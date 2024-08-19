@@ -1,0 +1,55 @@
+# Logs and temporary files
+logs/
+tmp/
+*.log
+*.tmp
+
+# Sensitive files
+.env
+.env.local
+*.key
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Composer
+/vendor/
+
+# Laravel
+/storage/
+.env.*
+
+# IDE/Editor Specific
+# VSCode
+.vscode/
+
+# JetBrains IDEs (PhpStorm, IntelliJ IDEA)
+.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Node.js (if applicable)
+node_modules/
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Backup files
+*.bak
+*.swp
+
+# Dependency directories
+vendor/
