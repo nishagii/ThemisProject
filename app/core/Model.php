@@ -1,131 +1,140 @@
-<?php
+<?php 
 
-// Main Model trait
-
-trait Model
+/**
+ * Main Model trait
+ */
+Trait Model
 {
-    use Database;
+	use Database;
 
-    protected $limit=10;
-    protected $offset=0;
-    protected $order_type="desc";
-    protected $order_column="id";
+	protected $limit 		= 10;
+	protected $offset 		= 0;
+	protected $order_type 	= "desc";
+	protected $order_column = "id";
+	public $errors 		= [];
 
-    public function findAll()
-    {
-        $query = "select * from $this->table order by $this->order_column $this->order_type  limit $this->limit offset $this->offset";
-        
-        
-        return $this->query($query);
-    }
+	public function findAll()
+	{
+	 
+		$query = "select * from $this->table order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
 
-    public function where($data, $data_not = [])
-    {
-        $keys = array_keys($data);
-        $keys_not = array_keys($data_not);
-        $query = "select * from $this->table where ";
+		return $this->query($query);
+	}
 
-        foreach ($keys as $key) {
-            $query .= $key . "= :" . $key . " && ";
-        }
+	public function where($data, $data_not = [])
+	{
+		$keys = array_keys($data);
+		$keys_not = array_keys($data_not);
+		$query = "select * from $this->table where ";
 
-        foreach ($keys_not as $key) {
-            $query .= $key . "!= :" . $key . " && ";
-        }
+		foreach ($keys as $key) {
+			$query .= $key . " = :". $key . " && ";
+		}
 
-        $query = trim($query, " && ");
+		foreach ($keys_not as $key) {
+			$query .= $key . " != :". $key . " && ";
+		}
+		
+		$query = trim($query," && ");
 
-        $query .= "order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
-        $data = array_merge($data, $data_not);
+		$query .= " order by $this->order_column $this->order_type limit $this->limit offset $this->offset";
+		$data = array_merge($data, $data_not);
 
-        return $this->query($query, $data);
-    }
+		return $this->query($query, $data);
+	}
 
-    public function first($data, $data_not = []) 
-    {
-        $keys = array_keys($data);
-        $keys_not = array_keys($data_not);
-        $query = "select * from $this->table where ";
+	public function first($data, $data_not = [])
+	{
+		$keys = array_keys($data);
+		$keys_not = array_keys($data_not);
+		$query = "select * from $this->table where ";
 
-        foreach ($keys as $key) {
-            $query .= $key . "= :" . $key . " && ";
-        }
+		foreach ($keys as $key) {
+			$query .= $key . " = :". $key . " && ";
+		}
 
-        foreach ($keys_not as $key) {
-            $query .= $key . "!= :" . $key . " && ";
-        }
+		foreach ($keys_not as $key) {
+			$query .= $key . " != :". $key . " && ";
+		}
+		
+		$query = trim($query," && ");
 
-        $query = trim($query, " && ");
+		$query .= " limit $this->limit offset $this->offset";
+		$data = array_merge($data, $data_not);
+		
+		$result = $this->query($query, $data);
+		if($result)
+			return $result[0];
 
-        $query .= " limit $this->limit offset $this->offset";
-        $data = array_merge($data, $data_not);
+		return false;
+	}
 
-        $result= $this->query($query, $data);
-        if ($result){
-            return $result[0];
-        }
-        return false;
-    }
+	public function insert($data)
+	{
+		
+		/** remove unwanted data **/
+		if(!empty($this->allowedColumns))
+		{
+			foreach ($data as $key => $value) {
+				
+				if(!in_array($key, $this->allowedColumns))
+				{
+					unset($data[$key]);
+				}
+			}
+		}
 
-    public function insert($data)
-    {
-        //remove unwanted data
-        if (!empty($this->allowedColumns)) {
-            foreach ($data as $key => $value) {
+		$keys = array_keys($data);
 
-                if (!in_array($key, $this->allowedColumns)) {
-                    unset($data[$key]);
-                }
-            }
-        }
+		$query = "insert into $this->table (".implode(",", $keys).") values (:".implode(",:", $keys).")";
+		$this->query($query, $data);
 
-        $keys=array_keys($data);
+		return false;
+	}
 
-        $query = "insert into $this->table (".implode(",",$keys).") values (:".implode(",:",$keys).")";
+	public function update($id, $data, $id_column = 'id')
+	{
 
-        $this->query($query, $data);
+		/** remove unwanted data **/
+		if(!empty($this->allowedColumns))
+		{
+			foreach ($data as $key => $value) {
+				
+				if(!in_array($key, $this->allowedColumns))
+				{
+					unset($data[$key]);
+				}
+			}
+		}
 
-        return false;
-    }
+		$keys = array_keys($data);
+		$query = "update $this->table set ";
 
-    public function update($id,$data,$id_column='id') 
-    {
-        //remove unwanted data
-        if(!empty($this->allowedColumns))
-        {
-            foreach ($data as $key => $value){
+		foreach ($keys as $key) {
+			$query .= $key . " = :". $key . ", ";
+		}
 
-                if(!in_array($key,$this->allowedColumns))
-                {
-                    unset($data[$key]);
-                }
-            }
-        }
+		$query = trim($query,", ");
 
-        $keys = array_keys($data);
-        $query = "update $this->table set ";
+		$query .= " where $id_column = :$id_column ";
 
-        foreach ($keys as $key) {
-            $query .= $key . "= :" . $key . ", ";
-        }
+		$data[$id_column] = $id;
 
-        $query = trim($query, ", ");
+		$this->query($query, $data);
+		return false;
 
-        $query .= " where $id_column = :$id_column ";
+	}
 
-        $data[$id_column] = $id;
+	public function delete($id, $id_column = 'id')
+	{
 
-        $this->query($query, $data);
-        return false;
-    }
+		$data[$id_column] = $id;
+		$query = "delete from $this->table where $id_column = :$id_column ";
+		$this->query($query, $data);
 
-    public function delete($id,$id_column='id')
-    {
-        $data[$id_column]=$id;
-        $query = "delete from $this->table where $id_column = :$id_column ";
-        
-        $this->query($query, $data);
+		return false;
 
-        return false;
-    }
+	}
+
+	
 }

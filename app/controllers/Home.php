@@ -1,13 +1,16 @@
-<?php
+<?php 
 
-use Controller;
-
+/**
+ * home class
+ */
 class Home
 {
-    use Controller;
+	use Controller;
 
-    public function index()
-    {
-        $this->view('home');
-    }
+	public function index()
+	{
+
+		$this->view('home');
+	}
+
 }
