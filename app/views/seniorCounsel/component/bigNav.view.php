@@ -20,7 +20,7 @@
             </label>
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="Logo" class="navbar-logo" />
             <ul class="big-navbar">
-                <li><a href="home">Home</a></li>
+                <li><a href="homelawyer">Home</a></li>
                 <li><a href="case">Cases</a></li>
                 <li><a href="payment">Payments</a></li>
                 <li><a href="precedent">Precedents</a></li>
