@@ -1,0 +1,175 @@
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-container {
+    width: 90%;
+    background-color: #eaf1fd;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.tab_box {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px solid rgba(229,229,229);
+    position: relative;
+}
+
+.tab_btn, .tab_box {
+    font-size: 18px;
+    font-weight: 600;
+    color: #8d8d93;
+    background: none;
+    border: none;
+    padding: 18px;
+    cursor: pointer;
+}
+
+.tab_box .tab_btn.active {
+    color: black;
+}
+
+.content_box {
+    padding: 20px;
+    background-color: white;
+}
+
+.content_box .content {
+    display: none;
+}
+
+.content_box .content.active {
+    display: block;
+}
+
+.content_box, .content h2 {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.line {
+    position: absolute;
+    top: 62px;
+    left: 232px;
+    width: 150px;
+    height: 5px;
+    background-color: #ff9800;
+    transition: all .3s ease-in-out;
+    border-radius: 10px;
+}
+
+/* Style for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Style for table headers */
+th {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    background: #1d1b31;
+    color: white;
+}
+
+/* Style for table data cells */
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+
+/* Style for the table rows when hovered */
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* Style for the 'done' button */
+button.done {
+    padding: 6px 12px;
+    background-color: #bddabe;  /* Green background */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Change the color on hover */
+button.done:hover {
+    background-color: #45a049;  /* Slightly darker green */
+    transform: scale(1.02);  /* Slightly enlarge the button */
+}
+
+/* Style for the checkmark icon inside the button */
+button.done i {
+    font-size: 18px;  /* Adjust the icon size */
+}
+
+/* Optional: Change the button color when it's clicked (marked complete) */
+button.done:active {
+    background-color: #3e8e41;  /* Darker green on click */
+}
+
+/* Style for overdue task in the table */
+td.overdue {
+    color: #ff4d4d; /* Red color for overdue tasks */
+}
+
+/* Style for the 'done-overdue' button */
+button.done-overdue {
+    padding: 6px 12px;
+    background-color: #d89797;  /* Red background for overdue button */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Change the background color on hover */
+button.done-overdue:hover {
+    background-color: #e60000;  /* Darker red on hover */
+    transform: scale(1.05);  /* Slightly enlarge the button */
+}
+
+/* Style for the checkmark icon inside the button */
+button.done-overdue i {
+    font-size: 18px;  /* Adjust icon size */
+}
+
+/* Change the button color when it's clicked (marked complete) */
+button.done-overdue:active {
+    background-color: #cc0000;  /* Even darker red when clicked */
+}
+
+.completed {
+    color: green;
+    font-weight: 300;
+}
+.incomplete {
+    color: red;
+    font-weight: 300;
+}
