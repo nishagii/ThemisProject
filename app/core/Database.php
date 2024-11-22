@@ -1,6 +1,6 @@
 <?php 
 
-Trait Database
+trait Database
 {
 
 	private function connect()
@@ -28,6 +28,8 @@ Trait Database
 
 		return false;
 	}
+	
+	//prepared statements to avoid the sql injection(query and data is enter in separate arguments)
 
 	public function get_row($query, $data = [])
 	{

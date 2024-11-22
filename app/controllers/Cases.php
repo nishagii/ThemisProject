@@ -38,7 +38,7 @@ class Cases
         $caseModel->save($data);
 
         // Redirect to the home page or success page
-        redirect('/seniorCounsel/home');
+        redirect('homelawyer');
     }
 
     // Retrieve all cases
@@ -51,7 +51,7 @@ class Cases
         $cases = $caseModel->getAllCases();
 
         // Load the view and pass the cases data
-        $this->view('/seniorCounsel/all_cases', ['cases' => $cases]);
+        $this->view('seniorCounsel/all_cases', ['cases' => $cases]);
     }
 
     // Retrieve all cases
@@ -64,7 +64,7 @@ class Cases
         $cases = $caseModel->getAllCases();
 
         // Load the view and pass the cases data
-        $this->view('/seniorCounsel/extended_case_details', ['cases' => $cases]);
+        $this->view('seniorCounsel/extended_case_details', ['cases' => $cases]);
     }
 
     // Delete a case
@@ -88,7 +88,7 @@ class Cases
         // Get the case by ID
         $case = $caseModel->getCaseById($caseId);
         // Load the view and pass the case data
-        $this->view('/seniorCounsel/one_full_case_details', ['case' => $case]);
+        $this->view('seniorCounsel/one_full_case_details', ['case' => $case]);
     }
 
     //get the case details by id and pass it to the view
@@ -109,7 +109,7 @@ class Cases
         }
 
         // Pass the case data to the view
-        $this->view('/seniorCounsel/edit_case', ['case' => $case]);
+        $this->view('seniorCounsel/edit_case', ['case' => $case]);
     }
 
     // Handle case update
