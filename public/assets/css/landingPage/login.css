@@ -1,0 +1,309 @@
+body {
+    background-color: #FAE9CF;
+    font-family: 'Montserrat';
+    margin: 0 auto;
+    padding: 0;
+    height: 100vh;
+}
+
+div.colour {
+    width: 50%;
+    height: 100vh;
+    display: flex;               
+    align-items: center;        
+    justify-content: center; 
+}
+
+div.white {
+    background-color: #f8fbff;
+    float: right;
+    height: 100vh;
+    width: 50%;
+    border-top-left-radius: 4%;
+    border-bottom-left-radius: 4%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;     
+    flex-direction: column;          
+    align-items: center;        
+    justify-content: center; 
+}
+
+div.heading {
+    font-size: 20px;
+    font-family: 'Montserrat';
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+    color: #4e4536;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+}
+
+input[type="text"],
+input[type="password"] {
+    
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid #C3BEBE;
+    padding-left: 10px;
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+input[type="text"] {
+    width: 390px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #FAE9CF;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+.pword {
+    position: relative;
+}
+
+.pword input {
+    width: 360px;
+    padding-right: 2rem; /* Space for the icon */
+}
+
+.pword .view {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.5rem; /* Adjust size as needed */
+    color: #555; /* Adjust color as needed */
+}
+
+
+
+input::placeholder {
+    color: #C3BEBE; 
+    font-family: 'Montserrat';
+}
+
+img.view {
+    height: 20px;
+    cursor: pointer;
+}
+
+input.login {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff7eb;
+    border-radius: 8px;
+    border: 1.5px solid #554a3a;
+    height: 30px;
+    width: 90px;
+    transition: background-color 0.1s, color 0.1s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+}
+
+img.colour-logo {
+    display: flex;
+    height: 350px;
+}
+
+img.white-logo {
+    height: 250px;
+    display: none;
+    margin-bottom: 5%;
+}
+
+button.button {
+    font-weight: bold;
+    background-color: #FAE9CF;
+    border-radius: 8px;
+    border: 1px solid #FAE9CF;
+    height: 30px;
+    transition: background-color 0.1s, color 0.1s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1.5px solid #4e4536;
+}
+
+button.button:hover,
+input.login:hover {
+    background-color: #ffffff; /* Lighten background color on hover */
+    color: #554a3a; /* Change text color on hover */
+    border-color: #7c5d41; /* Darken border color on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+button.button div.button {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+}
+
+button.button img.icon {
+    margin-right: 5px; 
+}
+
+.remember-me {
+    display: flex;
+    margin-top: 10px;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.remember-me label {
+    font-size: 14px;
+}
+
+img.icon {
+    height: 20px;
+}
+
+
+
+button.register {
+    margin: 0;
+    width: 100px;
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff7eb;
+    border-radius: 8px;
+    border: 1.5px solid #554a3a;
+    height: 30px;
+    width: 100px;
+    transition: background-color 0.1s, color 0.1s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 15px;
+    font-weight: 500;
+   
+}
+
+
+/* Media Queries for Mobile Devices */
+@media (max-width: 790px) {
+    body {
+        background: #fdf5e8;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* Change background to white */
+    }
+    div.colour {
+        display: none; /* Hide the colored section on small screens */
+    }
+
+    img.white-logo {
+        display: block;
+    }
+
+    div.white {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 10px;
+        box-sizing: border-box;
+        margin: auto;
+        background: #fdf5e8;
+    }
+
+    div.heading {
+        font-size: 30px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        max-width: 70%;
+    }
+
+    img.logo {
+        display: none;
+    }
+
+    
+}
+
+@media (max-width: 480px) {
+    div.heading {
+        font-size: 14px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        height: 30px;
+        max-width: 50%;
+    }
+
+    input.login,
+    button.button {
+        height: 30px; /* Even smaller button height */
+        font-size: 12px; /* Even smaller font size for buttons */
+    }
+
+    img.logo {
+        display: none;
+    }
+
+    input::placeholder {
+       
+        font-size: 90%;
+    }
+
+    img.white-logo {
+        height: 150px;
+    }
+}
