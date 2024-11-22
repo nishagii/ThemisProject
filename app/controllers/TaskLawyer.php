@@ -14,4 +14,6 @@ class TaskLawyer
         // Load the view with data
         $this->view('/seniorCounsel/task', $data);
     }
+
+    
 }
