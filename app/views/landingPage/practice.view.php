@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THEMIS Lawyer Panel</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/landingPage/about.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/landingPage/practice.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">  <!-- this is imported to use icons -->
    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -17,27 +17,26 @@
 <?php include('component/upBar.view.php'); ?>
 <?php include('component/navBar.view.php'); ?>
 
+<div class="practice-container">
+        <header>
+            <h1>Banking and Finance Law</h1>
+            <p>At Themis, we are recognized as a premier law firm specializing in Banking and Finance law in Sri Lanka.</p>
+        </header>
 
-<div class="content">
-        <div class="welcome">
-        <h2>Welcome to <br><span class="gold">THEMIS</span></h2>
+        <section class="expertise">
+            <h2>Our Expertise</h2>
+            <ul class="practice">
+                <li><strong>Cross-Border Financing:</strong> Guidance on securing financing across international borders while ensuring compliance with local regulations.</li>
+                <li><strong>Asset and Project Finance:</strong> Structuring and securing financing for major projects, offering insights into legal requirements and best practices.</li>
+                <li><strong>Financial Instruments:</strong> Navigating the complexities of various financial products while ensuring compliance with applicable laws.</li>
+                <li><strong>Sri Lanka Exchange Control Laws:</strong> Advising on exchange control regulations, enabling compliance with legal landscapes surrounding currency exchange.</li>
+            </ul>
+        </section>
 
-        <p>At Themis, <br>we are dedicated to revolutionizing the way legal professionals manage their cases.<br> Our mission is to provide a comprehensive, user-friendly platform that simplifies case management,<br> enhances collaboration, and ensures data security.</p>
-        <img src="<?= ROOT ?>/assets/images/about.png" height="200">
-    </div>
-    <div class="welcome">
-        <h2>Our <span class="gold">Story</span></h2>
-
-        <p>Themis was born from the need for a streamlined legal case management system that addresses the unique challenges faced by legal teams. Our team of experienced legal professionals and tech experts came together to create a solution that combines legal expertise with cutting-edge technology.</p>
-        <img src="<?= ROOT ?>/assets/images/story.png" height="200">
-    </div>
-    <div class="welcome">
-        <h2>Our <span class="gold">Vision</span></h2>
-
-        <p>We envision a world where legal professionals have access to the tools they need to work efficiently and effectively. Themis aims to bridge the gap between complex legal workflows and modern technology, enabling lawyers to focus on what they do best—serving their clients and advocating for justice.</p>
-        <img src="<?= ROOT ?>/assets/images/gavel.png" height="200">
-    </div>
-    
+        <section class="solutions">
+            <h2>Tailored Solutions</h2>
+            <p>We pride ourselves on delivering bespoke solutions for multinational corporations, financial institutions, and individual clients. Our approach ensures compliance while providing strategic advantages in this complex sector.</p>
+        </section>
     </div>
 
 
