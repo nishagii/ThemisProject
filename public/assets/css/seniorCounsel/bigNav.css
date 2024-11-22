@@ -240,7 +240,7 @@ label #cancel{
     }
 }
 
-.login-button {
+.big-navbar ul li .login-button {
     font-family: 'Montserrat', sans-serif;
     background-color: #fff7eb;
     border-radius: 8px;
