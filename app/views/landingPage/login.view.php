@@ -18,7 +18,7 @@
                         <button class="button register">
                 <div class="button">
                     <i class="bx bx-user-plus icon"></i> <!-- Boxicon for registration -->
-                    <span>Register</span>
+                    <a href="register">Register</a>
                 </div>
             </button>
 

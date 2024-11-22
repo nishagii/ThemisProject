@@ -1,0 +1,157 @@
+body {
+    background-color: #FAE9CF;
+    font-family: 'Montserrat';
+    margin: 0 auto;
+    padding: 0;
+    height: 100vh;
+}
+
+div.colour {
+    width: 50%;
+    height: 100vh;
+    display: flex;    
+    align-items: center;        
+    justify-content: center; 
+    position: relative;
+}
+
+div.white {
+    background-color: #f8fbff;
+    float: right;
+    height: 100vh;
+    width: 50%;
+    border-top-left-radius: 4%;
+    border-bottom-left-radius: 4%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+div.heading {
+    font-size: 18px;
+    font-family: 'Montserrat';
+    color: #4e4536;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"] {
+    border-radius: 8px;
+    border: 1px solid #C3BEBE;
+    padding-left: 10px;
+    transition: box-shadow 0.3s, border-color 0.3s;
+    height: 30px;
+    margin-bottom: 2%;
+}
+
+input[type="password"],
+input[type="email"],
+input[type="tel"] {
+    width: 390px;
+}
+
+input::placeholder {
+    color: #C3BEBE; 
+    font-family: 'Montserrat';
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus {
+    border-color: #FAE9CF;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+img.colour-logo {
+    display: flex;
+    height: 350px;
+}
+
+img.white-logo {
+    height: 150px;
+    display: none;
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+input.register {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff7eb;
+    border-radius: 8px;
+    border: 1.5px solid #554a3a;
+    height: 30px;
+    width: 150px;
+    transition: background-color 0.1s, color 0.1s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+input.register:hover {
+    background-color: #ffffff; /* Lighten background color on hover */
+    color: #554a3a; /* Change text color on hover */
+    border-color: #7c5d41; /* Darken border color on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+/* Media Queries for Mobile Devices */
+@media (max-width: 790px) {
+    body {
+        background: #fff; /* Change background to white */
+    }
+    div.colour {
+        display: none; /* Hide the colored section on small screens */
+    }
+
+    div.white {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 10px;
+        box-sizing: border-box;
+        margin: auto;
+    }
+
+    img.white-logo {
+        display: block;
+    }
+
+    div.heading {
+        font-size: 30px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    img.logo {
+        display: none;
+    }
+
+}
+
+@media (max-width: 480px) {
+    div.heading {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    img.logo {
+        display: none;
+    }
+
+}
