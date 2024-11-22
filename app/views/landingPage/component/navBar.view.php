@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THEMIS</title>
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/bigNav.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">  <!-- this is imported to use icons -->
+
+</head>
+<body>
+    <div class="container">
+        
+        <nav>
+            <input type="checkbox" id="check"> <!-- check box to check and uncheck the menu in 768px screen -->
+            <label for="check">
+                <i class="fas fa-bars" id="btn"></i><!-- dropmenu 3 bars -->
+                <i class="fas fa-times" id="cancel"></i>
+            </label>
+            <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="Logo" class="navbar-logo" />
+            <ul class="big-navbar">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Practice area</a></li>
+                <li><a href="#">blogs</a></li>
+                <li class="no-hover"><a href="#">
+                    <div class="login-register">
+                        <button class="login-button">LOG IN</button>
+                    </div>
+                    </a>
+                </li>
+                <li class="no-hover"><a href="#">
+                    <div class="login-register">
+                        <button class="login-button">REGISTER</button>
+                    </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+
+
+    </div>
+
+</body>
+</html>
