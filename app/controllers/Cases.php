@@ -41,16 +41,12 @@ class Cases
         redirect('/seniorCounsel/home');
     }
 
-    // Retrieve all cases
     public function retrieveAllCases()
     {
-        // Load the CaseModel
-        $caseModel = $this->loadModel('CaseModel');
+        $caseModel = $this->loadModel('CaseModel'); // Ensure correct model loading
+        $cases = $caseModel->getAllCases(); // Fetch cases data
 
-        // Fetch all cases
-        $cases = $caseModel->getAllCases();
-
-        // Load the view and pass the cases data
+        // Pass data to the view
         $this->view('/seniorCounsel/all_cases', ['cases' => $cases]);
     }
 
