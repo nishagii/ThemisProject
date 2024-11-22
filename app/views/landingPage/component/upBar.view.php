@@ -20,7 +20,7 @@
             <a href="mailto:info@themis.com" class="email-link">info@themis.com</a>
         </div>
         <div class="inquire">
-            <a href="#">
+            <a href="inquire">
                 <button>
                     Inquire now
                 </button>
