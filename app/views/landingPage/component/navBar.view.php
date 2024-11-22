@@ -23,7 +23,7 @@
                 <li><a href="landingpage">Home</a></li>
                 <li><a href="about">About</a></li>
                 <li><a href="practice">Practice area</a></li>
-                <li><a href="#">blogs</a></li>
+                <li><a href="blog">blogs</a></li>
                 <li ><a href="#">
                         <button class="login-button">LOG IN</button>
                     </a>
