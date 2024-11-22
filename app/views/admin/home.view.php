@@ -14,6 +14,7 @@
 <body>
 
 <?php include('component/navBar.view.php'); ?>
+<?php include('component/sideBar.view.php'); ?>
 
 </body>
 </html>

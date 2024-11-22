@@ -72,6 +72,6 @@
    </ul>
  </div>
    <!--side-bar ends-->
-   <script src="../../../../public/assets/js/sideBar.js"> </script>
+   <script src="<?= ROOT ?>/assets/js/sideBar.js"> </script>
 </body>
 </html>
