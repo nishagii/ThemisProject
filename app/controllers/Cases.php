@@ -8,7 +8,7 @@ class Cases
     public function index()
     {
         // Render the "add new case" view with an empty errors array
-        $this->view('add_new_case');
+        $this->view('seniorCounsel/add_new_case');
     }
 
     // Add a new case
