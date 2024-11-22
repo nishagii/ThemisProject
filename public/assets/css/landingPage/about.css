@@ -1,0 +1,165 @@
+.login-button {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff7eb;
+    border-radius: 8px;
+    border: 1.5px solid #554a3a;
+    height: 30px;
+    width: 90px;
+    transition: background-color 0.1s, color 0.1s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.login-button:hover {
+    background-color: #ffffff; /* Lighten background color on hover */
+    color: #554a3a; /* Change text color on hover */
+    border-color: #7c5d41; /* Darken border color on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.welcome {
+    display: flex;
+    align-items: center; /* Vertically center items in the flex container */
+    justify-content: space-between; /* Distribute space evenly between items */
+    gap: 20px; /* Add space between text and image */
+    margin-top: 50px; /* Optional: Add margin around the container */
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.gold {
+    color: #2e2d35;
+}
+
+.welcome img {
+     /* Ensure the image scales down properly */
+    height: 200; /* Maintain the aspect ratio of the image */
+    flex: 1; /* Allow the image to grow and shrink */
+    border-radius: 13%;
+}
+
+.welcome h2 {
+    margin-bottom: 10px;
+    font-size: 50px; /* Add space below the heading */
+    color: #554a3a;
+}
+
+.welcome p {
+    font-size: 16px; /* Adjust text size if needed */
+    line-height: 1.6; /* Improve readability with line height */
+    flex: 2; /* Allow the text to take up more space */
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.footer {
+    background-color: #2e2d35;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    font-size: 13px; 
+    padding: 20px; 
+}
+
+.footer-content {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    margin-bottom: 20px; 
+}
+
+.footer-content .quick-links,
+.footer-content .contact-info {
+    margin-top: 76px;
+}
+
+.footer-content > div {
+    flex: 1; 
+    margin: 0 15px; 
+}
+
+.footer-content h4 {
+    margin-bottom: 10px; 
+    color: #7B5B3E; 
+}
+
+.footer-content p {
+    font-size: 11px; 
+    color: #7B5B3E;
+    font-weight: 500;
+    line-height: 1.5; 
+}
+
+.quick-links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.quick-links ul li {
+    margin: 5px 0;
+}
+
+.quick-links ul li a {
+    color: #7B5B3E;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.quick-links ul li a:hover {
+    text-decoration: underline;
+}
+
+.stay-connected ul {
+    list-style-type: disc; /* Bullet points for lists */
+    padding-left: 20px; /* Space for bullet points */
+    text-align: left; /* Align list to the left for clarity */
+}
+
+.stay-connected li {
+    color: #7B5B3E;
+    margin: 5px 0; /* Space between list items */
+    font-weight: 400; /* Regular font weight for list items */
+    transition: color 0.3s ease; /* Smooth transition on hover */
+}
+
+.social-media {
+    margin-top: 20px; 
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center; 
+    gap: 15px; 
+}
+
+.social-icons a {
+    color: #554a3a; /* Icon color */
+    font-size: 24px; /* Size of the icons */
+}
+
+.social-icons a:hover {
+    color: #7B5B3E; /* Change color on hover */
+}
+
+.footer-bottom {
+    margin-top: 20px; 
+    font-size: 10px; 
+    color: #7B5B3E;
+    font-weight: 500;
+}
