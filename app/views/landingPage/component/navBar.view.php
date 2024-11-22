@@ -24,7 +24,7 @@
                 <li><a href="about">About</a></li>
                 <li><a href="practice">Practice area</a></li>
                 <li><a href="blog">blogs</a></li>
-                <li ><a href="#">
+                <li ><a href="login">
                         <button class="login-button">LOG IN</button>
                     </a>
                 </li>
