@@ -14,7 +14,7 @@
         <ul class="small-navbar">
             <li><a href="homelawyer">Calendar</a></li>
             <li><a href="tasklawyer">Task Board</a></li>
-            <li><a href="meeting">Meeting</a></li>
+            <li><a href="meetingslawyer">Meeting</a></li>
             <li><a href="template">Document templates</a></li>
             <li><a href="user">Users</a></li>
             <li><a href="rule">S.C Rules</a></li>
