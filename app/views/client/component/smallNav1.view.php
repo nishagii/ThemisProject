@@ -13,7 +13,7 @@
 <div>
         <ul class="small-navbar">
             <li><a href="#">Calendar</a></li>
-            <li><a href="#">Document templates</a></li>
+            <li><a href="templateclient">Document templates</a></li>
             <li><a href="#">Meeting</a></li>
             <li><a href="rule">S.C Rules</a></li>
         </ul>
