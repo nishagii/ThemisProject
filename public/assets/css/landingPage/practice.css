@@ -1,0 +1,172 @@
+.login-button {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff7eb;
+    border-radius: 8px;
+    border: 1.5px solid #554a3a;
+    height: 30px;
+    width: 90px;
+    transition: background-color 0.1s, color 0.1s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.login-button:hover {
+    background-color: #ffffff; /* Lighten background color on hover */
+    color: #554a3a; /* Change text color on hover */
+    border-color: #7c5d41; /* Darken border color on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+.practice-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8fbff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif; /* Added font-family for consistency */
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px; /* Increased spacing */
+}
+
+header h1 {
+    font-size: 32px; /* Increased font size */
+    color: #2e2d35;
+    margin-bottom: 10px; /* Added margin */
+}
+
+header p {
+    font-size: 18px; /* Adjusted font size */
+    color: #555; /* Slightly lighter color */
+    line-height: 1.6; /* Improved line spacing */
+}
+
+section {
+    margin-bottom: 30px; /* Increased spacing */
+}
+
+h2 {
+    font-size: 28px; /* Increased font size for headings */
+    color: #2e2d35;
+    margin-bottom: 15px; /* Added margin */
+    border-bottom: 2px solid #2e2d35; /* Underline for emphasis */
+    padding-bottom: 5px; /* Padding for space */
+}
+
+.practice-container ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.practice-container li {
+    background: #eaf1fe; /* Light background for list items */
+    margin: 10px 0; /* Margin between list items */
+    padding: 10px; /* Padding inside list items */
+    border-radius: 5px; /* Rounded corners */
+}
+
+
+.footer {
+    background-color: #2e2d35;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    font-size: 13px; 
+    padding: 20px; 
+}
+
+.footer-content {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    margin-bottom: 20px; 
+}
+
+.footer-content .quick-links,
+.footer-content .contact-info {
+    margin-top: 76px;
+}
+
+.footer-content > div {
+    flex: 1; 
+    margin: 0 15px; 
+}
+
+.footer-content h4 {
+    margin-bottom: 10px; 
+    color: #7B5B3E; 
+}
+
+.footer-content p {
+    font-size: 11px; 
+    color: #7B5B3E;
+    font-weight: 500;
+    line-height: 1.5; 
+}
+
+.quick-links ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.quick-links ul li {
+    margin: 5px 0;
+}
+
+.quick-links ul li a {
+    color: #7B5B3E;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.quick-links ul li a:hover {
+    text-decoration: underline;
+}
+
+.stay-connected ul {
+    list-style-type: disc; /* Bullet points for lists */
+    padding-left: 20px; /* Space for bullet points */
+    text-align: left; /* Align list to the left for clarity */
+}
+
+.stay-connected li {
+    color: #7B5B3E;
+    margin: 5px 0; /* Space between list items */
+    font-weight: 400; /* Regular font weight for list items */
+    transition: color 0.3s ease; /* Smooth transition on hover */
+}
+
+.social-media {
+    margin-top: 20px; 
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center; 
+    gap: 15px; 
+}
+
+.social-icons a {
+    color: #554a3a; /* Icon color */
+    font-size: 24px; /* Size of the icons */
+}
+
+.social-icons a:hover {
+    color: #7B5B3E; /* Change color on hover */
+}
+
+.footer-bottom {
+    margin-top: 20px; 
+    font-size: 10px; 
+    color: #7B5B3E;
+    font-weight: 500;
+}
