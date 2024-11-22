@@ -35,7 +35,7 @@
                 <i class="fas fa-cog"></i>
             </a>
 
-            <a href="profile.php">
+            <a href="profile">
             <i class="fas fa-user-circle" id="profile-icon"></i>
             </a>
             </div>
