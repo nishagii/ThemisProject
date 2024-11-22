@@ -1,3 +1,10 @@
+<!-- this was used to debug if the cases data are being fetched from the database to the view
+issue was in the core controller view function -->
+<!-- <?php
+// Debug the cases variable
+var_dump(isset($cases) ? $cases : 'Cases variable not set');
+?> -->
+
 <!DOCTYPE html>
 <html lang="en">
 
