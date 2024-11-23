@@ -5,14 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>New Case</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/addnewcase.css" />
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/addnewcase.css" />
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 
 <body>
-    <?php include('lawyer_navbar.view.php'); ?>
+    <?php include('component/bigNav.view.php'); ?>
+    <?php include('component/smallNav1.view.php'); ?>
     <main>
         <?php if (!empty($errors)): ?>
             <div class="error-container">

@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.body-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    padding: 30px;
+    
+}
+
+.body-container h4 {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.profile-section,
+.personal-info-section {
+    background-color: #eaf1fd;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1100px;
+}
+
+.activity-section {
+    background-color: #eaf1fd;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: space-between;
+    width: 1100px;
+}
+
+.profile-section,
+.personal-info-section {
+    grid-column: span 2;
+}
+
+
+.profile-pic {
+    font-size: 80px; /* Adjust icon size */
+    color: #1d1b31; /* Default color */
+    transition: color 0.3s, transform 0.3s; /* Smooth hover effect */
+}
+
+.profile-pic:hover {
+    color: #1d1b31; /* Change color on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.profile-info h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.profile-info p {
+    margin: 0;
+    color: #888;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s;
+}
+
+.popup-content {
+  background-color: white;
+  height: 200px;
+  width: 600px;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 200px;
+  margin-left: 350px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+      background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+      background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes slideIn {
+  from {
+      transform: translateY(-20px);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+
+.large-pic {
+  font-size: 100px;
+  color: #555;
+}
+
+.edit-pic-icon {
+  font-size: 24px;
+  color: #007BFF;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.close {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.close:hover {
+  background-color: #0056b3;
+}
+
+.edit-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.edit-button:hover {
+  color: #007BFF;
+  transform: scale(1.1);
+}
+
+
+.edit-icon {
+    font-size: 24px; /* Adjust icon size */
+    color: #1d1b31; /* Default color */
+}
+
+.edit-button:hover .edit-icon {
+    color: #ff9800; /* Change color on hover */
+}
+
+.profile-info {
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+h2, h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.info-item span {
+    margin-right: 10px;
+    font-size: 1.3rem;
+}
+
+.edit-icon {
+    cursor: pointer;
+    width: 20px;
+}
+
+
+.info-item i {
+    font-size: 2em; /* Icon size */
+    color: #1d1b31;; /* Default icon color */
+    background-color: #eaf4ff; /* Light background */
+    border-radius: 50%; /* Make icon circular */
+    padding: 8px; /* Padding around icon */
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+}
+
+.info-item i:hover {
+    color: #fff; /* Icon color on hover */
+    background-color: #1d1b31; /* Change color on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.password {
+    display: flex;              /* Use flexbox for alignment */
+    margin-top: 20px;          /* Optional: Add margin to position it vertically */
+  }
+  
+  .password-button {
+    background-color: #1d1b31; /* Green background */
+    color: white;              /* White text color */
+    border: none;              /* Remove border */
+    border-radius: 5px;       /* Rounded corners */
+    padding: 10px 20px;       /* Vertical and horizontal padding */
+    font-size: 16px;           /* Font size */
+    cursor: pointer;           /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Transition for background color */
+    display: flex;             /* Enable flexbox for the button */
+    align-items: center;       /* Center items vertically */
+  }
+  
+  .password-button i {
+    margin-right: 8px;        /* Space between icon and text */
+    font-size: 20px;          /* Adjust icon size */
+  }
+  
+  .password-button:hover {
+    background-color: #3b395c; /* Darker green on hover */
+  }
+  
+  .password-button:focus {
+    outline: none;             /* Remove outline on focus */
+  }
+
+  .login-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .login-table th,
+  .login-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  
+  .login-table th {
+    background-color: #f4f8ff;
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .login-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .login-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }

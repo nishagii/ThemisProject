@@ -1,0 +1,112 @@
+.footer {
+    background-color: #1d1b31;
+    color: #9f773c; /* Change the default text color */
+    font-size: 14px;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 10px;
+    min-width: 250px;
+}
+
+.footer-logo {
+    max-width: 150px;
+    margin-bottom: 10px;
+}
+
+.footer-column h4 {
+    font-size: 16px;
+    color: #9f773c; /* Change to the same orange shade */
+    margin-bottom: 10px;
+}
+
+.footer-column p, .footer-column ul li {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #9f773c; /* Apply the orange shade */
+}
+
+.footer-column ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer-column a {
+    color: #9f773c; /* Change to the same orange shade */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+    color: #7B5B3E; /* Hover color stays the same */
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icons a {
+    font-size: 20px;
+    color: #9f773c; /* Change to the same orange shade */
+}
+
+.social-icons a:hover {
+    color: #7B5B3E; /* Hover color stays the same */
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #9f773c; /* Apply the orange shade */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-column {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-logo {
+        max-width: 120px;
+    }
+
+    .social-icons a {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer {
+        padding: 20px 10px;
+    }
+
+    .footer-column h4 {
+        font-size: 14px;
+    }
+
+    .footer-column p, .footer-column ul li {
+        font-size: 11px;
+    }
+
+    .footer-bottom {
+        font-size: 10px;
+    }
+}

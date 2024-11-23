@@ -1,0 +1,27 @@
+.precedent-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .precedent-table th,
+  .precedent-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  
+  .precedent-table th {
+    background-color: #f4f8ff;
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .precedent-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .precedent-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }

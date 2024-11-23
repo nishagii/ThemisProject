@@ -8,7 +8,7 @@ class Cases
     public function index()
     {
         // Render the "add new case" view with an empty errors array
-        $this->view('add_new_case');
+        $this->view('/seniorCounsel/add_new_case');
     }
 
     // Add a new case
@@ -38,20 +38,16 @@ class Cases
         $caseModel->save($data);
 
         // Redirect to the home page or success page
-        redirect('homelawyer');
+        redirect('/seniorCounsel/home');
     }
 
-    // Retrieve all cases
     public function retrieveAllCases()
     {
-        // Load the CaseModel
-        $caseModel = $this->loadModel('CaseModel');
+        $caseModel = $this->loadModel('CaseModel'); // Ensure correct model loading
+        $cases = $caseModel->getAllCases(); // Fetch cases data
 
-        // Fetch all cases
-        $cases = $caseModel->getAllCases();
-
-        // Load the view and pass the cases data
-        $this->view('all_cases', ['cases' => $cases]);
+        // Pass data to the view
+        $this->view('/seniorCounsel/all_cases', ['cases' => $cases]);
     }
 
     // Retrieve all cases
@@ -64,7 +60,7 @@ class Cases
         $cases = $caseModel->getAllCases();
 
         // Load the view and pass the cases data
-        $this->view('extended_case_details', ['cases' => $cases]);
+        $this->view('/seniorCounsel/extended_case_details', ['cases' => $cases]);
     }
 
     // Delete a case
@@ -88,7 +84,7 @@ class Cases
         // Get the case by ID
         $case = $caseModel->getCaseById($caseId);
         // Load the view and pass the case data
-        $this->view('one_full_case_details', ['case' => $case]);
+        $this->view('/seniorCounsel/one_full_case_details', ['case' => $case]);
     }
 
     //get the case details by id and pass it to the view
@@ -109,7 +105,7 @@ class Cases
         }
 
         // Pass the case data to the view
-        $this->view('edit_case', ['case' => $case]);
+        $this->view('/seniorCounsel/edit_case', ['case' => $case]);
     }
 
     // Handle case update
@@ -141,5 +137,7 @@ class Cases
 
         // Redirect to a success page or the list of cases
         redirect('cases/retrieveCases');
+
+        
     }
 }

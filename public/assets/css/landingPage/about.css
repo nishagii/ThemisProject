@@ -1,0 +1,131 @@
+.login-button {
+    margin-left: 20px;
+    padding: 10px 20px;
+    background-color: #f0a636; /* Initial background color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+}
+
+.login-button:hover {
+    background-color: #5361b9; /* Change background on hover */
+    transform: scale(1.05); /* Slightly increase size */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+}
+
+.login-button:active {
+    transform: scale(0.95); /* Slightly decrease size when clicked */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow effect */
+}
+.welcome {
+    display: flex;
+    align-items: center; /* Vertically center items in the flex container */
+    justify-content: space-between; /* Distribute space evenly between items */
+    gap: 20px; /* Add space between text and image */
+    margin-top: 50px; /* Optional: Add margin around the container */
+    margin-left: 50px; 
+    margin-right: 50px; 
+    padding: 20px;
+    background-color: #eaf1fd;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.gold {
+    color: #2e2d35;
+}
+
+.welcome h2 {
+    margin-bottom: 10px;
+    font-size: 50px; /* Add space below the heading */
+    color: #554a3a;
+}
+
+.welcome p {
+    font-size: 16px; /* Adjust text size if needed */
+    line-height: 1.6; /* Improve readability with line height */
+    flex: 2; /* Allow the text to take up more space */
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+
+.welcome i {
+    font-size: 4rem; /* Icon size */
+    margin-top: 1rem;
+}
+
+/* Medium screens (tablets and smaller desktops) */
+@media (max-width: 1024px) {
+    .welcome {
+        flex-direction: column; /* Stack items vertically */
+        text-align: center; /* Center-align text */
+        margin: 30px; /* Reduce margin */
+    }
+
+    .welcome i {
+        margin-top: 10px;
+        font-size: 3rem; /* Reduce icon size */
+    }
+
+    .welcome h2 {
+        font-size: 40px; /* Adjust heading size */
+    }
+
+    .welcome p {
+        font-size: 14px; /* Adjust paragraph size */
+    }
+}
+
+/* Small screens (mobile devices) */
+@media (max-width: 768px) {
+    .welcome {
+        padding: 15px; /* Reduce padding */
+        margin: 20px; /* Reduce margin further */
+    }
+
+    .welcome h2 {
+        font-size: 30px; /* Adjust heading size */
+    }
+
+    .welcome p {
+        font-size: 12px; /* Further reduce paragraph size */
+        line-height: 1.4; /* Adjust line height */
+    }
+
+    .welcome i {
+        font-size: 2.5rem; /* Adjust icon size */
+    }
+}
+
+/* Extra small screens (very narrow devices like older phones) */
+@media (max-width: 480px) {
+    .welcome {
+        padding: 10px; /* Minimal padding */
+        margin: 10px; /* Minimal margin */
+    }
+
+    .welcome h2 {
+        font-size: 25px; /* Further adjust heading size */
+    }
+
+    .welcome p {
+        font-size: 11px; /* Adjust paragraph size */
+        line-height: 1.2; /* Tighten line spacing */
+    }
+
+    .welcome i {
+        font-size: 2rem; /* Icon size for extra small screens */
+    }
+}
+
