@@ -17,7 +17,6 @@ body {
     white-space: nowrap;
     overflow: hidden;
     font-family: 'Grey Qo', cursive;
-    background-image: url('asset/lawc.jpg'); /* Specify the path to your background image */
     background-size: cover; /* Ensure the image covers the entire container */
     background-position: center; /* Center the background image */
 }
@@ -33,7 +32,7 @@ body {
 }
 
 .gold {
-    color: #ca9038;
+    color: #ffb039;
 }
 
 /* Blinking caret effect */
@@ -48,15 +47,31 @@ body {
 
 .themis {
     display: flex;
+    flex-direction: column;
     align-items: center; /* Vertically center the items */
-    justify-content: flex-start; /* Default alignment */
+    justify-content: center; /* Default alignment */
     margin: 20px 50px; /* Adjusted margin for top and bottom */
     padding: 20px; /* Add padding inside the container */
-    background-color: #f8fbff;
+    background-color: #eaf1fd;
     border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    color: #45423f;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #1d1b31;
 }
+
+.themis h2 {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.themis p i {
+    color: #1d1b31;
+    margin-right: 8px;
+    font-size: 50px;
+}
+
 
 .themis div {
     display: flex;
@@ -64,17 +79,6 @@ body {
     align-items: center;
 }
 
-.themis-photo {
-    height: 300px;
-    margin: 10px;
-    flex: 1; /* Allow the image to flex */
-    object-fit: cover; /* Ensure the image covers its container */
-    border-radius: 10px; /* Round the image corners */
-}
-
-.themis h2 {
-    font-weight: 500;
-}
 
 .themis p {
     flex: 2; /* Allow the paragraph to flex more */
@@ -116,7 +120,7 @@ body {
 }
 
 .bold {
-    color: #7f6d6d; /* Text color for bold elements */
+    color: #100e0e; /* Text color for bold elements */
     font-weight: 600; /* Bold weight */
 }
 
@@ -128,7 +132,7 @@ body {
 
 .login-button {
     font-family: 'Montserrat', sans-serif;
-    background-color: #fff7eb;
+    background-color: #ffffff;
     border-radius: 8px;
     border: 1.5px solid #554a3a;
     height: 30px;
@@ -156,20 +160,21 @@ body {
 }
 
 .empower {
-    background-color: #f8fbff;
+    background-color: #eaf1fd;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     color: #333; /* Text color for readability */
     padding: 40px; /* Increased padding for better spacing */
     text-align: center; /* Center align text */
-    border-radius: 10px; /* Rounded corners for a softer look */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     margin: 20px 50px; /* Margin for spacing from other elements */
     display: flex;
 }
 
 .empower h2 {
-    font-size: 26px; /* Larger font size for the heading */
-    margin-bottom: 20px; /* Space below the heading */
-    color: #493d3d; /* Text color for bold elements */
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-weight: 500;
 }
 
@@ -180,8 +185,10 @@ body {
     line-height: 1.6; /* Improved line height */
 }
 
-.empower img {
-    border-radius: 10px; /* Round the image corners */
+.empower p i {
+    color: #1d1b31;
+    margin-right: 8px;
+    font-size: 50px;
 }
 
 .empower-text {
@@ -191,102 +198,58 @@ body {
     justify-content: center;
 }
 
-.footer {
-    background-color: #2e2d35;
-    display: flex;
-    flex-direction: column;
+.lp-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 50px 0;
     text-align: center;
-    justify-content: center;
-    font-size: 13px; 
-    padding: 20px; 
-}
+  }
 
-.footer-content {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: flex-start; 
-    margin-bottom: 20px; 
-}
+  .heading {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
 
-.footer-content .quick-links,
-.footer-content .contact-info {
-    margin-top: 76px;
-}
-
-.footer-content > div {
-    flex: 1; 
-    margin: 0 15px; 
-}
-
-.footer-content h4 {
-    margin-bottom: 10px; 
-    color: #7B5B3E; 
-}
-
-.footer-content p {
-    font-size: 11px; 
-    color: #7B5B3E;
-    font-weight: 500;
-    line-height: 1.5; 
-}
-
-.quick-links ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.quick-links ul li {
-    margin: 5px 0;
-}
-
-.quick-links ul li a {
-    color: #7B5B3E;
-    font-weight: 500;
-    text-decoration: none;
-}
-
-.quick-links ul li a:hover {
-    text-decoration: underline;
-}
-
-.stay-connected ul {
-    list-style-type: disc; /* Bullet points for lists */
-    padding-left: 20px; /* Space for bullet points */
-    text-align: left; /* Align list to the left for clarity */
-}
-
-.stay-connected li {
-    color: #7B5B3E;
-    margin: 5px 0; /* Space between list items */
-    font-weight: 400; /* Regular font weight for list items */
-    transition: color 0.3s ease; /* Smooth transition on hover */
-}
-
-.social-media {
-    margin-top: 20px; 
-}
-
-.social-icons {
+  .features {
     display: flex;
-    justify-content: center; 
-    gap: 15px; 
-}
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 
-.social-icons a {
-    color: #554a3a; /* Icon color */
-    font-size: 24px; /* Size of the icons */
-}
+  .feature-card {
+    background-color: #fff;
+    color: #333;
+    padding: 20px;
+    width: 22%;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
 
-.social-icons a:hover {
-    color: #7B5B3E; /* Change color on hover */
-}
+ 
 
-.footer-bottom {
-    margin-top: 20px; 
-    font-size: 10px; 
-    color: #7B5B3E;
-    font-weight: 500;
-}
+  .feature-card i {
+    font-size: 60px;
+    margin-bottom: 15px;
+    color: #1d1b31;
+  }
+
+
+  .feature-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+  }
+
+
+
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -510,3 +473,20 @@ body {
         height: 200px;
     }
 }
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .feature-card {
+      width: calc(50% - 20px); /* Two cards per row */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .feature-card {
+      width: 100%; /* One card per row */
+    }
+  
+    .heading {
+      font-size: 1.5rem; /* Smaller font on smaller screens */
+    }
+  }
