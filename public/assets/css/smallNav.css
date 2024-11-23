@@ -3,7 +3,7 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: #000000;
+    background-color: rgba(255, 171, 44, 0.893);
     display: flex;
     justify-content: center;
 }
@@ -16,7 +16,7 @@
 
 .small-navbar a {
     font-size: 14.5px;
-    font-weight: 500;
+    font-weight: bold;
     text-decoration: none;
     color: rgb(255, 255, 255);
     padding: 14px 20px;
@@ -25,12 +25,13 @@
 }
 
 .small-navbar li a:hover{
-    color: #f0d4aa;
+    color: #1d1b31;
 }
 
 .small-navbar li a:active {
     font-weight: bold;
 }
+
 
 /* screen sizes lower than 1075px*/
 @media (max-width: 1075px){
@@ -42,7 +43,7 @@
 }
 /* screen sizes lower than 936px*/
 @media (max-width: 936px){
-
+    
     .small-navbar a{
         text-align: center;
         font-size: 12px;
@@ -53,6 +54,7 @@
 /* screen sizes lower than 768 px.phones and tablets*/
 @media (max-width: 768px){
 
+   
     .small-navbar{
         display: flex;
         flex-direction: column;
@@ -60,4 +62,6 @@
     .small-navbar a{
         font-size: 13px;
     }
+
+    
 }
