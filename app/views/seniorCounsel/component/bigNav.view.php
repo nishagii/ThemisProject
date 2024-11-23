@@ -22,7 +22,7 @@
             </label>
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="Logo" class="navbar-logo" />
             <ul class="big-navbar">
-                <li><a href="homelawyer">Home</a></li>
+                <li><a href="<?= ROOT ?>/homelawyer">Home</a></li>
                 <li><a href="<?= ROOT ?>/cases/retrieveAllCases">Cases</a></li>
                 <li><a href="payment">Payments</a></li>
                 <li><a href="precedent">Precedents</a></li>
@@ -38,9 +38,9 @@
             </a>
 
             <a href="profile">
-            <i class="fas fa-user-circle" id="profile-icon"></i>
+                <i class="fas fa-user-circle" id="profile-icon"></i>
             </a>
-          
+
         </div>
 
         <!-- Popup element -->
