@@ -24,14 +24,14 @@
                 <li><a href="about">About</a></li>
                 <li><a href="practice">Practice area</a></li>
                 <li><a href="blog">blogs</a></li>
-                <li ><a href="login">
+                <a href="no-hover">
                         <button class="login-button">LOG IN</button>
                     </a>
-                </li>
-                <li ><a href="register">
+                
+                <a href="no-hover">
                         <button class="login-button">REGISTER</button>
                     </a>
-                </li>
+                
             </ul>
         </nav>
 

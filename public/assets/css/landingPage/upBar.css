@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #2e2d35;
+    background-color: #17161b;
     color: #fff7eb;
     padding: 10px 30px;
     font-size: 16px;
@@ -41,7 +41,7 @@ body {
 
 .up-bar .inquire button {
     border: 1.5px solid #554a3a;
-    background-color: #ffd493;
+    background-color: #fdc571;
     color: #352c20;
     border-radius: 5px;
     padding: 10px 20px;
