@@ -49,7 +49,7 @@
                 <br>Sign up to experience effortless legal management
                 <br>
                 <br>
-                <div class="login-register">
+                <div class="login-register sign">
                     <a href="../register.html" class="login-button register-button">SIGN UP</a>
             </div>
             

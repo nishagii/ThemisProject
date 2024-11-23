@@ -120,7 +120,7 @@ body {
 }
 
 .bold {
-    color: #100e0e; /* Text color for bold elements */
+    color: #070501; /* Text color for bold elements */
     font-weight: 600; /* Bold weight */
 }
 
@@ -130,34 +130,7 @@ body {
     
 }
 
-.login-button {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #ffffff;
-    border-radius: 8px;
-    border: 1.5px solid #554a3a;
-    height: 30px;
-    width: 90px;
-    transition: background-color 0.1s, color 0.1s;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    font-size: 15px;
-    font-weight: 500;
-}
 
-.register-button {
-    color: #000;
-    text-decoration: none;
-}
-
-.login-button:hover {
-    background-color: #ffffff; /* Lighten background color on hover */
-    color: #554a3a; /* Change text color on hover */
-    border-color: #7c5d41; /* Darken border color on hover */
-    transform: scale(1.05); /* Slightly enlarge the button on hover */
-}
 
 .empower {
     background-color: #eaf1fd;
@@ -232,7 +205,7 @@ body {
   .feature-card i {
     font-size: 60px;
     margin-bottom: 15px;
-    color: #1d1b31;
+    color: #d48001;
   }
 
 
