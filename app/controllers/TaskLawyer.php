@@ -12,7 +12,7 @@ class TaskLawyer
         $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
         // Load the view with data
-        $this->view('/seniorCounsel/task', $data);
+        $this->view('/seniorCounsel/tasklawyer', $data);
     }
 
     
