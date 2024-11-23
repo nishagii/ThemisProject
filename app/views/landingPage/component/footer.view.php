@@ -37,7 +37,7 @@
             <div class="contact-info">
                 <h4>Contact Our THEMIS Lawyer</h4>
                 <p>076-1234567<br>
-                johnkepling@gmail.com<br>
+                themis@gmail.com<br>
                 63, Galle Road, Colombo-04</p>
             </div>
         </div>
