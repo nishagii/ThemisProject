@@ -21,7 +21,7 @@ nav{
 
 
 .container {
-    background-color: #FAE9CF;
+    background-color: #1d1b31;
     padding: 18px 0;
     display: flex; 
     align-items: center; 
@@ -48,7 +48,7 @@ nav .big-navbar li a {
     font-weight: 500;
     text-decoration: none;
     position: relative;
-    color: rgb(0, 0, 0);
+    color: white;
     padding: 14px 20px;
     border-radius: 100px;
     transition: background-color 0.3s;
@@ -61,7 +61,7 @@ nav .big-navbar li a:before{
     bottom: 0;
     height: 3px;
     width: 100%;
-    background: white;
+    background: #ff9800;
     transform: scaleX(0);
     transform-origin: right;
 }
@@ -84,18 +84,18 @@ nav .big-navbar li a:active {
 
 .navbar-icons i {
     font-size: 23px;
-    color: #000;
+    color: white;
     cursor: pointer;
     transition: color 0.3s;
 }
 
 .navbar-icons i:hover {
-    color: #ca9038;
+    color: #ff9800;
 }
 
 label #btn,/* icons*/
 label #cancel{
-    color: #ca9038;
+    color: #ff9800;
     font-size: 25px;
     float: right;
     line-height: 80px;
