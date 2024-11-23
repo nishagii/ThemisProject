@@ -15,12 +15,6 @@
     <body>
         <div class="container">
             <div class="white">
-                        <button class="button register">
-                <div class="button">
-                    <i class="bx bx-user-plus icon"></i> <!-- Boxicon for registration -->
-                    <a href="register">Register</a>
-                </div>
-            </button>
 
                 <img src="<?= ROOT ?>/assets/images/themis_logo.png" class="white-logo">
                 <div class="heading">
