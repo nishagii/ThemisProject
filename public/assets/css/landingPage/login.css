@@ -1,5 +1,5 @@
 body {
-    background-color: #FAE9CF;
+    background-color: #1d1b31;
     font-family: 'Montserrat';
     margin: 0 auto;
     padding: 0;
@@ -93,27 +93,18 @@ input::placeholder {
     font-family: 'Montserrat';
 }
 
-img.view {
-    height: 20px;
-    cursor: pointer;
-}
 
 input.login {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #fff7eb;
-    border-radius: 8px;
-    border: 1.5px solid #554a3a;
-    height: 30px;
-    width: 90px;
-    transition: background-color 0.1s, color 0.1s;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    font-size: 15px;
-    font-weight: 500;
     margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #f0a636; /* Initial background color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
 }
 
 a {
@@ -134,37 +125,34 @@ img.white-logo {
     margin-bottom: 5%;
 }
 
-button.button {
-    font-weight: bold;
-    background-color: #FAE9CF;
-    border-radius: 8px;
-    border: 1px solid #FAE9CF;
-    height: 30px;
-    transition: background-color 0.1s, color 0.1s;
+.button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #f0a636; /* Initial background color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border: 1.5px solid #4e4536;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
 }
 
-button.button:hover,
+.button:hover,
 input.login:hover {
-    background-color: #ffffff; /* Lighten background color on hover */
-    color: #554a3a; /* Change text color on hover */
-    border-color: #7c5d41; /* Darken border color on hover */
-    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    background-color: #f9c67a; /* Initial background color */
 }
 
-button.button div.button {
+.button div.button {
     display: flex;
     align-items: center; 
     justify-content: center; 
 }
 
-button.button img.icon {
-    margin-right: 5px; 
+.register {
+
+    width: 100%;
+    height: 250px;
 }
 
 .remember-me {
@@ -214,7 +202,7 @@ button.register {
 /* Media Queries for Mobile Devices */
 @media (max-width: 790px) {
     body {
-        background: #fdf5e8;
+        background: white;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -236,7 +224,7 @@ button.register {
         padding: 10px;
         box-sizing: border-box;
         margin: auto;
-        background: #fdf5e8;
+        background: white;
     }
 
     div.heading {
@@ -247,16 +235,22 @@ button.register {
         font-size: 30px;
     }
 
-    input[type="text"],
-    input[type="password"] {
-        max-width: 70%;
-    }
 
+    input[type="password"],
+    input[type="text"] {
+        margin-left: 50px;
+    }
     img.logo {
         display: none;
     }
 
-    
+    .pword .view {
+        right: 0.5rem;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 1.5rem; /* Adjust size as needed */
+        color: #555; /* Adjust color as needed */
+    }
 }
 
 @media (max-width: 480px) {
@@ -292,10 +286,6 @@ button.register {
     button.button {
         height: 30px; /* Even smaller button height */
         font-size: 12px; /* Even smaller font size for buttons */
-    }
-
-    img.logo {
-        display: none;
     }
 
     input::placeholder {

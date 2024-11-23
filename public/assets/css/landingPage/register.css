@@ -1,5 +1,5 @@
 body {
-    background-color: #FAE9CF;
+    background-color: #1d1b31;
     font-family: 'Montserrat';
     margin: 0 auto;
     padding: 0;
@@ -80,28 +80,20 @@ img.white-logo {
 }
 
 input.register {
-    font-family: 'Montserrat', sans-serif;
-    background-color: #fff7eb;
-    border-radius: 8px;
-    border: 1.5px solid #554a3a;
-    height: 30px;
-    width: 150px;
-    transition: background-color 0.1s, color 0.1s;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    font-size: 15px;
-    font-weight: 500;
     margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #f0a636; /* Initial background color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
 }
 
 input.register:hover {
-    background-color: #ffffff; /* Lighten background color on hover */
-    color: #554a3a; /* Change text color on hover */
-    border-color: #7c5d41; /* Darken border color on hover */
-    transform: scale(1.05); /* Slightly enlarge the button on hover */
+    background-color: #f9c67a; /* Initial background color */
 }
 
 /* Media Queries for Mobile Devices */
