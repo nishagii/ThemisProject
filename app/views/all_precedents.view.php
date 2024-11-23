@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/precedent.css">
     <link rel="stylesheet" href="precedents-yearwise.css">
 </head>
 <body>
-    <div class="content">
+
         <div class="header">
             <h1>Judgments Delivered in 2024</h1>
         </div>
 
-        <div class="table-container">
+        <div class="precedent-table">
             <table>
                 <thead>
                     <tr>
@@ -71,6 +72,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
+
 </body>
 </html>

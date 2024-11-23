@@ -40,13 +40,6 @@
     color: #2e2d35;
 }
 
-.welcome img {
-     /* Ensure the image scales down properly */
-    height: 200; /* Maintain the aspect ratio of the image */
-    flex: 1; /* Allow the image to grow and shrink */
-    border-radius: 13%;
-}
-
 .welcome h2 {
     margin-bottom: 10px;
     font-size: 50px; /* Add space below the heading */
@@ -65,6 +58,75 @@
     flex-direction: column;
     align-content: center;
     justify-content: center;
+}
+
+.welcome i {
+    font-size: 4rem; /* Icon size */
+    margin-top: 1rem;
+}
+
+/* Medium screens (tablets and smaller desktops) */
+@media (max-width: 1024px) {
+    .welcome {
+        flex-direction: column; /* Stack items vertically */
+        text-align: center; /* Center-align text */
+        margin: 30px; /* Reduce margin */
+    }
+
+    .welcome i {
+        margin-top: 10px;
+        font-size: 3rem; /* Reduce icon size */
+    }
+
+    .welcome h2 {
+        font-size: 40px; /* Adjust heading size */
+    }
+
+    .welcome p {
+        font-size: 14px; /* Adjust paragraph size */
+    }
+}
+
+/* Small screens (mobile devices) */
+@media (max-width: 768px) {
+    .welcome {
+        padding: 15px; /* Reduce padding */
+        margin: 20px; /* Reduce margin further */
+    }
+
+    .welcome h2 {
+        font-size: 30px; /* Adjust heading size */
+    }
+
+    .welcome p {
+        font-size: 12px; /* Further reduce paragraph size */
+        line-height: 1.4; /* Adjust line height */
+    }
+
+    .welcome i {
+        font-size: 2.5rem; /* Adjust icon size */
+    }
+}
+
+/* Extra small screens (very narrow devices like older phones) */
+@media (max-width: 480px) {
+    .welcome {
+        padding: 10px; /* Minimal padding */
+        margin: 10px; /* Minimal margin */
+    }
+
+    .welcome h2 {
+        font-size: 25px; /* Further adjust heading size */
+    }
+
+    .welcome p {
+        font-size: 11px; /* Adjust paragraph size */
+        line-height: 1.2; /* Tighten line spacing */
+    }
+
+    .welcome i {
+        font-size: 2rem; /* Icon size for extra small screens */
+    }
 }
 
 .footer {
