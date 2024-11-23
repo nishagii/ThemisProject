@@ -16,7 +16,7 @@
 }
 
 .container {
-    background-color: #fff0db;
+    background-color: #1d1b31;
     padding: 10px 0;
     display: flex; 
     align-items: center; 
@@ -52,11 +52,11 @@ nav {
 
 .navbar-icons i {
     font-size: 23px;
-    color: #000;
+    color: white;
     cursor: pointer;
     transition: color 0.3s;
 }
 
 .navbar-icons i:hover {
-    color: #ca9038;
+    color: #ff9800;
 }
