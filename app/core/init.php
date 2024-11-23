@@ -3,6 +3,11 @@
 spl_autoload_register(function($classname){
 
 	require $filename = "../app/models/".ucfirst($classname).".php";
+	if (file_exists($filePath)) {
+        require $filePath;
+    } else {
+        die("The class file for {$classname} does not exist at {$filePath}");
+    }
 });
 
 require 'config.php';

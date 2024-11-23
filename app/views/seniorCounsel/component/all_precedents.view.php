@@ -3,74 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="precedents-yearwise.css">
+    <title>Judgments Delivered</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="content">
-        <div class="header">
-            <h1>Judgments Delivered in 2024</h1>
-        </div>
-
-        <div class="table-container">
-            <table>
-                <thead>
+    <h1>Judgments Delivered in 2024</h1>
+    <table border="1" style="width:100%; text-align:left;">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Case Number</th>
+                <th>Name of Parties</th>
+                <th>Judgment by</th>
+                <th>Document</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($judgments)): ?>
+                <?php foreach ($judgments as $judgment): ?>
                     <tr>
-                        <th>Date</th>
-                        <th>Case Number</th>
-                        <th>Name of Parties</th>
-                        <th>Judgment by</th>
-                        <th>Document</th>
+                        <td><?= htmlspecialchars($judgment->date); ?></td>
+                        <td><?= htmlspecialchars($judgment->case_number); ?></td>
+                        <td><?= htmlspecialchars($judgment->name_of_parties); ?></td>
+                        <td><?= htmlspecialchars($judgment->judgment_by); ?></td>
+                        <td><a href="documents/<?= htmlspecialchars($judgment->document_link); ?>"><?= htmlspecialchars($judgment->document_link); ?></a></td>
                     </tr>
-                </thead>
-            
-                    <tr>
-                        <td>26/07/2024</td>
-                        <td>S.C. (Misc.) No. 02/2016</td>
-                        <td>
-                            K.G. Keerthi Karangoda Amuthagoda, Panukerapeliyta, Hidelana, Ratnapura Vs. Attorney General...
-                        </td>
-                        <td>Hon. K. Priyantha Fernando, J</td>
-                        <td><a href="#" class="doc-link">doc</a></td>
-                    </tr>
-                    <tr>
-                        <td>26/07/2024</td>
-                        <td>SC Appeal No: 48/2013</td>
-                        <td>
-                            Triad Advertising (Pvt) Ltd Vs. Plaintiff Vs. Attorney General, Attorney General’s Department...
-                        </td>
-                        <td>Hon. Mahinda Samayawardhena, J.</td>
-                        <td><a href="#" class="doc-link">doc</a></td>
-                    </tr>
-                    <tr>
-                        <td>25/07/2024</td>
-                        <td>SC (CHC) Appeal No. 6/2009</td>
-                        <td>
-                            Nawarkama (Private) Limited Vs. Defendant – Appellant, Plaintiff – Respondent...
-                        </td>
-                        <td>Hon. K. Priyantha Fernando, J</td>
-                        <td><a href="#" class="doc-link">doc</a></td>
-                    </tr>
-                    <tr>
-                        <td>25/07/2024</td>
-                        <td>SC/RULE/04/2021</td>
-                        <td>
-                            Edward Megary 2nd Secretary Vs. Complainant, Defendant Respondent...
-                        </td>
-                        <td>Hon. Mahinda Samayawardhena, J</td>
-                        <td><a href="#" class="doc-link">doc</a></td></tr>
-                        <tr>
-                            <td>24/07/2024</td>
-                            <td>S.C. (C.H.C.) Appeal 11/2004</td>
-                            <td>
-                                Ceylon Company Group Vs. Plaintiff Vs. Defendant-Appellant...
-                            </td>
-                            <td>Hon. Mahinda Samayawardhena, J</td>
-                            <td><a href="#" class="doc-link">doc</a></td>
-                        </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td colspan="5">No judgments found.</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </body>
 </html>
