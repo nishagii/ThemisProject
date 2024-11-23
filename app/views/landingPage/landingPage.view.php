@@ -68,47 +68,7 @@
     </div>
 
 
-    <div class="footer">
-        <div class="footer-content">
-            <div class="quick-links">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="lp.html">Home</a></li>
-                    <li><a href="aboutus.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="practice area.html">Practice Area</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                </ul>
-            </div>
-            <div class="stay-connected">
-                <img src="<?= ROOT ?>/assets/images/themis_logo.png" height="75">
-                <h4>Stay Connected with Your Lawyer</h4>
-                <p>
-                    At THEMIS, we believe that effective legal management should be accessible and user-friendly. Our platform is designed to simplify your experience, allowing you to focus on what truly matters - your case.
-                </p>
-            </div>
-            
-            
-            <div class="contact-info">
-                <h4>Contact Our THEMIS Lawyer</h4>
-                <p>076-1234567<br>
-                johnkepling@gmail.com<br>
-                63, Galle Road, Colombo-04</p>
-            </div>
-        </div>
-        <div class="social-media">
-            <h4>Follow Us</h4>
-            <div class="social-icons">
-                <a href="www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>Developed by VIP Software Solutions</p>
-        </div>
-    </div>
+    <?php include('component/footer.view.php'); ?>
     <script src="<?= ROOT ?>/assets/js/landingPage.js"></script>
 
 </body>
