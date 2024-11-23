@@ -130,7 +130,33 @@ body {
     
 }
 
+.sign {
+    margin-left: 20px;
+    padding: 10px 20px;
+    background-color: #f0a636; /* Initial background color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    width: auto; /* Adjust width automatically */
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+    display: inline-block; /* Ensures proper alignment */
+}
 
+.sign:hover {
+    background-color: #5361b9; /* Change background on hover */
+    transform: scale(1.05); /* Slightly increase size */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+}
+
+.sign:active {
+    transform: scale(0.95); /* Slightly decrease size when clicked */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow effect */
+}
 
 .empower {
     background-color: #eaf1fd;
@@ -311,6 +337,10 @@ body {
     .empower p {
         font-size: 18px; /* Slightly larger text on bigger screens */
     }
+    .sign {
+        font-size: 12px;
+
+    }
 }
 
 @media (max-width: 480px) {
@@ -463,3 +493,23 @@ body {
       font-size: 1.5rem; /* Smaller font on smaller screens */
     }
   }
+
+  /* Responsive Design */
+@media (max-width: 768px) {
+    .sign {
+        width: 50%; /* Adjust width for medium screens */
+        font-size: 13px; /* Slightly reduce font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .sign {
+        width: 80%; /* Adjust width for smaller screens */
+        font-size: 12px; /* Further reduce font size */
+        padding: 8px 16px; /* Reduce padding */
+        margin-left: 0; /* Center align on small screens */
+    }
+    div {
+        text-align: center; /* Center the button */
+    }
+}

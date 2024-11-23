@@ -175,14 +175,20 @@ label #cancel{
 /* screen sizes lower than 1075px*/
 @media (max-width: 1075px){
     nav .big-navbar {
-        margin-right:0px;
+        margin-right:60px;
     }
     nav .big-navbar li a {
+        font-size: 11px;
+    }
+    .login-button {
+        padding: 5px 10px;
+        border-radius: 50px;
         font-size: 11px;
     }
 }
 /* screen sizes lower than 936px*/
 @media (max-width: 936px){
+
 
      nav .big-navbar li a {
         font-size: 11px;
@@ -210,27 +216,33 @@ label #cancel{
     .big-navbar{
         position: fixed;
         width: 100%;
-        height: 30vh;
+        height: 40vh;
         background: rgb(255, 255, 255);
-        top: 60px;
+        top: 120px;
         left: -100%;
         text-align: center;
         transition:  all 0.5s;
         flex-direction: column;
         display: none;
+        
     }
     nav .big-navbar li {
          display:block;
          line-height: 30px;
          margin-top: 5px;
          margin-bottom: 5px;
+        
     }
     nav .big-navbar li a{
         font-size: 15px;
         display: block;
         padding: 0;
+        color: #1d1b31;
     } 
-
+    .login-button {
+        margin-right: 20px;
+        margin-bottom: 10px;
+    }
     a:hover,a.active{
         background: none ;
     }
