@@ -27,11 +27,12 @@
         <section class="expertise">
             <h2>Our Expertise</h2>
             <ul class="practice">
-                <li><strong>Cross-Border Financing:</strong> Guidance on securing financing across international borders while ensuring compliance with local regulations.</li>
-                <li><strong>Asset and Project Finance:</strong> Structuring and securing financing for major projects, offering insights into legal requirements and best practices.</li>
-                <li><strong>Financial Instruments:</strong> Navigating the complexities of various financial products while ensuring compliance with applicable laws.</li>
-                <li><strong>Sri Lanka Exchange Control Laws:</strong> Advising on exchange control regulations, enabling compliance with legal landscapes surrounding currency exchange.</li>
-            </ul>
+    <li><i class='bx bx-globe'></i> <strong>Cross-Border Financing:</strong> Guidance on securing financing across international borders while ensuring compliance with local regulations.</li>
+    <li><i class='bx bx-briefcase'></i> <strong>Asset and Project Finance:</strong> Structuring and securing financing for major projects, offering insights into legal requirements and best practices.</li>
+    <li><i class='bx bxs-bar-chart-alt-2'></i> <strong>Financial Instruments:</strong> Navigating the complexities of various financial products while ensuring compliance with applicable laws.</li>
+    <li><i class='bx bx-dollar'></i> <strong>Sri Lanka Exchange Control Laws:</strong> Advising on exchange control regulations, enabling compliance with legal landscapes surrounding currency exchange.</li>
+</ul>
+
         </section>
 
         <section class="solutions">
