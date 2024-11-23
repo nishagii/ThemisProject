@@ -23,7 +23,7 @@
                 <li><a href="homeclient">Home</a></li>
                 <li><a href="case">Cases</a></li>
                 <li><a href="payment">Payments</a></li>
-                <li><a href="precedent">Precedents</a></li>
+                <li><a href="precedentClient">Precedents</a></li>
             </ul>
         </nav>
 
@@ -34,7 +34,7 @@
                 <i class="fas fa-cog"></i>
             </a>
 
-            <a href="profile.php">
+            <a href="clientprofile">
             <i class="fas fa-user-circle" id="profile-icon"></i>
             </a>
             </div>
