@@ -28,7 +28,7 @@
                         <button class="login-button">LOG IN</button>
                     </a>
                 
-                <a href="register">
+                <a href="registeruser">
                         <button class="login-button">REGISTER</button>
                     </a>
                 
