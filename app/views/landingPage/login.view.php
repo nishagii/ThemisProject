@@ -20,7 +20,7 @@
 
             <button class="button register">
                 <i class="bx bx-user-plus icon"></i> <!-- Boxicon for registration -->
-                <a href="<?= ROOT ?>/register_user">Register</a>
+                <a href="<?= ROOT ?>/registeruser">Register</a>
             </button>
 
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" class="white-logo">
@@ -28,7 +28,7 @@
                 <h1 class="welcome">Welcome Back!</h1>
                 <h1 class="login">Login to your account</h1>
             </div>
-            <form action="" method="">
+            <form action="" method="POST">
                 <input type="text" name="username" placeholder="Enter username or email" required> <br />
                 <div class="pword">
                     <input type="password" name="password" id="password" placeholder="Enter password" required>
@@ -48,7 +48,6 @@
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" class="colour-logo">
         </div>
     </div>
-    <script src="<?= ROOT ?>/assets/js/login.js" defer></script>
 </body>
 
 </html>
