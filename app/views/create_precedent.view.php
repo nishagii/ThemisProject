@@ -15,7 +15,7 @@
         <form method="POST" action="<?= ROOT ?>/precedents/create">
             <div class="form-group">
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date" required>
+                <input type="date" id="date" name="judgment_date" required>
             </div>
 
             <div class="form-group">
