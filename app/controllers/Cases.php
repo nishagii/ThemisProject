@@ -136,7 +136,7 @@ class Cases
         $caseModel->updateCase($data);
 
         // Redirect to a success page or the list of cases
-        redirect('cases/retrieveCases');
+        redirect('cases/extendRetrieveAllCases');
 
         
     }
