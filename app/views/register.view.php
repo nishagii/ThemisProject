@@ -17,7 +17,7 @@
                 <h1 class="register">Create your account</h1>
             </div>
             <div class="form">
-                <form action="<?= ROOT ?>/register" method="POST" novalidate>
+                <form action="<?= ROOT ?>/registeruser" method="POST" novalidate>
                     <!-- First Name -->
                     <input type="text" class="first-name" name="firstname" placeholder="Enter first name" required value="<?= htmlspecialchars($_POST['firstname'] ?? '') ?>">
                     <p class="fname-error"><?= $errors['firstname'] ?? '' ?></p>
