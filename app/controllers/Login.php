@@ -22,15 +22,15 @@ class Login
 
                 // Redirect based on role
                 if ($user->role === 'admin') {
-                    redirect('homeadmin');
+                    redirect('homeadmin?login=success');
                 } elseif ($user->role === 'client') {
-                    redirect('homeclient');
+                    redirect('homeclient?login=success');
                 } elseif ($user->role === 'lawyer') {
-                    redirect('homelawyer');
+                    redirect('homelawyer?login=success');
                 } elseif ($user->role === 'attorney') {
-                    redirect('homeattorney');
+                    redirect('homeattorney?login=success');
                 }elseif ($user->role === 'junior') {
-                    redirect('homejunior');
+                    redirect('homejunior?login=success');
                 }else {
                     // Default role or error
                     redirect('generalDashboard');
@@ -39,6 +39,7 @@ class Login
                 exit();
             } else {
                 $data['errors'] = ['Invalid username/email or password'];
+                // var_dump($data['errors']); // Debug here
             }
         }
 

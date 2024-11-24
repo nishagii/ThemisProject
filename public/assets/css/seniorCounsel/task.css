@@ -1,3 +1,5 @@
+
+
 .parent-container { /* Replace with the actual class of the parent container */
     display: flex;
     flex-direction: column;
@@ -106,3 +108,120 @@
   .add-button:focus {
     outline: none;             /* Remove outline on focus */
   }
+
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 200ms ease-in-out;
+    border-radius: 10px;
+    background-color: #eaf1fd;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+      max-width: 80%;
+  }
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+  .modal-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }
+
+  .modal-header .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .modal-header .close-button {
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    background: none;
+  }
+
+  .modal-body {
+    padding: 10px 15px;
+  }
+
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Small Text */
+small {
+  font-size: 12px;
+  color: #777;
+}
+
+/* File Input Styling */
+.form-group input[type="file"] {
+  padding: 5px;
+}
+
+/* Form Actions */
+.form-actions {
+  text-align: center;
+}
+
+.form-actions button {
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #ff9800;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-actions button:hover {
+  background-color: #feab2f;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  #taskForm {
+      padding: 15px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+      font-size: 11px;
+  }
+  .form-actions button {
+      font-size: 11px;
+  }
+}
