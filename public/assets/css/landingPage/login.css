@@ -298,3 +298,7 @@ button.register {
         height: 150px;
     }
 }
+.error-messages p {
+    color: red;
+    font-weight: bold;
+}
