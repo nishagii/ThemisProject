@@ -9,7 +9,7 @@ class Register
         $data = [];
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            echo "POST received"; // Debug point 1
+            // echo "POST received"; // Debug point 1
             $user = $this->loadModel('UserModel');
 
             if ($user->validate($_POST)) {
