@@ -12,6 +12,19 @@
     <title>
         Themis
     </title>
+    <style>
+        /* Styling for success message */
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,6 +48,7 @@
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
+
             <form action="" method="POST">
                 <input type="text" name="username" placeholder="Enter username or email" required> <br />
                 <div class="pword">
@@ -55,6 +69,24 @@
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" class="colour-logo">
         </div>
     </div>
+
+    <!-- JavaScript for Password Toggle -->
+    <script>
+        const passwordInput = document.getElementById('password');
+        const viewIcon = document.getElementById('view');
+
+        viewIcon.addEventListener('click', () => {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                viewIcon.classList.remove('bxs-show');
+                viewIcon.classList.add('bxs-hide');
+            } else {
+                passwordInput.type = 'password';
+                viewIcon.classList.remove('bxs-hide');
+                viewIcon.classList.add('bxs-show');
+            }
+        });
+    </script>
 </body>
 
 </html>
