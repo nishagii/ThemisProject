@@ -39,6 +39,7 @@ class Login
                 exit();
             } else {
                 $data['errors'] = ['Invalid username/email or password'];
+                // var_dump($data['errors']); // Debug here
             }
         }
 
