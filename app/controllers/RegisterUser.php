@@ -13,7 +13,7 @@ class RegisterUser
             $user = $this->loadModel('UserModel');
 
             if ($user->validate($_POST)) {
-                echo "Validation passed"; // Debug point 2
+                // echo "Validation passed"; // Debug point 2
                 if ($user->save($_POST)) {
                     echo "Save successful"; // Debug point 3
                     redirect('homelawyer');
