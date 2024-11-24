@@ -20,7 +20,8 @@
         <button class="add">Card View</button>
     </a>
 </div>
-    <table border="1" cellpadding="10" cellspacing="0">
+<div class="table-container">
+    <table border="1" cellpadding="10" cellspacing="0" class="template-table">
         <thead>
             <tr>
                 <th>#</th>
@@ -28,6 +29,7 @@
                 <th>Case Number</th>
                 <th>Court</th>
                 <th>Notes</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -39,15 +41,30 @@
                         <td><?= htmlspecialchars($case->case_number) ?></td>
                         <td><?= htmlspecialchars($case->court) ?></td>
                         <td><?= htmlspecialchars($case->notes) ?></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="more">View</button>
+                                <button class="edit">
+                    <i class="bx bx-edit"></i> <!-- Boxicon for Edit -->
+                </button>
+                <a href="<?= ROOT ?>/cases/deleteCase/<?= $case->id; ?>">
+                <button class="delete">
+                    <i class="bx bx-trash"></i> <!-- Boxicon for Delete -->
+                </button>
+            </a>
+                            </div>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>
                 <tr>
-                    <td colspan="5">No cases found.</td>
+                    <td colspan="6">No cases found.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
     </table>
+</div>
+
 </body>
 
 </html>

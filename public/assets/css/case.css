@@ -68,7 +68,7 @@ font-size: 20px;          /* Adjust icon size */
 }
 
 button:hover {
-background-color: #3b395c; /* Darker green on hover */
+background-color: #9392a3; /* Darker green on hover */
 }
 
 button:focus {
@@ -96,3 +96,66 @@ background-color: #5d5b5b;
 .edit {
 background-color: #5d5b5b;
 }
+
+.template-table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .template-table th,
+  .template-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .template-table th {
+    background-color: #1d1b31;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .template-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .template-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  .template-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .action-buttons button {
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+  }
+  
+  .action-buttons .edit {
+    background-color: #99cb89;
+  }
+  
+  .action-buttons .delete {
+    background-color: #e53935;
+  }
+  
+  .action-buttons button:hover {
+    opacity: 0.8;
+  }
