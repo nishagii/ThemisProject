@@ -30,6 +30,21 @@
 </head>
 
 <body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('register');
+
+            if (status === 'success') {
+                Swal.fire({
+                    title: 'Registration Successful!',
+                    text: 'Your account has been created successfully.',
+                    icon: 'success',
+                    confirmButtonText: 'Login to continue',
+                });
+            }
+        });
+    </script>
     <div class="container">
         <div class="white">
 
