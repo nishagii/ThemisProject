@@ -32,7 +32,7 @@ nav .big-navbar {
     list-style-type: none;
     float: right;
     margin-top: 40px;
-    margin-right: 475px;
+    margin-right: 300px;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -175,10 +175,10 @@ label #cancel{
 /* screen sizes lower than 1075px*/
 @media (max-width: 1075px){
     nav .big-navbar {
-        margin-right:60px;
+        margin-right:50px;
     }
     nav .big-navbar li a {
-        font-size: 11px;
+        font-size: 12px;
     }
     .login-button {
         padding: 5px 10px;
@@ -191,7 +191,7 @@ label #cancel{
 
 
      nav .big-navbar li a {
-        font-size: 11px;
+        font-size: 12px;
         padding: 5px;
     }
     .navbar-logo{

@@ -1,5 +1,6 @@
 <?php
 
+
 class UserModel
 {
     use Model;
@@ -11,9 +12,9 @@ class UserModel
     public function save($data)
     {
         $query = "INSERT INTO users 
-              (first_name, last_name, username, email, phone, password)
+              (first_name, last_name, username, email, phone, password,role)
               VALUES 
-              (:first_name, :last_name, :username, :email, :phone, :password)";
+              (:first_name, :last_name, :username, :email, :phone, :password,:role)";
 
         $params = [
             'first_name' => $data['firstname'],
@@ -22,6 +23,7 @@ class UserModel
             'email' => $data['email'],
             'phone' => $data['tel'],
             'password' => password_hash($data['password'], PASSWORD_DEFAULT),
+            'role' => 'client' // Automatically assign 'client' as the default role
         ];
 
         try {
@@ -29,14 +31,17 @@ class UserModel
             $result = $stmt->execute($params);
 
             if (!$result) {
-                $this->errors['general'] = "Database error: Could not save user.";
+                echo "Database Error: ";
+                print_r($stmt->errorInfo());
             }
             return $result;
         } catch (PDOException $e) {
-            $this->errors['general'] = "PDO Error: " . $e->getMessage();
+            echo "PDO Error: " . $e->getMessage();
             return false;
         }
     }
+
+
 
     // Validate user data
     public function validate($data)
@@ -53,8 +58,6 @@ class UserModel
 
         if (empty($data['username'])) {
             $this->errors['username'] = "Username is required.";
-        } elseif (strlen($data['username']) < 5) {
-            $this->errors['username'] = "Username must be at least 5 characters long.";
         }
 
         if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
@@ -65,18 +68,38 @@ class UserModel
             $this->errors['tel'] = "Valid phone number is required.";
         }
 
-        if (empty($data['password']) || strlen($data['password']) < 8) {
-            $this->errors['password'] = "Password must be at least 8 characters long.";
+        if (empty($data['password']) || strlen($data['password']) < 2) {
+            $this->errors['password'] = "Password must be at least 2 characters long.";
         }
 
         if ($data['password'] !== $data['confirm_password']) {
             $this->errors['confirm_password'] = "Passwords do not match.";
         }
 
-        if (!isset($data['terms'])) {
-            $this->errors['terms'] = "You must agree to the terms and conditions.";
+        return empty($this->errors);
+    }
+
+    public function login($data)
+    {
+        $query = "SELECT * FROM users WHERE (email = :email OR username = :username) LIMIT 1";
+
+        $params = [
+            'email' => $data['username'],
+            'username' => $data['username']
+        ];
+
+        try {
+            $stmt = $this->connect()->prepare($query);
+            $stmt->execute($params);
+            $user = $stmt->fetch(PDO::FETCH_OBJ);
+
+            if ($user && password_verify($data['password'], $user->password)) {
+                return $user;
+            }
+        } catch (PDOException $e) {
+            return false;
         }
 
-        return empty($this->errors);
+        return false;
     }
 }
