@@ -15,7 +15,7 @@ class RegisterUser
             if ($user->validate($_POST)) {
                 // echo "Validation passed"; // Debug point 2
                 if ($user->save($_POST)) {
-                    echo "Save successful"; // Debug point 3
+                    // echo "Save successful"; // Debug point 3
                     redirect('homelawyer');
                     return;
                 } else {
