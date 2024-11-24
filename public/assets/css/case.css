@@ -20,7 +20,7 @@
 }
 
 .case-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -84,6 +84,10 @@ margin-top: 10px;
 }
 .add {
 background-color: #93a8e3;
+}
+
+.more {
+    background-color: #fa9800;
 }
 
 .delete {

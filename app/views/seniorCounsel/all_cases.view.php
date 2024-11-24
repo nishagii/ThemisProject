@@ -39,7 +39,7 @@ var_dump(isset($cases) ? $cases : 'Cases variable not set');
             <div class="button">
 
             <a href="<?= ROOT ?>/cases/retrieveCase/<?= $case->id; ?>">
-                <button class="add">More details</button>
+                <button class="more">More details</button>
             </a>
 
             <a href="<?= ROOT ?>/cases/editCase/<?= $case->id; ?>">
