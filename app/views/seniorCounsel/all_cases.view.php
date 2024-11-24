@@ -20,7 +20,7 @@ var_dump(isset($cases) ? $cases : 'Cases variable not set');
     <?php include('component/smallNav1.view.php'); ?>
     <h1>List of Cases</h1>
 <div class="button">
-    <a href="#">
+    <a href="<?= ROOT ?>/cases">
         <button class="add">Add New Case</button>
     </a>
     <a href="<?= ROOT ?>/cases/extendRetrieveAllCases">
