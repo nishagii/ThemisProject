@@ -19,7 +19,7 @@
                 title: 'Welcome Back!',
                 text: 'You have successfully logged in.',
                 icon: 'success',
-                timer: 1500,
+                timer: 60000,
                 showConfirmButton: false,
             });
         }
