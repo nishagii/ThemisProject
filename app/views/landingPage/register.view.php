@@ -21,7 +21,7 @@
             </button>
             <img src="./logo/themis_logo.png" class="white-logo">
             <div class="heading">
-                <h1 class="register">Create your account</h1>
+                <h1 class="register_user">Create your account</h1>
             </div>
             <div class="form">
                 <form action="<?= ROOT ?>/register" method="POST" novalidate>

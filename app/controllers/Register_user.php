@@ -26,6 +26,6 @@ class Register_user
             }
         }
 
-        $this->view('register_user', $data);
+        $this->view('landingpage/register', $data);
     }
 }
