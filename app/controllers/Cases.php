@@ -50,6 +50,7 @@ class Cases
         $this->view('/seniorCounsel/all_cases', ['cases' => $cases]);
     }
 
+
     // Retrieve all cases
     public function extendRetrieveAllCases()
     {
