@@ -16,7 +16,7 @@ class RegisterUser
                 // echo "Validation passed"; // Debug point 2
                 if ($user->save($_POST)) {
                     // echo "Save successful"; // Debug point 3
-                    redirect('homelawyer');
+                    redirect('login?register=success');
                     return;
                 } else {
                     $data['errors'] = ["Unable to save user to the database."];
