@@ -28,6 +28,13 @@
                 <h1 class="welcome">Welcome Back!</h1>
                 <h1 class="login">Login to your account</h1>
             </div>
+            <?php if (!empty($data['errors'])): ?>
+                <div class="error-messages">
+                    <?php foreach ($data['errors'] as $error): ?>
+                        <p><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
             <form action="" method="POST">
                 <input type="text" name="username" placeholder="Enter username or email" required> <br />
                 <div class="pword">
