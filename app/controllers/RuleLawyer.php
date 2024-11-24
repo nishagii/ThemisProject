@@ -1,7 +1,7 @@
 <?php
 
-
-class TaskLawyer
+// HomeAdmin class
+class RuleLawyer
 {
     use Controller;
 
@@ -12,8 +12,6 @@ class TaskLawyer
         $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
         // Load the view with data
-        $this->view('/seniorCounsel/task', $data);
+        $this->view('/seniorCounsel/rule', $data);
     }
-
-    
 }

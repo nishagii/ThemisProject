@@ -1,0 +1,198 @@
+.cases-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    background-color: #f9f9f9;
+    /* flex-direction: column; */
+}
+
+.case-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    text-align: left;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.case-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.case-card h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.case-card p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.case-card strong {
+    color: #444;
+}
+h1 {
+color: #ffffff;
+background-color: #1d1b31;
+font-size: 20px;
+margin-bottom: 20px;
+padding: 20px;
+text-transform: uppercase;
+text-align: center;
+}
+button {
+color: white;              /* White text color */
+border: none;              /* Remove border */
+border-radius: 5px;       /* Rounded corners */
+padding: 5px 10px;       /* Vertical and horizontal padding */
+font-size: 15px;           /* Font size */
+cursor: pointer;           /* Pointer cursor on hover */
+transition: background-color 0.3s ease; /* Transition for background color */
+display: flex;             /* Enable flexbox for the button */
+align-items: center;       /* Center items vertically */
+text-decoration: none;
+margin-right: 20px;
+}
+
+button i {
+margin-right: 8px;        /* Space between icon and text */
+font-size: 20px;          /* Adjust icon size */
+}
+
+button:hover {
+background-color: #9392a3; /* Darker green on hover */
+}
+
+button:focus {
+outline: none;             /* Remove outline on focus */
+}
+a {
+text-decoration: none;
+}
+.button {
+display: flex;
+margin-left: 20px;
+margin-top: 10px;
+}
+.add {
+background-color: #93a8e3;
+}
+
+.more {
+    background-color: #fa9800;
+}
+
+.delete {
+background-color: #5d5b5b;
+}
+.edit {
+background-color: #5d5b5b;
+}
+
+.template-table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .template-table th,
+  .template-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .template-table th {
+    background-color: #1d1b31;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .template-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .template-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  .template-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .action-buttons button {
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+  }
+  
+  .action-buttons .edit {
+    background-color: #99cb89;
+  }
+  
+  .action-buttons .delete {
+    background-color: #e53935;
+  }
+  
+  .action-buttons button:hover {
+    opacity: 0.8;
+  }
+
+  /* Responsive adjustments */
+@media (max-width: 768px) {
+    .template-table th,
+    .template-table td {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .action-buttons {
+        gap: 5px;
+    }
+
+    .action-buttons button {
+        font-size: 10px;
+        padding: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .template-table th,
+    .template-table td {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .action-buttons button {
+        font-size: 10px;
+        padding: 5px;
+        width: 100%;
+    }
+}

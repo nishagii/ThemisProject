@@ -6,24 +6,26 @@ var_dump(isset($cases) ? $cases : 'Cases variable not set');
 ?> -->
 
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cases List</title>
+
+    <title>THEMIS</title>
+    
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/case.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">  <!-- this is imported to use icons -->
+   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 </head>
-<link rel="stylesheet" href="<?= ROOT ?>/assets/css/case.css">
 
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
     <h1>List of Cases</h1>
 <div class="button">
-    <a href="<?= ROOT ?>/cases">
-        <button class="add">Add New Case</button>
-    </a>
-    <a href="<?= ROOT ?>/cases/extendRetrieveAllCases">
+    <a href="#">
         <button class="add">Tabular View</button>
     </a>
 </div>
@@ -41,18 +43,6 @@ var_dump(isset($cases) ? $cases : 'Cases variable not set');
             <a href="<?= ROOT ?>/cases/retrieveCase/<?= $case->id; ?>">
                 <button class="more">More details</button>
             </a>
-
-            <a href="<?= ROOT ?>/cases/editCase/<?= $case->id; ?>">
-                <button class="edit">
-                    <i class="bx bx-edit"></i> <!-- Boxicon for Edit -->
-                </button>
-            </a>
-
-            <a href="<?= ROOT ?>/cases/deleteCase/<?= $case->id; ?>">
-                <button class="delete">
-                    <i class="bx bx-trash"></i> <!-- Boxicon for Delete -->
-                </button>
-            </a>
             </div>
         </div>
 
@@ -62,5 +52,4 @@ var_dump(isset($cases) ? $cases : 'Cases variable not set');
         <?php endif; ?>
     </div>
 </body>
-
 </html>
