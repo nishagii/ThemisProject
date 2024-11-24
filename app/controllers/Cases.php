@@ -38,7 +38,7 @@ class Cases
         $caseModel->save($data);
 
         // Redirect to the home page or success page
-        redirect('/seniorCounsel/home');
+        redirect('cases/extendRetrieveAllCases');
     }
 
     public function retrieveAllCases()
@@ -136,7 +136,7 @@ class Cases
         $caseModel->updateCase($data);
 
         // Redirect to a success page or the list of cases
-        redirect('cases/retrieveCases');
+        redirect('cases/extendRetrieveAllCases');
 
         
     }
