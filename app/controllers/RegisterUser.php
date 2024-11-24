@@ -1,6 +1,6 @@
 <?php
 
-class Register_user
+class RegisterUser
 {
     use Controller;
 
@@ -26,6 +26,6 @@ class Register_user
             }
         }
 
-        $this->view('landingpage/register', $data);
+        $this->view('register', $data);
     }
 }
