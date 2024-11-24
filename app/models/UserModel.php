@@ -12,9 +12,9 @@ class UserModel
     public function save($data)
     {
         $query = "INSERT INTO users 
-              (first_name, last_name, username, email, phone, password)
+              (first_name, last_name, username, email, phone, password,role)
               VALUES 
-              (:first_name, :last_name, :username, :email, :phone, :password)";
+              (:first_name, :last_name, :username, :email, :phone, :password,:role)";
 
         $params = [
             'first_name' => $data['firstname'],
@@ -23,6 +23,7 @@ class UserModel
             'email' => $data['email'],
             'phone' => $data['tel'],
             'password' => password_hash($data['password'], PASSWORD_DEFAULT),
+            'role' => 'client' // Automatically assign 'client' as the default role
         ];
 
         try {
@@ -68,7 +69,7 @@ class UserModel
         }
 
         if (empty($data['password']) || strlen($data['password']) < 2) {
-            $this->errors['password'] = "Password must be at least 6 characters long.";
+            $this->errors['password'] = "Password must be at least 2 characters long.";
         }
 
         if ($data['password'] !== $data['confirm_password']) {
