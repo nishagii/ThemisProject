@@ -159,3 +159,40 @@ background-color: #5d5b5b;
   .action-buttons button:hover {
     opacity: 0.8;
   }
+
+  /* Responsive adjustments */
+@media (max-width: 768px) {
+    .template-table th,
+    .template-table td {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .action-buttons {
+        gap: 5px;
+    }
+
+    .action-buttons button {
+        font-size: 10px;
+        padding: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .template-table th,
+    .template-table td {
+        font-size: 10px;
+        padding: 8px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .action-buttons button {
+        font-size: 10px;
+        padding: 5px;
+        width: 100%;
+    }
+}

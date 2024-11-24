@@ -25,7 +25,7 @@
                 <li><a href="<?= ROOT ?>/homelawyer">Home</a></li>
                 <li><a href="<?= ROOT ?>/cases/retrieveAllCases">Cases</a></li>
                 <li><a href="payment">Payments</a></li>
-                <li><a href="precedent">Precedents</a></li>
+                <li><a href="<?= ROOT ?>/precedent">Precedents</a></li>
                 <!-- <li><a href="blog">Blogs</a></li> -->
             </ul>
         </nav>
