@@ -5,14 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Meeting Requests</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/meetingslawyer.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/meetings.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
+    <?php include('component/bigNav.view.php'); ?>
+    <?php include('component/smallNav1.view.php'); ?>
     <div class="message-container">
 
-        <?php include('lawyer_sidebar.view.php'); ?>
+        <?php include('component/sidebar.view.php'); ?>
+
 
         <section class="home-section">
             <h1 class="title">Client Meeting Requests</h1>
