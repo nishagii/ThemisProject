@@ -1,8 +1,8 @@
-
-
 .parent-container { /* Replace with the actual class of the parent container */
     display: flex;
+    min-height: 80vh;
     flex-direction: column;
+    background-color: #f4f8ff;
   }
   
   
@@ -24,7 +24,7 @@
 
   /* Individual Counter Styles */
   .counter {
-      background-color: #eaf1fd;
+      background-color: #fff;
       color: #333;
       padding: 20px;
       border-radius: 10px;
@@ -224,4 +224,14 @@ small {
   .form-actions button {
       font-size: 11px;
   }
+}
+
+.active{
+  background-color: rgba(55, 255, 37, 0.2);
+}
+.completed{
+  background-color: rgba(37, 255, 251, 0.2);
+}
+.incomplete{
+   background-color: rgba(255, 37, 37, 0.2);
 }
