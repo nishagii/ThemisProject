@@ -18,7 +18,10 @@
 
 
         <section class="home-section">
-            <h1 class="title">Client Meeting Requests</h1>
+            <div class="meeting-section">
+                <h1 >Client Meeting Requests</h1>
+            </div>
+
             <div class="content">
                 <table>
                     <thead>
