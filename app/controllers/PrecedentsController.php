@@ -59,8 +59,9 @@ class PrecedentsController {
         // Load the view and pass the case data
         $this->view('one_precedent', ['case' => $case]);
     }
-
-    public function edit($id) {
+/*-------------------Update---------------------------------- */
+   
+    public function update($id) {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
                 'date' => $_POST['date'],
