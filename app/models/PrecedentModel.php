@@ -20,7 +20,7 @@ class PrecedentModel {
         ];
         $this->query($query, $params);
     }
-/*--------------------Retrieve------------------------------- */
+    
     public function getAll() {
         $query = "SELECT * FROM $this->table ORDER BY id DESC";
         return $this->query($query);
