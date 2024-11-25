@@ -182,35 +182,35 @@
 </style>
 
 <body>
-    <form id="precedentEditForm"action="<?= ROOT ?>/PrecedentsController/update" method="POST" >
+    <form id="precedentEditForm"action="<?= ROOT ?>/PrecedentsController/update" method="POST" novalidate>
         <input type="hidden" name="id" value="<?= $case->id ?>">
 
         <div class="form-section">
             <h2>Edit Case</h2>
                 <div class="form-group">
-                    <label for="date">Date:</label>
-                    <input type="date"  name="judgment_date" value="<?= htmlspecialchars($case->judgment_date) ?>" required>
-                    <div class="error"></div>
+                    <label for="judgment_date">Date:</label>
+                    <input id="judgment_date" type="date"  name="judgment_date" value="<?= htmlspecialchars($case->judgment_date) ?>" required>
+                    <div class="error" id="dateError"></div>
                 </div>
                 <div class="form-group">
                     <label for="case_number">Case Number:</label>
-                    <input type="text" name="case_number" value="<?= htmlspecialchars($case->case_number) ?>" required>
-                    <div class="error"></div>
+                    <input id="case_number" type="text" name="case_number" value="<?= htmlspecialchars($case->case_number) ?>" required>
+                    <div class="error" id="caseNumberError"></div>
                 </div>
                 <div class="form-group">
                     <label for="name_of_parties">Names of parties:</label>
-                    <input type="text" name="name_of_parties" value="<?= htmlspecialchars($case->name_of_parties) ?>" required>
-                    <div class="error"></div>
+                    <input id="name_of_parties" type="text" name="name_of_parties" value="<?= htmlspecialchars($case->name_of_parties) ?>" required>
+                    <div class="error" id="partiesError"></div>
                 </div>
                 <div class="form-group">
                     <label for="judgment_by">Judgment by:</label>
-                    <input type="text" name="judgment_by" value="<?= htmlspecialchars($case->judgment_by) ?>" required>
-                    <div class="error"></div>
+                    <input id="judgment_by" type="text" name="judgment_by" value="<?= htmlspecialchars($case->judgment_by) ?>" required>
+                    <div class="error" id="judgmentByError"></div>
                 </div>
                 <div class="form-group">
                     <label for="document_link">Document:</label>
-                    <input type="text" name="document_link" value="<?= htmlspecialchars($case->document_link) ?>" required>
-                    <div class="error"></div>
+                    <input id="document_link" type="text" name="document_link" value="<?= htmlspecialchars($case->document_link) ?>" required>
+                    <div class="error" id="documentLinkError"></div>
                 </div>
 
             <div class="form-group">
@@ -218,7 +218,61 @@
             </div>
         </div>
     </form>
+    <script>
+        // Form Validation
+        document.getElementById('precedentEditForm').addEventListener('submit', function(event) {
+            // Get form fields
+            const date = document.getElementById('judgment_date').value;
+            const caseNumber = document.getElementById('case_number').value.trim();
+            const parties = document.getElementById('name_of_parties').value.trim();
+            const judgmentBy = document.getElementById('judgment_by').value.trim();
+            const documentLink = document.getElementById('document_link').value.trim();
 
+            // Error elements
+            const dateError = document.getElementById('dateError');
+            const caseNumberError = document.getElementById('caseNumberError');
+            const partiesError = document.getElementById('partiesError');
+            const judgmentByError = document.getElementById('judgmentByError');
+            const documentLinkError = document.getElementById('documentLinkError');
+
+            // Reset error messages
+            dateError.textContent = '';
+            caseNumberError.textContent = '';
+            partiesError.textContent = '';
+            judgmentByError.textContent = '';
+            documentLinkError.textContent = '';
+
+            // Flag to check if form is valid
+            let isValid = true;
+
+            // Validation checks
+            if (!date) {
+                dateError.textContent = 'Date is required.';
+                isValid = false;
+            }
+            if (!caseNumber) {
+                caseNumberError.textContent = 'Case number is required.';
+                isValid = false;
+            }
+            if (!parties) {
+                partiesError.textContent = 'Name of parties is required.';
+                isValid = false;
+            }
+            if (!judgmentBy) {
+                judgmentByError.textContent = 'Judgment by is required.';
+                isValid = false;
+            }
+            if (!documentLink) {
+                documentLinkError.textContent = 'Document link is required.';
+                isValid = false;
+            }
+
+            // If form is not valid, prevent submission
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>
