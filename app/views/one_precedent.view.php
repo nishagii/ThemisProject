@@ -37,9 +37,10 @@
             gap: 15px;
         }
 
-        .info-row {
+        .info-row, .info-item {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            margin-bottom: 15px
         }
 
         .info-item strong {
@@ -47,7 +48,7 @@
         }
 
         .info-item p {
-            margin: 0;
+            /* margin: 0; */
             color: #333;
         }
 
@@ -83,6 +84,13 @@
         .btn-delete:hover {
             background-color: #e53935;
         }
+        a{
+            color: #3f51b5;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            margin bottom: 0px
+        }
 
         @media (max-width: 768px) {
             .info-row {
@@ -105,8 +113,6 @@
                     <strong>Case Number:</strong>
                     <p><?= htmlspecialchars($case->case_number) ?></p>
                 </div>
-            </div>
-            <div class="info-row">
                 <div class="info-item">
                     <strong>Name of Parties:</strong>
                     <p><?= htmlspecialchars($case->name_of_parties) ?></p>
@@ -114,6 +120,10 @@
                 <div class="info-item">
                     <strong>Judgment By:</strong>
                     <p><?= htmlspecialchars($case->judgment_by) ?></p>
+                </div>
+                <div class="info-item">
+                    <strong>Document:</strong>
+                    <a href="htmlspecialchars($case->document_link)">Download</a>
                 </div>
             </div>
         </div>
