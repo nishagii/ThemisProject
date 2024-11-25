@@ -3,75 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/precedent.css">
-    <link rel="stylesheet" href="precedents-yearwise.css">
+    <title>All Precedents</title>
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/all_precedents.css">
 </head>
 <body>
+<?php include('seniorCounsel/component/bigNav.view.php'); ?>
+<?php include('seniorCounsel/component/smallNav1.view.php'); ?>
+    <div class="header">
+        <h1>All Precedents</h1>
+    </div>
 
-        <div class="header">
-            <h1>Judgments Delivered in 2024</h1>
-        </div>
-
-        <div class="precedent-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Case Number</th>
-                        <th>Name of Parties</th>
-                        <th>Judgment by</th>
-                        <th>Document</th>
-                    </tr>
-                </thead>
-            
-                    <tr>
-                        <td>26/07/2024</td>
-                        <td>S.C. (Misc.) No. 02/2016</td>
-                        <td>
-                            K.G. Keerthi Karangoda Amuthagoda, Panukerapeliyta, Hidelana, Ratnapura Vs. Attorney General...
-                        </td>
-                        <td>Hon. K. Priyantha Fernando, J</td>
-                        <td><a href="#" class="doc-link">doc</a></td>
-                    </tr>
-                    <tr>
-                        <td>26/07/2024</td>
-                        <td>SC Appeal No: 48/2013</td>
-                        <td>
-                            Triad Advertising (Pvt) Ltd Vs. Plaintiff Vs. Attorney General, Attorney General’s Department...
-                        </td>
-                        <td>Hon. Mahinda Samayawardhena, J.</td>
-                        <td><a href="#" class="doc-link">doc</a></td>
-                    </tr>
-                    <tr>
-                        <td>25/07/2024</td>
-                        <td>SC (CHC) Appeal No. 6/2009</td>
-                        <td>
-                            Nawarkama (Private) Limited Vs. Defendant – Appellant, Plaintiff – Respondent...
-                        </td>
-                        <td>Hon. K. Priyantha Fernando, J</td>
-                        <td><a href="#" class="doc-link">doc</a></td>
-                    </tr>
-                    <tr>
-                        <td>25/07/2024</td>
-                        <td>SC/RULE/04/2021</td>
-                        <td>
-                            Edward Megary 2nd Secretary Vs. Complainant, Defendant Respondent...
-                        </td>
-                        <td>Hon. Mahinda Samayawardhena, J</td>
-                        <td><a href="#" class="doc-link">doc</a></td></tr>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Case Number</th>
+                    <th>Name of Parties</th>
+                    <th>Judgment By</th>
+                    <th>Document Link</th>
+                    <th>View More</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($cases)): ?>
+                    <?php foreach ($cases as $case): ?>
                         <tr>
-                            <td>24/07/2024</td>
-                            <td>S.C. (C.H.C.) Appeal 11/2004</td>
+                            <td><?php echo $case->judgment_date; ?></td>
+                            <td><?php echo $case->case_number; ?></td>
+                            <td><?php echo $case->name_of_parties; ?></td>
+                            <td><?php echo $case->judgment_by; ?></td>
+                            <td><a href="<?php echo $case->document_link; ?>" target="_blank">View Document</a></td>
                             <td>
-                                Ceylon Company Group Vs. Plaintiff Vs. Defendant-Appellant...
+                                <a href="<?= ROOT ?>/PrecedentsController/retrieveOne/<?= $case->id; ?>">
+                                <button class="more">View more</button>
+                                </a>
                             </td>
-                            <td>Hon. Mahinda Samayawardhena, J</td>
-                            <td><a href="#" class="doc-link">doc</a></td>
                         </tr>
-                </tbody>
-            </table>
-        </div>
-
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="6">No precedents found in the database.</td>
+                    </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

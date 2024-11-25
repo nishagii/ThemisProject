@@ -31,6 +31,35 @@ class PrecedentsController {
         $this->view('create_precedent');
     }
 
+/*--------------------Retrieve------------------------------- */
+    public function retrieveAll()
+    {
+        $caseModel = $this->loadModel('PrecedentModel'); 
+        $cases = $caseModel->getAll();
+
+        // Pass data to the view
+        $this->view('all_precedents', ['cases' => $cases]);
+    }
+
+    public function retrieveOne($id)
+    {
+        if ($id === null) {
+            echo "Case number is required.";
+            return;
+        }
+
+        $caseModel = $this->loadModel('PrecedentModel');
+        // Get the case by case number
+        $case = $caseModel->getByCaseId($id);
+        // Handle case not found
+        if ($case === null) {
+            echo "<p>Case with ID {$id} not found.</p>";
+            return;
+        }
+        // Load the view and pass the case data
+        $this->view('one_precedent', ['case' => $case]);
+    }
+
     public function edit($id) {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
