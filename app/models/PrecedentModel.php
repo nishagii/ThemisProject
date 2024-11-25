@@ -39,7 +39,7 @@ class PrecedentModel {
         }
         return $result[0];
     }
-
+    //update precedents
     public function update($data) {
         $query = "UPDATE {$this->table}
                 SET 
