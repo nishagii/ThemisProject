@@ -26,9 +26,9 @@ class PrecedentModel {
         return $this->query($query);
     }
 
-    public function getById($id)
+    public function getByCaseNumber($case_number)
     {
-        $query = "SELECT * FROM {$this->table} WHERE id = :id";
+        $query = "SELECT * FROM {$this->table} WHERE case_number = :case_number";
         $params = ['id' => $id];
 
         $result = $this->query($query, $params);
