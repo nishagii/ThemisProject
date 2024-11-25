@@ -23,21 +23,21 @@
                 <span class="total-users">200</span>
             </div>
             <div class="individual">
-                <div class="counter">
+                <div class="counter active">
                     <div class="counter-icon">
                         <i class="fas fa-spinner"></i> <!-- Icon for active tasks -->
                     </div>
                     <h3>Active Tasks</h3>
                     <span>50</span>
                 </div>
-                <div class="counter">
+                <div class="counter completed">
                     <div class="counter-icon">
                         <i class="fas fa-check-circle"></i> <!-- Icon for completed tasks -->
                     </div>
                     <h3>Completed Tasks</h3>
                     <span>25</span>
                 </div>
-                <div class="counter">
+                <div class="counter incomplete">
                     <div class="counter-icon">
                         <i class="fas fa-times-circle"></i> <!-- Icon for incomplete tasks -->
                     </div>

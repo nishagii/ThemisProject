@@ -6,7 +6,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #E4E9F7;
+    background-color: #f4f8ff;
 }
 
 /* Main Section */
@@ -18,8 +18,8 @@ body {
     color: #ffffff;
     background-color: rgb(29, 27, 49);
     font-size: 20px;
-    margin-bottom: 20px;
-    padding: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
     text-transform: uppercase;
 }
 
@@ -32,7 +32,7 @@ body {
 }
 
 .form-container {
-    background-color: #f1f1f1;
+    background-color: #E4E9F7;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -63,7 +63,7 @@ body {
     width: 100%;
     padding: 10px;
     border-radius: 10px;
-    background-color: #E4E9F7;
+    background-color: #fff;
     border: 1px solid #ddd;
     font-size: 15px;
     transition: border-color 0.3s;
@@ -78,7 +78,7 @@ body {
 }
 
 .large-container{
-    background-color: #f1f1f1;
+    background-color: #E4E9F7;
     padding: 20px 40px 20px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
