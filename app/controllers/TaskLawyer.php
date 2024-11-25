@@ -8,11 +8,11 @@ class TaskLawyer
     public function index()
     {
 
-        // Set username from session, or default to 'User'
-        $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
+        $userModel = $this->loadModel('UserModel'); // Ensure correct model loading
+        $users = $userModel->getJuniorsAndAttorneys(); // Fetch juniors and attorneys data
 
-        // Load the view with data
-        $this->view('/seniorCounsel/task', $data);
+        // Pass data to the view
+        $this->view('/seniorCounsel/task', ['users' => $users]);
     }
 
     

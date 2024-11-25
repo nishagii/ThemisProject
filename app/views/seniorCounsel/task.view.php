@@ -78,14 +78,20 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="assignee">Assign To:</label>
-                        <select id="assignee" name="assignee" required>
-                            <option value="" disabled selected>Select a user</option>
-                            <option value="user1">User 1</option>
-                            <option value="user2">User 2</option>
-                            <option value="user3">User 3</option>
-                        </select>
-                    </div>
+            <label for="assignee">Assign To:</label>
+            <select id="assignee" name="assignee" required>
+                <option value="" disabled selected>Select a user</option>
+                <?php if ($users): ?>
+                    <?php foreach ($users as $user): ?>
+                        <option value="<?php echo htmlspecialchars($user->email); ?>">
+                            <?php echo htmlspecialchars($user->first_name . ' ' . $user->last_name); ?> (<?php echo htmlspecialchars($user->role); ?>)
+                        </option>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <option value="" disabled>No users available</option>
+                <?php endif; ?>
+            </select>
+        </div>
                     
                     <div class="form-group">
                         <label for="deadlineDate">Deadline Date:</label>

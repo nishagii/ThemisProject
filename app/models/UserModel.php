@@ -102,4 +102,20 @@ class UserModel
 
         return false;
     }
+
+    public function getJuniorsAndAttorneys()
+    {
+        $query = "SELECT * FROM users WHERE role IN ('junior', 'attorney')";
+
+        try {
+            $stmt = $this->connect()->prepare($query);
+            $stmt->execute();
+            $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+            return $users;
+        } catch (PDOException $e) {
+            echo "PDO Error: " . $e->getMessage();
+            return false;
+        }
+    }
 }
