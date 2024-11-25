@@ -28,7 +28,7 @@
                 <div class="title">Assign a Task</div>
             </div>
             <div class="modal-body">
-                <form method="POST">
+                <form method="POST" action="<?= ROOT ?>/AddTask/add">
                     <div class="form-group">
                         <label for="name">Task Name:</label>
                         <input type="text" id="name" name="name" required>
@@ -45,7 +45,7 @@
                 <option value="" disabled selected>Select a user</option>
                 <?php if ($users): ?>
                     <?php foreach ($users as $user): ?>
-                                                <option value="<?php echo htmlspecialchars($user->username); ?>">
+                                                <option value="<?php echo htmlspecialchars($user->id); ?>">
                             <?php echo htmlspecialchars($user->first_name . ' ' . $user->last_name); ?> (<?php echo htmlspecialchars($user->role); ?>)
                         </option>
                     <?php endforeach; ?>
@@ -84,6 +84,36 @@
     </div>
                 </div>
     
+
+                <script>
+    // Function to check if the selected date is not before today
+    function validateDateAndTime() {
+        const today = new Date();
+        const dateInput = document.getElementById("deadlineDate");
+        const timeInput = document.getElementById("deadlineTime");
+
+        // Get today's date in YYYY-MM-DD format
+        const todayDate = today.toISOString().split('T')[0]; // Get only the date part (YYYY-MM-DD)
+        dateInput.setAttribute('min', todayDate);  // Set min date to today's date
+
+        // Compare if the selected time is earlier than the current time
+        timeInput.addEventListener('change', function() {
+            const selectedTime = new Date(today.toDateString() + ' ' + timeInput.value);
+            if (selectedTime < today) {
+                alert('Deadline time cannot be before the current time.');
+                timeInput.value = ''; // Clear the invalid time
+            }
+        });
+
+        // Set min date for deadline date input to today's date
+        if (dateInput.value && dateInput.value < todayDate) {
+            alert('Deadline date cannot be before today.');
+            dateInput.value = ''; // Clear the invalid date
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', validateDateAndTime);
+</script>
 
 </body>
 </html>
