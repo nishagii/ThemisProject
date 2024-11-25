@@ -15,7 +15,6 @@
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Date</th>
                     <th>Case Number</th>
                     <th>Name of Parties</th>
@@ -27,7 +26,6 @@
                 <?php if (!empty($cases)): ?>
                     <?php foreach ($cases as $case): ?>
                         <tr>
-                            <td><?php echo $case->id; ?></td>
                             <td><?php echo $case->judgment_date; ?></td>
                             <td><?php echo $case->case_number; ?></td>
                             <td><?php echo $case->name_of_parties; ?></td>
