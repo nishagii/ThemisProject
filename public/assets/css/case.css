@@ -1,10 +1,25 @@
+
+.allcases-section {
+    text-align: center;
+} 
+
+.allcases-section h1 {
+    color: #ffffff;
+    background-color: rgb(29, 27, 49);
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+
 .cases-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
     justify-content: center;
-    background-color: #f9f9f9;
+    background-color: #E4E9F7;
     /* flex-direction: column; */
 }
 
@@ -43,8 +58,8 @@ h1 {
 color: #ffffff;
 background-color: #1d1b31;
 font-size: 20px;
-margin-bottom: 20px;
-padding: 20px;
+margin-bottom: 10px;
+padding: 10px;
 text-transform: uppercase;
 text-align: center;
 }
@@ -59,6 +74,7 @@ transition: background-color 0.3s ease; /* Transition for background color */
 display: flex;             /* Enable flexbox for the button */
 align-items: center;       /* Center items vertically */
 text-decoration: none;
+margin-top: 10px;
 margin-right: 20px;
 }
 
@@ -91,10 +107,10 @@ background-color: #93a8e3;
 }
 
 .delete {
-background-color: #5d5b5b;
+background-color: hsla(0, 100%, 61%, 0.91);
 }
 .edit {
-background-color: #5d5b5b;
+background-color: hsla(111, 100%, 39%, 0.683);
 }
 
 .template-table {
