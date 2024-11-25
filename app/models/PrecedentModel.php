@@ -3,16 +3,22 @@
 class PrecedentModel {
     use Database;
 
-    protected $table = 'precedents';
+    protected $table = 'judgmentsyearwise';
 
     public function insert($data) {
-        $keys = array_keys($data);
-        $columns = implode(',', $keys);
-        $values = implode(',', array_fill(0, count($keys), '?'));
-        
-        $query = "INSERT INTO $this->table ($columns) VALUES ($values)";
-        
-        $this->query($query, array_values($data));
+        $query = "INSERT INTO {$this->table} 
+              (judgment_date, case_number, name_of_parties, judgment_by, document_link)
+              VALUES 
+              (:judgment_date, :case_number, :name_of_parties, :judgment_by, :document_link)";
+
+        $params = [
+            'judgment_date' => $_POST['judgment_date'],
+            'case_number' => $_POST['case_number'],
+            'name_of_parties' => $_POST['parties'],
+            'judgment_by' => $_POST['judgment_by'],
+            'document_link' => $_POST['document_link']
+        ];
+        $this->query($query, $params);
     }
 
     public function getAll() {

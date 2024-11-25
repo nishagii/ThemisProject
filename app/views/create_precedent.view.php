@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Precedent</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/precedent.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/create_precedent.css">
 </head>
 <body>
     <div class="header">
@@ -12,10 +12,10 @@
     </div>
 
     <div class="form-container">
-        <form method="POST" action="<?= ROOT ?>/precedents/create">
+        <form method="POST" action="<?= ROOT ?>/PrecedentsController/create">
             <div class="form-group">
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date" required>
+                <input type="date" id="date" name="judgment_date" required>
             </div>
 
             <div class="form-group">
