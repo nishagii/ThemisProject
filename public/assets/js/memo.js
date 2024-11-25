@@ -1,26 +1,21 @@
-            // Select all elements that can open a modal
-            const openModalButtons = document.querySelectorAll('[data-modal-target]');
+document.addEventListener("DOMContentLoaded", () => {
+    const settingsIcon = document.getElementById("settings-icon");
+    const settingsMenu = document.getElementById("settings-menu");
 
-            // Function to open a modal
-            function openModal(popup) {
-            if (popup == null) return;
-            popup.classList.add('active');
-            }
+    // Toggle visibility on click
+    settingsIcon.addEventListener("click", (event) => {
+        event.preventDefault(); // Prevent default behavior of <a> tag
+        event.stopPropagation(); // Prevent bubbling
+        settingsMenu.classList.toggle("active"); // Toggle active class
+    });
 
-            // Add click event listeners to open modal buttons
-            openModalButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const popup = document.querySelector(button.dataset.modalTarget);
-                openModal(popup);
-            });
-            });
+    // Close menu when clicking outside
+    document.addEventListener("click", () => {
+        settingsMenu.classList.remove("active");
+    });
 
-            // Optional: Close the modal when clicking outside of it
-            window.addEventListener('click', (e) => {
-            openModalButtons.forEach(button => {
-                const popup = document.querySelector(button.dataset.modalTarget);
-                if (e.target === popup) {
-                closeModal(popup);
-                }
-            });
-            });
+    // Prevent menu from closing when clicking inside it
+    settingsMenu.addEventListener("click", (event) => {
+        event.stopPropagation();
+    });
+});

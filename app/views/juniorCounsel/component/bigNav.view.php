@@ -30,9 +30,14 @@
                     <div class="navbar-icons">
             <i data-modal-target="#popup" class="fas fa-envelope" id="envelope-icon"></i>
             <i class="fas fa-bell"></i>
-            <a href="setting.php">
+            <a href="#" id="settings-icon">
                 <i class="fas fa-cog"></i>
             </a>
+            <div id="settings-menu" class="settings-menu hidden">
+                <ul>
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+            </div>
 
             <a href="profile.php">
             <i class="fas fa-user-circle" id="profile-icon"></i>
