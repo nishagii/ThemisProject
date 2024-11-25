@@ -6,17 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cs rules</title>
     <script src="script.js" defer></script>
-    <link rel="stylesheet" href="SCRules.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/SCRules.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- this is imported to use icons -->
 
 </head>
 
 <body>
-    
-        <!--Supreme court laws section starts from here-->
-        <div class="sc-rules">
-            <h2 >Supreme Court Rules</h2>
+
+    <!--Supreme court laws section starts from here-->
+    <div class="rules-header">
+        <h1>Supreme Court Rules</h1>
+    </div>
+    <div class="sc-rules">
+
 
         <ul>
             <li>
@@ -76,11 +79,11 @@
                 </span>
             </li>
         </ul>
-        </div>
-        
+    </div>
+
     </div>
     </div>
-    
+
 </body>
 
 </html>
