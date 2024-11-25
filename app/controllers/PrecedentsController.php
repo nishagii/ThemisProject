@@ -25,7 +25,6 @@ class PrecedentsController {
             ];
             
             $this->precedentModel->insert($data);
-            header("Location: " . ROOT . "/precedents/index");
         }
         
         $this->view('create_precedent');
