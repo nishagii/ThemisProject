@@ -1,0 +1,96 @@
+.rules-header{
+      text-align: center;
+}
+
+.rules-header h1{
+    color: #ffffff;
+    background-color: rgb(29, 27, 49);
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+/* General container styling */
+.sc-rules {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Open Sans', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* List styling */
+.sc-rules ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sc-rules li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.sc-rules li:last-child {
+    border-bottom: none;
+}
+
+/* Number and date styling */
+.sc-rules li span:first-child {
+    font-weight: bold;
+    color: #555;
+    flex: 2;
+}
+
+.sc-rules li span:nth-child(2) {
+    color: #777;
+    flex: 1;
+    text-align: center;
+}
+
+/* Links container */
+.sc-rules li span:last-child {
+    flex: 2;
+    text-align: right;
+}
+
+/* Link styling */
+.sc-rules li a {
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0 5px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sc-rules li a:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .sc-rules li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sc-rules li span:nth-child(2),
+    .sc-rules li span:last-child {
+        text-align: left;
+        margin-top: 5px;
+    }
+
+    .sc-rules li span:last-child a {
+        display: inline-block;
+        margin-top: 5px;
+    }
+}
