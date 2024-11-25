@@ -46,13 +46,54 @@
                 </div>
             </div>
         </div>
+
+        <!-- Add Task Button -->
         <div class="add">
-        <a href="<?= ROOT ?>/addTask">
-            <button class="add-button">
-                <i class="bx bx-plus"></i> Assign New Task 
-            </button>
-</a>
+            <a href="<?= ROOT ?>/addTask">
+                <button class="add-button">
+                    <i class="bx bx-plus"></i> Assign New Task 
+                </button>
+            </a>
         </div>
+
+        <!-- Table to display tasks -->
+        <div class="task-table-container">
+            <h2>Task List</h2>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Description</th>
+                        <th>Assignee</th>
+                        <th>Deadline Date</th>
+                        <th>Deadline Time</th>
+                        <th>Status</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through tasks (assumed to be passed from the controller) -->
+                    <?php if (isset($task) && count($task) > 0): ?>
+                        <?php foreach ($task as $t): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($t->name) ?></td>
+                                <td><?= htmlspecialchars($t->description) ?></td>
+                                <td><?= htmlspecialchars($t->assigneeID) ?></td>
+                                <td><?= htmlspecialchars($t->deadlineDate) ?></td>
+                                <td><?= htmlspecialchars($t->deadlineTime) ?></td>
+                                <td><?= htmlspecialchars($t->status) ?></td>
+                                <td><?= htmlspecialchars($t->priority) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="7">No tasks available.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </body>
 </html>

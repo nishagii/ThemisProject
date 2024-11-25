@@ -32,4 +32,14 @@ class TaskModel
         // Execute the query using the parent Model class's query method
         return $this->query($query, $params);
     }
+
+    public function getAllTasks()
+    {
+        // Prepare the SQL query to fetch all tasks
+        $query = "SELECT taskID, name, description, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority 
+                  FROM {$this->table}";
+
+        // Execute the query and return the results
+        return $this->query($query);
+    }
 }
