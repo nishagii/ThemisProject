@@ -47,101 +47,12 @@
             </div>
         </div>
         <div class="add">
-            <button data-modal-target="#modal" class="add-button">
-                <i class="bx bx-plus"></i> Assign New Task
+        <a href="<?= ROOT ?>/addTask">
+            <button class="add-button">
+                <i class="bx bx-plus"></i> Assign New Task 
             </button>
+</a>
         </div>
-
-        <div class="modal" id="modal">
-                        <?php if (!empty($errors)): ?>
-                    <div class="error-container">
-                        <?php foreach ($errors as $field => $error): ?>
-                            <p><?= ucfirst($field) ?>: <?= $error ?></p>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-
-            <div class="modal-header">
-                <div class="title">Assign a Task</div>
-                <button data-close-button class="close-button">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="<?= ROOT ?>/tasks/assignTask">
-                    <div class="form-group">
-                        <label for="taskName">Task Name:</label>
-                        <input type="text" id="taskName" name="task_name" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="description">Description:</label>
-                        <textarea id="description" name="description" rows="3" required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-            <label for="assignee">Assign To:</label>
-            <select id="assignee" name="assignee" required>
-                <option value="" disabled selected>Select a user</option>
-                <?php if ($users): ?>
-                    <?php foreach ($users as $user): ?>
-                        <option value="<?php echo htmlspecialchars($user->email); ?>">
-                            <?php echo htmlspecialchars($user->first_name . ' ' . $user->last_name); ?> (<?php echo htmlspecialchars($user->role); ?>)
-                        </option>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <option value="" disabled>No users available</option>
-                <?php endif; ?>
-            </select>
-        </div>
-                    
-                    <div class="form-group">
-                        <label for="deadlineDate">Deadline Date:</label>
-                        <input type="date" id="deadlineDate" name="deadline_date" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="deadlineTime">Deadline Time:</label>
-                        <input type="time" id="deadlineTime" name="deadline_time" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="priority">Priority:</label>
-                        <select id="priority" name="priority" required>
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
-                            <option value="low">Low</option>
-                        </select>
-                    </div>
-                    
-                    
-                    <div class="form-actions">
-                        <button type="submit">Assign Task</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const openModalButtons = document.querySelectorAll('[data-modal-target]');
-            const closeModalButtons = document.querySelectorAll('[data-close-button]');
-
-            openModalButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const modal = document.querySelector(button.dataset.modalTarget);
-                    modal.classList.add('active');
-                });
-            });
-
-            closeModalButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const modal = button.closest('.modal');
-                    modal.classList.remove('active');
-                });
-            });
-        });
-
-    </script>
 
 </body>
 </html>
