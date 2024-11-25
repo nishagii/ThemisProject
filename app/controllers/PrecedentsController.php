@@ -11,9 +11,9 @@ class PrecedentsController {
 
     public function index()
     {
-        $this->view('/create_precedent');
+        $this->view('create_precedent');
     }
-
+/*---------------------Create operation----------------------------- */
     public function create() {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
@@ -25,10 +25,10 @@ class PrecedentsController {
             ];
             
             $this->precedentModel->insert($data);
-            header("Location: " . ROOT . "/precedents");
+            header("Location: " . ROOT . "/precedents/index");
         }
         
-        $this->view('precedents/create');
+        $this->view('create_precedent');
     }
 
     public function edit($id) {

@@ -12,7 +12,7 @@
     </div>
 
     <div class="form-container">
-        <form method="POST" action="<?= ROOT ?>/precedents/create">
+        <form method="POST" action="<?= ROOT ?>/PrecedentsController/create">
             <div class="form-group">
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="judgment_date" required>

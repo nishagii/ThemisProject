@@ -7,18 +7,24 @@ class PrecedentModel {
 
     public function insert($data) {
         $query = "INSERT INTO {$this->table} 
-              (judgment_date, case_number, name_of_parties, judgment_by, phone, document_link)
+              (judgment_date, case_number, name_of_parties, judgment_by, document_link)
               VALUES 
-              (:judgment_date, :case_number, :parties, :judgment_by, :document_link)";
+              (:judgment_date, :case_number, :name_of_parties, :judgment_by, :document_link)";
 
         $params = [
             'judgment_date' => $_POST['judgment_date'],
             'case_number' => $_POST['case_number'],
-            'parties' => $_POST['parties'],
+            'name_of_parties' => $_POST['parties'],
             'judgment_by' => $_POST['judgment_by'],
             'document_link' => $_POST['document_link']
         ];
-        return $this->query($query, $params);
+        $this->query($query, $params);
+    // try {
+    //     $this->query($query, $params);
+    //     echo "Data inserted successfully!";
+    // } catch (PDOException $e) {
+    //     echo "SQL Error: " . $e->getMessage();
+    // }
     }
 
     public function getAll() {
