@@ -310,7 +310,12 @@ label #cancel{
     cursor: pointer; /* Shows pointer cursor on hover */
     text-align: left; /* Aligns text to the left */
     font-size: 14px; /* Adjusts font size */
-    color: #333; /* Dark text color */
+    color: #000000; /* Dark text color */
+}
+
+.settings-menu li a{
+   
+    color: #000000; /* Dark text color */
 }
 
 /* Hover effect for menu items */

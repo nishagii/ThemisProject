@@ -33,7 +33,7 @@
         <div class="navbar-icons">
             <i data-modal-target="#popup" class="fas fa-envelope" id="envelope-icon"></i>
             <i class="fas fa-bell"></i>
-                        <a href="#" id="settings-icon">
+            <a href="#" id="settings-icon">
                 <i class="fas fa-cog"></i>
             </a>
             <div id="settings-menu" class="settings-menu hidden">
