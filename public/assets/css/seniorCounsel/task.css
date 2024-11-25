@@ -292,3 +292,47 @@ small {
   font-style: italic;
   color: #777;
 }
+
+
+/* Styling for Action Column */
+.task-table td a {
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 0 5px;
+  font-size: 14px;
+}
+
+/* Edit Button Styling */
+.edit-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.edit-btn:hover {
+  background-color: #45a049;
+  border-color: #45a049;
+}
+
+/* Delete Button Styling */
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+  border: 1px solid #f44336;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.delete-btn:hover {
+  background-color: #e53935;
+  border-color: #e53935;
+}
+
+/* Responsive Design for Buttons */
+@media screen and (max-width: 768px) {
+  .task-table td a {
+      font-size: 12px;
+      padding: 6px 10px;
+  }
+}

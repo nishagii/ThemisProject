@@ -56,43 +56,40 @@
             </a>
         </div>
 
-        <!-- Table to display tasks -->
         <div class="task-table-container">
-            <h2>Task List</h2>
-            <table class="task-table">
-                <thead>
-                    <tr>
-                        <th>Task Name</th>
-                        <th>Description</th>
-                        <th>Assignee</th>
-                        <th>Deadline Date</th>
-                        <th>Deadline Time</th>
-                        <th>Status</th>
-                        <th>Priority</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Loop through tasks (assumed to be passed from the controller) -->
-                    <?php if (isset($task) && count($task) > 0): ?>
-                        <?php foreach ($task as $t): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($t->name) ?></td>
-                                <td><?= htmlspecialchars($t->description) ?></td>
-                                <td><?= htmlspecialchars($t->assigneeID) ?></td>
-                                <td><?= htmlspecialchars($t->deadlineDate) ?></td>
-                                <td><?= htmlspecialchars($t->deadlineTime) ?></td>
-                                <td><?= htmlspecialchars($t->status) ?></td>
-                                <td><?= htmlspecialchars($t->priority) ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="7">No tasks available.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+    <table class="task-table">
+        <thead>
+            <tr>
+                <th>Task Name</th>
+                <th>Description</th>
+                <th>Assigned To</th>
+                <th>Deadline Date</th>
+                <th>Deadline Time</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Actions</th> <!-- Added Actions Column -->
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($task as $t): ?>
+            <tr>
+                <td><?= htmlspecialchars($t->name) ?></td>
+                <td><?= htmlspecialchars($t->description) ?></td>
+                <td><?= htmlspecialchars($t->assigneeID) ?></td>
+                <td><?= htmlspecialchars($t->deadlineDate) ?></td>
+                <td><?= htmlspecialchars($t->deadlineTime) ?></td>
+                <td><?= htmlspecialchars($t->priority) ?></td>
+                <td><?= htmlspecialchars($t->status) ?></td>
+                <td>
+                    <a href="<?= ROOT ?>/editTask/<?= $t->id ?>" class="edit-btn">Edit</a> <!-- Edit Link -->
+                    <a href="<?= ROOT ?>/deleteTask/<?= $t->id ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this task?')">Delete</a> <!-- Delete Link -->
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
     </div>
 
 </body>
