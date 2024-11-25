@@ -41,6 +41,16 @@ class PrecedentsController {
         $this->view('all_precedents', ['cases' => $cases]);
     }
 
+    public function retrieveCase($caseId)
+    {
+        // Load the CaseModel
+        $caseModel = $this->loadModel('PrecedentModel');
+        // Get the case by ID
+        $case = $caseModel->getById($caseId);
+        // Load the view and pass the case data
+        $this->view('/seniorCounsel/one_full_case_details', ['case' => $case]);
+    }
+
     public function edit($id) {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [

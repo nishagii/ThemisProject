@@ -20,16 +20,30 @@ class PrecedentModel {
         ];
         $this->query($query, $params);
     }
-    
+
     public function getAll() {
         $query = "SELECT * FROM $this->table ORDER BY id DESC";
         return $this->query($query);
     }
 
-    public function getById($id) {
-        $query = "SELECT * FROM $this->table WHERE id = ?";
-        return $this->get_row($query, [$id]);
+    public function getById($id)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE id = :id";
+        $params = ['id' => $id];
+
+        $result = $this->query($query, $params);
+
+        // Check if result is empty
+        if (empty($result)) {
+            return null;
+        }
+        return $result[0];
     }
+
+    // public function getById($id) {
+    //     $query = "SELECT * FROM $this->table WHERE id = ?";
+    //     return $this->get_row($query, [$id]);
+    // }
 
     public function update($id, $data) {
         $sets = [];
