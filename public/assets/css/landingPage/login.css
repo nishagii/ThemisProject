@@ -139,6 +139,32 @@ img.white-logo {
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
 }
 
+.home {
+    padding: 10px 10px;
+    background-color: #f0a636; /* Initial background color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 65px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+    margin: 0;
+
+    position: absolute;
+    top: 5px;
+    float: left;
+
+   
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4e4536;
+}
+
 .button:hover,
 input.login:hover {
     background-color: #f9c67a; /* Initial background color */
