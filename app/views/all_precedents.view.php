@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/all_precedents.css">
 </head>
 <body>
+<?php include('seniorCounsel/component/bigNav.view.php'); ?>
+<?php include('seniorCounsel/component/smallNav1.view.php'); ?>
     <div class="header">
         <h1>All Precedents</h1>
     </div>
