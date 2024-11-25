@@ -39,9 +39,7 @@ class PrecedentModel {
 
     public function getAll() {
         $query = "SELECT * FROM $this->table ORDER BY id DESC";
-
-        $result = $this->query($query);
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        return $this->query($query);
     }
 
     public function update($id, $data) {

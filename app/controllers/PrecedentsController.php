@@ -41,10 +41,11 @@ class PrecedentsController {
     }
 
     public function retrieveAll() {
-        $cases = $this->model->getAll();
-    
-        // Pass the data to the view
-        include_once 'views/all_precedents.view.php';
+        $caseModel = $this->loadModel('PrecedentModel'); // Ensure correct model loading
+        $cases = $caseModel->getAll(); // Fetch cases data
+
+        // Pass data to the view
+        $this->view('/all_precedents', ['cases' => $cases]);
     }
     
     public function edit($id) {
