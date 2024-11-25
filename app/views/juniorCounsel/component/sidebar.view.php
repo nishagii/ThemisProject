@@ -21,32 +21,11 @@
                 <span class="tooltip">Search</span>
             </li>
             <li>
-                <a href="<?= ROOT ?>/homelawyer">
+                <a href="<?= ROOT ?>/homejunior">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                 </a>
                 <span class="tooltip">Dashboard</span>
-            </li>
-            <li>
-                <a href="<?= ROOT ?>/meetingslawyer/index/client">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">Client</span>
-                </a>
-                <span class="tooltip">Client</span>
-            </li>
-            <li>
-                <a href="<?= ROOT ?>/meetingslawyer/index/attorney">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">Attorney</span>
-                </a>
-                <span class="tooltip">Attorney</span>
-            </li>
-            <li>
-                <a href="<?= ROOT ?>/meetingslawyer/index/junior">
-                    <i class='bx bx-user'></i>
-                    <span class="links_name">Junior Councel</span>
-                </a>
-                <span class="tooltip">Junior Councel</span>
             </li>
             <li>
                 <a href="#">

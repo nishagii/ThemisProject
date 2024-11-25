@@ -50,7 +50,7 @@
                 <br>
                 <br>
                 <div>
-                    <a href="../register.html" class="sign">SIGN UP</a>
+                    <a href="registeruser" class="sign">SIGN UP</a>
             </div>
             
         </p>

@@ -1,5 +1,5 @@
 body {
-    background-color: #1d1b31;
+    background-color: #7875a0;
     font-family: 'Montserrat';
     margin: 0 auto;
     padding: 0;
@@ -90,6 +90,36 @@ input.register {
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 45%;
+    height: 10vh;
+    position: absolute;
+    top: 5px;
+    right: 20px;
+}
+
+.home {
+    padding: 10px 10px;
+    background-color: #f0a636; /* Initial background color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 65px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+    margin: 0;
+
+    position: absolute;
+    top: 5px;
+    float: left;
+
+   
 }
 
 input.register:hover {

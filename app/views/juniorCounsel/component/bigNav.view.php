@@ -20,10 +20,10 @@
             </label>
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="Logo" class="navbar-logo" />
             <ul class="big-navbar">
-                <li><a href="#">Home</a></li>
+                <li><a href="homejunior">Home</a></li>
                 <li><a href="caseJunior">Cases</a></li>
                 <li><a href="salary">Salary</a></li>
-                <li><a href="precedent">Precedents</a></li>
+                <li><a href="precedentJunior">Precedents</a></li>
             </ul>
         </nav>
 
@@ -39,7 +39,7 @@
                 </ul>
             </div>
 
-            <a href="profile.php">
+            <a href="profilejunior">
             <i class="fas fa-user-circle" id="profile-icon"></i>
             </a>
             </div>

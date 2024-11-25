@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/register.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <title>Themis</title>
 </head>
 
@@ -13,6 +14,12 @@
     <div class="container">
         <div class="white">
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" class="white-logo">
+            <div class="flex">
+                <!-- Boxicon for registration -->
+                <a href="landingpage"><button class="home"><i class="fas fa-arrow-left"></i> </button></a>
+                <a href="login"><button class="button register">Login </button></a>
+           
+            </div>
             <div class="heading">
                 <h1 class="register">Create your account</h1>
             </div>

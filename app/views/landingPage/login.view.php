@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/landingPage/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
@@ -48,11 +49,12 @@
     <div class="container">
         <div class="white">
 
-            <button class="button register">
-                <i class="bx bx-user-plus icon"></i> <!-- Boxicon for registration -->
-                <a href="<?= ROOT ?>/registeruser">Register</a>
-            </button>
-
+            <div class="flex">
+                <!-- Boxicon for registration -->
+                <a href="landingpage"><button class="home"><i class="fas fa-arrow-left"></i> </button></a>
+                <a href="registeruser"><button class="button register">Register </button></a>
+           
+            </div>
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" class="white-logo">
             <div class="heading">
                 <h1 class="welcome">Welcome Back!</h1>
