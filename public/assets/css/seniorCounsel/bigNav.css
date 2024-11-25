@@ -277,3 +277,48 @@ label #cancel{
     }
 }
 
+/* Settings menu container styling */
+.settings-menu {
+    position: absolute; /* Allows precise positioning relative to the parent */
+    top: 90px; /* Adjust to position below the settings icon */
+    right: 10px; /* Aligns the menu to the right */
+    background: #ffffff; /* White background for the menu */
+    border: 1px solid #ccc; /* Light border for better visibility */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    z-index: 1000; /* Ensures it appears above other elements */
+    display: none; /* Hidden by default */
+    width: 150px; /* Adjust based on the content */
+}
+
+/* Menu list styling */
+.settings-menu ul {
+    list-style: none; /* Removes bullet points */
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+    color: #1d1b31;
+}
+
+/* Active state: visible */
+.settings-menu.active {
+    display: block;
+}
+
+/* Menu item styling */
+.settings-menu li {
+    padding: 10px 15px; /* Space inside each item */
+    cursor: pointer; /* Shows pointer cursor on hover */
+    text-align: left; /* Aligns text to the left */
+    font-size: 14px; /* Adjusts font size */
+    color: #333; /* Dark text color */
+}
+
+/* Hover effect for menu items */
+.settings-menu li:hover {
+    background-color: #f4f4f4; /* Light gray background on hover */
+}
+
+/* Class to hide the menu */
+.hidden {
+    display: none;
+}
