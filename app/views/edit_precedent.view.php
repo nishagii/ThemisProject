@@ -1,4 +1,5 @@
 <?php
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,8 +64,7 @@
         color: var(--text-color);
     }
 
-    input,
-    textarea {
+    input, textarea {
         padding: 0.75rem;
         border: 1px solid var(--border-color);
         border-radius: 0.5rem;
@@ -199,7 +199,7 @@
                 </div>
                 <div class="form-group">
                     <label for="name_of_parties">Names of parties:</label>
-                    <input id="name_of_parties" type="text" name="name_of_parties" value="<?= htmlspecialchars($case->name_of_parties) ?>" required>
+                    <textarea id="name_of_parties" type="text" name="name_of_parties" value="<?= htmlspecialchars($case->name_of_parties) ?>" required><?= htmlspecialchars($case->name_of_parties) ?></textarea>
                     <div class="error" id="partiesError"></div>
                 </div>
                 <div class="form-group">
@@ -274,5 +274,4 @@
         });
     </script>
 </body>
-
 </html>

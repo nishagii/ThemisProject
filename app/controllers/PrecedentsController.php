@@ -68,7 +68,7 @@ class PrecedentsController {
         if (!$case) {
             die("Case not found or invalid ID.");
         }
-        $this->view('one_precedent', ['case' => $case]);
+        $this->view('edit_precedent', ['case' => $case]);
     }
 
     public function update()
@@ -91,24 +91,24 @@ class PrecedentsController {
 
         
     }
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $data = [
-                'date' => $_POST['date'],
-                'case_number' => $_POST['case_number'],
-                'parties' => $_POST['parties'],
-                'judgment_by' => $_POST['judgment_by'],
-                'document_link' => $_POST['document_link']
-            ];
+    //     if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //         $data = [
+    //             'date' => $_POST['date'],
+    //             'case_number' => $_POST['case_number'],
+    //             'parties' => $_POST['parties'],
+    //             'judgment_by' => $_POST['judgment_by'],
+    //             'document_link' => $_POST['document_link']
+    //         ];
             
-            $this->precedentModel->update($id, $data);
-            header("Location: " . ROOT . "/precedents");
-        }
+    //         $this->precedentModel->update($id, $data);
+    //         header("Location: " . ROOT . "/precedents");
+    //     }
         
-        $precedent = $this->precedentModel->getById($id);
-        $this->view('precedents/edit', [
-            'precedent' => $precedent
-        ]);
-    }
+    //     $precedent = $this->precedentModel->getById($id);
+    //     $this->view('precedents/edit', [
+    //         'precedent' => $precedent
+    //     ]);
+    // }
 
     public function delete($id) {
         $this->precedentModel->delete($id);
