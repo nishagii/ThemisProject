@@ -19,12 +19,6 @@ class PrecedentModel {
             'document_link' => $_POST['document_link']
         ];
         $this->query($query, $params);
-    // try {
-    //     $this->query($query, $params);
-    //     echo "Data inserted successfully!";
-    // } catch (PDOException $e) {
-    //     echo "SQL Error: " . $e->getMessage();
-    // }
     }
 
     public function getAll() {
