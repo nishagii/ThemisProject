@@ -3,6 +3,7 @@
 class CaseModel
 {
 
+    
     use Model;
     protected $table = 'cases'; // Name of the database table
 
