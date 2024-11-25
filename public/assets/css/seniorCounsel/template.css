@@ -1,10 +1,25 @@
-
+.main-container{
+  background-color: #f4f8ff;
+  height: 100vh;
+}
 .template-container {
-    background-color: #eaf1fd;
+    background-color: #E4E9F7;
     margin: 40px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.282);
     padding: 20px;
+}
+.temp-section{
+  text-align: center;
+}
+
+.temp-section h1{
+ color: #ffffff;
+    background-color: rgb(29, 27, 49);
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-transform: uppercase;
 }
 
 .search-container {
