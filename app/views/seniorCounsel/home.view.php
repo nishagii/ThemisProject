@@ -52,6 +52,7 @@
             <a href="<?= ROOT ?>/cases/retrieveAllCases" class="btn">View All Cases</a>
         </div>
 
+        
         <!-- Add Case Section -->
         <div class="card">
             <h3>Add New Case</h3>
