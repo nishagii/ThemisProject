@@ -45,20 +45,24 @@ body {
 /* Table Styling */
 table {
     width: 100%;
+    margin: 20px auto;
     border-collapse: collapse;
-    font-size: 1rem;
-    text-align: left;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 table th,
 table td {
-    padding: 10px 10px;
+    padding: 12px 15px;
+    text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
 table th {
-    background-color: #3f51b5;
-    color: white;
+    background-color: #1d1b31;
+    color: #ffffff;
+    font-weight: bold;
     text-transform: uppercase;
 }
 
@@ -67,7 +71,7 @@ table tbody tr:nth-child(even) {
 }
 
 table tbody tr:hover {
-    background-color: #E4E9F7;
+    background-color: #f1f1f1;
 }
 
 table tbody tr td a {
@@ -86,7 +90,27 @@ table tbody tr td[colspan] {
     font-style: italic;
     color: #777;
 }
-
+.more {
+    color: white;            
+    border: none;              
+    border-radius: 5px;      
+    padding: 5px 10px;       
+    font-size: 15px;           
+    cursor: pointer;          
+    transition: background-color 0.3s ease; 
+    display: flex;            
+    align-items: center;     
+    text-decoration: none;
+    margin-top: 10px;
+    margin-right: 20px;
+    display: flex;
+    margin-left: 20px;
+    margin-top: 10px;
+    background-color: #fa9800;
+}
+.more:hover{
+    background-color: #9392a3;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     .table-container {
