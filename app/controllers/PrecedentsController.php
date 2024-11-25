@@ -39,6 +39,13 @@ class PrecedentsController {
         // Pass data to the view
         $this->view('/precedents_yearwise', ['cases' => $cases, 'year' => $year]);
     }
+
+    public function retrieveAll() {
+        $cases = $this->model->getAll();
+    
+        // Pass the data to the view
+        include_once 'views/all_precedents.view.php';
+    }
     
     public function edit($id) {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
