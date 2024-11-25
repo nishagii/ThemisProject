@@ -11,7 +11,7 @@
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
-
+    <?php include('component/rule.view.php'); ?>
     
 </body>
 </html>
