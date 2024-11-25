@@ -12,30 +12,35 @@
     </div>
 
     <div class="form-container">
-        <form method="POST" action="<?= ROOT ?>/PrecedentsController/create">
+        <form id="precedentForm" method="POST" action="<?= ROOT ?>/PrecedentsController/create" novalidate>
             <div class="form-group">
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="judgment_date" required>
+                <div class="error" id="dateError"></div>
             </div>
 
             <div class="form-group">
                 <label for="case_number">Case Number:</label>
                 <input type="text" id="case_number" name="case_number" required>
+                <div class="error" id="caseNumberError"></div>
             </div>
 
             <div class="form-group">
                 <label for="parties">Name of Parties:</label>
                 <textarea id="parties" name="parties" required></textarea>
+                <div class="error" id="partiesError"></div>
             </div>
 
             <div class="form-group">
                 <label for="judgment_by">Judgment by:</label>
                 <input type="text" id="judgment_by" name="judgment_by" required>
+                <div class="error" id="judgmentByError"></div>
             </div>
 
             <div class="form-group">
                 <label for="document_link">Document Link:</label>
                 <input type="text" id="document_link" name="document_link" required>
+                <div class="error" id="documentLinkError"></div>
             </div>
 
             <div class="form-actions">
@@ -43,6 +48,61 @@
                 <a href="<?= ROOT ?>/precedents" class="btn-cancel">Cancel</a>
             </div>
         </form>
+        <script>
+        //Form Validation
+        document.getElementById('precedentForm').addEventListener('submit', function(event) {
+            // Get form fields
+            const date = document.getElementById('date').value;
+            const caseNumber = document.getElementById('case_number').value;
+            const parties = document.getElementById('parties').value;
+            const judgmentBy = document.getElementById('judgment_by').value;
+            const documentLink = document.getElementById('document_link').value;
+
+            // Error elements
+            const dateError = document.getElementById('dateError');
+            const caseNumberError = document.getElementById('caseNumberError');
+            const partiesError = document.getElementById('partiesError');
+            const judgmentByError = document.getElementById('judgmentByError');
+            const documentLinkError = document.getElementById('documentLinkError');
+
+            // Reset error messages
+            dateError.textContent = '';
+            caseNumberError.textContent = '';
+            partiesError.textContent = '';
+            judgmentByError.textContent = '';
+            documentLinkError.textContent = '';
+
+            // Flag to check if form is valid
+            let isValid = true;
+
+            // Validation checks
+            if (!date) {
+                dateError.textContent = 'Date is required.';
+                isValid = false;
+            }
+            if (!caseNumber.trim()) {
+                caseNumberError.textContent = 'Case number is required.';
+                isValid = false;
+            }
+            if (!parties.trim()) {
+                partiesError.textContent = 'Name of parties is required.';
+                isValid = false;
+            }
+            if (!judgmentBy.trim()) {
+                judgmentByError.textContent = 'Judgment by is required.';
+                isValid = false;
+            }
+            if (!documentLink.trim()) {
+                documentLinkError.textContent = 'Document link is required.';
+                isValid = false;
+            }
+
+            // If form is not valid, prevent submission
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
     </div>
 </body>
 </html>
