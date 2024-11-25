@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/create_precedent.css">
 </head>
 <body>
-<?php include('juniorCounsel/component/bigNav.view.php'); ?>
-    
+    <?php include('juniorCounsel/component/bigNav.view.php'); ?>
+    <?php include('juniorCounsel/component/smallNav1.view.php'); ?>
     <div class="header">
         <h1>Add New Precedent</h1>
     </div>
