@@ -1,9 +1,9 @@
 <!-- this was used to debug if the cases data are being fetched from the database to the view
 issue was in the core controller view function -->
 <!-- <?php
-// Debug the cases variable
-var_dump(isset($cases) ? $cases : 'Cases variable not set');
-?> -->
+        // Debug the cases variable
+        var_dump(isset($cases) ? $cases : 'Cases variable not set');
+        ?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,43 +18,46 @@ var_dump(isset($cases) ? $cases : 'Cases variable not set');
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
-    <h1>List of Cases</h1>
-<div class="button">
-    <a href="<?= ROOT ?>/cases">
-        <button class="add">Add New Case</button>
-    </a>
-    <a href="<?= ROOT ?>/cases/extendRetrieveAllCases">
-        <button class="add">Tabular View</button>
-    </a>
-</div>
-            <div class="cases-container">
-                <?php if (!empty($cases)) : ?>
-                    <?php foreach ($cases as $case) : ?>
-                        <div class="case-card">
-            <h3>Case Number: <?= htmlspecialchars($case->case_number) ?></h3>
-            <p><strong>Client Name:</strong> <?= htmlspecialchars($case->client_name) ?></p>
-            <p><strong>Court:</strong> <?= htmlspecialchars($case->court) ?></p>
-            <p><strong>Notes:</strong> <?= htmlspecialchars($case->notes) ?></p>
+    <div class="allcases-section">
+        <h1>List of Cases</h1>
+    </div>
 
-            <div class="button">
+    <div class="button">
+        <a href="<?= ROOT ?>/cases">
+            <button class="add">Add New Case</button>
+        </a>
+        <a href="<?= ROOT ?>/cases/extendRetrieveAllCases">
+            <button class="add">Tabular View</button>
+        </a>
+    </div>
+    <div class="cases-container">
+        <?php if (!empty($cases)) : ?>
+            <?php foreach ($cases as $case) : ?>
+                <div class="case-card">
+                    <h3>Case Number: <?= htmlspecialchars($case->case_number) ?></h3>
+                    <p><strong>Client Name:</strong> <?= htmlspecialchars($case->client_name) ?></p>
+                    <p><strong>Court:</strong> <?= htmlspecialchars($case->court) ?></p>
+                    <p><strong>Notes:</strong> <?= htmlspecialchars($case->notes) ?></p>
 
-            <a href="<?= ROOT ?>/cases/retrieveCase/<?= $case->id; ?>">
-                <button class="more">More details</button>
-            </a>
+                    <div class="button">
 
-            <a href="<?= ROOT ?>/cases/editCase/<?= $case->id; ?>">
-                <button class="edit">
-                    <i class="bx bx-edit"></i> <!-- Boxicon for Edit -->
-                </button>
-            </a>
+                        <a href="<?= ROOT ?>/cases/retrieveCase/<?= $case->id; ?>">
+                            <button class="more">More details</button>
+                        </a>
 
-            <a href="<?= ROOT ?>/cases/deleteCase/<?= $case->id; ?>">
-                <button class="delete">
-                    <i class="bx bx-trash"></i> <!-- Boxicon for Delete -->
-                </button>
-            </a>
-            </div>
-        </div>
+                        <a href="<?= ROOT ?>/cases/editCase/<?= $case->id; ?>">
+                            <button class="edit">
+                                <i class="bx bx-edit"></i> <!-- Boxicon for Edit -->
+                            </button>
+                        </a>
+
+                        <a href="<?= ROOT ?>/cases/deleteCase/<?= $case->id; ?>">
+                            <button class="delete">
+                                <i class="bx bx-trash"></i> <!-- Boxicon for Delete -->
+                            </button>
+                        </a>
+                    </div>
+                </div>
 
             <?php endforeach; ?>
         <?php else : ?>
