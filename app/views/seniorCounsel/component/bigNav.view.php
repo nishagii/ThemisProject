@@ -24,7 +24,7 @@
             <ul class="big-navbar">
                 <li><a href="<?= ROOT ?>/homelawyer">Home</a></li>
                 <li><a href="<?= ROOT ?>/cases/retrieveAllCases">Cases</a></li>
-                <li><a href="payment">Payments</a></li>
+                <li><a href="<?= ROOT ?>/paymentgate">Payments</a></li>
                 <li><a href="<?= ROOT ?>/precedent">Precedents</a></li>
                 <!-- <li><a href="blog">Blogs</a></li> -->
             </ul>
