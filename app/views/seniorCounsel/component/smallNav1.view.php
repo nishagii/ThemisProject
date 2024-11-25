@@ -16,8 +16,8 @@
         <ul class="small-navbar">
             <li><a href="<?= ROOT ?>/homelawyer">Calendar</a></li>
             <li><a href="<?= ROOT ?>/tasklawyer">Task Board</a></li>
-            <li><a href="meetingslawyer">Meeting</a></li>
-            <li><a href="template">Document templates</a></li>
+            <li><a href="<?= ROOT ?>/meetingslawyer">Meeting</a></li>
+            <li><a href="<?= ROOT ?>/template">Document templates</a></li>
             <li><a href="<?= ROOT ?>/users">Users</a></li>
             <li><a href="<?= ROOT ?>/rulelawyer">S.C Rules</a></li>
         </ul>
