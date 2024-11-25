@@ -30,7 +30,16 @@ class PrecedentsController {
         
         $this->view('create_precedent');
     }
-
+    public function retrieveYearwise()
+    {
+        $year = isset($_GET['year']) ? $_GET['year'] : date('Y');
+        
+        $caseModel = $this->loadModel('PrecedentModel'); // Ensure correct model loading
+        $cases = $caseModel->getYearwise($year);
+        // Pass data to the view
+        $this->view('/precedents_yearwise', ['cases' => $cases, 'year' => $year]);
+    }
+    
     public function edit($id) {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [

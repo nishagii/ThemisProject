@@ -21,9 +21,20 @@ class PrecedentModel {
         $this->query($query, $params);
     }
 
-    public function getAll() {
-        $query = "SELECT * FROM $this->table ORDER BY date DESC";
-        return $this->query($query);
+    public function getYearwise() {
+        $query = "SELECT * FROM {$this->table} WHERE YEAR(judgment_date) = ? ORDER BY judgment_date DESC";
+
+        $stmt = $this->connect()->prepare($query);  // Use the `connect()` method from the Database trait for connection
+        $stmt->bind_param("i", $year);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $cases = [];
+        while ($row = $result->fetch_assoc()) {
+            $cases[] = $row;
+        }
+        return $cases;
     }
 
     public function getById($id) {

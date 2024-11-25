@@ -1,47 +1,52 @@
+<!-- yearwise_cases.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Precedents</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/precedent.css">
+    <title>Cases for Year <?php echo $year; ?></title>
 </head>
 <body>
-    <div class="header">
-        <h1>Judgments Delivered in 2024</h1>
-        <a href="<?= ROOT ?>/precedents/create" class="btn-add">Add New Precedent</a>
+    <h1>Cases for the year <?php echo $year; ?></h1>
+
+    <!-- Year selection links -->
+    <div>
+        <?php
+        $currentYear = date('Y');
+        for ($i = $currentYear; $i >= 2000; $i--) {
+            echo "<a href='?year=$i'>Cases from $i</a> | ";
+        }
+        ?>
     </div>
 
-    <div class="precedent-table">
-        <table>
-            <thead>
+    <!-- Displaying cases in a table -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Case Number</th>
+                <th>Name of Parties</th>
+                <th>Judgment By</th>
+                <th>Document Link</th>
+                <th>Judgment Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($cases)) { ?>
+                <?php foreach ($cases as $case) { ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($case['case_number']); ?></td>
+                        <td><?php echo htmlspecialchars($case['name_of_parties']); ?></td>
+                        <td><?php echo htmlspecialchars($case['judgment_by']); ?></td>
+                        <td><a href="<?php echo htmlspecialchars($case['document_link']); ?>" target="_blank">View Document</a></td>
+                        <td><?php echo htmlspecialchars($case['judgment_date']); ?></td>
+                    </tr>
+                <?php } ?>
+            <?php } else { ?>
                 <tr>
-                    <th>Date</th>
-                    <th>Case Number</th>
-                    <th>Name of Parties</th>
-                    <th>Judgment by</th>
-                    <th>Document</th>
-                    <th>Actions</th>
+                    <td colspan="5">No cases found for this year.</td>
                 </tr>
-            </thead>
-            <tbody>
-                <?php if(isset($precedents) && is_array($precedents)): ?>
-                    <?php foreach($precedents as $precedent): ?>
-                        <tr>
-                            <td><?= date('d/m/Y', strtotime($precedent->date)) ?></td>
-                            <td><?= htmlspecialchars($precedent->case_number) ?></td>
-                            <td><?= htmlspecialchars($precedent->parties) ?></td>
-                            <td><?= htmlspecialchars($precedent->judgment_by) ?></td>
-                            <td><a href="<?= htmlspecialchars($precedent->document_link) ?>" class="doc-link">doc</a></td>
-                            <td class="actions">
-                                <a href="<?= ROOT ?>/precedents/edit/<?= $precedent->id ?>" class="btn-edit">Edit</a>
-                                <a href="<?= ROOT ?>/precedents/delete/<?= $precedent->id ?>" class="btn-delete" onclick="return confirm('Are you sure you want to delete this precedent?')">Delete</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
+            <?php } ?>
+        </tbody>
+    </table>
 </body>
 </html>
