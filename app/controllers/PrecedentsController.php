@@ -9,17 +9,15 @@ class PrecedentsController {
         $this->precedentModel = $this->loadModel('PrecedentModel');
     }
 
-    public function index() {
-        $precedents = $this->precedentModel->getAll();
-        $this->view('precedents/precedents_yearwise', [
-            'precedents' => $precedents
-        ]);
+    public function index()
+    {
+        $this->view('create_precedent');
     }
-
+/*---------------------Create operation----------------------------- */
     public function create() {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
-                'date' => $_POST['date'],
+                'judgment_date' => $_POST['judgment_date'],
                 'case_number' => $_POST['case_number'],
                 'parties' => $_POST['parties'],
                 'judgment_by' => $_POST['judgment_by'],
@@ -27,10 +25,10 @@ class PrecedentsController {
             ];
             
             $this->precedentModel->insert($data);
-            header("Location: " . ROOT . "/precedents");
+            header("Location: " . ROOT . "/precedents/index");
         }
         
-        $this->view('precedents/create');
+        $this->view('create_precedent');
     }
 
     public function edit($id) {
