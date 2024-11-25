@@ -25,7 +25,7 @@
 
         <section class="new-case-section">
             <div class="new-case-header">
-                <h1>New Case</h1>
+                <h1>Add New Case</h1>
             </div>
             <form method="POST" action="<?= ROOT ?>/cases/addCase">
                 <div class="case-forms">
