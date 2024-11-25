@@ -63,7 +63,34 @@ class PrecedentsController {
    
     public function edit($id) {
         $caseModel = $this->loadModel('PrecedentModel');
+        $case = $caseModel->getByCaseId($id);
 
+        if (!$case) {
+            die("Case not found or invalid ID.");
+        }
+        $this->view('one_precedent', ['case' => $case]);
+    }
+
+    public function update()
+    {
+        // Collect POST data
+        $data = [
+            'date' => $_POST['date'],
+                'case_number' => $_POST['case_number'],
+                'name_of_parties' => $_POST['name_of_parties'],
+                'judgment_by' => $_POST['judgment_by'],
+                'document_link' => $_POST['document_link']
+        ];
+
+        // Update the case
+        $caseModel = $this->loadModel('PrecedentModel');
+        $caseModel->updateCase($data);
+
+        // Redirect to a success page or the list of cases
+        redirect('cases/extendRetrieveAllCases');
+
+        
+    }
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
                 'date' => $_POST['date'],
