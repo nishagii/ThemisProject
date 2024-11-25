@@ -35,7 +35,7 @@
                             <td><?php echo $case->judgment_by; ?></td>
                             <td><a href="<?php echo $case->document_link; ?>" target="_blank">View Document</a></td>
                             <td>
-                                <a href="<?= ROOT ?>/Precedentsontroller/retrieveOne/<?= $case->id; ?>">
+                                <a href="<?= ROOT ?>/PrecedentsController/retrieveOne/<?= $case->id; ?>">
                                 <button class="more">View more</button>
                                 </a>
                             </td>
