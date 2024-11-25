@@ -81,8 +81,8 @@
                 <td><?= htmlspecialchars($t->priority) ?></td>
                 <td><?= htmlspecialchars($t->status) ?></td>
                 <td>
-                    <a href="<?= ROOT ?>/editTask/<?= $t->id ?>" class="edit-btn">Edit</a> <!-- Edit Link -->
-                    <a href="<?= ROOT ?>/deleteTask/<?= $t->id ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this task?')">Delete</a> <!-- Delete Link -->
+                    <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $t->taskID ?>" class="edit-btn">Edit</a> <!-- Edit Link -->
+                    <a href="<?= ROOT ?>/tasklawyer/deleteTask/<?= $t->taskID ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this task?')">Delete</a> <!-- Delete Link -->
                 </td>
             </tr>
             <?php endforeach; ?>

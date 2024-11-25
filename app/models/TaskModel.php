@@ -42,4 +42,54 @@ class TaskModel
         // Execute the query and return the results
         return $this->query($query);
     }
+
+        // Get a specific case by ID
+        public function getTaskById($taskID)
+        {
+            $query = "SELECT * FROM {$this->table} WHERE taskID = :taskID";
+            $params = ['taskID' => $taskID];
+    
+            $result = $this->query($query, $params);
+    
+            // Check if result is empty
+            if (empty($result)) {
+                return null; // Return null if no case is found
+            }
+    
+            return $result[0]; // Return the first (and expected only) result
+        }
+
+        public function updateTask($data)
+        {
+            $query = "UPDATE {$this->table} 
+                      SET 
+                          name = :name,
+                          description = :description,
+                          assigneeID = :assigneeID,
+                          deadlineDate = :deadlineDate,
+                          deadlineTime = :deadlineTime,
+                          priority = :priority
+                      WHERE taskID = :taskID";
+        
+            $params = [
+                'name' => $data['name'],
+                'description' => $data['description'],
+                'assigneeID' => $data['assigneeID'],
+                'deadlineDate' => $data['deadlineDate'],
+                'deadlineTime' => $data['deadlineTime'],
+                'priority' => $data['priority'],
+                'taskID' => $data['taskID'], // Ensure taskID is passed
+            ];
+        
+            return $this->query($query, $params);
+        }
+            //delete case
+    public function deleteTask($taskID)
+    {
+        $query = "DELETE FROM $this->table WHERE taskID = :taskID";
+        $params = ['taskID' => $taskID];
+        return $this->query($query, $params);
+    }
+
+
 }
