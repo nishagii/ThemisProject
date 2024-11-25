@@ -31,6 +31,14 @@ class PrecedentsController {
         $this->view('create_precedent');
     }
 
+    public function retrieveAll()
+    {
+        $caseModel = $this->loadModel('PrecedentModel'); 
+        $cases = $caseModel->getAllCases(); // Fetch cases data
+
+        // Pass data to the view
+        $this->view('/all_precendents', ['cases' => $cases]);
+    }
     public function edit($id) {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
