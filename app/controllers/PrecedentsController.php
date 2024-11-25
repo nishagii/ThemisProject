@@ -41,19 +41,19 @@ class PrecedentsController {
         $this->view('all_precedents', ['cases' => $cases]);
     }
 
-    public function retrieveOne($caseId)
+    public function retrieveOne($id)
     {
-        if ($caseId === null) {
-            echo "Case ID is required.";
+        if ($id === null) {
+            echo "Case number is required.";
             return;
         }
 
         $caseModel = $this->loadModel('PrecedentModel');
-        // Get the case by ID
-        $case = $caseModel->getByCaseNUmber($caseId);
+        // Get the case by case number
+        $case = $caseModel->getByCaseId($id);
         // Handle case not found
         if ($case === null) {
-            echo "<p>Case with ID {$caseId} not found.</p>";
+            echo "<p>Case with ID {$id} not found.</p>";
             return;
         }
         // Load the view and pass the case data
