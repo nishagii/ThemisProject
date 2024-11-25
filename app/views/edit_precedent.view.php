@@ -108,6 +108,11 @@
     .submit-button:active {
         transform: translateY(0);
     }
+    .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    }
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
@@ -182,11 +187,11 @@
 </style>
 
 <body>
-    <form id="precedentEditForm"action="<?= ROOT ?>/PrecedentsController/update" method="POST" novalidate>
+    <form id="precedentEditForm"action="<?= ROOT ?>/PrecedentsController/updatePrecedent" method="POST" novalidate>
         <input type="hidden" name="id" value="<?= $case->id ?>">
 
         <div class="form-section">
-            <h2>Edit Case</h2>
+            <h2>Edit Precedent</h2>
                 <div class="form-group">
                     <label for="judgment_date">Date:</label>
                     <input id="judgment_date" type="date"  name="judgment_date" value="<?= htmlspecialchars($case->judgment_date) ?>" required>

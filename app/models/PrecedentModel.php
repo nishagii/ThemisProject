@@ -55,6 +55,7 @@ class PrecedentModel {
             'name_of_parties' => $data['name_of_parties'],
             'judgment_by' => $data['judgment_by'],
             'document_link' => $data['document_link'],
+            ':id' => $data['id'],
         ];
         return $this->query($query, $params);
     }

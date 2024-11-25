@@ -71,44 +71,25 @@ class PrecedentsController {
         $this->view('edit_precedent', ['case' => $case]);
     }
 
-    public function update()
+    public function updatePrecedent()
     {
         // Collect POST data
         $data = [
-            'date' => $_POST['date'],
-                'case_number' => $_POST['case_number'],
-                'name_of_parties' => $_POST['name_of_parties'],
-                'judgment_by' => $_POST['judgment_by'],
-                'document_link' => $_POST['document_link']
+            'judgment_date' => $_POST['judgment_date'],
+            'case_number' => $_POST['case_number'],
+            'name_of_parties' => $_POST['name_of_parties'],
+            'judgment_by' => $_POST['judgment_by'],
+            'document_link' => $_POST['document_link'],
+            'id' => $_POST['id'],
         ];
 
         // Update the case
         $caseModel = $this->loadModel('PrecedentModel');
-        $caseModel->updateCase($data);
+        $caseModel->update($data);
 
         // Redirect to a success page or the list of cases
-        redirect('cases/extendRetrieveAllCases');
-
-        
+        redirect('PrecedentsController/retrieveAll');
     }
-    //     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //         $data = [
-    //             'date' => $_POST['date'],
-    //             'case_number' => $_POST['case_number'],
-    //             'parties' => $_POST['parties'],
-    //             'judgment_by' => $_POST['judgment_by'],
-    //             'document_link' => $_POST['document_link']
-    //         ];
-            
-    //         $this->precedentModel->update($id, $data);
-    //         header("Location: " . ROOT . "/precedents");
-    //     }
-        
-    //     $precedent = $this->precedentModel->getById($id);
-    //     $this->view('precedents/edit', [
-    //         'precedent' => $precedent
-    //     ]);
-    // }
 
     public function delete($id) {
         $this->precedentModel->delete($id);
