@@ -61,7 +61,9 @@ class PrecedentsController {
     }
 /*-------------------Update---------------------------------- */
    
-    public function update($id) {
+    public function edit($id) {
+        $caseModel = $this->loadModel('PrecedentModel');
+
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
                 'date' => $_POST['date'],
