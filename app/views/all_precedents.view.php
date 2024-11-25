@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Precedents</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/create_precedent.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/all_precedents.css">
 </head>
 <body>
     <div class="header">
