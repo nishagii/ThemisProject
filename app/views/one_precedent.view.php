@@ -129,7 +129,7 @@
         </div>
         <div class="card-footer">
             <a href="<?= ROOT ?>/PrecedentsController/edit/<?= $case->id ?>" class="btn btn-edit">Edit Case</a>
-            <a href="<?= ROOT ?>/cases/deleteCase/<?= $case->id ?>" class="btn btn-delete">Delete Case</a>
+            <a href="<?= ROOT ?>/PrecedentsController/deletePrecedent/<?= $case->id ?>" class="btn btn-delete">Delete Case</a>
         </div>
     </div>
 </body>

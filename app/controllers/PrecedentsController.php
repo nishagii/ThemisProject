@@ -90,9 +90,16 @@ class PrecedentsController {
         // Redirect to a success page or the list of cases
         redirect('PrecedentsController/retrieveAll');
     }
+/*-------------------Delete----------------------------------- */
+    public function deletePrecedent($id)
+    {
+        // Load the CaseModel
+        $caseModel = $this->loadModel('PrecedentModel');
 
-    public function delete($id) {
-        $this->precedentModel->delete($id);
-        header("Location: " . ROOT . "/precedents");
+        // Delete the case
+        $caseModel->delete($id);
+
+        // Redirect to the home page or success page
+        redirect('PrecedentsController/retrieveAll');
     }
 }
