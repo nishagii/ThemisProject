@@ -61,7 +61,7 @@
  
     <li class="profile">
         <div class="profile-details">
-          <img src="../../../../public/assets/images/themis_logo.png" alt="profileImg">
+          <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="profileImg">
           <div class="name_job">
             <div class="name">VIP Solutions</div>
             <div class="job">Web desining</div>
@@ -72,6 +72,6 @@
    </ul>
  </div>
    <!--side-bar ends-->
-   <script src="../../../../public/assets/js/sideBar.js"> </script>
+   <script src="<?= ROOT ?>/assets/js/sideBar.js"> </script>
 </body>
 </html>
