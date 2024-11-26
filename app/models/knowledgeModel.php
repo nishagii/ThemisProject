@@ -27,17 +27,51 @@ class knowledgeModel
     }
 
     // Retrieve all knowledge
-    public function getAllKnowledge()
+    public function getAllKnowledges()
     {
         $query = "SELECT * FROM $this->table";
         return $this->query($query);
     }
 
+
+            // Get a specific case by ID
+            public function getKnowledgeById($id)
+            {
+                $query = "SELECT * FROM {$this->table} WHERE id = :id";
+                $params = ['id' => $id];
+        
+                $result = $this->query($query, $params);
+        
+                // Check if result is empty
+                if (empty($result)) {
+                    return null; // Return null if no case is found
+                }
+        
+                return $result[0]; // Return the first (and expected only) result
+            }
+
+            public function updateKnowledge($data)
+{
+    $query = "UPDATE {$this->table} 
+              SET 
+                  topic = :topic,
+                  note = :note
+              WHERE id = :id"; // Removed the trailing comma in the SET clause
+    
+    $params = [
+        'topic' => $data['topic'],
+        'note' => $data['note'],
+        'id' => $data['id'], // Ensure the correct key matches the form data
+    ];
+    
+    return $this->query($query, $params);
+}
+
     //delete knowledge
-    public function deleteKnowledge($knowledgeId)
+    public function deleteKnowledge($id)
     {
         $query = "DELETE FROM $this->table WHERE id = :id";
-        $params = ['id' => $knowledgeId];
+        $params = ['id' => $id];
         return $this->query($query, $params);
     }
 

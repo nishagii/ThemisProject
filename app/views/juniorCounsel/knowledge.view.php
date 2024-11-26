@@ -22,7 +22,8 @@
 
                 <div class="note-container">
     <h1>Knowledge Notes</h1>
-    <table>
+    <div class="notes-table-container">
+    <table class="notes-table">
         <thead>
             <tr>
                 <th>Topic</th>
@@ -31,32 +32,20 @@
             </tr>
         </thead>
         <tbody>
+            <?php foreach ($knowledge as $knowledge): ?>
             <tr>
-                <td>Topic A</td>
-                <td>This is the note for Topic A. It provides detailed information.</td>
+                <td><?= htmlspecialchars($knowledge->topic) ?></td>
+                <td><?= htmlspecialchars($knowledge->note) ?></td>
                 <td>
-                    <button onclick="editForm(1, 'Topic A', 'This is the note for Topic A. It provides detailed information.')">Edit</button>
-                    <a href="#" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
+                    <a href="<?= ROOT ?>/knowledge/editKnowledge/<?= $knowledge->id ?>"><button onclick="editForm(<?= htmlspecialchars($knowledge->id) ?>, '<?= htmlspecialchars(addslashes($knowledge->topic)) ?>', '<?= htmlspecialchars(addslashes($knowledge->details)) ?>')">Edit</button></a>
+                    <a href="<?= ROOT ?>/knowledge/deleteKnowledge/<?= htmlspecialchars($knowledge->id) ?>" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
                 </td>
             </tr>
-            <tr>
-                <td>Topic B</td>
-                <td>Note for Topic B with some interesting insights and ideas.</td>
-                <td>
-                    <button onclick="editForm(2, 'Topic B', 'Note for Topic B with some interesting insights and ideas.')">Edit</button>
-                    <a href="#" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
-                </td>
-            </tr>
-            <tr>
-                <td>Topic C</td>
-                <td>Topic C covers a wide range of useful information, summarizing key points.</td>
-                <td>
-                    <button onclick="editForm(3, 'Topic C', 'Topic C covers a wide range of useful information, summarizing key points.')">Edit</button>
-                    <a href="#" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
-                </td>
-            </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
+</div>
+
 </div>
 
     </div>
