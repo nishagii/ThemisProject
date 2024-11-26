@@ -31,7 +31,7 @@
        <span class="tooltip">Add User</span>
    </li>
    <li>
-       <a href="#">
+       <a href="loginadmin">
            <i class='bx bx-history'></i>
            <span class="links_name">Login Activity</span>
        </a>
