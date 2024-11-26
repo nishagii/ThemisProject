@@ -119,3 +119,95 @@ td {
         font-size: 20px;
     }
 }
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Button to add a note */
+a > button {
+    background-color: #0a2f56;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 20px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+a > button:hover {
+    background-color: #064e9a;
+}
+
+/* Note container styles */
+.note-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(39, 7, 145, 0.1);
+    border-radius: 8px;
+}
+
+.note-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+/* Table styles */
+.notes-table-container {
+    overflow-x: auto;
+}
+
+.notes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fafafa;
+}
+
+.notes-table th,
+.notes-table td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.notes-table th {
+    background: #02203f;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.notes-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Actions column styling */
+.notes-table td i {
+    font-size: 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: #3807b2;
+}
+.notes-table td i.bx-trash {
+    color: #b71417;}
+
+.notes-table td i:hover {
+    color: #0ebb4d;
+}
+
+/* Delete icon specific styling */
+.notes-table td i.bx-trash:hover {
+    color: #e58518;
+}
