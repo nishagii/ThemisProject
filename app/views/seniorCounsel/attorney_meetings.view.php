@@ -17,7 +17,11 @@
         <?php include('component/sidebar.view.php'); ?>
 
         <section class="home-section">
-            <h1 class="title">Attorney Meeting Requests</h1>
+
+            <div class="meeting-section">
+                <h1 >Attorney Meeting Requests</h1>
+            </div>
+
             <div class="content">
                 <table>
                     <thead>

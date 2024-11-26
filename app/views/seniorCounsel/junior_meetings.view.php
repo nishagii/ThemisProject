@@ -16,7 +16,10 @@
         <?php include('component/sidebar.view.php'); ?>
 
         <section class="home-section">
-            <h1 class="title">Junior Councel Meeting Requests</h1>
+            <div class="meeting-section">
+                <h1 >Junior Councel Meeting Requests</h1>
+            </div>
+
             <div class="content">
                 <table>
                     <thead>
