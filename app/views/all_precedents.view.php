@@ -12,7 +12,9 @@
     <div class="header">
         <h1>All Precedents</h1>
     </div>
-
+    <a href="<?= ROOT ?>/PrecedentsController">
+            <button class="add-precedent">Add New Precedent</button>
+        </a>
     <div class="table-container">
         <table>
             <thead>
