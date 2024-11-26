@@ -55,5 +55,17 @@ class Knowledge
     // Redirect to the list of tasks or a success page
     redirect('knowledge');
 }
+    // Delete a case
+    public function deleteKnowledge($id)
+    {
+        // Load the CaseModel
+        $knowledgeModel = $this->loadModel('knowledgeModel');
+
+        // Delete the case
+        $knowledgeModel->deleteKnowledge($id);
+
+        // Redirect to the list of tasks or a success page
+    redirect('knowledge');
+    }
 
 }

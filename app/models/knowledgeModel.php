@@ -68,10 +68,10 @@ class knowledgeModel
 }
 
     //delete knowledge
-    public function deleteKnowledge($knowledgeId)
+    public function deleteKnowledge($id)
     {
         $query = "DELETE FROM $this->table WHERE id = :id";
-        $params = ['id' => $knowledgeId];
+        $params = ['id' => $id];
         return $this->query($query, $params);
     }
 

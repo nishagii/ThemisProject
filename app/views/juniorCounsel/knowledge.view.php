@@ -38,7 +38,7 @@
                 <td><?= htmlspecialchars($knowledge->note) ?></td>
                 <td>
                     <a href="<?= ROOT ?>/knowledge/editKnowledge/<?= $knowledge->id ?>"><button onclick="editForm(<?= htmlspecialchars($knowledge->id) ?>, '<?= htmlspecialchars(addslashes($knowledge->topic)) ?>', '<?= htmlspecialchars(addslashes($knowledge->details)) ?>')">Edit</button></a>
-                    <a href="<?= ROOT ?>/notes/deleteNote/<?= htmlspecialchars($knowledge->id) ?>" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
+                    <a href="<?= ROOT ?>/knowledge/deleteKnowledge/<?= htmlspecialchars($knowledge->id) ?>" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
                 </td>
             </tr>
             <?php endforeach; ?>
