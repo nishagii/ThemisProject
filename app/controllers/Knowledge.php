@@ -1,6 +1,5 @@
 <?php
 
-// HomeAdmin class
 class Knowledge
 {
     use Controller;

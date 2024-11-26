@@ -15,6 +15,7 @@
 
     <div class="form-body">
 
+
         <div class="modal" id="modal">
                         <?php if (!empty($errors)): ?>
                     <div class="error-container">
@@ -24,11 +25,12 @@
                     </div>
                 <?php endif; ?>
 
+
             <div class="modal-header">
                 <div class="title">Assign a Task</div>
             </div>
             <div class="modal-body">
-                <form method="POST" action="<<?= ROOT ?>/addTask">
+                <form method="POST" action="<?= ROOT ?>/addTask/add">
                     <div class="form-group">
                         <label for="name">Task Name:</label>
                         <input type="text" id="name" name="name" required>

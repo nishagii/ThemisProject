@@ -22,8 +22,18 @@
             <div class="add">
                 Pin down a knowledge note
             </div>
+
+            <?php if (!empty($errors)): ?>
+                    <div class="error-container">
+                        <?php foreach ($errors as $field => $error): ?>
+                            <p><?= ucfirst($field) ?>: <?= $error ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+
                 <div class="form-popup" id="formPopup">
-                                <form action="<?= ROOT ?>/addKnowledge" method="POST" class="form-container">
+
+                                <form action="<?= ROOT ?>/addKnowledge/add" method="POST" class="form-container">
                     <label for="topic">Topic:</label>
                     <input type="text" name="topic" id="topic" required>
                     <label for="note">Note:</label>
