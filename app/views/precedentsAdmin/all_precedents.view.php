@@ -7,14 +7,13 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/all_precedents.css">
 </head>
 <body>
-<?php include('seniorCounsel/component/bigNav.view.php'); ?>
-<?php include('seniorCounsel/component/smallNav1.view.php'); ?>
+<?php include('components/bigNav.view.php'); ?>
     <div class="header">
         <h1>All Precedents</h1>
     </div>
-    <a href="<?= ROOT ?>/PrecedentsController">
+    <!-- <a href="<?= ROOT ?>/PrecedentsController/create">
             <button class="add-precedent">Add New Precedent</button>
-        </a>
+        </a> -->
     <div class="table-container">
         <table>
             <thead>
