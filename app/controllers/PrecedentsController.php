@@ -25,7 +25,6 @@ class PrecedentsController {
             ];
             
             $this->precedentModel->insert($data);
-            header("Location: " . ROOT . "/precedents/index");
         }
         
         $this->view('create_precedent');
@@ -59,29 +58,47 @@ class PrecedentsController {
         // Load the view and pass the case data
         $this->view('one_precedent', ['case' => $case]);
     }
-
+/*-------------------Update---------------------------------- */
+   
     public function edit($id) {
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $data = [
-                'date' => $_POST['date'],
-                'case_number' => $_POST['case_number'],
-                'parties' => $_POST['parties'],
-                'judgment_by' => $_POST['judgment_by'],
-                'document_link' => $_POST['document_link']
-            ];
-            
-            $this->precedentModel->update($id, $data);
-            header("Location: " . ROOT . "/precedents");
+        $caseModel = $this->loadModel('PrecedentModel');
+        $case = $caseModel->getByCaseId($id);
+
+        if (!$case) {
+            die("Case not found or invalid ID.");
         }
-        
-        $precedent = $this->precedentModel->getById($id);
-        $this->view('precedents/edit', [
-            'precedent' => $precedent
-        ]);
+        $this->view('edit_precedent', ['case' => $case]);
     }
 
-    public function delete($id) {
-        $this->precedentModel->delete($id);
-        header("Location: " . ROOT . "/precedents");
+    public function updatePrecedent()
+    {
+        // Collect POST data
+        $data = [
+            'judgment_date' => $_POST['judgment_date'],
+            'case_number' => $_POST['case_number'],
+            'name_of_parties' => $_POST['name_of_parties'],
+            'judgment_by' => $_POST['judgment_by'],
+            'document_link' => $_POST['document_link'],
+            'id' => $_POST['id'],
+        ];
+
+        // Update the case
+        $caseModel = $this->loadModel('PrecedentModel');
+        $caseModel->update($data);
+
+        // Redirect to a success page or the list of cases
+        redirect('PrecedentsController/retrieveAll');
+    }
+/*-------------------Delete----------------------------------- */
+    public function deletePrecedent($id)
+    {
+        // Load the CaseModel
+        $caseModel = $this->loadModel('PrecedentModel');
+
+        // Delete the case
+        $caseModel->delete($id);
+
+        // Redirect to the home page or success page
+        redirect('PrecedentsController/retrieveAll');
     }
 }
