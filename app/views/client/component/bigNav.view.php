@@ -22,7 +22,7 @@
             <ul class="big-navbar">
                 <li><a href="homeclient">Home</a></li>
                 <li><a href="case">Cases</a></li>
-                <li><a href="payment">Payments</a></li>
+                <li><a href="paymentsclients">Payments</a></li>
                 <li><a href="precedentClient">Precedents</a></li>
             </ul>
         </nav>
