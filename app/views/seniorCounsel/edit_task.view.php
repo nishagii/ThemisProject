@@ -27,6 +27,7 @@
                     <div class="title">Assign a Task</div>
                 </div>
                 <div class="modal-body">
+                
                     <form method="POST" action="<?= ROOT ?>/tasklawyer/updateTask">
                         <!-- Hidden field for taskID -->
                         <input type="hidden" name="taskID" value="<?= htmlspecialchars($task->taskID) ?>">

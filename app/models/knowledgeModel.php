@@ -33,6 +33,23 @@ class knowledgeModel
         return $this->query($query);
     }
 
+
+            // Get a specific case by ID
+            public function getKnowledgeById($id)
+            {
+                $query = "SELECT * FROM {$this->table} WHERE id = :id";
+                $params = ['id' => $id];
+        
+                $result = $this->query($query, $params);
+        
+                // Check if result is empty
+                if (empty($result)) {
+                    return null; // Return null if no case is found
+                }
+        
+                return $result[0]; // Return the first (and expected only) result
+            }
+
     //delete knowledge
     public function deleteKnowledge($knowledgeId)
     {
