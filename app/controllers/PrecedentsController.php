@@ -66,7 +66,7 @@ class PrecedentsController {
         $cases = $caseModel->getAll();
 
         // Pass data to the view
-        $this->view('all_precedents', ['cases' => $cases]);
+        $this->view('all_precedents_viewOnly', ['cases' => $cases]);
     }
     public function retrieveOneViewOnly($id)
     {
