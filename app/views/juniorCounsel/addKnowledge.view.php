@@ -23,7 +23,7 @@
                 Pin down a knowledge note
             </div>
                 <div class="form-popup" id="formPopup">
-                                <form action="<?= ROOT ?>/addKnowledge" method="POST" class="form-container">
+                                <form action="<?= ROOT ?>/addKnowledge/add" method="POST" class="form-container">
                     <label for="topic">Topic:</label>
                     <input type="text" name="topic" id="topic" required>
                     <label for="note">Note:</label>
