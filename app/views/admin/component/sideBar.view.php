@@ -24,44 +24,37 @@
    </div>
    <ul class="nav-list">
      <li>
-       <a href="homepage.php">
+       <a href="homeadmin">
            <i class='bx bx-user'></i>
            <span class="links_name">Add User</span>
        </a>
        <span class="tooltip">Add User</span>
    </li>
    <li>
-       <a href="login.php">
+       <a href="#">
            <i class='bx bx-history'></i>
            <span class="links_name">Login Activity</span>
        </a>
        <span class="tooltip">Login Activity</span>
    </li>    
     <li>
-      <a href="sys_health.php">
+      <a href="systemhealth">
         <i class='bx bx-bar-chart-square'></i>
         <span class="links_name">System Health</span>
       </a>
       <span class="tooltip">System Health</span>
     </li>
     <li>
-     <a href="security.php">
+     <a href="security">
          <i class='bx bx-shield'></i>
          <span class="links_name">Security</span>
      </a>
      <span class="tooltip">Security</span>
    </li>
-   <li>
-    <a href="help.php">
-        <i class='bx bx-help-circle'></i>
-        <span class="links_name">Help Center</span>
-    </a>
-    <span class="tooltip">Help Center</span>
-  </li>
  
     <li class="profile">
         <div class="profile-details">
-          <img src="../../../../public/assets/images/themis_logo.png" alt="profileImg">
+          <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="profileImg">
           <div class="name_job">
             <div class="name">VIP Solutions</div>
             <div class="job">Web desining</div>
@@ -72,6 +65,6 @@
    </ul>
  </div>
    <!--side-bar ends-->
-   <script src="../../../../public/assets/js/sideBar.js"> </script>
+   <script src="<?= ROOT ?>/assets/js/sideBar.js"> </script>
 </body>
 </html>

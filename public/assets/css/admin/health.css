@@ -1,0 +1,273 @@
+
+
+
+.line-container {
+    margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.peak-time-container {
+  background-color: #1d1b31;
+  padding: 20px;
+  height: 350px;
+  width: 800px;
+  
+  margin-left: 100px;
+  border-radius: 8px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.line-chart {
+  margin-top: 20px;
+}
+
+.usage-container {
+  background-color: #ffbe5d;
+  height: 350px;
+  width: 360px;
+  border-radius: 8px;
+  margin-left: 10px;
+  padding: 20px;
+  font-family: "Montserrat", Arial, sans-serif;
+}
+
+.usage-container h2 {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.usage-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #181822;
+}
+
+.label {
+  font-weight: bold;
+  color: #3e3e51;
+}
+
+.value {
+  color: #2b702e;
+}
+
+.line-1 {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.box-3 {
+  background-color: #e8e7f3;
+  margin-left: 100px;
+  border-radius: 8px;
+  width: 600px;
+}
+
+.box-3 h3 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.status {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.status p {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.status p i {
+  margin-right: 10px;
+  font-size: 50px;
+  color: #0a201d;
+}
+
+.status span {
+  font-weight: bold;
+  color: #3f5856;
+  margin-left: 10px;
+}
+
+.pie-chart-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.pie-chart {
+  margin-left: 100px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: conic-gradient(#2a9d8f 0% 65%, #e0e0e0 65% 100%);
+}
+
+.memory-info {
+  font-size: 14px;
+  color: #333;
+}
+
+.box-4 {
+  background-color: #daf8db;
+  margin-left: 10px;
+  border-radius: 8px;
+
+  padding: 20px;
+  
+}
+
+.box-4 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.box-4 ul li {
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: #555;
+}
+
+.box-4 ul li i {
+  margin-right: 8px;
+  font-size: 50px;
+}
+
+.box-4 ul li strong {
+  margin-left: 5px;
+  margin-right: 10px;
+  color: #333;
+}
+
+.box-5 {
+  background-color: #accafe;
+  margin-left: 10px;
+  border-radius: 8px;
+  width: 360px;
+}
+
+/* screen sizes lower than 1375px*/
+@media (max-width: 1375px){
+    nav .big-navbar {
+        margin-right: 170px;
+    }
+}
+/* screen sizes lower than 1075px*/
+@media (max-width: 1075px){
+    nav .big-navbar {
+        margin-right:50px;
+    }
+    nav .big-navbar li a {
+        font-size: 14px;
+    }
+     .small-navbar a{
+        font-size: 13px;
+    }
+
+}
+/* screen sizes lower than 936px*/
+@media (max-width: 936px){
+    nav .big-navbar {
+        margin-right: 9px;
+    }
+     nav .big-navbar li a {
+        font-size: 13px;
+        padding: 10px;
+    }
+    .navbar-logo{
+        margin-right: 10px;
+        height: 80px;
+        width: auto;
+        margin-top: 6px;
+    }
+    .small-navbar a{
+        text-align: center;
+        font-size: 12px;
+        padding: 10px 6px 0 10px;
+    }
+    
+}
+/* screen sizes lower than 768 px.phones and tablets*/
+@media (max-width: 768px){
+
+    label #btn{
+        display: block;
+    }
+    .big-navbar{
+        position: fixed;
+        width: 100%;
+        height: 30vh;
+        background: rgb(255, 255, 255);
+        top: 60px;
+        left: -100%;
+        text-align: center;
+        transition:  all 0.5s;
+        flex-direction: column;
+        display: none;
+    }
+    nav .big-navbar li {
+         display:block;
+         line-height: 30px;
+         margin-top: 5px;
+         margin-bottom: 5px;
+    }
+    nav .big-navbar li a{
+        font-size: 15px;
+        display: block;
+        padding: 0;
+    } 
+
+    a:hover,a.active{
+        background: none ;
+    }
+    #check:checked ~ .big-navbar{
+        left: 0;
+    }
+    .container{
+        padding: 0;
+    }
+    .navbar-logo{
+        width: auto;
+        margin-top: 12px;
+        height: 70px;
+    }
+    .small-navbar{
+        display: flex;
+        flex-direction: column;
+    }
+    .small-navbar a{
+        font-size: 13px;
+    }
+
+    .search-bar {
+        width: 90%; /* Almost full-width on small screens */
+        max-width: 500px;
+        font-size: 14px; /* Adjust font size */
+        height: 30px;
+        margin-top: 30px;
+    }
+    .navbar-icons i {
+        font-size: 21px;
+    }
+}
+
+
