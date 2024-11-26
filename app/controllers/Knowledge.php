@@ -36,4 +36,24 @@ class Knowledge
         $this->view('/juniorCounsel/edit_knowledge', ['knowledge' => $knowledge]);
     }
 
+
+    public function updateKnowledge()
+{
+    // Collect POST data
+    $data = [
+        'id' => $_POST['id'] ?? '', // Include taskID
+        'topic' => $_POST['topic'] ?? '',
+        'note' => $_POST['note'] ?? '',
+    ];
+
+    // Load the Task model
+    $knowledgeModel = $this->loadModel('knowledgeModel');
+
+    // Call the update method from the model
+    $knowledgeModel->updateKnowledge($data);
+
+    // Redirect to the list of tasks or a success page
+    redirect('knowledge');
+}
+
 }

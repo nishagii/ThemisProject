@@ -34,7 +34,7 @@
                 <div class="form-popup" id="formPopup">
     <form action="<?= ROOT ?>/Knowledge/updateKnowledge" method="POST" class="form-container">
         <!-- Hidden field for knowledge ID -->
-        <input type="hidden" name="knowledgeID" value="<?= htmlspecialchars($knowledge->id) ?>">
+        <input type="hidden" name="id" value="<?= htmlspecialchars($knowledge->id) ?>">
 
         <div class="form-group">
             <label for="topic">Topic:</label>

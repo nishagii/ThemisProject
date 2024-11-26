@@ -50,6 +50,23 @@ class knowledgeModel
                 return $result[0]; // Return the first (and expected only) result
             }
 
+            public function updateKnowledge($data)
+{
+    $query = "UPDATE {$this->table} 
+              SET 
+                  topic = :topic,
+                  note = :note
+              WHERE id = :id"; // Removed the trailing comma in the SET clause
+    
+    $params = [
+        'topic' => $data['topic'],
+        'note' => $data['note'],
+        'id' => $data['id'], // Ensure the correct key matches the form data
+    ];
+    
+    return $this->query($query, $params);
+}
+
     //delete knowledge
     public function deleteKnowledge($knowledgeId)
     {
