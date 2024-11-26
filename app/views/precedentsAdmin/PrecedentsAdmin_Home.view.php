@@ -8,7 +8,7 @@
     <title>THEMIS Lawyer Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- this is imported to use icons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/home.css" />
+    <link rel="stylesheet" href='<?= ROOT ?>/assets/css/precedentsAdmin/home.css'/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
@@ -50,56 +50,16 @@
 
         
         <!-- Add Case Section -->
-        <div class="card">
+        <div class="card add-cases">
             <h3>Add New Precedent</h3>
             <p>Start adding a new precedent by clicking the button below.</p>
             <a href="<?= ROOT ?>/PrecedentsController/create" class="btn">Add Precedent</a>
         </div>
-
-        <div class="cards-container">
-            <div class="card cards">
+        <div class="card cards">
                 <i class="fas fa-balance-scale"></i>
                 <p>Database have</p>
                 <p>15</p>
                 <h3>Precedents</h3>
-
-            </div>
-
-            </div>
-        </div>
-
-        <!-- Chart Section -->
-        <div class="chart-container">
-            <div class="heading">
-                <h3>Case Analytics</h3>
-            </div>
-
-
-            <div class="chart-row">
-                <!-- Pie Chart -->
-                <div class="chart-item">
-                    <h4>Case Stats</h4>
-                    <div class="pie-chart-container">
-                        <canvas id="casesPieChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Bar Chart -->
-                <div class="chart-item">
-                    <h4>Cases Handled by Lawyer</h4>
-                    <div class="bar-chart-container">
-                        <canvas id="barChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Line Chart -->
-                <div class="chart-item">
-                    <h4>Cases Closed Over Time</h4>
-                    <div class="line-chart-container">
-                        <canvas id="lineChart"></canvas>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
