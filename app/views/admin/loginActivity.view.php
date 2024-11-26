@@ -1,36 +1,24 @@
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Activity</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            width: 90%;
-            max-width: 1000px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+    <title>THEMIS Admin Panel</title>
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/admin/login.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">  <!-- this is imported to use icons -->
+   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+   <style>
+       
         h2 {
             text-align: center;
             margin-bottom: 20px;
         }
         table {
+            margin-top: 100px;
+            margin-left: 200px;
             width: 100%;
             border-collapse: collapse;
         }
@@ -58,9 +46,14 @@
             background-color: #F44336;
         }
     </style>
+
 </head>
+
 <body>
-    <div class="container">
+
+<?php include('component/navBar.view.php'); ?>
+<?php include('component/sideBar.view.php'); ?>
+<div class="login-container">
         <h2>Admin Login Activity</h2>
         <table>
             <thead>
@@ -117,5 +110,9 @@
             </tbody>
         </table>
     </div>
+
+
+    
+
 </body>
 </html>
