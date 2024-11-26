@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Precedents</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/all_precedents.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/precedentsAdmin/all_precedents.css">
 </head>
 <body>
 <?php include('components/bigNav.view.php'); ?>

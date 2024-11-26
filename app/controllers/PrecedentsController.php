@@ -11,8 +11,9 @@ class PrecedentsController {
 
     public function index()
     {
-        $this->view('create_precedent');
+        $this->view('/precedentsAdmin/PrecedentsAdmin_Home');
     }
+    
 /*---------------------Create operation----------------------------- */
     public function create() {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
