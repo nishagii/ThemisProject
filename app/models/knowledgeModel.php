@@ -27,7 +27,7 @@ class knowledgeModel
     }
 
     // Retrieve all knowledge
-    public function getAllKnowledge()
+    public function getAllKnowledges()
     {
         $query = "SELECT * FROM $this->table";
         return $this->query($query);

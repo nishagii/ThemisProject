@@ -7,11 +7,11 @@ class Knowledge
     public function index()
     {
 
-        // Set username from session, or default to 'User'
-        $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
+        $knowledgeModel = $this->loadModel('knowledgeModel'); 
+        $knowledge = $knowledgeModel->getAllKnowledges(); // Fetch cases data
 
         // Load the view with data
-        $this->view('/juniorCounsel/knowledge', $data);
+        $this->view('/juniorCounsel/knowledge', ['knowledge' => $knowledge]);
     }
 
 
