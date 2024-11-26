@@ -21,7 +21,7 @@
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="Logo" class="navbar-logo" />
             <ul class="big-navbar">
                 <li><a href="homeclient">Home</a></li>
-                <li><a href="case">Cases</a></li>
+                <li><a href="caseclient">Cases</a></li>
                 <li><a href="paymentsclients">Payments</a></li>
                 <li><a href="precedentClient">Precedents</a></li>
             </ul>
