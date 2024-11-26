@@ -6,7 +6,7 @@ class TaskLawyer
 
     public function index()
     {
-        $TaskModel = $this->loadModel('TaskModel'); // Ensure correct model loading
+        $TaskModel = $this->loadModel('TaskModel'); 
         $task = $TaskModel->getAllTasks(); // Fetch cases data
 
         // Pass data to the view
