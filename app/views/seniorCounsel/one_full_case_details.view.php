@@ -5,111 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/one_case.css">
 </head>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
-    /* General Styles */
-    body {
-        font-family: 'Montserrat', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #E4E9F7;
-    }
 
-    .case-details-card {
-        background-color: #f1f1f1;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        max-width: 800px;
-        margin: 30px auto;
-        padding: 20px;
-        overflow: hidden;
-    }
-
-    .card-title {
-        text-align: center;
-        font-size: 24px;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .card-content {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .info-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 15px;
-    }
-
-    .info-item {
-        width: 48%;
-    }
-
-    .info-item strong {
-        display: block;
-        font-weight: bold;
-        color: #555;
-    }
-
-    .info-item p {
-        margin: 5px 0;
-        color: #333;
-    }
-
-    .card-footer {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
-    }
-
-    .card-footer .btn {
-        padding: 10px 20px;
-        font-size: 14px;
-        border-radius: 4px;
-        text-decoration: none;
-        display: inline-block;
-        text-align: center;
-    }
-
-    .btn-edit {
-        background-color: #4CAF50;
-        color: white;
-    }
-
-    .btn-edit:hover {
-        background-color: #45a049;
-    }
-
-    .btn-delete {
-        background-color: #f44336;
-        color: white;
-    }
-
-    .btn-delete:hover {
-        background-color: #e53935;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .info-row {
-            flex-direction: column;
-        }
-
-        .info-item {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-    }
-</style>
 
 
 <body>
+    <?php include('component/bigNav.view.php'); ?>
+    <?php include('component/smallNav1.view.php'); ?>
+
+    <h1 class="card-section">Case Details</h1>
+
     <div class="case-details-card">
-        <h2 class="card-title">Case Details</h2>
+        <h2 class="card-title"><?= htmlspecialchars($case->client_name) ?> : <?= htmlspecialchars($case->case_number) ?></h2>
         <div class="card-content">
             <div class="info-row">
                 <div class="info-item">

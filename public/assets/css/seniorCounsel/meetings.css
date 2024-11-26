@@ -6,6 +6,18 @@
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
 }
+.meeting-section{
+  text-align: center;
+}
+h1{
+    color: #ffffff;
+    background-color: rgb(29, 27, 49);
+    font-size: 20px;
+    margin-top: 14px;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-transform: uppercase;
+}
 
 /* Sidebar Styles */
 .sidebar{

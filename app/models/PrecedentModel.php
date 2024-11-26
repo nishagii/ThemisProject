@@ -20,34 +20,51 @@ class PrecedentModel {
         ];
         $this->query($query, $params);
     }
-/*--------------------Retrieve------------------------------- */
+
     public function getAll() {
         $query = "SELECT * FROM $this->table ORDER BY id DESC";
         return $this->query($query);
     }
 
-    public function getById($id) {
-        $query = "SELECT * FROM $this->table WHERE id = ?";
-        return $this->get_row($query, [$id]);
-    }
+    public function getByCaseId($id)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE id = :id";
+        $params = ['id' => $id];
 
-    public function update($id, $data) {
-        $sets = [];
-        foreach($data as $key => $value) {
-            $sets[] = "$key = ?";
+        $result = $this->query($query, $params);
+
+        // Check if result is empty
+        if (empty($result)) {
+            return null;
         }
-        $setString = implode(',', $sets);
-        
-        $query = "UPDATE $this->table SET $setString WHERE id = ?";
-        
-        $values = array_values($data);
-        $values[] = $id;
-        
-        $this->query($query, $values);
+        return $result[0];
+    }
+    //update precedents
+    public function update($data) {
+        $query = "UPDATE {$this->table}
+                SET 
+                    judgment_date = :judgment_date,
+                    case_number = :case_number,
+                    name_of_parties = :name_of_parties,
+                    judgment_by = :judgment_by,
+                    document_link = :document_link
+                    WHERE id = :id";
+        $params = [
+            'judgment_date' => $data['judgment_date'],
+            'case_number' => $data['case_number'],
+            'name_of_parties' => $data['name_of_parties'],
+            'judgment_by' => $data['judgment_by'],
+            'document_link' => $data['document_link'],
+            ':id' => $data['id'],
+        ];
+        return $this->query($query, $params);
     }
 
-    public function delete($id) {
-        $query = "DELETE FROM $this->table WHERE id = ?";
-        $this->query($query, [$id]);
+    //delete precedents
+    public function delete($id)
+    {
+        $query = "DELETE FROM $this->table WHERE id = :id";
+        $params = ['id' => $id];
+        return $this->query($query, $params);
     }
 }

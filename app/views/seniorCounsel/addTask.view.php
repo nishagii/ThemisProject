@@ -28,7 +28,7 @@
                 <div class="title">Assign a Task</div>
             </div>
             <div class="modal-body">
-                <form method="POST" action="<?= ROOT ?>/AddTask/add">
+                <form method="POST" action="<<?= ROOT ?>/addTask">
                     <div class="form-group">
                         <label for="name">Task Name:</label>
                         <input type="text" id="name" name="name" required>
