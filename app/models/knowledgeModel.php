@@ -5,7 +5,7 @@ class knowledgeModel
 
     
     use Model;
-    protected $table = 'knowledge'; // Name of the database table
+    protected $table = 'knowledge'; 
 
     /**
      * Save a new case to the database.

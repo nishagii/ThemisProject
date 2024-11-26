@@ -2,7 +2,7 @@
 
 class TaskModel
 {
-    use Model; // Assuming you're using a Model trait for database interaction.
+    use Model; 
     protected $table = 'task'; // Name of the database table for tasks
 
     /**
