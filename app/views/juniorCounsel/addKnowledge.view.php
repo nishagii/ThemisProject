@@ -23,15 +23,14 @@
                 Pin down a knowledge note
             </div>
                 <div class="form-popup" id="formPopup">
-                <form action="<?= ROOT ?>/addKnowledge" method="POST" class="form-container">
-
-                        <label for="topic">Topic:</label>
-                        <input type="text" name="topic" id="topic" required>
-                        <label for="note">Note:</label>
-                        <textarea name="note" id="note" required></textarea>
-                        <button type="submit" name="add" id="addBtn">Add</button>
-               
+                                <form action="<?= ROOT ?>/addKnowledge" method="POST" class="form-container">
+                    <label for="topic">Topic:</label>
+                    <input type="text" name="topic" id="topic" required>
+                    <label for="note">Note:</label>
+                    <textarea name="note" id="note" required></textarea>
+                    <button type="submit" name="add" id="addBtn">Add</button>
                 </form>
+
                 </div>
 
                

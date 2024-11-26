@@ -13,23 +13,19 @@ class knowledgeModel
      * @param array $data Associative array containing case details.
      * @return bool True if the operation was successful, false otherwise.
      */
-    public function save($data)
-    {
-        // Prepare the query to insert data into the "cases" table
-        $query = "INSERT INTO {$this->table} 
-                  (topic, note) 
-                  VALUES 
-                  (:topic, :note)";  // Fixed missing closing parenthesis and quotation mark
-    
-        // Bind parameters to prevent SQL injection
+    public function save($data) {
+        $query = "INSERT INTO {$this->table} (topic, note) VALUES (:topic, :note)";
+        
+        // Prepare the parameters
         $params = [
             'topic' => $data['topic'],
             'note' => $data['note'],
         ];
-    
-        // Execute the query using the parent Model class's query method
+        
+        // Execute the query and check for success
         return $this->query($query, $params);
     }
+    
     
 
 
