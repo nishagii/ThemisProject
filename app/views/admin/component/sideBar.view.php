@@ -45,19 +45,12 @@
       <span class="tooltip">System Health</span>
     </li>
     <li>
-     <a href="security.php">
+     <a href="security">
          <i class='bx bx-shield'></i>
          <span class="links_name">Security</span>
      </a>
      <span class="tooltip">Security</span>
    </li>
-   <li>
-    <a href="help.php">
-        <i class='bx bx-help-circle'></i>
-        <span class="links_name">Help Center</span>
-    </a>
-    <span class="tooltip">Help Center</span>
-  </li>
  
     <li class="profile">
         <div class="profile-details">
