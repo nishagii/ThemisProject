@@ -58,6 +58,34 @@ class PrecedentsController {
         // Load the view and pass the case data
         $this->view('one_precedent', ['case' => $case]);
     }
+
+    //view only
+    public function retrieveAllViewOnly()
+    {
+        $caseModel = $this->loadModel('PrecedentModel'); 
+        $cases = $caseModel->getAll();
+
+        // Pass data to the view
+        $this->view('all_precedents', ['cases' => $cases]);
+    }
+    public function retrieveOneViewOnly($id)
+    {
+        if ($id === null) {
+            echo "Case number is required.";
+            return;
+        }
+
+        $caseModel = $this->loadModel('PrecedentModel');
+        // Get the case by case number
+        $case = $caseModel->getByCaseId($id);
+        // Handle case not found
+        if ($case === null) {
+            echo "<p>Case with ID {$id} not found.</p>";
+            return;
+        }
+        // Load the view and pass the case data
+        $this->view('one_precedent_viewOnly', ['case' => $case]);
+    }
 /*-------------------Update---------------------------------- */
    
     public function edit($id) {
