@@ -14,4 +14,7 @@ class Knowledge
         // Load the view with data
         $this->view('/juniorCounsel/knowledge', $data);
     }
+
+
+
 }

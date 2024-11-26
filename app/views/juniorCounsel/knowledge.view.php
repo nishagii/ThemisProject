@@ -17,42 +17,54 @@
 <?php include('component/bigNav.view.php'); ?>
 <?php include('component/smallNav1.view.php'); ?>
 
-<div class="search-container">
-        <input type="text" placeholder="Search" class="search-bar" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'"  /> 
-    </div>
-    <div class="add-container">
-    <div class="add-container">
-            <div class="add">
-                Pin down a knowledge note
-                <i class="fas fa-thumbtack" style="font-size: 30px; margin-left: 5px; color: #000;"></i> <!-- Replaced with Font Awesome icon -->
-                <button>Add note</button>
-            </div>
-        </div>
+    
+   <a href="<?= ROOT ?>/addKnowledge"><button>Add Note</button></a>
+
+                <div class="note-container">
+    <h1>Knowledge Notes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Notes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Topic A</td>
+                <td>This is the note for Topic A. It provides detailed information.</td>
+                <td>
+                    <button onclick="editForm(1, 'Topic A', 'This is the note for Topic A. It provides detailed information.')">Edit</button>
+                    <a href="#" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Topic B</td>
+                <td>Note for Topic B with some interesting insights and ideas.</td>
+                <td>
+                    <button onclick="editForm(2, 'Topic B', 'Note for Topic B with some interesting insights and ideas.')">Edit</button>
+                    <a href="#" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Topic C</td>
+                <td>Topic C covers a wide range of useful information, summarizing key points.</td>
+                <td>
+                    <button onclick="editForm(3, 'Topic C', 'Topic C covers a wide range of useful information, summarizing key points.')">Edit</button>
+                    <a href="#" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
     </div>
-    <div class="notes-container">
-        <table class="notes-table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Topic</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2024-11-17</td>
-                    <td>Contract Law Basics</td>
-                    <td>Key principles include offer, acceptance, consideration, and intention to create legal relations.</td>
-                </tr>
-                <tr>
-                    <td>2024-11-16</td>
-                    <td>Case Study: Donoghue v. Stevenson</td>
-                    <td>This case established the modern law of negligence.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+ 
+    
+
+    
+  
 
 
 </body>
