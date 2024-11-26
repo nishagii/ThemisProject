@@ -13,7 +13,7 @@
         <h1>Add New Precedent</h1>
     </div>
     <a href="<?= ROOT ?>/PrecedentsController/retrieveAll">
-        <button class="view-all">View All Precedent</button>
+        <button class="view-all">View All Precedents</button>
     </a>
     <div class="form-container">
         <form method="POST" id="precedentForm" action="<?= ROOT ?>/PrecedentsController/create" novalidate>
