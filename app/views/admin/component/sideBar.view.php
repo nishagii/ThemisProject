@@ -31,14 +31,14 @@
        <span class="tooltip">Add User</span>
    </li>
    <li>
-       <a href="login.php">
+       <a href="#">
            <i class='bx bx-history'></i>
            <span class="links_name">Login Activity</span>
        </a>
        <span class="tooltip">Login Activity</span>
    </li>    
     <li>
-      <a href="sys_health.php">
+      <a href="systemhealth">
         <i class='bx bx-bar-chart-square'></i>
         <span class="links_name">System Health</span>
       </a>
