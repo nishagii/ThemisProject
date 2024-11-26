@@ -32,7 +32,6 @@
                 <?php endif; ?>
 
                 <div class="form-popup" id="formPopup">
-
                                 <form action="<?= ROOT ?>/addKnowledge/add" method="POST" class="form-container">
                     <label for="topic">Topic:</label>
                     <input type="text" name="topic" id="topic" required>

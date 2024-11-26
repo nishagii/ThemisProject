@@ -25,7 +25,22 @@ class knowledgeModel
         // Execute the query and check for success
         return $this->query($query, $params);
     }
-    
+
+    // Retrieve all knowledge
+    public function getAllKnowledge()
+    {
+        $query = "SELECT * FROM $this->table";
+        return $this->query($query);
+    }
+
+    //delete knowledge
+    public function deleteKnowledge($knowledgeId)
+    {
+        $query = "DELETE FROM $this->table WHERE id = :id";
+        $params = ['id' => $knowledgeId];
+        return $this->query($query, $params);
+    }
+
     
 
 
