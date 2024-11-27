@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Precedent</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/create_precedent.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/precedentsAdmin/create_precedent.css">
 </head>
 <body>
-    <?php include('seniorCounsel/component/bigNav.view.php'); ?>
-    <?php include('seniorCounsel/component/smallNav1.view.php'); ?>
+    <?php include('components/bigNav.view.php'); ?>
     <div class="header">
         <h1>Add New Precedent</h1>
     </div>
-    <a href="<?= ROOT ?>/PrecedentsController/retrieveAll">
+    <!-- <a href="<?= ROOT ?>/PrecedentsController/retrieveAll">
         <button class="view-all">View All Precedents</button>
-    </a>
+    </a> -->
     <div class="form-container">
         <form method="POST" id="precedentForm" action="<?= ROOT ?>/PrecedentsController/create" novalidate>
             <div class="form-group">
