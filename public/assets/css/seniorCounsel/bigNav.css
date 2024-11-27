@@ -84,13 +84,13 @@ nav .big-navbar li a:active {
 
 .navbar-icons i {
     font-size: 23px;
-    color: white;
+    color: #fff;
     cursor: pointer;
     transition: color 0.3s;
 }
 
 .navbar-icons i:hover {
-    color: #ff9800;
+    color: orange;
 }
 
 label #btn,/* icons*/
