@@ -119,3 +119,70 @@ td {
         font-size: 20px;
     }
 }
+/*.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-icon {
+    font-size: 40px;
+    color: #ffa500; /* Match the color to your theme 
+    margin-bottom: 10px;
+}
+
+.card-content h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.card-content p {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+.card-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.card-actions .btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.card-actions .btn-edit {
+    background-color: #4caf50;
+    color: white;
+}
+
+.card-actions .btn-delete {
+    background-color: #f44336;
+    color: white;*/
+}
