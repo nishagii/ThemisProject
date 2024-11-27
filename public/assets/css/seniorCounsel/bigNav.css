@@ -141,7 +141,7 @@ label #cancel{
     background-color: #f0a636; /* Initial background color */
     color: white; /* Text color */
     border: none;
-    border-radius: 50px;
+    border-radius: 10px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -149,7 +149,8 @@ label #cancel{
 }
 
 .login-button:hover {
-    background-color: #5361b9; /* Change background on hover */
+    background-color: white; /* Change background on hover */
+    color: #f0a636;
     transform: scale(1.05); /* Slightly increase size */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
 }
