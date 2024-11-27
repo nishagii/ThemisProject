@@ -11,9 +11,18 @@
     <div class="header">
         <h1>All Precedents</h1>
     </div>
-    <!-- <a href="<?= ROOT ?>/PrecedentsController/create">
-            <button class="add-precedent">Add New Precedent</button>
-        </a> -->
+
+    <!-- search bar -->
+    <div class="search-bar-container">
+        <input type="text" id="searchBar" class="search-bar" placeholder="Search precedents..." oninput="searchPrecedents()">
+        <button type="submit" class="search-button">Search</button>
+    </div>
+
+    <!-- sort and filter button -->
+    <a href="#">
+            <button class="sort-filter">Sort & Filter</button>
+    </a>
+    
     <div class="table-container">
         <table>
             <thead>
