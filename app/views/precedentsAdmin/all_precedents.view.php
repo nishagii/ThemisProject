@@ -22,7 +22,7 @@
     <a href="#">
             <button class="sort-filter">Sort & Filter</button>
     </a>
-    
+
     <div class="table-container">
         <table>
             <thead>
