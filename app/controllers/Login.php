@@ -31,6 +31,8 @@ class Login
                     redirect('homeattorney?login=success');
                 }elseif ($user->role === 'junior') {
                     redirect('homejunior?login=success');
+                }elseif ($user->role === 'precedent') {
+                    redirect('precedentscontroller/index?login=success');
                 }else {
                     // Default role or error
                     redirect('generalDashboard');
