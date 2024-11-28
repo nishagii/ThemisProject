@@ -17,7 +17,10 @@
 
         <section class="home-section">
             <div class="meeting-section">
-                <h1 >Junior Councel Meeting Requests</h1>
+                <h1>Junior Councel Meeting Requests</h1>
+            </div>
+            <div class="meeting-paragraph">
+                <p>Here you can view the juniors meeting requests and their status. Select see more button to view details </p>
             </div>
 
             <div class="content">
