@@ -12,8 +12,10 @@ issue was in the core controller view function -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cases List</title>
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/case.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<link rel="stylesheet" href="<?= ROOT ?>/assets/css/case.css">
+
 
 <body>
     <?php include('component/bigNav.view.php'); ?>
@@ -56,11 +58,12 @@ issue was in the core controller view function -->
                             </button>
                         </a>
 
-                        <a href="<?= ROOT ?>/cases/deleteCase/<?= $case->id; ?>">
+                        <a href="javascript:void(0);" onclick="confirmDelete(<?= $case->id; ?>)">
                             <button class="delete">
                                 <i class="bx bx-trash"></i> <!-- Boxicon for Delete -->
                             </button>
                         </a>
+
                     </div>
                 </div>
 
@@ -69,6 +72,29 @@ issue was in the core controller view function -->
             <p>No cases found.</p>
         <?php endif; ?>
     </div>
+
+    <script>
+        function confirmDelete(caseId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you really want to delete this case? This action cannot be undone!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#93a8e3',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel',
+                background: '#fafafa',
+                color: '#1d1b31',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the delete action
+                    window.location.href = `<?= ROOT ?>/cases/deleteCase/${caseId}`;
+                }
+            });
+        }
+    </script>
+
 </body>
 
 </html>
