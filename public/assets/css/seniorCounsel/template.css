@@ -50,7 +50,8 @@
   }
   
   .search-bar:focus {
-    outline: none;
+    outline: #ff9800;
+
   }
   
   .search-bar::placeholder {

@@ -16,7 +16,7 @@ class PrecedentModel {
             'case_number' => $_POST['case_number'],
             'name_of_parties' => $_POST['parties'],
             'judgment_by' => $_POST['judgment_by'],
-            'document_link' => $_POST['document_link']
+            'document_link' => $data['document_link']
         ];
         $this->query($query, $params);
     }

@@ -38,6 +38,7 @@ class Cases
         $caseModel->save($data);
 
         // Redirect to the home page or success page
+        $_SESSION['success'] = 'Case added successfully!';
         redirect('cases/extendRetrieveAllCases');
     }
 

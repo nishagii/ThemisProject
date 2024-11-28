@@ -89,6 +89,8 @@ button:hover {
   background-color: #9392a3; /* Darker green on hover */
 }
 
+
+
 button:focus {
   outline: none; /* Remove outline on focus */
 }
@@ -110,6 +112,9 @@ a {
 
 .delete {
   background-color: #555555;
+}
+.delete:hover {
+  background-color: #d33;
 }
 .edit {
   background-color: #93a8e3;
@@ -174,9 +179,13 @@ a {
   background-color: #e53935;
 }
 
+
+
 .action-buttons button:hover {
   opacity: 0.8;
 }
+
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

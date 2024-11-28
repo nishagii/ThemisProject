@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/one_case.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 
@@ -89,9 +90,39 @@
         </div>
         <div class="card-footer">
             <a href="<?= ROOT ?>/cases/editCase/<?= $case->id; ?>" class="btn btn-edit">Edit Case</a>
-            <a href="<?= ROOT ?>/cases/deleteCase/<?= $case->id; ?>" class="btn btn-delete">Delete Case</a>
+            <a href="javascript:void(0);"
+                class="btn btn-delete"
+                onclick="confirmDelete(<?= $case->id; ?>)">
+                Delete Case
+            </a>
+
         </div>
     </div>
+
+
+    <!-- -------------------------------------JavaScript------------------------------------- -->
+    <script>
+        function confirmDelete(caseId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you really want to delete this case? This action cannot be undone!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#93a8e3',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel',
+                background: '#fafafa',
+                color: '#1d1b31',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the delete action
+                    window.location.href = `<?= ROOT ?>/cases/deleteCase/${caseId}`;
+                }
+            });
+        }
+    </script>
+
 
 </body>
 
