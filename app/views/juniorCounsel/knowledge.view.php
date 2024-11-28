@@ -18,21 +18,7 @@
 
     <a href="<?= ROOT ?>/addKnowledge"><button class="add-note-btn">Add Note</button></a>
 
-    <div class="note-container">
-        <h1>Knowledge Notes</h1>
-        <div class="cards-container">
-            <?php foreach ($knowledge as $note): ?>
-                <div class="card">
-                    <div class="card-header"><?= htmlspecialchars($note->topic) ?></div>
-                    <div class="card-content"><?= htmlspecialchars($note->note) ?></div>
-                    <div class="card-actions">
-                        <a href="<?= ROOT ?>/knowledge/editKnowledge/<?= $note->id ?>" class="btn btn-edit">Edit</a>
-                        <a href="<?= ROOT ?>/knowledge/deleteKnowledge/<?= $note->id ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
-                    </div>
-                    <a href="<?= ROOT ?>/addKnowledge">
-    </a>
 
-   <a href="<?= ROOT ?>/addKnowledge"><button>Add Note</button></a>
 
                 <div class="note-container">
     <h1>Knowledge Notes</h1>
@@ -64,13 +50,6 @@
         </tbody>
     </table>
 </div>
-
-
-
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
 
 </body>
 </html>
