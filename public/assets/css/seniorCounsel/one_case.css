@@ -12,11 +12,13 @@ body {
     text-align: center;
 }
  h1{
-    color: #ffffff;
-    background-color: rgb(29, 27, 49);
-    font-size: 20px;
+    color: #1d1b31;
+    background-color: #f4f8ff;
+    font-size: 30px;
     margin-bottom: 10px;
     padding: 10px;
+
+    font-weight: bold;
     text-transform: uppercase;
 }
 
@@ -74,28 +76,28 @@ body {
 .card-footer .btn {
     padding: 10px 20px;
     font-size: 16px;
-    border-radius: 6px;
+    border-radius: 5px;
     text-decoration: none;
     display: inline-block;
     text-align: center;
 }
 
 .btn-edit {
-    background-color: #4CAF50;
+    background-color: #ff9800;
     color: white;
 }
 
 .btn-edit:hover {
-    background-color: #45a049;
+    background-color: #ffb444;
 }
 
 .btn-delete {
-    background-color: #f44336;
+    background-color: #1d1b31;
     color: white;
 }
 
 .btn-delete:hover {
-    background-color: #e53935;
+    background-color: #e53835b4;
 }
 
 /* Responsive Design */
