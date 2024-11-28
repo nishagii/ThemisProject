@@ -33,17 +33,17 @@
                 <form method="POST" action="<?= ROOT ?>/addTask/add">
                     <div class="form-group">
                         <label for="name">Task Name:</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name">
                     </div>
                     
                     <div class="form-group">
                         <label for="description">Description:</label>
-                        <textarea id="description" name="description" rows="3" required></textarea>
+                        <textarea id="description" name="description" rows="3"></textarea>
                     </div>
                     
                     <div class="form-group">
             <label for="assigneeID">Assign To:</label>
-            <select id="assigneeID" name="assigneeID" required>
+            <select id="assigneeID" name="assigneeID">
                 <option value="" disabled selected>Select a user</option>
                 <?php if ($users): ?>
                     <?php foreach ($users as $user): ?>
@@ -59,17 +59,17 @@
                     
                     <div class="form-group">
                         <label for="deadlineDate">Deadline Date:</label>
-                        <input type="date" id="deadlineDate" name="deadlineDate" required>
+                        <input type="date" id="deadlineDate" name="deadlineDate" >
                     </div>
                     
                     <div class="form-group">
                         <label for="deadlineTime">Deadline Time:</label>
-                        <input type="time" id="deadlineTime" name="deadlineTime" required>
+                        <input type="time" id="deadlineTime" name="deadlineTime">
                     </div>
                     
                     <div class="form-group">
                         <label for="priority">Priority:</label>
-                        <select id="priority" name="priority" required>
+                        <select id="priority" name="priority" >
                             <option value="high">High</option>
                             <option value="medium">Medium</option>
                             <option value="low">Low</option>
@@ -127,6 +127,90 @@ function validateDateAndTime() {
 
 // Run the validation function once the DOM is loaded
 document.addEventListener('DOMContentLoaded', validateDateAndTime);
+
+
+// Function to validate the form before submission
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const errorMessages = {};
+
+    form.addEventListener("submit", function (event) {
+        // Clear previous error messages
+        clearErrors();
+
+        // Perform validation
+        let isValid = true;
+
+        // Validate Task Name
+        isValid &= validateRequired("name", "Task name is required.");
+
+        // Validate Description
+        isValid &= validateRequired("description", "Description is required.");
+
+        // Validate Assignee
+        isValid &= validateRequired("assigneeID", "Assignee is required.");
+
+        // Validate Deadline Date
+        isValid &= validateRequired("deadlineDate", "Deadline date is required.");
+
+        // Validate Deadline Time
+        isValid &= validateRequired("deadlineTime", "Deadline time is required.");
+        isValid &= validateTimeNotInPast("deadlineTime", "Deadline time cannot be in the past.");
+
+        // Prevent form submission if validation fails
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+
+    // Validate required fields
+    function validateRequired(id, message) {
+        const field = document.getElementById(id);
+        if (field.value.trim() === "") {
+            showError(id, message);
+            return false;
+        }
+        return true;
+    }
+
+    // Validate that the selected date is not in the past
+    function validateDateNotInPast(id, message) {
+        const field = document.getElementById(id);
+        const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+        if (field.value < today) {
+            showError(id, message);
+            return false;
+        }
+        return true;
+    }
+
+    // Validate that the selected time is not in the past
+    function validateTimeNotInPast(id, message) {
+        const dateField = document.getElementById("deadlineDate");
+        const timeField = document.getElementById(id);
+        const selectedDateTime = new Date(`${dateField.value}T${timeField.value}`);
+
+        if (selectedDateTime < new Date()) {
+            showError(id, message);
+            return false;
+        }
+        return true;
+    }
+
+    // Display error messages
+    function showError(id, message) {
+        const field = document.getElementById(id);
+        const errorElement = document.createElement("div");
+        errorElement.className = "error-message";
+        errorElement.innerText = message;
+        field.parentElement.appendChild(errorElement);
+    }
+
+    // Clear previous error messages
+    function clearErrors() {
+        document.querySelectorAll(".error-message").forEach((element) => element.remove());
+    }
+});
 
 </script>
 
