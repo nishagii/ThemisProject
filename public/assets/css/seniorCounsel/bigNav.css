@@ -5,7 +5,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f8ff;
+    background-color: #E4E9F7;
 }
 nav{
     height: 100px;
@@ -84,13 +84,13 @@ nav .big-navbar li a:active {
 
 .navbar-icons i {
     font-size: 23px;
-    color: white;
+    color: #fff;
     cursor: pointer;
     transition: color 0.3s;
 }
 
 .navbar-icons i:hover {
-    color: #ff9800;
+    color: orange;
 }
 
 label #btn,/* icons*/
@@ -141,7 +141,7 @@ label #cancel{
     background-color: #f0a636; /* Initial background color */
     color: white; /* Text color */
     border: none;
-    border-radius: 50px;
+    border-radius: 10px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -149,7 +149,8 @@ label #cancel{
 }
 
 .login-button:hover {
-    background-color: #5361b9; /* Change background on hover */
+    background-color: white; /* Change background on hover */
+    color: #f0a636;
     transform: scale(1.05); /* Slightly increase size */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
 }

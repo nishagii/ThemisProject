@@ -17,6 +17,7 @@ class RegisterUser
                 if ($user->save($_POST)) {
                     // echo "Save successful"; // Debug point 3
                     redirect('login?register=success');
+                    
                     return;
                 } else {
                     $data['errors'] = ["Unable to save user to the database."];

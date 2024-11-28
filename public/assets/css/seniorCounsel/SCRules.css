@@ -1,14 +1,20 @@
+body {
+    background-color: #f4f8ff;
+    margin: 0;
+    padding: 0;
+}
 .rules-header{
       text-align: center;
 }
 
 .rules-header h1{
-    color: #ffffff;
-    background-color: rgb(29, 27, 49);
-    font-size: 20px;
+    color: #1d1b31;
+    background-color: #f4f8ff;
+    font-size: 30px;
     margin-bottom: 10px;
     padding: 10px;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 /* General container styling */
@@ -16,7 +22,7 @@
     max-width: 90%;
     margin: 20px auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #E4E9F7;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-family: 'Open Sans', sans-serif;
@@ -34,7 +40,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #ffffff;
 }
 
 .sc-rules li:last-child {
@@ -62,7 +68,7 @@
 
 /* Link styling */
 .sc-rules li a {
-    color: #007BFF;
+    color: #ff9800;
     text-decoration: none;
     font-size: 14px;
     margin: 0 5px;
@@ -72,7 +78,7 @@
 }
 
 .sc-rules li a:hover {
-    background-color: #007BFF;
+    background-color: #1d1b31;
     color: #fff;
 }
 

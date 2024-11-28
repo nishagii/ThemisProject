@@ -19,12 +19,16 @@
     <?php include('component/smallNav1.view.php'); ?>
     <?php include('component/sidebar.view.php'); ?>
 
+    <h1 class="home-heading">
+        Welcome Back Michael !
+    </h1>
     <div class="home-section">
-        <!-- Analytics Cards -->
-
         <!-- Recent Cases -->
         <div class="card recent-cases">
             <h3>Recent Cases</h3>
+            <p>Recently added cases. Click
+                <span style="color: #fa9800; font-weight: bold;"> View All cases </span> to view all cases.
+            </p>
             <table>
                 <thead>
                     <tr>
@@ -52,11 +56,13 @@
             <a href="<?= ROOT ?>/cases/retrieveAllCases" class="btn">View All Cases</a>
         </div>
 
-        
+
         <!-- Add Case Section -->
         <div class="card">
             <h3>Add New Case</h3>
-            <p>Start managing a new case by clicking the button below.</p>
+            <p>Start managing a
+                <span style="color: #fa9800; font-weight: bold;">new case</span> by clicking the button below.
+            </p>
             <a href="<?= ROOT ?>/cases" class="btn">Add Case</a>
         </div>
 
