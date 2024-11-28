@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THEMIS - Salary Payment</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/template.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/precedentsAdmin/all_precedents.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
@@ -65,7 +65,6 @@
             </tbody>
         </table>
     </div>
-
     
 </body>
 </html>
