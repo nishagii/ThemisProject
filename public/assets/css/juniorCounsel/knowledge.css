@@ -119,95 +119,70 @@ td {
         font-size: 20px;
     }
 }
-/* General styles */
-body {
-    font-family: Arial, sans-serif;
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-icon {
+    font-size: 40px;
+    color: #ffa500; /* Match the color to your theme */
+    margin-bottom: 10px;
+}
+
+.card-content h3 {
     margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
+    font-size: 1.5rem;
     color: #333;
 }
 
-/* Button to add a note */
-a > button {
-    background-color: #0a2f56;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 20px;
-    text-transform: uppercase;
-    transition: background-color 0.3s ease;
+.card-content p {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 10px;
 }
 
-a > button:hover {
-    background-color: #064e9a;
-}
-
-/* Note container styles */
-.note-container {
-    width: 90%;
-    margin: 0 auto;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 4px 8px rgba(39, 7, 145, 0.1);
-    border-radius: 8px;
-}
-
-.note-container h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #444;
-}
-
-/* Table styles */
-.notes-table-container {
-    overflow-x: auto;
-}
-
-.notes-table {
-    width: 100%;
-    border-collapse: collapse;
+.card-actions {
     margin-top: 20px;
-    background: #fafafa;
+    display: flex;
+    justify-content: space-around;
 }
 
-.notes-table th,
-.notes-table td {
-    padding: 10px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.notes-table th {
-    background: #02203f;
-    color: #fff;
+.card-actions .btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
     font-weight: bold;
-    text-transform: uppercase;
 }
 
-.notes-table tr:hover {
-    background-color: #f1f1f1;
+.card-actions .btn-edit {
+    background-color: #4caf50;
+    color: white;
 }
 
-/* Actions column styling */
-.notes-table td i {
-    font-size: 20px;
-    margin: 0 10px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    color: #3807b2;
-}
-.notes-table td i.bx-trash {
-    color: #b71417;}
-
-.notes-table td i:hover {
-    color: #0ebb4d;
-}
-
-/* Delete icon specific styling */
-.notes-table td i.bx-trash:hover {
-    color: #e58518;
+.card-actions .btn-delete {
+    background-color: #f44336;
+    color: white;
 }
