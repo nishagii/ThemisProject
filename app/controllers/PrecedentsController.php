@@ -23,7 +23,11 @@ public function create() {
             $uploadDir = '../public/assets/precedentsUploads/';
             $fileName = basename($_FILES['document_link']['name']);
             $fileTmpPath = $_FILES['document_link']['tmp_name'];
+            $fileType = $_FILES['document_link']['type'];
             $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+            // Define allowed file types
+            $allowedTypes = ['application/pdf'];
+
 
             // Sanitize and create unique file name
             $sanitizedFileName = uniqid('precedent_', true) . '.' . $fileExtension;
@@ -33,7 +37,10 @@ public function create() {
             if (!file_exists($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
-
+            // Validate file type
+            if (!in_array($fileType, $allowedTypes)) {
+                die("Invalid file type. Please upload a PDF or Word document.");
+            }
             // Move the uploaded file to the desired directory
             if (move_uploaded_file($fileTmpPath, $uploadPath)) {
                 // Save the relative path to the database
@@ -140,7 +147,7 @@ public function create() {
 
     // Check if a file was uploaded
     if (isset($_FILES['document_upload']) && $_FILES['document_upload']['error'] === UPLOAD_ERR_OK) {
-        // Define allowed file types and maximum file size
+        // Define allowed file types
         $allowedTypes = ['application/pdf'];
 
         $fileTmpPath = $_FILES['document_upload']['tmp_name'];
