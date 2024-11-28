@@ -21,10 +21,12 @@
 .new-case-section h1 {
     color: #ffffff;
     background-color: rgb(29, 27, 49);
-    font-size: 20px;
+    font-size: 30px;
+    font-weight: bold;
     margin-bottom: 10px;
     padding: 10px;
     text-transform: uppercase;
+    background-color: #d72638;
 }
 
 body{
