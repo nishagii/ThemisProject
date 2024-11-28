@@ -1,4 +1,4 @@
-/* Dark Blue Theme Styles */
+
 body {
     font-family: Arial, sans-serif;
     color: #fff;
@@ -7,7 +7,7 @@ body {
 .add-container {
     margin: 20px;
     padding: 20px;
-    background-color: #eaf1fd; /* Darker Blue Container */
+    background-color: #fbfcfc; /* Darker Blue Container */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -119,70 +119,121 @@ td {
         font-size: 20px;
     }
 }
+
+
+.note-container {
+
 .cards-container {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+
     padding: 20px;
-    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 60px;
+    margin-top: 50px;
 }
 
 .card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
     padding: 20px;
-    text-align: center;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.3s, box-shadow 0.3s;
+    height: 300px; 
+    width: 300px; 
+    position: relative;
+    cursor: pointer;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+
+.card-header {
+    font-weight: bold;
+    font-size: 20px;
+    color: #000000;
 
 .card-icon {
     font-size: 40px;
     color: #ffa500; /* Match the color to your theme */
+
     margin-bottom: 10px;
 }
 
-.card-content h3 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #333;
-}
-
-.card-content p {
-    font-size: 1rem;
-    color: #666;
-    margin-top: 10px;
+.card-content {
+    flex: 1;
+    color: #777;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card-actions {
-    margin-top: 20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
-.card-actions .btn {
-    padding: 10px 20px;
-    border-radius: 5px;
+.card-actions a {
     text-decoration: none;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 18px;
+    color: #555;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
 }
 
-.card-actions .btn-edit {
-    background-color: #4caf50;
-    color: white;
+.card-actions a:hover {
+    background-color: #f5efef;
 }
 
+.btn-edit {
+    color: #007bff;
+}
+
+.btn-edit:hover {
+    color: #0056b3;
+}
+
+.btn-delete {
+    color: #dc3545;
+}
+
+.btn-delete:hover {
+    color: #a71d2a;
+  
 .card-actions .btn-delete {
     background-color: #f44336;
     color: white;
 }
+.add-note-btn {
+    background-color: #2b0a58; /* Blue color */
+    color: #fff; /* White text color */
+    border: none; /* Remove border */
+    padding: 15px 25px; /* Add some padding */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    font-size: 20px; /* Increase font size */
+    transition: background-color 0.3s ease; /* Add smooth transition on hover */
+  }
+  
+  .add-note-btn:hover {
+    background-color: #3c0574; /* Darker blue on hover */
+  }
