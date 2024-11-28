@@ -20,6 +20,8 @@
             <nav>
             
                 <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="Logo" class="navbar-logo" />
+                
+                <h1>Admin Dashboard</h1>
             </nav>
 
             <div class="navbar-icons">
