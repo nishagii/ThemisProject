@@ -16,7 +16,7 @@
         <ul class="small-navbar">
             <li><a href="#">Calendar</a></li>
             <li><a href="templateclient">Document templates</a></li>
-            <li><a href="#">Meeting</a></li>
+            <li><a href="meetingClient">Meeting</a></li>
             <li><a href="<?= ROOT ?>/ruleclient">S.C Rules</a></li>
         </ul>
     </div>

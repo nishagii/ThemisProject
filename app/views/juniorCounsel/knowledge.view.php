@@ -30,8 +30,40 @@
                         <a href="<?= ROOT ?>/knowledge/deleteKnowledge/<?= $note->id ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
                     </div>
                     <a href="<?= ROOT ?>/addKnowledge">
-    
-</a>
+    </a>
+
+   <a href="<?= ROOT ?>/addKnowledge"><button>Add Note</button></a>
+
+                <div class="note-container">
+    <h1>Knowledge Notes</h1>
+    <div class="notes-table-container">
+    <table class="notes-table">
+        <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Notes</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($knowledge as $knowledge): ?>
+            <tr>
+                <td><?= htmlspecialchars($knowledge->topic) ?></td>
+                <td><?= htmlspecialchars($knowledge->note) ?></td>
+                                <td>
+                    <a href="<?= ROOT ?>/knowledge/editKnowledge/<?= $knowledge->id ?>" title="Edit">
+                        <i class='bx bx-edit' ></i>
+                    </a>
+                    <a href="<?= ROOT ?>/knowledge/deleteKnowledge/<?= htmlspecialchars($knowledge->id) ?>" title="Delete" onclick="return confirm('Are you sure you want to delete this note?')">
+                        <i class='bx bx-trash' ></i>
+                    </a>
+                </td>
+
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
 
 
 

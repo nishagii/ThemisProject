@@ -97,7 +97,7 @@ th, td {
 }
 
 th {
-    background-color: #1d1b31;
+    background-color: #11101b;
     color: white;
     font-size: 16px;
 }
@@ -120,7 +120,14 @@ td {
     }
 }
 
+
 .note-container {
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
@@ -156,10 +163,16 @@ h1 {
     cursor: pointer;
 }
 
+
 .card-header {
     font-weight: bold;
     font-size: 20px;
     color: #000000;
+
+.card-icon {
+    font-size: 40px;
+    color: #ffa500; /* Match the color to your theme */
+
     margin-bottom: 10px;
 }
 
@@ -205,6 +218,10 @@ h1 {
 
 .btn-delete:hover {
     color: #a71d2a;
+  
+.card-actions .btn-delete {
+    background-color: #f44336;
+    color: white;
 }
 .add-note-btn {
     background-color: #2b0a58; /* Blue color */

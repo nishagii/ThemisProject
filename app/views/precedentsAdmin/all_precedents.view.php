@@ -4,14 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Precedents</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/all_precedents.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/precedentsAdmin/all_precedents.css">
 </head>
 <body>
-<?php include('seniorCounsel/component/bigNav.view.php'); ?>
-<?php include('seniorCounsel/component/smallNav1.view.php'); ?>
+<?php include('components/bigNav.view.php'); ?>
     <div class="header">
         <h1>All Precedents</h1>
     </div>
+
+    <!-- search bar -->
+    <div class="search-bar-container">
+        <input type="text" id="searchBar" class="search-bar" placeholder="Search precedents..." oninput="searchPrecedents()">
+        <button type="submit" class="search-button">Search</button>
+    </div>
+
+    <!-- sort and filter button -->
+    <a href="#">
+            <button class="sort-filter">Sort & Filter</button>
+    </a>
 
     <div class="table-container">
         <table>
