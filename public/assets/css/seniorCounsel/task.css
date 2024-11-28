@@ -355,4 +355,13 @@ small {
   }
 }
 
+.error-message {
+  color: #ff5d5d;
+  font-size: 0.8em;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
 
+input.valid {
+  border: 2px solid green;
+}
