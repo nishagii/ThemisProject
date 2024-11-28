@@ -3,10 +3,9 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: #11101D;
+    background-color: #2e2b4b;
     display: flex;
-    justify-content: center;
-    border-top: orange solid 2px;
+    justify-content: center;    
 }
 
 .small-navbar li {
