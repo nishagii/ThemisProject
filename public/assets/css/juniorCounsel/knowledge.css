@@ -1,13 +1,9 @@
-/* Dark Blue Theme Styles */
-body {
-    font-family: Arial, sans-serif;
-    color: #fff;
-}
+
 
 .add-container {
     margin: 20px;
     padding: 20px;
-    background-color: #eaf1fd; /* Darker Blue Container */
+    background-color: #eaf1fd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -16,7 +12,7 @@ body {
 
 .add {
     font-size: 18px;
-    color: #011517; /* Light Blue for text */
+    color: #011517;  
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -24,7 +20,7 @@ body {
 
 .add i {
     margin-left: 5px;
-    color: #00bcd4; /* Light Blue Icon */
+    color: #00bcd4; 
 }
 
 .form-popup {
@@ -38,7 +34,7 @@ body {
     display: block;
     margin-bottom: 10px;
     font-size: 14px;
-    color: #021a1d; /* Light Blue Label */
+    color: #021a1d;  
 }
 
 .form-container input,
@@ -49,7 +45,7 @@ body {
     border: 1px solid #deeaec;
     border-radius: 4px;
     font-size: 14px;
-    background-color: #f6faff; /* Slightly darker input background */
+    background-color: #f6faff; 
     color: rgb(13, 9, 9);
 }
 
@@ -82,7 +78,7 @@ h1 {
     text-align: center;
 }
 
-/* Table Styles */
+ 
 table {
     width: 100%;
     border-collapse: collapse;
@@ -109,7 +105,7 @@ td {
 
 
 
-/* Responsive Styles */
+
 @media (max-width: 768px) {
     th, td {
         padding: 10px;
@@ -119,7 +115,7 @@ td {
         font-size: 20px;
     }
 }
-/* General styles */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -128,7 +124,7 @@ body {
     color: #333;
 }
 
-/* Button to add a note */
+
 a > button {
     background-color: #0a2f56;
     color: #fff;
@@ -146,7 +142,7 @@ a > button:hover {
     background-color: #064e9a;
 }
 
-/* Note container styles */
+
 .note-container {
     width: 90%;
     margin: 0 auto;
@@ -162,7 +158,6 @@ a > button:hover {
     color: #444;
 }
 
-/* Table styles */
 .notes-table-container {
     overflow-x: auto;
 }
@@ -192,7 +187,7 @@ a > button:hover {
     background-color: #f1f1f1;
 }
 
-/* Actions column styling */
+ 
 .notes-table td i {
     font-size: 20px;
     margin: 0 10px;
@@ -207,7 +202,9 @@ a > button:hover {
     color: #0ebb4d;
 }
 
-/* Delete icon specific styling */
+
 .notes-table td i.bx-trash:hover {
     color: #e58518;
 }
+
+

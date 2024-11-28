@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Precedents</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/precedentsAdmin/all_precedents.css">
 </head>
 <body>
@@ -14,14 +16,16 @@
 
     <!-- search bar -->
     <div class="search-bar-container">
-        <input type="text" id="searchBar" class="search-bar" placeholder="Search precedents..." oninput="searchPrecedents()">
-        <button type="submit" class="search-button">Search</button>
+        <input type="text" 
+        id="searchBar" 
+        class="search-bar" 
+        placeholder="Search precedents..." 
+        oninput="searchPrecedents()" 
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder = 'Search precedents...' ">
+        <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
+        <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
     </div>
-
-    <!-- sort and filter button -->
-    <a href="#">
-            <button class="sort-filter">Sort & Filter</button>
-    </a>
 
     <div class="table-container">
         <table>
