@@ -127,25 +127,53 @@ public function create() {
         $this->view('precedentsAdmin/edit_precedent', ['case' => $case]);
     }
 
-    public function updatePrecedent()
-    {
-        // Collect POST data
-        $data = [
-            'judgment_date' => $_POST['judgment_date'],
-            'case_number' => $_POST['case_number'],
-            'name_of_parties' => $_POST['name_of_parties'],
-            'judgment_by' => $_POST['judgment_by'],
-            'document_link' => $_POST['document_link'],
-            'id' => $_POST['id'],
-        ];
+    public function updatePrecedent(){
+    // Collect POST data
+    $data = [
+        'judgment_date' => $_POST['judgment_date'],
+        'case_number' => $_POST['case_number'],
+        'name_of_parties' => $_POST['name_of_parties'],
+        'judgment_by' => $_POST['judgment_by'],
+        'document_link' => $_POST['document_link'], // Keep this for the case where no file is uploaded
+        'id' => $_POST['id'],
+    ];
 
-        // Update the case
-        $caseModel = $this->loadModel('PrecedentModel');
-        $caseModel->update($data);
+    // Check if a file was uploaded
+    if (isset($_FILES['document_upload']) && $_FILES['document_upload']['error'] === UPLOAD_ERR_OK) {
+        // Define allowed file types and maximum file size
+        $allowedTypes = ['application/pdf'];
 
-        // Redirect to a success page or the list of cases
-        redirect('PrecedentsController/retrieveAll');
+        $fileTmpPath = $_FILES['document_upload']['tmp_name'];
+        $fileName = $_FILES['document_upload']['name'];
+        $fileType = $_FILES['document_upload']['type'];
+        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+
+        // Validate file type
+        if (!in_array($fileType, $allowedTypes)) {
+            die("Invalid file type. Please upload a PDF or Word document.");
+        }
+
+        $uploadDir = '../public/assets/precedentsUploads/';
+        $sanitizedFileName = uniqid('precedent_', true) . '.' . $fileExtension;
+        $uploadPath = $uploadDir . $sanitizedFileName;
+
+        // Move the uploaded file to the server
+        if (move_uploaded_file($fileTmpPath, $uploadPath)) {
+                // Save the relative path to the database
+                $data['document_link'] = '/themisrepo/public/assets/precedentsUploads/' . $sanitizedFileName;
+            } else {
+                die('File upload failed. Please try again.');
+        }
     }
+
+    // Update the case in the database
+    $caseModel = $this->loadModel('PrecedentModel');
+    $caseModel->update($data);
+
+    // Redirect to a success page or the list of cases
+    redirect('PrecedentsController/retrieveAll');
+}
+
 /*-------------------Delete----------------------------------- */
     public function deletePrecedent($id)
     {

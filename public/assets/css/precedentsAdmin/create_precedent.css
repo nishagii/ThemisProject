@@ -61,7 +61,7 @@ label {
     transition: border-color 0.3s ease-in-out;
 }
 input[type="file"]::file-selector-button {
-    background-color: #4CAF50;
+    background-color: #3f51b5;
     color: white;
     padding: 10px 20px;
     border: none;
