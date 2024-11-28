@@ -43,7 +43,7 @@
             </div>
 
 
-            <a href="profile">
+            <a href="<?= ROOT ?>/profile">
                 <i class="fas fa-user-circle" id="profile-icon"></i>
             </a>
 
