@@ -21,11 +21,12 @@
     color: rgb(255, 255, 255);
     padding: 14px 20px;
     border-radius: 4px;
-    transition: background-color 0.3s;
+     transition: all 0.3s ease;
 }
 
 .small-navbar li a:hover{
-    color: #1d1b31;
+    color: #a5bdff;
+    transform: scale(1.05);
 }
 
 .small-navbar li a:active {
