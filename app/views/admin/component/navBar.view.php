@@ -27,7 +27,7 @@
                 <a href="setting">
                     <i class="fas fa-cog"></i>
                 </a>
-                <a href="profile">
+                <a href="profileadmin">
                     <i class="fas fa-user-circle"></i>
                 </a>
             </div>

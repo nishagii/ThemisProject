@@ -1,0 +1,112 @@
+.body-container {
+    
+    margin: 40px;
+    border-radius: 8px;
+   
+    padding: 20px;
+}
+
+.request-meeting-section {
+    padding: 20px;
+    margin: 20px auto;
+    width: 70%;
+    background-color: #eaf1fd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.request-meeting-section h2 {
+    text-align: center;
+    color: #333;
+}
+
+.request-meeting-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.request-meeting-form label {
+    font-weight: 600;
+}
+
+.request-meeting-form input, 
+.request-meeting-form textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.request-meeting-form button {
+    background-color: #1d1b31; /* Green background */
+    color: white;              /* White text color */
+    border: none;              /* Remove border */
+    border-radius: 5px;       /* Rounded corners */
+    padding: 10px 20px;       /* Vertical and horizontal padding */
+    font-size: 16px;           /* Font size */
+    cursor: pointer;           /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Transition for background color */
+  
+}
+
+.request-meeting-form button:hover {
+    background-color: #3b395c; /* Darker green on hover */
+}
+.request-meeting-form textarea {
+    height: 100px; /* Adjust height as needed */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+/* Styling for the Comments Section */
+.request-meeting-form #meeting-comments {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.body-table {
+    background-color: #eaf1fd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .body-table th,
+  .body-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  
+  .body-table th {
+    background-color: #f4f8ff;
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .body-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .body-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+
+/* Color-coding for status */
+.body-table .accepted {
+    color: #28a745; /* Green */
+}
+
+.body-table .pending {
+    color: #ffc107; /* Yellow */
+}
+
+.body-table .rejected {
+    color: #dc3545; /* Red */
+}

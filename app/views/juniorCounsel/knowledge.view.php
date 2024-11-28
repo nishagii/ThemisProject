@@ -36,10 +36,15 @@
             <tr>
                 <td><?= htmlspecialchars($knowledge->topic) ?></td>
                 <td><?= htmlspecialchars($knowledge->note) ?></td>
-                <td>
-                    <a href="<?= ROOT ?>/knowledge/editKnowledge/<?= $knowledge->id ?>"><button onclick="editForm(<?= htmlspecialchars($knowledge->id) ?>, '<?= htmlspecialchars(addslashes($knowledge->topic)) ?>', '<?= htmlspecialchars(addslashes($knowledge->details)) ?>')">Edit</button></a>
-                    <a href="<?= ROOT ?>/knowledge/deleteKnowledge/<?= htmlspecialchars($knowledge->id) ?>" onclick="return confirm('Are you sure you want to delete this note?')">Delete</a>
+                                <td>
+                    <a href="<?= ROOT ?>/knowledge/editKnowledge/<?= $knowledge->id ?>" title="Edit">
+                        <i class='bx bx-edit' ></i>
+                    </a>
+                    <a href="<?= ROOT ?>/knowledge/deleteKnowledge/<?= htmlspecialchars($knowledge->id) ?>" title="Delete" onclick="return confirm('Are you sure you want to delete this note?')">
+                        <i class='bx bx-trash' ></i>
+                    </a>
                 </td>
+
             </tr>
             <?php endforeach; ?>
         </tbody>
