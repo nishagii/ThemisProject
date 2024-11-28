@@ -23,7 +23,7 @@
 
 
             <div class="search-container">
-                <input type="text" placeholder="Search" class="search-bar" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" />
+                <input type="text" placeholder="Search here for templates" class="search-bar" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" />
                 <i class="bx bx-sort sort-icon" title="Sort" onclick="sortFunction()"></i>
                 <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
 
@@ -44,7 +44,7 @@
             <div class="template">
                 <div class="header">
                     <div class="template-header">
-                        <h2>Templates</h2>
+                        <h2>Current Templates of You</h2>
                     </div>
                 </div>
 
