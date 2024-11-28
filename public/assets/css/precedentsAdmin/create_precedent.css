@@ -134,6 +134,11 @@ a{
 .btn-cancel:hover {
     background-color: #d32f2f;
 }
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {

@@ -88,33 +88,46 @@
     
 
                 <script>
-    // Function to check if the selected date is not before today
-    function validateDateAndTime() {
-        const today = new Date();
-        const dateInput = document.getElementById("deadlineDate");
-        const timeInput = document.getElementById("deadlineTime");
+   // Function to validate the selected date and time
+function validateDateAndTime() {
+    const today = new Date();
+    const dateInput = document.getElementById("deadlineDate");
+    const timeInput = document.getElementById("deadlineTime");
 
-        // Get today's date in YYYY-MM-DD format
-        const todayDate = today.toISOString().split('T')[0]; // Get only the date part (YYYY-MM-DD)
-        dateInput.setAttribute('min', todayDate);  // Set min date to today's date
+    // Get today's date in YYYY-MM-DD format
+    const todayDate = today.toISOString().split('T')[0]; // Get only the date part (YYYY-MM-DD)
 
-        // Compare if the selected time is earlier than the current time
-        timeInput.addEventListener('change', function() {
-            const selectedTime = new Date(today.toDateString() + ' ' + timeInput.value);
-            if (selectedTime < today) {
-                alert('Deadline time cannot be before the current time.');
-                timeInput.value = ''; // Clear the invalid time
-            }
-        });
+    // Set the minimum date for the date input to today
+    dateInput.setAttribute('min', todayDate);
 
-        // Set min date for deadline date input to today's date
-        if (dateInput.value && dateInput.value < todayDate) {
-            alert('Deadline date cannot be before today.');
+    // Event listener for date input
+    dateInput.addEventListener('change', function () {
+        const selectedDate = new Date(`${dateInput.value}T${timeInput.value}`); // Use default time if not selected
+        if (selectedDate < today) {
+            alert('Deadline date and time cannot be in the past.');
             dateInput.value = ''; // Clear the invalid date
         }
-    }
+    });
 
-    document.addEventListener('DOMContentLoaded', validateDateAndTime);
+    // Event listener for time input
+    timeInput.addEventListener('change', function () {
+        if (!dateInput.value) {
+            alert('Please select a date first.');
+            timeInput.value = ''; // Clear the invalid time
+            return;
+        }
+
+        const selectedDate = new Date(`${dateInput.value}T${timeInput.value}`);
+        if (selectedDate < today) {
+            alert('Deadline date and time cannot be in the past.');
+            timeInput.value = ''; // Clear the invalid time
+        }
+    });
+}
+
+// Run the validation function once the DOM is loaded
+document.addEventListener('DOMContentLoaded', validateDateAndTime);
+
 </script>
 
 </body>

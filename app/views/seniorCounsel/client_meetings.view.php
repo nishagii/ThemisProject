@@ -19,7 +19,10 @@
 
         <section class="home-section">
             <div class="meeting-section">
-                <h1 >Client Meeting Requests</h1>
+                <h1>Client Meeting Requests</h1>
+            </div>
+            <div class="meeting-paragraph">
+                <p>Here you can view the client meeting requests and their status. Select see more button to view details </p>
             </div>
 
             <div class="content">
@@ -34,6 +37,27 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>Nishagi Jeewantha</td>
+                            <td>2024.10.11</td>
+                            <td>2024.11.01</td>
+                            <td class="status approved">Approved</td>
+                            <td><button class="see-more-btn">See more</button></td>
+                        </tr>
+                        <tr>
+                            <td>Nishagi Jeewantha</td>
+                            <td>2024.10.11</td>
+                            <td>2024.11.01</td>
+                            <td class="status declined">Declined</td>
+                            <td><button class="see-more-btn">See more</button></td>
+                        </tr>
+                        <tr>
+                            <td>Nishagi Jeewantha</td>
+                            <td>2024.10.11</td>
+                            <td>2024.11.01</td>
+                            <td class="status approved">Approved</td>
+                            <td><button class="see-more-btn">See more</button></td>
+                        </tr>
                         <tr>
                             <td>Nishagi Jeewantha</td>
                             <td>2024.10.11</td>

@@ -19,7 +19,12 @@ issue was in the core controller view function -->
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
     <div class="allcases-section">
-        <h1>List of Cases</h1>
+        <h1>List of All Cases</h1>
+    </div>
+    <div class="paragraph-all-cases">
+        Click here to add a
+        <span style="color: #fa9800; font-weight: bold;">new case</span> or to view details in
+        <span style="color: #fa9800; font-weight: bold;">tabular view</span>.
     </div>
 
     <div class="button">

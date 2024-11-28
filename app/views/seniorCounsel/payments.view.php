@@ -19,6 +19,10 @@
         <div class="payment-header">
             <h1>Make Payments</h1>
         </div>
+        <div class="payment-paragraph">
+            <p>To proceed with the payment, please fill in the following details.Your payment will be processed securely.</p>
+            <p>Card details will not be shared with any third party. </p>
+        </div>
         <div class="pay_container">
             <div id="Checkout" class="inline">
                 <h1>Pay Invoice</h1>

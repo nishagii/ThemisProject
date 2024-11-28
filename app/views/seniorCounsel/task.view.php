@@ -14,6 +14,9 @@
     <?php include('component/smallNav1.view.php'); ?>
     
     <div class="parent-container">
+        <h1 class="task-heading">
+            Task Management
+        </h1>
         <div class="counters-container">
             <div class="counter total">
                 <div class="counter-icon">

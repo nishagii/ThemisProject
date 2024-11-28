@@ -26,14 +26,14 @@
     align-items: center; /* Vertically center items in the flex container */
     justify-content: space-between; /* Distribute space evenly between items */
     gap: 20px; /* Add space between text and image */
-    margin-top: 50px; /* Optional: Add margin around the container */
+    margin-top: 40px; /* Optional: Add margin around the container */
     margin-left: 50px; 
     margin-right: 50px; 
     padding: 20px;
     background-color: #eaf1fd;
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .gold {

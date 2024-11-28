@@ -1,19 +1,19 @@
  background-color: #f4f8ff;
 
- //forms wala backgroud galapena thana anuwa
+ /* //forms wala backgroud galapena thana anuwa */
 
   background-color: #E4E9F7;
   or
   background-color: #ffffff;
 
 
-//commom header bar for each page
+/* //commom header bar for each page */
 
    <div class="new-case-header">
                 <h1>New Case</h1>
             </div>
 
-    //css
+    /* //css */
 .new-case-section {
     text-align: center;
 } 
@@ -21,13 +21,17 @@
 .new-case-section h1 {
     color: #ffffff;
     background-color: rgb(29, 27, 49);
-    font-size: 20px;
+    font-size: 30px;
+    font-weight: bold;
     margin-bottom: 10px;
     padding: 10px;
     text-transform: uppercase;
+    background-color: #d72638;
 }
 
-
-//dark blue
- background-color: #1d1b31;
+body{
+    /* //dark blue */
   background-color: #1d1b31;
+  /* button clor */
+   background-color: #f0a636; 
+}
