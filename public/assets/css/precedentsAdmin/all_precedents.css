@@ -114,10 +114,11 @@ a:hover{
     margin-top: 10px;
     background-color: #fa9800;
 }
-.more:hover, .add-precedent:hover{
+.more:hover, .sort-filter:hover{
     background-color: #9392a3;
+    transform: scale(1.05);
 }
-.add-precedent{
+.sort-filter{
     color: white;            
     border: none;              
     border-radius: 5px;      
@@ -128,12 +129,49 @@ a:hover{
     display: flex;            
     align-items: center;     
     text-decoration: none;
-    margin-top: 10px;
-    margin-right: 20px;
+    margin: 20px auto;
     display: flex;
-    margin-left: 20px;
-    margin-top: 10px;
     background-color: #3f51b5;
+}
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 10px;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+}
+.search-bar {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px 0 0 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+.search-bar:focus {
+    border-color: #3f51b5;
+}
+.search-button {
+    padding: 10px 20px;
+    background-color: #3f51b5;
+    color: #fff;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+.search-button:hover {
+    background-color: #9392a3;
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+.search-button:active {
+    transform: scale(1); /* Reset zoom on click */
 }
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -145,5 +183,20 @@ a:hover{
     table td {
         font-size: 0.9rem;
         padding: 8px;
+    }
+    .search-bar-container {
+        flex-direction: column;
+        width: 50%;
+        padding: 0px;
+    }
+    .search-bar {
+        border-radius: 8px;
+        margin-bottom: 5px;
+        width: 90%;
+    }
+    .search-button {
+        border-radius: 8px;
+        width:90%;
+        margin-bottom: 20px;
     }
 }

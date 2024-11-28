@@ -11,8 +11,9 @@ class PrecedentsController {
 
     public function index()
     {
-        $this->view('create_precedent');
+        $this->view('/precedentsAdmin/PrecedentsAdmin_Home');
     }
+    
 /*---------------------Create operation----------------------------- */
     public function create() {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -27,7 +28,7 @@ class PrecedentsController {
             $this->precedentModel->insert($data);
         }
         
-        $this->view('create_precedent');
+        $this->view('precedentsAdmin/create_precedent');
     }
 
 /*--------------------Retrieve------------------------------- */
@@ -37,7 +38,7 @@ class PrecedentsController {
         $cases = $caseModel->getAll();
 
         // Pass data to the view
-        $this->view('all_precedents', ['cases' => $cases]);
+        $this->view('precedentsAdmin/all_precedents', ['cases' => $cases]);
     }
 
     public function retrieveOne($id)
@@ -56,7 +57,7 @@ class PrecedentsController {
             return;
         }
         // Load the view and pass the case data
-        $this->view('one_precedent', ['case' => $case]);
+        $this->view('precedentsAdmin/one_precedent', ['case' => $case]);
     }
 
     //view only
@@ -95,7 +96,7 @@ class PrecedentsController {
         if (!$case) {
             die("Case not found or invalid ID.");
         }
-        $this->view('edit_precedent', ['case' => $case]);
+        $this->view('precedentsAdmin/edit_precedent', ['case' => $case]);
     }
 
     public function updatePrecedent()
