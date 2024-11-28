@@ -1,13 +1,20 @@
+body {
+    background-color: #f4f8ff;
+    margin: 0;
+    padding: 0;
+}
+
 .users-header{
     text-align: center;
 }
 .users-header h1{
-    color: #ffffff;
-    background-color: rgb(29, 27, 49);
-    font-size: 20px;
+    color: #1d1b31;
+    background-color: #f4f8ff;
+    font-size: 30px;
     margin-bottom: 10px;
     padding: 10px;
     text-transform: uppercase;
+    font-style: bold;
 }
 
 
@@ -28,8 +35,8 @@
 }
 
 .user-card {
-    background: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: #fafafa;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
     border-radius: 10px;
     padding: 20px;
     width: 250px;
@@ -54,14 +61,14 @@
 
 .user-card .icon {
     font-size: 40px;
-    color: #ff9800;
+    color: #505e86;
     margin-bottom: 10px;
 }
 .line {
     position: absolute;
     top: 62px; /* Adjust this to match your button alignment */
     height: 5px;
-    background-color:  rgba(0, 183, 37, 0.487);
+    background-color:  #ff9500;
     border-radius: 10px;
     transition: all 0.3s ease-in-out; /* Smooth animation */
 }
@@ -81,14 +88,13 @@
 }
 
 .tab-container {
-    width: 90%;
+    width: 100%;
     display: inline-flex;
     height: 30px;
-    background-color: #ffffff;
     padding: 10px;
     padding-bottom: 18px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 100px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    /* border-radius: 100px; */
     align-self: center;
     margin-top: 20px;
     justify-content: center;
@@ -105,9 +111,9 @@
 }
 
 .tab_btn, .tab_box {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
-    color: rgba(206, 0, 0, 0.842);
+    color:#1d1b31;
     background: none;
     border: none;
     padding: 18px;
@@ -115,5 +121,6 @@
 }
 
 .tab_box .tab_btn.active {
-    color: rgba(0, 183, 37, 0.487);
+    color:#ff9500;
+    font-size: 19px;
 }
