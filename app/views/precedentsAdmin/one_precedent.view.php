@@ -123,7 +123,7 @@
                 </div>
                 <div class="info-item">
                     <strong>Document:</strong>
-                    <a href="htmlspecialchars($case->document_link)">Download</a>
+                    <a href="<?php echo $case->document_link; ?>" target="_blank">View Document</a>
                 </div>
             </div>
         </div>
