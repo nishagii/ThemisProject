@@ -1,3 +1,591 @@
+/* Dark Blue Theme Styles 
+body {
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+.add-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #eaf1fd; /* Darker Blue Container 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.add {
+    font-size: 18px;
+    color: #011517; /* Light Blue for text 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.add i {
+    margin-left: 5px;
+    color: #00bcd4; /* Light Blue Icon 
+}
+
+.form-popup {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #021a1d; /* Light Blue Label 
+}
+
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #deeaec;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f6faff; /* Slightly darker input background 
+    color: rgb(13, 9, 9);
+}
+
+.form-container button {
+    background-color: #1d1b31;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-container button:hover {
+    background-color: #555276;
+}
+
+.note-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Table Styles 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #11101b;
+    color: white;
+    font-size: 16px;
+}
+
+td {
+    font-size: 14px;
+    color: #555;
+}
+
+
+
+/* Responsive Styles 
+@media (max-width: 768px) {
+    th, td {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+}
+/* General styles 
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Button to add a note 
+a > button {
+    background-color: #0a2f56;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 20px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+a > button:hover {
+    background-color: #064e9a;
+}
+
+/* Note container styles 
+.note-container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(39, 7, 145, 0.1);
+    border-radius: 8px;
+}
+
+.note-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+/* Table styles 
+.notes-table-container {
+    overflow-x: auto;
+}
+
+.notes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fafafa;
+}
+
+.notes-table th,
+.notes-table td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.notes-table th {
+    background: #02203f;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.notes-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Actions column styling 
+.notes-table td i {
+    font-size: 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: #3807b2;
+}
+.notes-table td i.bx-trash {
+    color: #b71417;}
+
+.notes-table td i:hover {
+    color: #0ebb4d;
+}
+
+/* Delete icon specific styling 
+.notes-table td i.bx-trash:hover {
+    color: #e58518;
+}*/
+
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    
+}
+
+/* Knowledge Panel Container */
+.add-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #eaf1fd; /* Subtle Blue Background */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.5s ease-out;
+    transition: transform 0.3s ease;
+}
+
+.add-container:hover {
+    transform: scale(1.02);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add Button Styling */
+.add {
+    font-size: 18px;
+    color: #011517; /* Light Blue for text */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.add:hover {
+    color: #0056b3;
+}
+
+.add i {
+    margin-left: 5px;
+    color: #00bcd4; /* Light Blue Icon */
+    transition: transform 0.3s ease;
+}
+
+.add:hover i {
+    transform: rotate(20deg);
+}
+
+/* Form Popup Enhancements */
+.form-popup {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    animation: slideDown 0.5s ease;
+}
+
+/* Slide-down animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Form Input and Textarea Styles */
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #deeaec;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #f6faff;
+    color: #333;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+    outline: none;
+    border: 2px solid #064e9a;
+    box-shadow: 0 0 10px rgba(6, 78, 154, 0.4);
+}
+
+/* Submit Button Enhancements */
+.form-container button {
+    background-color: #1d1b31;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form-container button:hover {
+    background-color: #555276;
+    transform: translateY(-2px);
+}
+
+/* Error Message Styling */
+.form-container .error {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+/* Table Enhancements */
+.notes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.notes-table th, .notes-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.notes-table th {
+    background-color: #02203f;
+    color: white;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.notes-table td {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Row Hover Effects */
+.notes-table tr:hover {
+    background-color: #eef3ff;
+    transform: scale(1.02);
+}
+
+/* Actions Column Icons */
+.notes-table td i {
+    font-size: 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: #3807b2;
+}
+
+.notes-table td i:hover {
+    color: #17cf45;
+}
+
+/* Delete Icon Specific Styling */
+.notes-table td i.bx-trash {
+    color: #b71417;
+}
+
+.notes-table td i.bx-trash:hover {
+    color: #ff6f61;
+}
+
+/* Accessibility Enhancements */
+table {
+    border-spacing: 0;
+    caption-side: top;
+    border: 1px solid #ddd;
+}
+
+
+
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+    th, td {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .form-container input,
+    .form-container textarea {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+/* Add Note Button Styles */
+a > button {
+    background-color: #0056b3; /* A vibrant blue */
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+a > button:hover {
+    background-color: #004099; /* Darker blue on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+a > button:focus {
+    outline: 2px solid #004099; /* Blue outline for focus */
+    outline-offset: 2px;
+}
+
+a > button:active {
+    background-color: #003366; /* Even darker blue when clicked */
+    transform: translateY(1px); /* Pressed effect */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Disabled Button State */
+a > button:disabled {
+    background-color: #cccccc; /* Grey for disabled state */
+    color: #666666;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+.note-container h1 {
+    text-align: center; /* Centers the text horizontally */
+    color: #333; /* Optional: Set a color for the text */
+    font-size: 24px; /* Optional: Adjust font size */
+    margin-bottom: 20px; /* Optional: Add some space below the title */
+}
+/* Knowledge Note Container */
+.note-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    justify-content: center; /* Centers content vertically */
+    text-align: center; /* Ensures text inside is centered */
+    padding: 30px;
+    background: #f9f9f9; /* Light background for the container */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adds a soft shadow for depth */
+    border-radius: 12px;
+    margin: 20px;
+    max-width: 600px; /* Optional: Limits width of the container */
+    animation: fadeIn 0.5s ease-out; /* Optional: Fade-in effect */
+}
+
+/* Knowledge Note Topic (Title) Styling */
+.note-container h1 {
+    font-size: 32px; /* Larger font size for emphasis */
+    font-weight: bold; /* Makes the title bold */
+    color: #011517; /* Dark color for the title */
+    margin-bottom: 20px; /* Adds space below the title */
+    padding: 10px; /* Adds padding inside the title area */
+    background-color: #eaf1fd; /* Light blue background behind the title */
+    border-radius: 8px; /* Rounds the edges of the title background */
+    text-transform: uppercase; /* Optional: Makes the title uppercase */
+    letter-spacing: 2px; /* Adds some space between letters for better readability */
+}
+
+/* Optional: Add a subtle fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Additional Styles for the Note Content */
+.note-container p {
+    font-size: 16px;
+    color: #555; /* Slightly lighter text color */
+    line-height: 1.6;
+    padding: 0 20px; /* Adds horizontal padding for better text alignment */
+}
+
+/* Optional: Add a hover effect to the note container */
+.note-container:hover {
+    transform: scale(1.03); /* Slight scale-up effect when hovered */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Slightly bigger shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+/* Knowledge Note Container (Full Page) */
+.note-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    justify-content: center; /* Centers content vertically */
+    text-align: center; /* Ensures text inside is centered */
+    padding: 50px 20px; /* Increase padding for more space around the content */
+    background: #f9f9f9; /* Light background for the container */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adds a soft shadow for depth */
+    border-radius: 12px;
+    margin: 0 auto;
+    width: 80%; /* Takes up 80% of the page width */
+    height: 90vh; /* Makes the container height 90% of the viewport height */
+    max-width: 1200px; /* Optional: Limits maximum width of the container */
+    animation: fadeIn 0.5s ease-out; /* Optional: Fade-in effect */
+}
+
+/* Knowledge Note Topic (Title) Styling */
+.note-container h1 {
+    font-size: 48px; /* Larger font size for emphasis */
+    font-weight: bold; /* Makes the title bold */
+    color: #011517; /* Dark color for the title */
+    margin-bottom: 30px; /* Adds space below the title */
+    padding: 15px; /* Adds padding inside the title area */
+    background-color: #eaf1fd; /* Light blue background behind the title */
+    border-radius: 8px; /* Rounds the edges of the title background */
+    text-transform: uppercase; /* Optional: Makes the title uppercase */
+    letter-spacing: 3px; /* Adds some space between letters for better readability */
+}
+
+/* Optional: Add a subtle fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Additional Styles for the Note Content */
+.note-container p {
+    font-size: 18px; /* Bigger font size for better readability */
+    color: #555; /* Slightly lighter text color */
+    line-height: 1.6;
+    padding: 0 30px; /* Adds horizontal padding for better text alignment */
+}
+
+/* Optional: Add a hover effect to the note container */
+.note-container:hover {
+    transform: scale(1.03); /* Slight scale-up effect when hovered */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Slightly bigger shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
 /* Dark Blue Theme Styles */
 body {
     font-family: Arial, sans-serif;
@@ -107,8 +695,6 @@ td {
     color: #555;
 }
 
-
-
 /* Responsive Styles */
 @media (max-width: 768px) {
     th, td {
@@ -119,80 +705,174 @@ td {
         font-size: 20px;
     }
 }
-/* General styles */
+
+/* General Body Styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f9;
     color: #333;
+    line-height: 1.6;
 }
 
-/* Button to add a note */
-a > button {
-    background-color: #0a2f56;
-    color: #fff;
-    padding: 10px 20px;
+/* Knowledge Panel Container */
+.add-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #eaf1fd; /* Subtle Blue Background */
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.5s ease-out;
+    transition: transform 0.3s ease;
+}
+
+.add-container:hover {
+    transform: scale(1.02);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add Button Styling */
+.add {
+    font-size: 18px;
+    color: #011517; /* Light Blue for text */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.add:hover {
+    color: #0056b3;
+}
+
+.add i {
+    margin-left: 5px;
+    color: #00bcd4; /* Light Blue Icon */
+    transition: transform 0.3s ease;
+}
+
+.add:hover i {
+    transform: rotate(20deg);
+}
+
+/* Form Popup Enhancements */
+.form-popup {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    animation: slideDown 0.5s ease;
+}
+
+/* Slide-down animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Form Input and Textarea Styles */
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #deeaec;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #f6faff;
+    color: #333;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+    outline: none;
+    border: 2px solid #064e9a;
+    box-shadow: 0 0 10px rgba(6, 78, 154, 0.4);
+}
+
+/* Submit Button Enhancements */
+.form-container button {
+    background-color: #1d1b31;
+    color: white;
+    padding: 12px 24px;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
-    margin: 20px;
-    text-transform: uppercase;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-a > button:hover {
-    background-color: #064e9a;
+.form-container button:hover {
+    background-color: #555276;
+    transform: translateY(-2px);
 }
 
-/* Note container styles */
-.note-container {
-    width: 90%;
-    margin: 0 auto;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 4px 8px rgba(39, 7, 145, 0.1);
-    border-radius: 8px;
+/* Error Message Styling */
+.form-container .error {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin: 5px 0;
+    font-weight: bold;
 }
 
-.note-container h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #444;
-}
-
-/* Table styles */
-.notes-table-container {
-    overflow-x: auto;
-}
-
+/* Table Enhancements */
 .notes-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    background: #fafafa;
+    margin: 20px 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.notes-table th,
-.notes-table td {
-    padding: 10px 15px;
+.notes-table th, .notes-table td {
+    padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .notes-table th {
-    background: #02203f;
-    color: #fff;
-    font-weight: bold;
+    background-color: #02203f;
+    color: white;
+    font-size: 16px;
     text-transform: uppercase;
 }
 
-.notes-table tr:hover {
-    background-color: #f1f1f1;
+.notes-table td {
+    font-size: 14px;
+    color: #555;
 }
 
-/* Actions column styling */
+/* Row Hover Effects */
+.notes-table tr:hover {
+    background-color: #eef3ff;
+    transform: scale(1.02);
+}
+
+/* Actions Column Icons */
 .notes-table td i {
     font-size: 20px;
     margin: 0 10px;
@@ -200,14 +880,54 @@ a > button:hover {
     transition: color 0.3s ease;
     color: #3807b2;
 }
-.notes-table td i.bx-trash {
-    color: #b71417;}
 
 .notes-table td i:hover {
-    color: #0ebb4d;
+    color: #17cf45;
 }
 
-/* Delete icon specific styling */
+/* Delete Icon Specific Styling */
+.notes-table td i.bx-trash {
+    color: #b71417;
+}
+
 .notes-table td i.bx-trash:hover {
-    color: #e58518;
+    color: #ff6f61;
+}
+
+/* Knowledge Note Container */
+.note-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    justify-content: center; /* Centers content vertically */
+    text-align: center; /* Ensures text inside is centered */
+    padding: 50px 20px; /* Increase padding for more space around the content */
+    background: #f9f9f9; /* Light background for the container */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Adds a soft shadow for depth */
+    border-radius: 12px;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 1000px;
+}
+
+.note-container h1 {
+    font-size: 36px;
+    font-weight: 600;
+    color: #0a1a1a;
+    margin-bottom: 20px;
+}
+
+.note-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.note-container td {
+    font-size: 16px;
+}
+
+@media screen and (max-width: 768px) {
+    .note-container h1 {
+        font-size: 28px;
+    }
 }
