@@ -15,7 +15,11 @@
         <button class="view-all">View All Precedents</button>
     </a> -->
     <div class="form-container">
-        <form method="POST" id="precedentForm" action="<?= ROOT ?>/PrecedentsController/create" novalidate>
+        <form method="POST" 
+        id="precedentForm" 
+        action="<?= ROOT ?>/PrecedentsController/create" 
+        enctype="multipart/form-data"
+        novalidate>
             <div class="form-group">
                 <label for="date">Date:</label>
                 <input type="date" id="date" name="judgment_date" required>
@@ -41,8 +45,8 @@
             </div>
 
             <div class="form-group">
-                <label for="document_link">Document Link:</label>
-                <input type="text" id="document_link" name="document_link" required>
+                <label for="document_link">Case document:</label>
+                <input type="file" id="document_link" name="document_link" required>
                 <div class="error" id="documentLinkError"></div>
             </div>
 

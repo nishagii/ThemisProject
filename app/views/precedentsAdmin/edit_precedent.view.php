@@ -113,6 +113,12 @@
     font-size: 14px;
     margin-top: 5px;
     }
+    a{
+        color: #3f51b5;
+        text-decoration: none;
+        font-weight: bold;
+        padding-left: 20px;
+    }
 
     /* Responsive adjustments */
     @media (max-width: 768px) {
@@ -184,10 +190,21 @@
         opacity: 0.7;
         cursor: wait;
     }
+    input[type="file"]::file-selector-button {
+    background-color: #3f51b5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
 </style>
 
 <body>
-    <form id="precedentEditForm"action="<?= ROOT ?>/PrecedentsController/updatePrecedent" method="POST" novalidate>
+    <form id="precedentEditForm"
+    action="<?= ROOT ?>/PrecedentsController/updatePrecedent" method="POST" 
+    enctype="multipart/form-data"
+    novalidate>
         <input type="hidden" name="id" value="<?= $case->id ?>">
 
         <div class="form-section">
@@ -212,11 +229,13 @@
                     <input id="judgment_by" type="text" name="judgment_by" value="<?= htmlspecialchars($case->judgment_by) ?>" required>
                     <div class="error" id="judgmentByError"></div>
                 </div>
-                <div class="form-group">
-                    <label for="document_link">Document:</label>
-                    <input id="document_link" type="text" name="document_link" value="<?= htmlspecialchars($case->document_link) ?>" required>
-                    <div class="error" id="documentLinkError"></div>
-                </div>
+            <div class="form-group">
+                <label for="document_link">Current Document:</label>
+                <a href="<?php echo $case->document_link; ?>" target="_blank">View Document</a>
+                <p><b>Or upload a new document (optional):</b></p>
+                <input type="file" name="document_upload">
+                <div class="error" id="documentLinkError"></div>
+            </div>
 
             <div class="form-group">
                 <button type="submit" class="submit-button">Update Case</button>
