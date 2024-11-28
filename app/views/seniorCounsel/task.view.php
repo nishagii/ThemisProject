@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/task.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- this is imported to use icons -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -84,8 +85,10 @@
                 <td><?= htmlspecialchars($t->priority) ?></td>
                 <td><?= htmlspecialchars($t->status) ?></td>
                 <td>
+
                     <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $t->taskID ?>" class="edit-btn">Edit</a> <!-- Edit Link -->
-                    <a href="<?= ROOT ?>/tasklawyer/deleteTask/<?= $t->taskID ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this task?')">Delete</a> <!-- Delete Link -->
+                   
+                    <a href="javascript:void(0);" class="delete-btn" onclick="confirmDelete(<?= $t->taskID; ?>)">Delete</a> <!-- Delete Link -->
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -94,6 +97,27 @@
 </div>
 
     </div>
+        <script>
+            function confirmDelete(taskID) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you really want to delete this task? This action cannot be undone!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#93a8e3',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel',
+                background: '#fafafa',
+                color: '#1d1b31',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the delete action
+                    window.location.href = `<?= ROOT ?>/tasklawyer/deleteTask/${taskID}`;
+                }
+            });
+        }
+        </script>
 
 </body>
 </html>

@@ -63,6 +63,7 @@ issue was in the core controller view function -->
                                 <i class="bx bx-trash"></i> <!-- Boxicon for Delete -->
                             </button>
                         </a>
+                        
 
                     </div>
                 </div>
