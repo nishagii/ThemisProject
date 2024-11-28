@@ -41,8 +41,8 @@
             </div>
 
             <div class="form-group">
-                <label for="document_link">Document Link:</label>
-                <input type="text" id="document_link" name="document_link" required>
+                <label for="document_link">Case document:</label>
+                <input type="file" id="document_link" name="document_link" required>
                 <div class="error" id="documentLinkError"></div>
             </div>
 
