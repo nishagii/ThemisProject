@@ -52,7 +52,7 @@
 
             <div class="form-actions">
                 <button type="submit" class="btn-submit">Save Precedent</button>
-                <a href="<?= ROOT ?>/precedents" class="btn-cancel">Cancel</a>
+                <a href="<?= ROOT ?>/precedentsController/create" class="btn-cancel">Cancel</a>
             </div>
         </form>
     </div>

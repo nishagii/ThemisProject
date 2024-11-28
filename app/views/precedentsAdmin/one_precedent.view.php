@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Precedent Details</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;700&display=swap');
 
@@ -129,9 +130,30 @@
         </div>
         <div class="card-footer">
             <a href="<?= ROOT ?>/PrecedentsController/edit/<?= $case->id ?>" class="btn btn-edit">Edit Case</a>
-            <a href="<?= ROOT ?>/PrecedentsController/deletePrecedent/<?= $case->id ?>" class="btn btn-delete">Delete Case</a>
+            <a href="javascript:void(0);" onclick="confirmDelete(<?= $case->id; ?>)" class="btn btn-delete">Delete Case</a>
         </div>
     </div>
 </body>
 
+<script>
+        function confirmDelete(caseId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you really want to delete this case? This action cannot be undone!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#93a8e3',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel',
+                background: '#fafafa',
+                color: '#1d1b31',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to the delete action
+                    window.location.href = `<?= ROOT ?>/PrecedentsController/deletePrecedent/${caseId}`;
+                }
+            });
+        }
+    </script>
 </html>
