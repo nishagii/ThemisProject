@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attorney Meeting Requests</title>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/calendar.css">
 </head>
 
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
+    <div class="align">
     <div class="calendar-container">
                 <div class="calendar-header">
                   <h3>Calendar</h3>
@@ -37,6 +39,7 @@
                   </tbody>
                 </table>
               </div>
+    </div>
 
     <script>
         const calendarBody = document.getElementById('calendar-body');

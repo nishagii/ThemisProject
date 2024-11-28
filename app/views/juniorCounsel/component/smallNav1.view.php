@@ -12,7 +12,7 @@
 <body>
 <div>
         <ul class="small-navbar">
-            <li><a href="#">Calendar</a></li>
+            <li><a href="calendarjunior">Calendar</a></li>
             <li><a href="task">Task Board</a></li>
             <li><a href="templateJunior">Document templates</a></li>
             <li><a href="knowledge">Knowledge Panel</a></li>

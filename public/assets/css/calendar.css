@@ -1,0 +1,122 @@
+.align {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.calendar-container {
+    width: 90%;
+    max-width: 600px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.calendar-header {
+    margin-bottom: 20px;
+}
+
+.calendar-header h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #172554;
+    margin: 0;
+}
+
+.calendar-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.calendar-nav span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1b2748;
+}
+
+.calendar-nav button {
+    background-color: #1b2748;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.calendar-nav button:hover {
+    background-color: #374151;
+}
+
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin-top: 10px;
+}
+
+.calendar-table th {
+    background-color: #e4e9f7;
+    color: #1b2748;
+    font-size: 16px;
+    padding: 10px 0;
+    text-transform: uppercase;
+}
+
+.calendar-table td {
+    font-size: 14px;
+    padding: 10px;
+    width: 14.28%;
+    /* Equal width for all days */
+    height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+}
+
+.calendar-table td:hover {
+    background-color: #e0f2fe;
+    color: #172554;
+}
+
+.calendar-table td.inactive {
+    color: #b0b0b0;
+    background-color: #f9fafb;
+}
+
+.calendar-table td.active {
+    background-color: #1d4ed8;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.calendar-table td::before {
+    content: attr(data-event);
+    font-size: 10px;
+    color: #1d4ed8;
+    display: block;
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+}
+
+.calendar-table td[data-event]:hover::before {
+    color: #000;
+}
+
+.calendar-footer {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+}
