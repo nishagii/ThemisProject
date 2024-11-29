@@ -67,6 +67,7 @@ public function create() {
 }
 
 /*--------------------Retrieve------------------------------- */
+
     public function retrieveAll()
     {
         $caseModel = $this->loadModel('PrecedentModel'); 

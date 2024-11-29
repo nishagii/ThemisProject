@@ -36,6 +36,12 @@ nav {
     align-items: center;
 }
 
+nav h1 {
+    color: white;
+    text-align: center;
+    font-weight: 600;
+}
+
 .navbar-logo {
     height: 75px; 
     vertical-align: middle; 

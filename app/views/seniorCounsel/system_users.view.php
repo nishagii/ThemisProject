@@ -35,8 +35,23 @@
             <!-- Example user card for clients -->
             <div class="user-card">
                 <div class="icon"><i class="fas fa-user"></i></div>
-                <h3>John Doe</h3>
-                <p>john.doe@example.com</p>
+                <h3>Nadhiya Nashath</h3>
+                <p>nadhiya@example.com</p>
+            </div>
+            <div class="user-card">
+                <div class="icon"><i class="fas fa-user"></i></div>
+                <h3>Nishagi Jeewantha</h3>
+                <p>nish@example.com</p>
+            </div>
+            <div class="user-card">
+                <div class="icon"><i class="fas fa-user"></i></div>
+                <h3>Sawani Vihanga</h3>
+                <p>sawani@example.com</p>
+            </div>
+            <div class="user-card">
+                <div class="icon"><i class="fas fa-user"></i></div>
+                <h3>Chamath Abeysinghe</h3>
+                <p>chamath@example.com</p>
             </div>
             <div class="user-card">
                 <div class="icon"><i class="fas fa-user"></i></div>
@@ -45,28 +60,13 @@
             </div>
             <div class="user-card">
                 <div class="icon"><i class="fas fa-user"></i></div>
-                <h3>John Doe</h3>
-                <p>john.doe@example.com</p>
+                <h3>Doe</h3>
+                <p>doe@example.com</p>
             </div>
             <div class="user-card">
                 <div class="icon"><i class="fas fa-user"></i></div>
-                <h3>John Doe</h3>
-                <p>john.doe@example.com</p>
-            </div>
-            <div class="user-card">
-                <div class="icon"><i class="fas fa-user"></i></div>
-                <h3>John Doe</h3>
-                <p>john.doe@example.com</p>
-            </div>
-            <div class="user-card">
-                <div class="icon"><i class="fas fa-user"></i></div>
-                <h3>John Doe</h3>
-                <p>john.doe@example.com</p>
-            </div>
-            <div class="user-card">
-                <div class="icon"><i class="fas fa-user"></i></div>
-                <h3>John Doe</h3>
-                <p>john.doe@example.com</p>
+                <h3>Mark</h3>
+                <p>Mark.doe@example.com</p>
             </div>
         </div>
 
@@ -80,20 +80,20 @@
 
             <div class="user-card">
                 <div class="icon"><i class="fas fa-user-tie"></i></div>
-                <h3>Jane Smith</h3>
-                <p>jane.smith@example.com</p>
+                <h3>Smith</h3>
+                <p>smith@example.com</p>
             </div>
 
             <div class="user-card">
                 <div class="icon"><i class="fas fa-user-tie"></i></div>
-                <h3>Jane Smith</h3>
-                <p>jane.smith@example.com</p>
+                <h3>Jaya</h3>
+                <p>jaya@example.com</p>
             </div>
 
             <div class="user-card">
                 <div class="icon"><i class="fas fa-user-tie"></i></div>
-                <h3>Jane Smith</h3>
-                <p>jane.smith@example.com</p>
+                <h3>Sunny</h3>
+                <p>sunny@example.com</p>
             </div>
         </div>
 
@@ -106,8 +106,8 @@
             </div>
             <div class="user-card">
                 <div class="icon"><i class="fas fa-user-graduate"></i></div>
-                <h3>Emma Brown</h3>
-                <p>emma.brown@example.com</p>
+                <h3>Em</h3>
+                <p>em@example.com</p>
             </div>
         </div>
     </div>

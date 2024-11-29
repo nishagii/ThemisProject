@@ -26,10 +26,10 @@
 
             <div class="navbar-icons">
                 <i class="fas fa-bell"></i>
-                <a href="setting">
+                <a href="#">
                     <i class="fas fa-cog"></i>
                 </a>
-                <a href="profileadmin">
+                <a href="#">
                     <i class="fas fa-user-circle"></i>
                 </a>
             </div>

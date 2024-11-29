@@ -28,7 +28,7 @@ class Login
                 } elseif ($user->role === 'lawyer') {
                     redirect('homelawyer?login=success');
                 } elseif ($user->role === 'attorney') {
-                    redirect('homeattorney?login=success');
+                    redirect('homejunior?login=success');
                 }elseif ($user->role === 'junior') {
                     redirect('homejunior?login=success');
                 }elseif ($user->role === 'precedent') {

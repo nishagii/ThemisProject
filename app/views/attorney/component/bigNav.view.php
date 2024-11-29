@@ -20,10 +20,10 @@
             </label>
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="Logo" class="navbar-logo" />
             <ul class="big-navbar">
-                <li><a href="#">Home</a></li>
-                <li><a href="case">Cases</a></li>
+                <li><a href="homejunior">Home</a></li>
+                <li><a href="casejunior">Cases</a></li>
                 <li><a href="salary">Salary</a></li>
-                <li><a href="precedent">Precedents</a></li>
+                <li><a href="precedentjunior">Precedents</a></li>
             </ul>
         </nav>
 
