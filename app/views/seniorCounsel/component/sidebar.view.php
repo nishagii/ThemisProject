@@ -49,7 +49,7 @@
                 <span class="tooltip">Junior Councel</span>
             </li>
             <li>
-                <a href="#">
+                <a href="<?= ROOT ?>/chat">
                     <i class='bx bx-chat'></i>
                     <span class="links_name">Messages</span>
                 </a>
