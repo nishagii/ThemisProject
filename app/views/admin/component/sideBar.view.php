@@ -24,7 +24,7 @@
    </div>
    <ul class="nav-list">
      <li>
-       <a href="homeadmin">
+       <a href="<?= ROOT ?>/admin">
            <i class='bx bx-user'></i>
            <span class="links_name">Add User</span>
        </a>
