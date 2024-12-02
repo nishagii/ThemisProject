@@ -1,8 +1,8 @@
-<?php
-echo '<pre>';
-print_r($errors);
-echo '</pre>';
-?>
+<!-- <?php
+        echo '<pre>';
+        print_r($errors);
+        echo '</pre>';
+        ?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +14,11 @@ echo '</pre>';
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/admin/add_user.css" />
 </head>
 
-<body>
+<body> 
+    <?php include('component/navBar.view.php'); ?>
+    <?php include('component/sideBar.view.php'); ?>
+
+
     <div class="new-user-header">
         <h1>Add a New User</h1>
     </div>
