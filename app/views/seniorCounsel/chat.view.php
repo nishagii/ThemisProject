@@ -18,7 +18,17 @@
     <?php include('component/smallNav1.view.php'); ?>
     <?php include('component/sidebar.view.php'); ?>
 
-    
+    <div class="home-section">
+        <div class="chat">
+            <div id="inner_left_panel">
+                gggggggggggggggggggggg
+            </div>
+            <div id="inner_right_panel">
+                hhhhhhhhhhhhhhhhhhhhhhhh
+            </div>
+        </div>
+    </div>
+    <script src="<?= ROOT ?>/assets/js/chat.js"> </script>
 </body>
 
 </html>

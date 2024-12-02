@@ -1,0 +1,15 @@
+.chat {
+    display: flex;
+}
+
+#inner_left_panel {
+    background-color: white;
+    flex: 1;
+    min-height: 110vh;
+}
+
+#inner_right_panel {
+    background-color: #eff2f9;
+    flex: 3;
+    min-height: 110vh;
+}
