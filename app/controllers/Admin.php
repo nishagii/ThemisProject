@@ -14,12 +14,6 @@ class Admin
             // die();
             $user = $this->loadModel('UserModel');
 
-            // Validate role field
-            $valid_roles = ['lawyer', 'junior', 'attorney', 'precedent'];
-            if (!isset($_POST['role']) || !in_array($_POST['role'], $valid_roles)) {
-                $data['errors'][] = "Invalid or missing role. Please select a valid role.";
-            }
-
             // Validate other input fields
             if (empty($data['errors']) && $user->validate($_POST)) {
                 // Save user with the specified role
