@@ -15,9 +15,17 @@
 
     <div class="home-section">
         <div class="chat">
-            <div id="inner_left_panel">
-                <!-- Content will be loaded here -->
-            </div>
+        <div id="inner_left_panel">
+            <!-- Content will be loaded here -->
+                <div class="icon">
+                    <i class="bx bx-plus-circle" id="addButton"></i>
+                </div>
+                
+                <div class="message">
+                    <h4>Messages</h4>
+                </div>
+        </div>
+
             <div id="inner_right_panel">
                 hhhhhhhhhhhhhhhhhhhhhhhh
             </div>

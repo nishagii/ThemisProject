@@ -14,3 +14,33 @@
     flex: 3;
     min-height: 110vh;
 }
+
+#addButton {
+    font-size: 20px;
+    color: #a8a8a9;
+    cursor: pointer;
+    align-self: right;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.chat h4 {
+    font-weight: 500;
+    text-align: center;
+}
+
+
+
+.icon {
+    display: flex; /* Enable flexbox */
+    justify-content: flex-end; /* Push content to the right */
+    align-items: center; /* Center the content vertically */
+    padding: 5px; /* Optional: Add padding for spacing */
+}
+
+#newComponent {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    height: 110vh;
+}
