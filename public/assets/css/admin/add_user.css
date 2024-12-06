@@ -1,0 +1,197 @@
+/* Global Styles */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+
+
+/* Modern color scheme and base styles */
+:root {
+  --primary-color: #1d1b31;
+  --secondary-color: #fa9800;
+  --background-color: #f5f6fa;
+  --input-background: #f1f1f1;
+  --text-color: #2c3e50;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #E4E9F7;
+}
+
+.add-user-container{
+  margin-top: 135px;
+}
+
+/* Header styling */
+.new-user-header {
+  /* background-color: #f4f8ff; */
+
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.new-user-header h1 {
+  color: var(--input-background);
+  font-size: 2rem;
+    color: #1d1b31;
+  margin: 0;
+  padding: 10px 0;
+}
+
+/* Form container */
+.new-user-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--input-background);
+  padding: 30px;
+  border-radius: 10px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form group styling */
+.new-user-form-group {
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.new-user-form-group ::placeholder{
+    color: #999999;
+}
+
+/* Label styling */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  color: var(--primary-color);
+}
+
+/* Input and select styling */
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e4e9f7;
+  background-color: #e4e9f7;
+  border-radius: 10px;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #fa9800;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/* Select specific styling */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+}
+
+/* Submit button styling */
+.submit-button {
+  width: 20%;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: rgb(233, 140, 1);
+}
+
+.submit-button:active {
+  transform: scale(0.98);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .new-user-form {
+    padding: 20px;
+    margin: 0 10px;
+  }
+
+  .new-user-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .submit-button {
+    width: 40%;
+  }
+
+  .new-user-form-group.inline label {
+    padding: 10px;
+    width: 450px;
+    margin: 0; /* Remove any default margin from label */
+  }
+}
+
+/* Placeholder styling */
+::placeholder {
+  color: #95a5a6;
+  opacity: 1;
+}
+
+/* Input validation styling */
+/* input:invalid {
+  border-color: var(--error-color);
+} */
+
+input:valid {
+  border-color: #bdc3c7;
+}
+
+/* Focus visible for accessibility
+input:focus-visible,
+select:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
+} */
+
+/* Inline style for checkbox and label */
+.new-user-form-group.inline {
+  width: 28%;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust spacing between checkbox and label */
+}
+.new-user-form-group.inline input {
+  padding: 0px;
+  margin: 0px;
+  width: 30px;
+}
+
+.new-user-form-group.inline label {
+  padding:0px;
+  width: 800px;
+  margin: 0; 
+}
+
+p {
+    color: red !important;
+    font-size: 0.9rem !important;
+    margin: 0px 5px 5px !important;
+}
+
+
+
+
+
