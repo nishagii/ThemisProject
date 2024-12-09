@@ -20,4 +20,13 @@ class Template
         // Load the view with data
         $this->view('/seniorCounsel/template', $data);
     }
+/*------------------------------retrieve function ------------------------------------*/
+    public function retrieve()
+    {
+        $templateModel = $this->loadModel('templateModel'); 
+        $templates = $templateModel->getAll();
+
+        // Pass data to the view
+        $this->view('seniorCounsel/template', ['templates' => $templates]);
+    }
 }

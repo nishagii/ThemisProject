@@ -64,8 +64,8 @@
                         <tr>
                             <td><?php echo $template->name; ?></td>
                             <td><?php echo $template->description; ?></td>
-                            <td><?php echo $template->upload_by; ?></td>
-                            <td><?php echo $template->upload_date; ?></td>
+                            <td><?php echo $template->uploaded_by; ?></td>
+                            <td><?php echo $template->uploaded_date; ?></td>
                             <td>
                                 <div class="action-menu">
                                     <button class="dots-btn">⋮</button>
