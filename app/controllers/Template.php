@@ -5,6 +5,12 @@ class Template
 {
     use Controller;
 
+    private $templateModel;
+
+    public function __construct() {
+        $this->templateModel = $this->loadModel('templateModel');
+    }
+
     public function index()
     {
 
