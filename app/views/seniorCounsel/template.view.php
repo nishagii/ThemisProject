@@ -72,6 +72,7 @@
                                 <div class="action-menu">
                                     <button class="dots-btn">⋮</button>
                                     <div class="dropdown">
+                                        <button class="dropdown-item">Download</button>
                                         <button class="dropdown-item">Edit</button>
                                         <button class="dropdown-item">Delete</button>
                                     </div>
@@ -89,6 +90,29 @@
             </div>
         </div>
     </div>
-</body>
+    <script>
+    // Toggle the dropdown menu
+    document.addEventListener("DOMContentLoaded", function () {
+        const actionMenus = document.querySelectorAll(".action-menu");
 
+        actionMenus.forEach(menu => {
+            const button = menu.querySelector(".dots-btn");
+            const dropdown = menu.querySelector(".dropdown");
+
+            button.addEventListener("click", function (e) {
+                e.stopPropagation(); // Prevent click propagation
+                // Toggle visibility of dropdown
+                dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function () {
+            document.querySelectorAll(".dropdown").forEach(dropdown => {
+                dropdown.style.display = "none";
+            });
+        });
+    });
+</script>
+</body>
 </html>
