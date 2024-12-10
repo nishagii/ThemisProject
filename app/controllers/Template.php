@@ -58,15 +58,13 @@ public function create() {
 
         // Prepare data for insertion
         $data = [
-            'judgment_date' => $_POST['judgment_date'],
-            'case_number' => $_POST['case_number'],
-            'name_of_parties' => $_POST['parties'],
-            'judgment_by' => $_POST['judgment_by'],
-            'document_link' => $documentLink  // Use the correct variable here
+            'name' => $_POST['name'],
+            'description' => $_POST['description'],
+            'document_link' => $documentLink
         ];
 
         // Insert into database
-        $this->template->insert($data);
+        $this->templateModel->insert($data);
     }
 
     $this->view('seniorCounsel/add_template');

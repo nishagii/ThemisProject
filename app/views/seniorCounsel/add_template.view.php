@@ -11,92 +11,66 @@
     <?php include('component/smallNav1.view.php'); ?>
     <div class="form-container">
         <form method="POST" 
-        id="precedentForm" 
-        action="<?= ROOT ?>/PrecedentsController/create" 
+        id="templateForm" 
+        action="<?= ROOT ?>/Template/create" 
         enctype="multipart/form-data"
         novalidate>
             <div class="form-group">
-                <label for="date">Date:</label>
-                <input type="date" id="date" name="judgment_date" required>
-                <div class="error" id="dateError"></div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <div class="error" id="nameError"></div>
             </div>
 
             <div class="form-group">
-                <label for="case_number">Case Number:</label>
-                <input type="text" id="case_number" name="case_number" required>
-                <div class="error" id="caseNumberError"></div>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+                <div class="error" id="descriptionError"></div>
             </div>
 
             <div class="form-group">
-                <label for="parties">Name of Parties:</label>
-                <textarea id="parties" name="parties" required></textarea>
-                <div class="error" id="partiesError"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="judgment_by">Judgment by:</label>
-                <input type="text" id="judgment_by" name="judgment_by" required>
-                <div class="error" id="judgmentByError"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="document_link">Case document:</label>
+                <label for="document_link">Template document:</label>
                 <input type="file" id="document_link" name="document_link" required>
                 <div class="error" id="documentLinkError"></div>
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn-submit">Save Precedent</button>
-                <a href="<?= ROOT ?>/precedentsController/create" class="btn-cancel">Cancel</a>
+                <button type="submit" class="btn-submit">Save Template</button>
+                <a href="<?= ROOT ?>/Template/create" class="btn-cancel">Cancel</a>
             </div>
         </form>
     </div>
     <script>
         // Form Validation
-        document.getElementById('precedentForm').addEventListener('submit', function(event) {
+        document.getElementById('templateForm').addEventListener('submit', function(event) {
             // Get form fields
-            const date = document.getElementById('date').value;
-            const caseNumber = document.getElementById('case_number').value.trim();
-            const parties = document.getElementById('parties').value.trim();
-            const judgmentBy = document.getElementById('judgment_by').value.trim();
+            const name = document.getElementById('name').value.trim();
+            const description = document.getElementById('description').value.trim();
             const documentLink = document.getElementById('document_link').value.trim();
 
             // Error elements
-            const dateError = document.getElementById('dateError');
-            const caseNumberError = document.getElementById('caseNumberError');
-            const partiesError = document.getElementById('partiesError');
-            const judgmentByError = document.getElementById('judgmentByError');
+            const nameError = document.getElementById('nameError');
+            const descriptionError = document.getElementById('descriptionError');
             const documentLinkError = document.getElementById('documentLinkError');
 
             // Reset error messages
-            dateError.textContent = '';
-            caseNumberError.textContent = '';
-            partiesError.textContent = '';
-            judgmentByError.textContent = '';
+            nameError.textContent = '';
+            descriptionError.textContent = '';
             documentLinkError.textContent = '';
             
             // Flag to check if form is valid
             let isValid = true;
 
             // Validation checks
-            if (!date) {
-                dateError.textContent = 'Date is required.';
+            if (!name) {
+                nameError.textContent = 'template name is required.';
                 isValid = false;
             }
-            if (!caseNumber) {
-                caseNumberError.textContent = 'Case number is required.';
-                isValid = false;
-            }
-            if (!parties) {
-                partiesError.textContent = 'Name of parties is required.';
-                isValid = false;
-            }
-            if (!judgmentBy) {
-                judgmentByError.textContent = 'Judgment by is required.';
+            if (!description) {
+                descriptionError.textContent = 'description is required.';
                 isValid = false;
             }
             if (!documentLink) {
-                documentLinkError.textContent = 'Document link is required.';
+                documentLinkError.textContent = 'Document is required.';
                 isValid = false;
             }
 
