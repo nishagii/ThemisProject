@@ -5,6 +5,12 @@ class Template
 {
     use Controller;
 
+    private $templateModel;
+
+    public function __construct() {
+        $this->templateModel = $this->loadModel('templateModel');
+    }
+
     public function index()
     {
 
@@ -13,5 +19,64 @@ class Template
 
         // Load the view with data
         $this->view('/seniorCounsel/template', $data);
+    }
+
+/*---------------------Create operation----------------------------- */
+public function create() {
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // File upload logic
+        $documentLink = '';  // Default value if no file is uploaded
+        if (isset($_FILES['document_link']) && $_FILES['document_link']['error'] === UPLOAD_ERR_OK) {
+            $uploadDir = '../public/assets/templateUploads/';
+            $fileName = basename($_FILES['document_link']['name']);
+            $fileTmpPath = $_FILES['document_link']['tmp_name'];
+            $fileType = $_FILES['document_link']['type'];
+            $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+            // Define allowed file types
+            $allowedTypes = ['application/pdf'];
+
+            // Sanitize and create unique file name
+            $sanitizedFileName = uniqid('template_', true) . '.' . $fileExtension;
+            $uploadPath = $uploadDir . $sanitizedFileName;
+
+            // Ensure directory exists
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+            // Validate file type
+            if (!in_array($fileType, $allowedTypes)) {
+                die("Invalid file type. Please upload a PDF or Word document.");
+            }
+            // Move the uploaded file to the desired directory
+            if (move_uploaded_file($fileTmpPath, $uploadPath)) {
+                // Save the relative path to the database
+                $documentLink = '/themisrepo/public/assets/templateUploads/' . $sanitizedFileName;
+            } else {
+                die('File upload failed. Please try again.');
+            }
+        }
+
+        // Prepare data for insertion
+        $data = [
+            'name' => $_POST['name'],
+            'description' => $_POST['description'],
+            'document_link' => $documentLink
+        ];
+
+        // Insert into database
+        $this->templateModel->insert($data);
+    }
+
+    $this->view('seniorCounsel/add_template');
+}    
+
+/*------------------------------retrieve function ------------------------------------*/
+    public function retrieve()
+    {
+        $templateModel = $this->loadModel('templateModel'); 
+        $templates = $templateModel->getAll();
+
+        // Pass data to the view
+        $this->view('seniorCounsel/template', ['templates' => $templates]);
     }
 }

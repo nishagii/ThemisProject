@@ -36,9 +36,11 @@
             </div>
 
             <div class="add">
+            <a href="<?= ROOT ?>/template/create">
                 <button class="add-button">
                     <i class="bx bx-plus"></i> Upload New Template
                 </button>
+            </a>
             </div>
 
             <div class="template">
@@ -59,11 +61,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <?php if (!empty($templates)): ?>
+                    <?php foreach ($templates as $template): ?>
                         <tr>
-                            <td>John Doe</td>
-                            <td>Template for legal case documents</td>
-                            <td>John(Admin)</td>
-                            <td>12/09/2024</td>
+                            <td><?php echo $template->name; ?></td>
+                            <td><?php echo $template->description; ?></td>
+                            <td><?php echo $template->uploaded_by; ?></td>
+                            <td><?php echo $template->uploaded_date; ?></td>
                             <td>
                                 <div class="action-menu">
                                     <button class="dots-btn">⋮</button>
@@ -74,22 +78,12 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Sample Template</td>
-                            <td>Template for client agreements</td>
-                            <td>Jane(Admin)</td>
-                            <td>15/09/2024</td>
-                            <td>
-                                <div class="action-menu">
-                                    <button class="dots-btn">⋮</button>
-                                    <div class="dropdown">
-                                        <button class="dropdown-item">Edit</button>
-                                        <button class="dropdown-item">Delete</button>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Add more rows as needed -->
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="6">No precedents found in the database.</td>
+                    </tr>
+                <?php endif; ?>
                     </tbody>
                 </table>
             </div>
