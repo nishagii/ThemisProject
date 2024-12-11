@@ -72,9 +72,12 @@
                                 <div class="action-menu">
                                     <button class="dots-btn">⋮</button>
                                     <div class="dropdown">
-                                        <button class="dropdown-item">Download</button>
-                                        <button class="dropdown-item">Edit</button>
-                                        <button class="dropdown-item">Delete</button>
+                                        <!-- Download -->
+                                        <a href="<?php echo $template->document_link; ?>" target="_blank">Download</a>
+                                        <!-- Edit -->
+                                        <a href="<?= ROOT ?>/template/edit/<?= $template->id ?>" class="dropdown-item">Edit</a>
+                                        <!-- Delete -->
+                                        <a href="<?= ROOT ?>/template/delete/<?= $template->id ?>" class="dropdown-item" onclick="return confirm('Are you sure you want to delete this template?');">Delete</a>  
                                     </div>
                                 </div>
                             </td>

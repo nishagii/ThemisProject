@@ -198,6 +198,7 @@ a{
   border-radius: 4px;
   z-index: 1;
   min-width: 100px;
+  padding: 10px;
 }
 
 /* Dropdown items styling */
@@ -206,7 +207,7 @@ a{
   border: none;
   width: 100%;
   text-align: left;
-  padding: 10px 15px;
+  padding: 10px 16px;
   cursor: pointer;
   font-size: 14px;
   color: #333;
@@ -214,9 +215,6 @@ a{
 
 .dropdown-item:hover {
   background-color: #f1f1f1;
-}
-.dropdown-item:last-child {
-  border-bottom: none;
 }
 
 /* Show dropdown when .action-menu is active */

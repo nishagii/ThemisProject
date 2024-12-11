@@ -79,4 +79,30 @@ public function create() {
         // Pass data to the view
         $this->view('seniorCounsel/template', ['templates' => $templates]);
     }
+    /*------------------------------Download function ------------------------------------*/
+    public function download($id){
+        $template = $this->templateModel->findById($id);
+
+        if ($template && file_exists('../' . $template->document_link)) {
+            $filePath = '../' . $template->document_link;
+            $fileName = basename($filePath);
+
+            // Set headers for download
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . $fileName . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($filePath));
+
+            // Read and output the file
+            readfile($filePath);
+            exit;
+        } else {
+            // echo "File not found.";
+            http_response_code(404);
+        }
+    }
+
 }

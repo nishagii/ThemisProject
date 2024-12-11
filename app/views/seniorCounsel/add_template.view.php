@@ -9,6 +9,9 @@
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
+    <div class="header">
+            <h1>Add New Template</h1>
+    </div>
     <div class="form-container">
         <form method="POST" 
         id="templateForm" 

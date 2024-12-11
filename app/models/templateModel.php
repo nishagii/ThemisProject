@@ -24,5 +24,12 @@
             $query = "SELECT * FROM $this->table ORDER BY id DESC";
             return $this->query($query);
         }
+
+        public function findById($id) {
+            $query = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
+            $params = ['id' => $id];
+            $result = $this->query($query, $params);
+            return $result ? $result[0] : null;
+        }
     }
 ?>
