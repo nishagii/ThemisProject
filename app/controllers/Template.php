@@ -81,7 +81,7 @@ public function create() {
     }
     /*------------------------------Download function ------------------------------------*/
     public function download($id){
-        $template = $this->templateModel->findById($id);
+        $template = $this->templateModel->getById($id);
 
         if ($template && file_exists('../' . $template->document_link)) {
             $filePath = '../' . $template->document_link;
@@ -104,5 +104,60 @@ public function create() {
             http_response_code(404);
         }
     }
+/*-------------------Update---------------------------------- */
+   
+public function edit($id) {
+    $templateModel = $this->loadModel('templateModel');
+    $template = $templateModel->getById($id);
 
+    if (!$template) {
+        die("Case not found or invalid ID.");
+    }
+    $this->view('seniorCounsel/edit_template', ['template' => $template]);
+}
+
+public function updateTemplate(){
+// Collect POST data
+$data = [
+    'name' => $_POST['Name'],
+    'description' => $_POST['Description'],
+    'document_link' => $_POST['document_link'], // Keep this for the case where no file is uploaded
+    'id' => $_POST['id'],
+];
+
+// Check if a file was uploaded
+if (isset($_FILES['document_upload']) && $_FILES['document_upload']['error'] === UPLOAD_ERR_OK) {
+    // Define allowed file types
+    $allowedTypes = ['application/pdf'];
+
+    $fileTmpPath = $_FILES['document_upload']['tmp_name'];
+    $fileName = $_FILES['document_upload']['name'];
+    $fileType = $_FILES['document_upload']['type'];
+    $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+
+    // Validate file type
+    if (!in_array($fileType, $allowedTypes)) {
+        die("Invalid file type. Please upload a PDF or Word document.");
+    }
+
+    $uploadDir = '../public/assets/templateUploads/';
+    $sanitizedFileName = uniqid('template_', true) . '.' . $fileExtension;
+    $uploadPath = $uploadDir . $sanitizedFileName;
+
+    // Move the uploaded file to the server
+    if (move_uploaded_file($fileTmpPath, $uploadPath)) {
+            // Save the relative path to the database
+            $data['document_link'] = '/themisrepo/public/assets/templateUploads/' . $sanitizedFileName;
+        } else {
+            die('File upload failed. Please try again.');
+    }
+}
+
+// Update the case in the database
+$caseModel = $this->loadModel('templateModel');
+$caseModel->update($data);
+
+// Redirect to a success page or the list of cases
+redirect('template/retrieve');
+}
 }
