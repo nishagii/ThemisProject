@@ -230,11 +230,12 @@
                     <div class="error" id="judgmentByError"></div>
                 </div>
             <div class="form-group">
-                <label for="document_link">Current Document:</label>
-                <a href="<?php echo $case->document_link; ?>" target="_blank">View Document</a>
-                <p><b>Or upload a new document (optional):</b></p>
-                <input type="file" name="document_upload">
-                <div class="error" id="documentLinkError"></div>
+            <label for="document_link">Current Document:</label>
+                    <a href="<?= htmlspecialchars($case->document_link) ?>" target="_blank">View Document</a>
+                    <input type="hidden" name="current_document_link" value="<?= htmlspecialchars($case->document_link) ?>">
+                    <p><b>Or upload a new document (optional):</b></p>
+                    <input id="document_upload" type="file" name="document_upload">
+                    <div class="error" id="documentLinkError"></div>
             </div>
 
             <div class="form-group">
@@ -250,21 +251,18 @@
             const caseNumber = document.getElementById('case_number').value.trim();
             const parties = document.getElementById('name_of_parties').value.trim();
             const judgmentBy = document.getElementById('judgment_by').value.trim();
-            const documentLink = document.getElementById('document_link').value.trim();
-
+        
             // Error elements
             const dateError = document.getElementById('dateError');
             const caseNumberError = document.getElementById('caseNumberError');
             const partiesError = document.getElementById('partiesError');
             const judgmentByError = document.getElementById('judgmentByError');
-            const documentLinkError = document.getElementById('documentLinkError');
-
+            
             // Reset error messages
             dateError.textContent = '';
             caseNumberError.textContent = '';
             partiesError.textContent = '';
             judgmentByError.textContent = '';
-            documentLinkError.textContent = '';
 
             // Flag to check if form is valid
             let isValid = true;
@@ -286,11 +284,7 @@
                 judgmentByError.textContent = 'Judgment by is required.';
                 isValid = false;
             }
-            if (!documentLink) {
-                documentLinkError.textContent = 'Document link is required.';
-                isValid = false;
-            }
-
+    
             // If form is not valid, prevent submission
             if (!isValid) {
                 event.preventDefault();
