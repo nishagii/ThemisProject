@@ -74,7 +74,7 @@
                                     <button class="dots-btn">⋮</button>
                                     <div class="dropdown">
                                         <!-- Download -->
-                                        <a href="<?php echo $template->document_link; ?>" target="_blank">Download</a>
+                                        <a href="<?php echo $template->document_link; ?>" target="_blank" class="dropdown-item">Download</a>
                                         <!-- Edit -->
                                         <a href="<?= ROOT ?>/template/edit/<?= $template->id ?>" class="dropdown-item">Edit</a>
                                         <!-- Delete -->
