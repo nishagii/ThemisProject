@@ -54,5 +54,11 @@
             ];
             return $this->query($query, $params);
         }
+
+        public function delete($id){
+            $query = "DELETE FROM $this->table WHERE id = :id";
+            $params = ['id' => $id];
+            return $this->query($query, $params);
+        }
     }
 ?>

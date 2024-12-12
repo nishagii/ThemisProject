@@ -160,4 +160,16 @@ $templateModel->update($data);
 // Redirect to a success page or the list of cases
 redirect('template/retrieve');
 }
+
+public function delete($id)
+    {
+        // Load the CaseModel
+        $templateModel = $this->loadModel('templateModel');
+
+        // Delete the case
+        $templateModel->delete($id);
+
+        // Redirect to the home page or success page
+        redirect('Template/retrieve');
+    }
 }
