@@ -121,7 +121,7 @@ public function updateTemplate(){
 $data = [
     'name' => $_POST['Name'],
     'description' => $_POST['Description'],
-    'document_link' => $_POST['document_link'], // Keep this for the case where no file is uploaded
+    'document_link' => $_POST['current_document_link'], // Keep this for the case where no file is uploaded
     'id' => $_POST['id'],
 ];
 
@@ -151,11 +151,11 @@ if (isset($_FILES['document_upload']) && $_FILES['document_upload']['error'] ===
         } else {
             die('File upload failed. Please try again.');
     }
-}
+    }
 
 // Update the case in the database
-$caseModel = $this->loadModel('templateModel');
-$caseModel->update($data);
+$templateModel = $this->loadModel('templateModel');
+$templateModel->update($data);
 
 // Redirect to a success page or the list of cases
 redirect('template/retrieve');

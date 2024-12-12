@@ -220,7 +220,8 @@
                 </div>
                 <div class="form-group">
                     <label for="document_link">Current Document:</label>
-                    <a href="<?php echo $template->document_link; ?>" target="_blank">View Document</a>
+                    <a href="<?= htmlspecialchars($template->document_link) ?>" target="_blank">View Document</a>
+                    <input type="hidden" name="current_document_link" value="<?= htmlspecialchars($template->document_link) ?>">
                     <p><b>Or upload a new document (optional):</b></p>
                     <input id="document_upload" type="file" name="document_upload">
                     <div class="error" id="documentLinkError"></div>
@@ -237,17 +238,14 @@
             // Get form fields
             const name = document.getElementById('Name').value.trim();
             const description = document.getElementById('Description').value.trim();
-            // const documentLink = document.getElementById('document_upload').value.trim();
 
             // Error elements
             const nameError = document.getElementById('nameError');
             const descriptionError = document.getElementById('descriptionError');
-            const documentLinkError = document.getElementById('documentLinkError');
-
+            
             // Reset error messages
             nameError.textContent = '';
             descriptionError.textContent = '';
-            documentLinkError.textContent = '';
 
             // Flag to check if form is valid
             let isValid = true;
@@ -261,11 +259,7 @@
                 descriptionError.textContent = 'Description is required.';
                 isValid = false;
             }
-            // if (!documentLink) {
-            //     documentLinkError.textContent = 'Document link is required.';
-            //     isValid = false;
-            // }
-
+           
             // If form is not valid, prevent submission
             if (!isValid) {
                 event.preventDefault();
