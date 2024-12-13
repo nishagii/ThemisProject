@@ -1,6 +1,7 @@
 .main-container{
   background-color: #f4f8ff;
   height: 100vh;
+  max-width: 100%;
 }
 .template-container {
     background-color: #E4E9F7;
@@ -220,25 +221,99 @@ a{
   display: block;
 }
 
-@media (max-width: 768px) {
-  .table-container {
-      padding: 10px;
+/* General container adjustments for smaller screens */
+@media (max-width: 1024px) {
+  .main-container {
+    max-width: 100%;
+    padding: 10px;
   }
 
-  table th,
-  table td {
-      font-size: 0.9rem;
-      padding: 8px;
+  .template-container {
+    margin: 20px;
+    padding: 15px;
   }
-  .search-bar-container {
-      flex-direction:row;
-      max-width: 100%;
+
+  .search-bar {
+    width: 80%;
   }
-  
-  .filter-icon,.sort-icon {
-      margin-left: 5px;
-      font-size: 20px;
-      margin-top: 25px;
+
+  .add {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .template-table th,
+  .template-table td {
+    font-size: 0.9rem;
+  }
+
+  .dropdown {
+    min-width: 80px;
   }
 }
 
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  .search-container{
+    margin-top: 0px;
+    flex-direction: none;
+    align-items: center;
+  }
+  .search-bar {
+    width:50%;
+    margin-bottom: 10px;
+  }
+  .sort-icon .filter-icon{
+    margin-top: 20px;
+  }
+
+  .add-button {
+    justify-content: center;
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .template-table {
+    font-size: 0.85rem;
+  }
+
+  .template-table th,
+  .template-table td {
+    font-size: 0.75rem;
+    padding: 10px;
+  }
+
+  .dots-btn {
+    font-size: 16px;
+  }
+
+  .dropdown {
+    right: auto;
+    left: 0;
+  }
+}
+
+/* Very small devices adjustments */
+@media (max-width: 480px) {
+  .temp-section h1 {
+    font-size: 20px;
+  }
+
+  .add-button i {
+    font-size: 16px;
+  }
+
+  .search-bar {
+    font-size: 14px;
+  }
+
+  .dropdown-item {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+  }
+
+  .template-table th,
+  .template-table td {
+    font-size: 0.7rem;
+  }
+}
