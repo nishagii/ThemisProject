@@ -82,7 +82,25 @@
                 </div>
                 <input type="submit" value="Log In" class="login"> <br />
             </form>
-            <a href="">Forgot password ?</a> <br>
+            <button class="forgot-btn" onclick="togglePopup()">Forgot password?</button>
+
+            <div class="forgot-password-popup" id="forgot-password-popup">
+                <div class="overlay"></div>
+                <div class="content">
+                        <div class="close-btn">
+                            &times;
+                        </div>
+                        <h2>Forgot your password?</h2>
+                        <p>
+                            Enter your email below and we will send you an email with instructions to reset your password.
+                        </p>
+                        <form>
+                            <input type="text" placeholder="Enter your Email" required>
+                            <input type="submit" value="Send Reset Email">
+                        </form>
+                        
+                </div>
+            </div>
         </div>
         <div class="colour">
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" class="colour-logo">
