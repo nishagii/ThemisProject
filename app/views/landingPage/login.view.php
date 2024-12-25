@@ -87,7 +87,7 @@
             <div class="forgot-password-popup" id="forgot-password-popup">
                 <div class="overlay"></div>
                 <div class="content">
-                        <div class="close-btn">
+                        <div class="close-btn" onclick="togglePopup()">
                             &times;
                         </div>
                         <h2>Forgot your password?</h2>
@@ -123,6 +123,10 @@
                 viewIcon.classList.add('bxs-show');
             }
         });
+
+        function togglePopup() {
+            document.getElementById("forgot-password-popup").classList.toggle("active");
+        }
     </script>
 </body>
 
