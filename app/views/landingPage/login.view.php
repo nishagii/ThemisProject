@@ -91,13 +91,29 @@
                             &times;
                         </div>
                         <h2>Forgot your password?</h2>
-                        <p>
-                            Enter your email below and we will send you an email with instructions to reset your password.
-                        </p>
-                        <form>
-                            <input type="text" placeholder="Enter your Email" required>
-                            <input type="submit" value="Send Reset Email">
-                        </form>
+
+                        <?php
+                            switch ($mode) {
+                                case 'enter_email': ?>
+
+                                    <p>
+                                    Enter your email below and we will send you an email with instructions to reset your password.
+                                    </p>
+                                    <form>
+                                        <input type="text" placeholder="Enter your Email" name="email" required>
+                                        <input type="submit" value="Send Reset Email">
+                                    </form>
+                                
+                                <?php 
+                                    break;
+                                case 'enter_code':
+                                    break;
+                                case 'enter_password':
+                                    break;
+                                default:
+                                    break;
+                            }
+                        ?>
                         
                 </div>
             </div>

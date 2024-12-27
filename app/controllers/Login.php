@@ -44,7 +44,28 @@ class Login
                 // var_dump($data['errors']); // Debug here
             }
         }
-
         $this->view('/landingPage/login', $data);
+    }
+
+    public function forgot() {
+
+        // $mode = "enter_email";
+        // if(isset($_GET['mode'])) {
+        //     $mode = $_GET['mode'];
+        // }
+
+        // if(count($_POST) > 0) {
+        //     switch ($mode) {
+        //         case 'enter_email':
+        //             break;
+        //         case 'enter_code':
+        //             break;
+        //         case 'enter_password':
+        //             break;
+        //         default:
+        //             break;
+        //     }
+        // }
+
     }
 }
