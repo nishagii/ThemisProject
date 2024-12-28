@@ -50,24 +50,24 @@ class Login
             $mode = $_GET['mode'];
         }
 
-        if(count($_POST) > 0) {
-            switch ($mode) {
-                case 'enter_email':
-                    redirect("login?mode=enter_code");
-                    die;
-                    break;
-                case 'enter_code':
-                    redirect("login?mode=enter_password");
-                    die;
-                    break;
-                case 'enter_password':
-                    redirect("login");
-                    die;
-                    break;
-                default:
-                    break;
-            }
-        }
+        // if(count($_POST) > 0) {
+        //     switch ($mode) {
+        //         case 'enter_email':
+        //             redirect("login?mode=enter_code");
+        //             die;
+        //             break;
+        //         case 'enter_code':
+        //             redirect("login?mode=enter_password");
+        //             die;
+        //             break;
+        //         case 'enter_password':
+        //             redirect("login");
+        //             die;
+        //             break;
+        //         default:
+        //             break;
+        //     }
+        // }
 
         $this->view('/landingPage/login', ['data' => $data, 'mode' => $mode]);
 
