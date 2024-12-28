@@ -99,7 +99,7 @@
                                     <p>
                                     Enter your email below and we will send you an email with instructions to reset your password.
                                     </p>
-                                    <form>
+                                    <form method="post" action="<?= ROOT ?>/login?mode=enter_email">
                                         <input type="text" placeholder="Enter your Email" name="email" required>
                                         <input type="submit" value="Send Reset Email">
                                     </form>
@@ -107,8 +107,37 @@
                                 <?php 
                                     break;
                                 case 'enter_code':
+                                    ?>
+
+                                    <p>
+                                    Please check your email for the code and enter it below.
+                                    </p>
+                                    <form method="post" action="<?= ROOT ?>/login?mode=enter_code">
+                                        <input type="text" placeholder="Enter your code" name="code" required>
+                                        <input type="submit" value="Enter">
+                                        <a href="<?= ROOT ?>/login">
+                                            <input type="button" value="Go Back">
+                                        </a>
+                                    </form>
+                                
+                                <?php 
                                     break;
                                 case 'enter_password':
+                                    ?>
+
+                                    <p>
+                                    Enter your new password.
+                                    </p>
+                                    <form method="post" action="<?= ROOT ?>/login?mode=enter_password">
+                                        <input type="password" placeholder="Enter your password" name="password" required>
+                                        <input type="password" placeholder="Confirm your password" name="password2" required>
+                                        <input type="submit" value="Submit">
+                                        <a href="<?= ROOT ?>/login">
+                                            <input type="button" value="Go Back">
+                                        </a>
+                                    </form>
+                                
+                                <?php 
                                     break;
                                 default:
                                     break;
