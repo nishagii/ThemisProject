@@ -87,9 +87,11 @@
             <div class="forgot-password-popup" id="forgot-password-popup">
                 <div class="overlay"></div>
                 <div class="content">
+                    <a href="<?= ROOT ?>/login">
                         <div class="close-btn" onclick="togglePopup()">
                             &times;
                         </div>
+                    </a>
                         <h2>Forgot your password?</h2>
 
                         <?php
@@ -115,9 +117,6 @@
                                     <form method="post" action="<?= ROOT ?>/login?mode=enter_code">
                                         <input type="text" placeholder="Enter your code" name="code" required>
                                         <input type="submit" value="Enter">
-                                        <a href="<?= ROOT ?>/login">
-                                            <input type="button" value="Go Back">
-                                        </a>
                                     </form>
                                 
                                 <?php 
@@ -132,9 +131,6 @@
                                         <input type="password" placeholder="Enter your password" name="password" required>
                                         <input type="password" placeholder="Confirm your password" name="password2" required>
                                         <input type="submit" value="Submit">
-                                        <a href="<?= ROOT ?>/login">
-                                            <input type="button" value="Go Back">
-                                        </a>
                                     </form>
                                 
                                 <?php 
