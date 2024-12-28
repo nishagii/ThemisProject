@@ -169,9 +169,22 @@
             }
         });
 
-        function togglePopup() {
-            document.getElementById("forgot-password-popup").classList.toggle("active");
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+    const forgotPasswordPopup = document.getElementById("forgot-password-popup");
+    const currentMode = "<?= htmlspecialchars($mode ?? '', ENT_QUOTES, 'UTF-8') ?>";
+
+    if (currentMode === 'enter_code' || currentMode === 'enter_password') {
+        forgotPasswordPopup.classList.add("active");
+    }
+    
+});
+
+function togglePopup() {
+    const forgotPasswordPopup = document.getElementById("forgot-password-popup");
+    forgotPasswordPopup.classList.toggle("active");
+}
+
+    
     </script>
 </body>
 
