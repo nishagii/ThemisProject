@@ -86,7 +86,7 @@
                 <td><?= htmlspecialchars($t->status) ?></td>
                 <td>
 
-                    <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $t->taskID ?>" class="edit-btn">Edit</a> <!-- Edit Link -->
+                    <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $t->taskID ?>" class="edit-btn">Edit</a>
                    
                     <a href="javascript:void(0);" class="delete-btn" onclick="confirmDelete(<?= $t->taskID; ?>)">Delete</a> <!-- Delete Link -->
                 </td>

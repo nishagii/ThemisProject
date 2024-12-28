@@ -30,7 +30,7 @@ class TaskLawyer
 
 
         if (!$task) {
-            die("Task not found or invalid ID."); // Handle missing case data
+            die("Task not found or invalid ID."); 
         }
 
         // Pass the case data to the view
