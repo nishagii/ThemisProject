@@ -28,6 +28,10 @@ div.white {
     justify-content: center;
 }
 
+h1 {
+    font-size: 30px;
+}
+
 button.button {
     font-weight: bold;
     background-color: #FAE9CF;

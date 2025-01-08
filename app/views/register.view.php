@@ -21,7 +21,8 @@
            
             </div>
             <div class="heading">
-                <h1 class="register">Create your account</h1>
+            
+                <h1 class="register">Are you a THEMIS client?<br>Create your account here</h1>
             </div>
             <div class="form">
                 <form action="<?= ROOT ?>/registeruser" method="POST" novalidate>
