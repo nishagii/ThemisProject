@@ -3,11 +3,11 @@
 
 class Inquire
 {
-    use Controller;  // Assuming Controller trait is being used for base functionality
-    use Database;    // Using Database trait for DB interaction
+    use Controller;  
 
     public function index()
     {
+        
         $errors = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -37,13 +37,15 @@ class Inquire
                     'message' => $message,
                 ];
 
+                $inquireModel = $this->loadModel('inquireModel');
+                $inquireModel->save($data);
                 // Insert query
-                $query = "INSERT INTO inquiries (name, email, message, created_at) VALUES (:name, :email, :message, NOW())";
-                $this->query($query, $data); // Use the `query` method from the Database trait
+                // $query = "INSERT INTO inquiries (name, email, message, created_at) VALUES (:name, :email, :message, NOW())";
+                // $this->query($query, $data); // Use the `query` method from the Database trait
 
-                $_SESSION['success'] = 'Your message has been sent successfully!';
-                header('Location: ' . ROOT . '/Inquire');
-                exit;
+                // $_SESSION['success'] = 'Your message has been sent successfully!';
+                // header('Location: ' . ROOT . '/Inquire');
+                // exit;
             }
         }
 
