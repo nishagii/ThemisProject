@@ -22,7 +22,7 @@
         novalidate>
             <div class="form-group">
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="judgment_date" required>
+                <input type="date" id="date" name="judgment_date" max="" required>
                 <div class="error" id="dateError"></div>
             </div>
 
@@ -57,6 +57,12 @@
         </form>
     </div>
     <script>
+        
+        window.addEventListener('DOMContentLoaded', function () {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('max', today);
+        });
+        
         // Form Validation
         document.getElementById('precedentForm').addEventListener('submit', function(event) {
             // Get form fields

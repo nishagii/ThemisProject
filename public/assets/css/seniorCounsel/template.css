@@ -1,6 +1,7 @@
 .main-container{
   background-color: #f4f8ff;
   height: 100vh;
+  max-width: 100%;
 }
 .template-container {
     background-color: #E4E9F7;
@@ -22,205 +23,297 @@
     padding-top: 10px;
     text-transform: uppercase;
 }
-
+a{
+  text-decoration: none;
+}
 .search-container {
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    width: 50%;
-    margin-top: 10px; /* Adjust as needed to move up and down the search bar*/
-    
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 30px;
+  flex-wrap: wrap;     
+}
   /* search bar settings*/
   .search-bar{
     border-radius: 50px;
     padding: 3px;
     width: 700px;
-    height: 40px;
+    height: 30px;
     border:#676767;
     transition: box-shadow 0.3s ease; 
     caret-color: transparent;
-    padding-left: 20px; 
+    padding: 10px 10px; 
     font-size: 16px;
-    border-radius:30px;
     border:1px solid #dcdcdc;
   }
   
-  .search-bar:hover {
-    box-shadow: 1px 1px 8px 1px #dcdcdc;
-  }
-  
   .search-bar:focus {
-    outline: #ff9800;
+    outline: none;
+}
+.search-bar:hover {
+    box-shadow: 1px 1px 8px 1px #dcdcdc;
+}
+  
+.search-bar::placeholder {
+  color: #aaa; 
+  opacity: 1;
+  font-size: 16px;
+  padding-left: 10px;
+}
 
-  }
+/* Icon styles */
+.sort-icon,
+.filter-icon {
+    font-size: 23px; /* Adjust icon size */
+    color: #1d1b31; /* Default icon color */
+    cursor: pointer; /* Pointer on hover */
+    transition: color 0.3s;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.sort-icon:hover,
+.filter-icon:hover {
+    color: #b57c30; /* Change color on hover */
+}
   
-  .search-bar::placeholder {
-    color: #aaa; 
-    opacity: 1;
-    font-size: 16px;
-    padding-left: 10px;
-  }
+.sort-dropdown {
+  display: none;
+  position: absolute;
+  top: 50px; /* Adjust based on your layout */
+  left: 50%; /* Align below the sort icon */
+  transform: translateX(-50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1000;
+}
   
-  /* Icon styles */
-  .sort-icon,
-  .filter-icon {
-      font-size: 23px; /* Adjust icon size */
-      color: #1d1b31; /* Default icon color */
-      cursor: pointer; /* Pointer on hover */
-      transition: color 0.3s;
-      margin-left: 10px;
-      margin-top: 5px;
-  }
+.sort-dropdown .dropdown-item {
+  display: block;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-align: left;
+  background: none;
+  border: none;
+  width: 100%;
+}
   
-  .sort-icon:hover,
-  .filter-icon:hover {
-      color: #b57c30; /* Change color on hover */
-  }
+.sort-dropdown .dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+
+.add {
   
-  .sort-dropdown {
-    display: none;
-    position: absolute;
-    top: 50px; /* Adjust based on your layout */
-    left: 50%; /* Align below the sort icon */
-    transform: translateX(-50%);
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;          /* Optional: Add margin to position it vertically */
+}
+
+.add-button {
+  background-color: #1d1b31; /* Green background */
+  color: white;              /* White text color */
+  border: none;              /* Remove border */
+  border-radius: 5px;       /* Rounded corners */
+  padding: 10px 20px;       /* Vertical and horizontal padding */
+  font-size: 16px;           /* Font size */
+  cursor: pointer;           /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Transition for background color */
+  display: flex;             /* Enable flexbox for the button */
+  align-items: center;       /* Center items vertically */
+}
+
+.add-button i {
+  margin-right: 8px;        /* Space between icon and text */
+  font-size: 20px;          /* Adjust icon size */
+}
+
+.add-button:hover {
+  background-color: #3b395c; /* Darker green on hover */
+}
+
+.add-button:focus {
+  outline: none;             /* Remove outline on focus */
+}
+
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #1d1b31;
+}
+
+.template-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.template-table th,
+.template-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+
+.template-table th {
+  background-color: #f4f8ff;
+  color: #333;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.template-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.template-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Styling for the action menu */
+.action-menu {
+  position: relative;
+  display: inline-block;
+}
+
+/* Three-dots button */
+.dots-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* Dropdown menu hidden by default */
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 1;
+  padding: 5x 0px;
+  min-width: 100px;
+}
+/* Dropdown items styling */
+.dropdown-item {
+  display: block;
+    padding: 7px 10px;
+    color: #1f2937;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+  color: #3b395c;
+}
+
+/* Show dropdown when .action-menu is active */
+.action-menu.active .dropdown {
+  display: block;
+}
+
+/* General container adjustments for smaller screens */
+@media (max-width: 1024px) {
+  .main-container {
+    max-width: 100%;
     padding: 10px;
-    z-index: 1000;
   }
-  
-  .sort-dropdown .dropdown-item {
-    display: block;
-    padding: 8px 16px;
-    cursor: pointer;
-    text-align: left;
-    background: none;
-    border: none;
-    width: 100%;
+
+  .template-container {
+    margin: 20px;
+    padding: 15px;
   }
-  
-  .sort-dropdown .dropdown-item:hover {
-    background-color: #f0f0f0;
+
+  .search-bar {
+    width: 80%;
   }
-  
 
   .add {
-    
-    margin-top: 20px;          /* Optional: Add margin to position it vertically */
-  }
-  
-  .add-button {
-    background-color: #1d1b31; /* Green background */
-    color: white;              /* White text color */
-    border: none;              /* Remove border */
-    border-radius: 5px;       /* Rounded corners */
-    padding: 10px 20px;       /* Vertical and horizontal padding */
-    font-size: 16px;           /* Font size */
-    cursor: pointer;           /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Transition for background color */
-    display: flex;             /* Enable flexbox for the button */
-    align-items: center;       /* Center items vertically */
-  }
-  
-  .add-button i {
-    margin-right: 8px;        /* Space between icon and text */
-    font-size: 20px;          /* Adjust icon size */
-  }
-  
-  .add-button:hover {
-    background-color: #3b395c; /* Darker green on hover */
-  }
-  
-  .add-button:focus {
-    outline: none;             /* Remove outline on focus */
+    text-align: center;
+    margin-top: 15px;
   }
 
-
-  .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #1d1b31;
-  }
-  
-  .template-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
   .template-table th,
   .template-table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem;
   }
-  
-  
-  .template-table th {
-    background-color: #f4f8ff;
-    color: #333;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
-  .template-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .template-table tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Styling for the action menu */
-  .action-menu {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Three-dots button */
-  .dots-btn {
-    background: none;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  
-  /* Dropdown menu hidden by default */
+
   .dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    z-index: 1;
-    min-width: 100px;
+    min-width: 80px;
   }
-  
-  /* Dropdown items styling */
-  .dropdown-item {
-    background: none;
-    border: none;
-    width: 100%;
-    text-align: left;
-    padding: 8px 16px;
-    cursor: pointer;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+  .search-container{
+    margin-top: 0px;
+    flex-direction: none;
+    align-items: center;
+  }
+  .search-bar {
+    width:50%;
+    margin-bottom: 10px;
+  }
+  .sort-icon .filter-icon{
+    margin-top: 20px;
+  }
+
+  .add-button {
+    justify-content: center;
     font-size: 14px;
-    color: #333;
+    padding: 8px 15px;
   }
-  
-  .dropdown-item:hover {
-    background-color: #f1f1f1;
+
+  .template-table {
+    font-size: 0.85rem;
   }
-  
-  /* Show dropdown when .action-menu is active */
-  .action-menu.active .dropdown {
-    display: block;
+
+  .template-table th,
+  .template-table td {
+    font-size: 0.75rem;
+    padding: 10px;
   }
-  
-  
-  
- 
+
+  .dots-btn {
+    font-size: 16px;
+  }
+
+  .dropdown {
+    right: auto;
+    left: 0;
+  }
+}
+
+/* Very small devices adjustments */
+@media (max-width: 480px) {
+  .temp-section h1 {
+    font-size: 20px;
+  }
+
+  .add-button i {
+    font-size: 16px;
+  }
+
+  .search-bar {
+    font-size: 14px;
+  }
+
+  .dropdown-item {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+  }
+
+  .template-table th,
+  .template-table td {
+    font-size: 0.7rem;
+  }
+}

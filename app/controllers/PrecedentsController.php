@@ -142,7 +142,7 @@ public function create() {
         'case_number' => $_POST['case_number'],
         'name_of_parties' => $_POST['name_of_parties'],
         'judgment_by' => $_POST['judgment_by'],
-        'document_link' => $_POST['document_link'], // Keep this for the case where no file is uploaded
+        'document_link' => $_POST['current_document_link'], // Keep this for the case where no file is uploaded
         'id' => $_POST['id'],
     ];
 
