@@ -4,11 +4,48 @@ document.getElementById("addButton").addEventListener("click", function () {
     // Example content/component to display
     const newContent = document.createElement("div");
     newContent.innerHTML = `
-        <p>New Component Content</p>
-        <button id="closeButton">Close</button>
+        <i class='bx bx-x-circle' id="closeButton" style="cursor: pointer;"></i>
+
+        <div id="contact" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
+            <h5>Username</h5>
+        </div>
+
+        <div id="contact" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
+            <h5>Username</h5>
+        </div>
+
+        <div id="contact" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
+            <h5>Username</h5>
+        </div>
+
+        <div id="contact" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
+            <h5>Username</h5>
+        </div>
+        
     `;
     newContent.id = "newComponent";
 
+    // Style the newContent to overlap the panel
+    newContent.style.position = "absolute";
+    newContent.style.top = "0";
+    newContent.style.left = "0";
+    newContent.style.width = `${innerLeftPanel.offsetWidth}px`; // Dynamically set the width
+    newContent.style.height = "100%";
+    newContent.style.zIndex = "10";
+    newContent.style.borderRight = "0.5px solid rgb(214, 214, 214)";
+
+    // Style the close button
+    const closeButton = newContent.querySelector("#closeButton");
+    closeButton.style.position = "absolute";
+    closeButton.style.top = "10px";
+    closeButton.style.right = "10px";
+    closeButton.style.fontSize = "20px"; // Adjust the size as needed
+    closeButton.style.color = "#a8a8a9";
+    
     // Append new content/component
     innerLeftPanel.appendChild(newContent);
 
@@ -17,6 +54,8 @@ document.getElementById("addButton").addEventListener("click", function () {
         innerLeftPanel.removeChild(newContent);
     });
 });
+
+
 
 
 // Function to get an element by its ID

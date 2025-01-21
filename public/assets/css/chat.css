@@ -40,7 +40,13 @@
 
 #newComponent {
     padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    height: 110vh;
+    /* flex: 1; */
+    background-color: #ffffff;
+    /* height: 110vh; */
+}
+
+#contact h5 {
+    
+    font-weight: 500;
+    color: rgb(48, 47, 47);
 }
