@@ -3,16 +3,15 @@
 }
 
 #inner_left_panel {
-    background-color: white;
+   
     flex: 1;
-    min-height: 110vh;
     border-right: 0.5px solid rgb(214, 214, 214);
 }
 
 #inner_right_panel {
     background-color: white;
     flex: 3;
-    min-height: 110vh;
+  
 }
 
 #addButton {
@@ -40,9 +39,9 @@
 
 #newComponent {
     padding: 10px;
-    /* flex: 1; */
+    
     background-color: #ffffff;
-    /* height: 110vh; */
+    
 }
 
 #contact h5 {

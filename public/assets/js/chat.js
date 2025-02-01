@@ -15,7 +15,9 @@ document.getElementById("addButton").addEventListener("click", function () {
         <div class="message">
             <h4>Contacts</h4>
         </div>
-        ${userListHTML}
+        <div id="scrollableContent" style="overflow-y: auto; max-height: calc(100vh - 50px); padding: 10px;">
+            ${userListHTML}
+        </div>
     `;
     newContent.id = "newComponent";
 
@@ -24,29 +26,30 @@ document.getElementById("addButton").addEventListener("click", function () {
     newContent.style.top = "0";
     newContent.style.left = "0";
     newContent.style.width = `${innerLeftPanel.offsetWidth}px`; // Dynamically set the width
-    newContent.style.height = "100%";
+    // newContent.style.height = "100%";
     newContent.style.zIndex = "10";
     newContent.style.borderRight = "0.5px solid rgb(214, 214, 214)";
+    newContent.style.background = "#fff"; // Ensure it has a background
+    newContent.style.display = "flex";
+    newContent.style.flexDirection = "column";
 
     // Style the close button
     const closeButton = newContent.querySelector("#closeButton");
     closeButton.style.position = "absolute";
     closeButton.style.top = "10px";
     closeButton.style.right = "10px";
-    closeButton.style.fontSize = "20px"; // Adjust the size as needed
+    closeButton.style.fontSize = "20px";
     closeButton.style.color = "#a8a8a9";
 
-    
-
-    
     // Append new content/component
     innerLeftPanel.appendChild(newContent);
 
     // Add close functionality
-    document.getElementById("closeButton").addEventListener("click", function () {
+    closeButton.addEventListener("click", function () {
         innerLeftPanel.removeChild(newContent);
     });
 });
+
 
 
 
