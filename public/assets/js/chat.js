@@ -3,33 +3,19 @@ document.getElementById("addButton").addEventListener("click", function () {
 
     // Example content/component to display
     const newContent = document.createElement("div");
+    let userListHTML = users.map(user => `
+        <div class="contact" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
+            <h5>${user.first_name} ${user.last_name}</h5>
+        </div>
+    `).join("");
+
     newContent.innerHTML = `
         <i class='bx bx-x-circle' id="closeButton" style="cursor: pointer;"></i>
-
         <div class="message">
             <h4>Contacts</h4>
         </div>
-
-        <div id="contact" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
-            <h5>Username</h5>
-        </div>
-
-        <div id="contact" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
-            <h5>Username</h5>
-        </div>
-
-        <div id="contact" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
-            <h5>Username</h5>
-        </div>
-
-        <div id="contact" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-            <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
-            <h5>Username</h5>
-        </div>
-        
+        ${userListHTML}
     `;
     newContent.id = "newComponent";
 

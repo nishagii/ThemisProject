@@ -24,7 +24,7 @@
                 <div class="message">
                     <h4>Messages</h4>
                 </div>
-        </div>
+          </div>
 
             <div id="inner_right_panel">
                 hhhhhhhhhhhhhhhhhhhhhhhh
@@ -38,6 +38,10 @@
         const ROOT = "<?= ROOT ?>";
     </script>
 
+<script>
+    // Convert PHP array to JavaScript JSON object
+    const users = <?= json_encode($users); ?>;
+</script>
     <!-- Include chat.js, where ROOT is now accessible -->
     <script src="<?= ROOT ?>/assets/js/chat.js"> </script>
 </body>

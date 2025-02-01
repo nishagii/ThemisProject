@@ -185,4 +185,19 @@ class UserModel
             return false;
         }
     }
+
+    public function getAllUsers()
+{
+    $query = "SELECT * FROM users";
+
+    try {
+        $stmt = $this->connect()->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $e) {
+        echo "PDO Error: " . $e->getMessage();
+        return false;
+    }
+}
+
 }
