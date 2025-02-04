@@ -1,7 +1,7 @@
 <?php 
 require_once('vendor/autoload.php');
 
-\Stripe\Stripe::setApiKey('your-secret-key');
+\Stripe\Stripe::setApiKey('sk_test_51QmDvQQKXhrTFb70dBIipdkE9qCXSYzeMyFPULq8IYANIP4jexRVFFUqruxEhRnbZx92zRciH7B3SnwuZDNE6H1f000LbCJBYa');
 
 //Get the payment amount from the frontend
 $paymentAmount=$_POST['amount'];
