@@ -11,16 +11,17 @@ class PaymentModel
      * @param array $data Associative array containing payment details.
      * @return bool True if the operation was successful, false otherwise.
      */
-    public function save($data)
+    public function savePayment($data)
     {
         $query = "INSERT INTO {$this->table} 
-                  (user_id, amount, status, transaction_id, created_at) 
-                  VALUES (:user_id, :amount, :status, :transaction_id, NOW())";
+                  (case_number, id_number, amount, payment_status, transaction_id, created_at) 
+                  VALUES (:case_number, :id_number, :amount, :payment_status, :transaction_id, NOW())";
 
         $params = [
-            'user_id' => $data['user_id'],
+            'case_number' => $data['case_number'],
+            'id_number' => $data['id_number'],
             'amount' => $data['amount'],
-            'status' => $data['status'],
+            'payment_status' => $data['payment_status'],
             'transaction_id' => $data['transaction_id'],
         ];
 

@@ -1,15 +1,17 @@
 <?php
-require_once '../vendor/autoload.php';
-require_once '../core/config.php';
 
-class Payments
+error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+
+require_once '../vendor/autoload.php';
+require_once '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/app/core/config.php';
+
+class PaymentController
 {
     use Controller;
 
     public function index()
     {
-        // Render the "Make Payment" view
-        $this->view('/payments/make_payment');
+        $this->view('/client/payments');
     }
 
     // Create a new payment session using Stripe
@@ -19,25 +21,40 @@ class Payments
 
         header('Content-Type: application/json');
 
-        $amount = $_POST['amount'] * 100; // Convert to cents
-        $user_id = $_POST['user_id'];
+        // Decode JSON input
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        // Validate input
+        $case_number = $data['case_number'] ?? null;
+        $id_number = $data['id_number'] ?? null;
+        $amount = isset($data['amount']) ? $data['amount'] * 100 : null; // Convert to cents
+
+        if (!$case_number || !$id_number || !$amount) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Missing required fields']);
+            exit;
+        }
 
         try {
             $checkout_session = \Stripe\Checkout\Session::create([
                 'payment_method_types' => ['card'],
                 'line_items' => [[
                     'price_data' => [
-                        'currency' => 'lkr',
+                        'currency' => 'usd',
                         'product_data' => [
-                            'name' => 'Lawyer Payment',
+                            'name' => 'Themis Payment for Case #' . $case_number,
                         ],
                         'unit_amount' => $amount,
                     ],
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
-                'success_url' => 'http://yourwebsite.com/payments/paymentSuccess?session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => 'http://yourwebsite.com/payments/paymentCancel',
+                'success_url' => ROOT . '/PaymentController/paymentSuccess?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => ROOT . '/payments/paymentCancel',
+                'metadata' => [
+                    'case_number' => $case_number,
+                    'id_number' => $id_number,
+                ]
             ]);
 
             echo json_encode(['id' => $checkout_session->id]);
@@ -59,24 +76,27 @@ class Payments
         $session = \Stripe\Checkout\Session::retrieve($session_id);
 
         $paymentData = [
-            'user_id' => $session->metadata->user_id,
+            'case_number' => $session->metadata->case_number,
+            'id_number' => $session->metadata->id_number,
             'amount' => $session->amount_total / 100,
-            'status' => $session->payment_status,
+            'payment_status' => $session->payment_status,
             'transaction_id' => $session->id,
         ];
+        // var_dump($paymentData); 
+        // die();
 
         $paymentModel = $this->loadModel('PaymentModel');
-        $paymentModel->save($paymentData);
+        $paymentModel->savePayment($paymentData);
 
         $_SESSION['success'] = 'Payment completed successfully!';
-        redirect('payments/retrieveAllPayments');
+        $this->view('/client/payment_success');
     }
 
     // Handle payment cancellation
     public function paymentCancel()
     {
         $_SESSION['error'] = 'Payment was canceled.';
-        redirect('payments/index');
+        redirect('PaymentController');
     }
 
     // Retrieve all payments
