@@ -11,4 +11,8 @@ class Chat
         // Load the view
         $this->view('/seniorCounsel/chat', ['users' => $users]);
     }
+
+    // public function message_left($data) {
+
+    // }
 }

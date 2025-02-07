@@ -216,10 +216,15 @@ function start_chat(event, userName) {
     <div class="chat-bubble received">Hello ${userName}, how can I help you?</div>
     <div class="chat-bubble">Hi ${userName}, let's start our conversation!</div>
     <div class="message-input">
-                <input type="text" id="messageInput" placeholder="Type your message..." />
-                <button id="sendMessageBtn">Send</button>
+        <label for="fileInput" class="file-upload">
+            <span class="upload-icon">+</span>
+        </label>
+        <input type="file" id="fileInput" style="display: none;">
+        <input type="text" id="messageInput" placeholder="Type your message..." />
+        <button id="sendMessageBtn">Send</button>
     </div>
 `;
+
 
     // Move to the inner_right_panel smoothly
     innerRightPanel.scrollIntoView({ behavior: "smooth" });
