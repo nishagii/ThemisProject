@@ -50,3 +50,9 @@
     font-weight: 500;
     color: rgb(48, 47, 47);
 }
+
+.contact-item:hover {
+    background-color: #f0f0f0; /* Light gray background */
+    border-radius: 5px; /* Slightly rounded corners */
+    transition: background-color 0.2s ease-in-out;
+}

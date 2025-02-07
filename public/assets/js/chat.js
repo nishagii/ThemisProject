@@ -4,11 +4,12 @@ document.getElementById("addButton").addEventListener("click", function () {
     // Example content/component to display
     const newContent = document.createElement("div");
     let userListHTML = users.map(user => `
-        <div class="contact" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+        <div class="contact contact-item" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; cursor: pointer;">
             <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
             <h5>${user.first_name} ${user.last_name}</h5>
         </div>
     `).join("");
+    
 
     newContent.innerHTML = `
         <i class='bx bx-x-circle' id="closeButton" style="cursor: pointer;"></i>
