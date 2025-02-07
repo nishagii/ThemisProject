@@ -1,11 +1,10 @@
 document.getElementById("addButton").addEventListener("click", function () {
     const innerLeftPanel = document.getElementById("inner_left_panel");
 
-    // Example content/component to display
     const newContent = document.createElement("div");
     let userListHTML = users.map(user => 
         `<div class="contact contact-item" 
-             onclick="start_chat(event, '${user.first_name} ${user.last_name}')"
+             onclick="start_chat(event, '${user.first_name} ${user.last_name}', '${user.id}')"
              style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; cursor: pointer;">
             <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
             <h5>${user.first_name} ${user.last_name}</h5>
@@ -101,8 +100,8 @@ function handle_result(result, type) {
 
 get_data({}, "user_info");
 
-function start_chat(event, userName) {
-    console.log("start_chat function called with userName:", userName); // Debugging log
+function start_chat(event, userName, receiverId) {
+    console.log("start_chat function called with userName:", userName, "Receiver ID:", receiverId); // Debugging log
 
     const messageDiv = document.querySelector(".message");
     const innerRightPanel = document.getElementById("inner_right_panel");
@@ -136,6 +135,7 @@ function start_chat(event, userName) {
         if (!existingUser) {
             const userItem = document.createElement("li");
             userItem.dataset.username = userName;
+            userItem.dataset.receiverid = receiverId; // Store the receiver's user ID
             userItem.style.padding = "10px 0";
             userItem.style.color = "#007bff";
             userItem.style.cursor = "pointer";
@@ -194,7 +194,8 @@ function start_chat(event, userName) {
 
             // **When user is clicked, update the right panel**
             userItem.addEventListener("click", () => {
-                console.log("User clicked:", userName); // Debugging log
+                const receiverId = userItem.dataset.receiverid; // Get the receiver's user ID
+                console.log("User clicked:", userName, "Receiver ID:", receiverId); // Debugging log
                 innerRightPanel.innerHTML = `    
     <h2>Chat with ${userName}</h2>
     <div class="chat-bubble received">Hello ${userName}, how can I help you?</div>
@@ -205,6 +206,9 @@ function start_chat(event, userName) {
                 if (messageInputArea) {
                     messageInputArea.style.display = "flex"; // Show message input
                 }
+
+                // Store the receiverId globally to be used in send_message
+                window.receiverId = receiverId;
             });
         }
     }
@@ -219,12 +223,11 @@ function start_chat(event, userName) {
         <label for="fileInput" class="file-upload">
             <span class="upload-icon">+</span>
         </label>
-        <input type="file" id="fileInput" style="display: none;">
-        <input type="text" id="messageInput" placeholder="Type your message..." />
-        <button id="sendMessageBtn">Send</button>
+        <input type="file" id="message_file" style="display: none;">
+        <input type="text" id="message_text" placeholder="Type your message..." />
+        <button id="sendMessageBtn" onclick='send_message(event, "${receiverId}")'>Send</button>
     </div>
 `;
-
 
     // Move to the inner_right_panel smoothly
     innerRightPanel.scrollIntoView({ behavior: "smooth" });
@@ -236,6 +239,24 @@ function start_chat(event, userName) {
     }
 }
 
+
+let currentUserId = userId;
+
+function send_message(e, receiverId) {
+    var message_text = _("message_text");
+    if (message_text.value.trim() == "") {
+        alert("Please type something");
+        return;
+    }
+
+    alert("Receiver ID: " + receiverId); // Display the receiver's ID
+
+    get_data({
+        message: message_text.value.trim(),
+        userid: currentUserId, // sender
+        receiverid: receiverId // receiver
+    }, "send_message");
+}
 
 
 

@@ -1,17 +1,25 @@
 <?php
 
-// HomeAdmin class
+// HomeLawyer class
 class HomeLawyer
 {
     use Controller;
 
     public function index()
     {
+        // Ensure session is started
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
-        // Set username from session, or default to 'User'
-        $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
+        // Pass user session data
+        $data['user'] = isset($_SESSION['user_id']) ? [
+            'id' => $_SESSION['user_id'],
+            'username' => $_SESSION['username'] ?? 'User',
+            'role' => $_SESSION['role'] ?? 'lawyer'
+        ] : null;
 
-        // Load the view with data
+        // Load the view with user data
         $this->view('/seniorCounsel/home', $data);
     }
 }

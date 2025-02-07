@@ -45,6 +45,21 @@
 <script>
     // Convert PHP array to JavaScript JSON object
     const users = <?= json_encode($users); ?>;
+
+    
+    // if (user && user.id) {
+    //     alert("User ID: " + user.id); // Display user ID in an alert
+    // } else {
+    //     alert("No user session found.");
+    // }
+
+    // Pass user data to chat.js (specifically user ID)
+    const userId = <?= json_encode($user['id'] ?? null); ?>;
+
+    // Optionally, check if user ID exists
+    if (userId) {
+        console.log("User ID: " + userId); // Optional: log user ID to the console for verification
+    }
 </script>
     <!-- Include chat.js, where ROOT is now accessible -->
     <script src="<?= ROOT ?>/assets/js/chat.js"> </script>
