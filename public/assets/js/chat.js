@@ -106,10 +106,16 @@ function start_chat(event, userName) {
 
     const messageDiv = document.querySelector(".message");
     const innerRightPanel = document.getElementById("inner_right_panel");
+    const messageInputArea = document.querySelector(".message-input"); // Get the message input area
 
     if (!innerRightPanel) {
         console.error("Error: inner_right_panel not found!"); // Debugging log
-        return; 
+        return;
+    }
+
+    // Show the message input area when a contact is clicked
+    if (messageInputArea) {
+        messageInputArea.style.display = "flex"; // Show the message input field
     }
 
     if (messageDiv) {
@@ -189,24 +195,31 @@ function start_chat(event, userName) {
             // **When user is clicked, update the right panel**
             userItem.addEventListener("click", () => {
                 console.log("User clicked:", userName); // Debugging log
-                innerRightPanel.innerHTML = `
+                innerRightPanel.innerHTML = `    
     <h2>Chat with ${userName}</h2>
     <div class="chat-bubble received">Hello ${userName}, how can I help you?</div>
     <div class="chat-bubble">Hi ${userName}, let's start our conversation!</div>
 `;
 
+                // Ensure the message input area is displayed when a user is clicked
+                if (messageInputArea) {
+                    messageInputArea.style.display = "flex"; // Show message input
+                }
             });
         }
     }
 
     // **Ensure inner_right_panel updates when function runs**
     console.log("Updating inner_right_panel...");
-    innerRightPanel.innerHTML = `
+    innerRightPanel.innerHTML = `    
     <h2>Chat with ${userName}</h2>
     <div class="chat-bubble received">Hello ${userName}, how can I help you?</div>
     <div class="chat-bubble">Hi ${userName}, let's start our conversation!</div>
+    <div class="message-input">
+                <input type="text" id="messageInput" placeholder="Type your message..." />
+                <button id="sendMessageBtn">Send</button>
+    </div>
 `;
-
 
     // Move to the inner_right_panel smoothly
     innerRightPanel.scrollIntoView({ behavior: "smooth" });
@@ -217,6 +230,7 @@ function start_chat(event, userName) {
         newContent.remove();
     }
 }
+
 
 
 

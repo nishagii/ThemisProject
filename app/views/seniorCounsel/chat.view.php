@@ -30,10 +30,7 @@
             <!-- Chat messages will appear here -->
             
             <!-- Message input area -->
-            <div class="message-input">
-                <input type="text" id="messageInput" placeholder="Type your message..." />
-                <button id="sendMessageBtn">Send</button>
-            </div>
+            
           </div>
 
         </div>
