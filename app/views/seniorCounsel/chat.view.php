@@ -27,7 +27,7 @@
           </div>
 
             <div id="inner_right_panel">
-                hhhhhhhhhhhhhhhhhhhhhhhh
+                <!-- hhhhhhhhhhhhhhhhhhhhhhhh -->
             </div>
         </div>
     </div>

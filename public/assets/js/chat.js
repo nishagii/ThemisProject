@@ -64,23 +64,25 @@ function _(element) {
 }
 
 function get_data(find, type) {
-
     var xml = new XMLHttpRequest();
-    xml.onload = function() {
-
-        if (xml.readyState == 4 || xml.status == 200) {
-            handle_result(xml.responseText, type);
+    xml.onload = function () {
+        if (xml.readyState === 4 && xml.status === 200) {
+            try {
+                var response = JSON.parse(xml.responseText);
+                handle_result(response, type);
+            } catch (e) {
+                console.error("Error parsing JSON response:", e, xml.responseText);
+            }
         }
-    }
-    var data = {};
-    data.find = find;
-    data.data_type = type;
+    };
 
-    data = JSON.stringify(data);
+    var data = JSON.stringify({ find: find, data_type: type });
 
-    xml.open("POST", "", true);
+    xml.open("POST", "YOUR_ENDPOINT_URL", true);
+    xml.setRequestHeader("Content-Type", "application/json"); // Ensuring JSON format
     xml.send(data);
 }
+
 
 function handle_result(result, type) {
 
@@ -100,7 +102,15 @@ function handle_result(result, type) {
 get_data({}, "user_info");
 
 function start_chat(event, userName) {
+    console.log("start_chat function called with userName:", userName); // Debugging log
+
     const messageDiv = document.querySelector(".message");
+    const innerRightPanel = document.getElementById("inner_right_panel");
+
+    if (!innerRightPanel) {
+        console.error("Error: inner_right_panel not found!"); // Debugging log
+        return; 
+    }
 
     if (messageDiv) {
         let userList = document.getElementById("selectedUsersList");
@@ -175,18 +185,29 @@ function start_chat(event, userName) {
 
             // Append the new user to the list
             userList.appendChild(userItem);
+
+            // **When user is clicked, update the right panel**
+            userItem.addEventListener("click", () => {
+                console.log("User clicked:", userName); // Debugging log
+                innerRightPanel.innerHTML = `<h2>Chat with ${userName}</h2>`;
+            });
         }
     }
 
-    // Move to the inner_right_panel
-    document.getElementById("inner_right_panel").scrollIntoView({ behavior: "smooth" });
+    // **Ensure inner_right_panel updates when function runs**
+    console.log("Updating inner_right_panel...");
+    innerRightPanel.innerHTML = `<h2>Chat with ${userName}</h2>`; 
 
-    // Close the newContent panel
+    // Move to the inner_right_panel smoothly
+    innerRightPanel.scrollIntoView({ behavior: "smooth" });
+
+    // Close the newContent panel if it exists
     const newContent = document.getElementById("newComponent");
     if (newContent) {
         newContent.remove();
     }
 }
+
 
 
 
