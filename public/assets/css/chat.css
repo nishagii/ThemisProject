@@ -56,3 +56,68 @@
     border-radius: 5px; /* Slightly rounded corners */
     transition: background-color 0.2s ease-in-out;
 }
+
+#inner_right_panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    overflow-y: auto; /* Allow scrolling for long chats */
+}
+
+/* Chat Bubble */
+.chat-bubble {
+    max-width: 70%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    border-radius: 20px;
+    position: relative;
+    word-wrap: break-word;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a tail to the chat bubble */
+.chat-bubble::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #007bff;
+}
+
+/* Chat bubble for received messages */
+.chat-bubble.received {
+    align-self: flex-start;
+    background-color: #e0e0e0;
+    color: black;
+}
+
+.chat-bubble.received::after {
+    left: auto;
+    right: -10px;
+    border-right: none;
+    border-left: 10px solid #e0e0e0;
+}
+
+/* Ensure chat messages are aligned properly */
+#inner_right_panel h2 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #b8d8f9;
+}

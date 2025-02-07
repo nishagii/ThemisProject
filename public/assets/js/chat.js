@@ -189,14 +189,24 @@ function start_chat(event, userName) {
             // **When user is clicked, update the right panel**
             userItem.addEventListener("click", () => {
                 console.log("User clicked:", userName); // Debugging log
-                innerRightPanel.innerHTML = `<h2>Chat with ${userName}</h2>`;
+                innerRightPanel.innerHTML = `
+    <h2>Chat with ${userName}</h2>
+    <div class="chat-bubble received">Hello ${userName}, how can I help you?</div>
+    <div class="chat-bubble">Hi ${userName}, let's start our conversation!</div>
+`;
+
             });
         }
     }
 
     // **Ensure inner_right_panel updates when function runs**
     console.log("Updating inner_right_panel...");
-    innerRightPanel.innerHTML = `<h2>Chat with ${userName}</h2>`; 
+    innerRightPanel.innerHTML = `
+    <h2>Chat with ${userName}</h2>
+    <div class="chat-bubble received">Hello ${userName}, how can I help you?</div>
+    <div class="chat-bubble">Hi ${userName}, let's start our conversation!</div>
+`;
+
 
     // Move to the inner_right_panel smoothly
     innerRightPanel.scrollIntoView({ behavior: "smooth" });
