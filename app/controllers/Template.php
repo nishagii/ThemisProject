@@ -11,15 +11,15 @@ class Template
         $this->templateModel = $this->loadModel('templateModel');
     }
 
-    public function index()
-    {
+    // public function index()
+    // {
 
-        // Set username from session, or default to 'User'
-        $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
+    //     // Set username from session, or default to 'User'
+    //     $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        // Load the view with data
-        $this->view('/seniorCounsel/template', $data);
-    }
+    //     // Load the view with data
+    //     $this->view('/seniorCounsel/template', $data);
+    // }
 
 /*---------------------Create operation----------------------------- */
 public function create() {
@@ -71,8 +71,10 @@ public function create() {
 }    
 
 /*------------------------------retrieve function ------------------------------------*/
-    public function retrieve()
+    public function index()
     {
+        $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
+        
         $templateModel = $this->loadModel('templateModel'); 
         $templates = $templateModel->getAll();
 
