@@ -26,9 +26,16 @@
                 </div>
           </div>
 
-            <div id="inner_right_panel">
-                <!-- hhhhhhhhhhhhhhhhhhhhhhhh -->
+          <div id="inner_right_panel">
+            <!-- Chat messages will appear here -->
+            
+            <!-- Message input area -->
+            <div class="message-input">
+                <input type="text" id="messageInput" placeholder="Type your message..." />
+                <button id="sendMessageBtn">Send</button>
             </div>
+          </div>
+
         </div>
     </div>
 
