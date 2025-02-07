@@ -3,12 +3,15 @@ document.getElementById("addButton").addEventListener("click", function () {
 
     // Example content/component to display
     const newContent = document.createElement("div");
-    let userListHTML = users.map(user => `
-        <div class="contact contact-item" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; cursor: pointer;">
+    let userListHTML = users.map(user => 
+        `<div class="contact contact-item" 
+             onclick="start_chat(event, '${user.first_name} ${user.last_name}')"
+             style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; cursor: pointer;">
             <i class='bx bx-user' style="font-size: 35px; color: #a8a8a9;"></i>
             <h5>${user.first_name} ${user.last_name}</h5>
-        </div>
-    `).join("");
+        </div>`
+    ).join("");
+    
     
 
     newContent.innerHTML = `
@@ -95,6 +98,99 @@ function handle_result(result, type) {
 }
 
 get_data({}, "user_info");
+
+function start_chat(event, userName) {
+    const messageDiv = document.querySelector(".message");
+
+    if (messageDiv) {
+        let userList = document.getElementById("selectedUsersList");
+
+        // Create the list container if it doesn't exist
+        if (!userList) {
+            userList = document.createElement("ul");
+            userList.id = "selectedUsersList";
+            userList.style.listStyle = "none";
+            userList.style.padding = "10px 0";
+            userList.style.textAlign = "center"; // Center the list items
+            messageDiv.appendChild(userList);
+        }
+
+        // Check if the username is already in the list
+        const existingUser = [...userList.children].find(li => li.dataset.username === userName);
+        if (!existingUser) {
+            const userItem = document.createElement("li");
+            userItem.dataset.username = userName;
+            userItem.style.padding = "10px 0";
+            userItem.style.color = "#007bff";
+            userItem.style.cursor = "pointer";
+            userItem.style.fontWeight = "500";
+            userItem.style.transition = "background 0.3s ease-in-out";
+            userItem.style.fontSize = "15px";
+            userItem.style.position = "relative";
+            userItem.style.display = "flex";
+            userItem.style.flexDirection = "column"; // Ensure line appears below text
+            userItem.style.alignItems = "center"; // Center the content
+
+            // Add hover effect
+            userItem.addEventListener("mouseenter", () => {
+                userItem.style.backgroundColor = "#f0f0f0"; // Light gray hover effect
+                userItem.style.borderRadius = "5px";
+            });
+
+            userItem.addEventListener("mouseleave", () => {
+                userItem.style.backgroundColor = "transparent";
+            });
+
+            // Container for icon and username
+            const userContent = document.createElement("div");
+            userContent.style.display = "flex";
+            userContent.style.alignItems = "center";
+            userContent.style.gap = "10px"; // Space between icon and text
+
+            // Create the user icon
+            const userIcon = document.createElement("i");
+            userIcon.className = "bx bx-user";
+            userIcon.style.fontSize = "35px";
+            userIcon.style.color = "#a8a8a9";
+
+            // Create the username text
+            const userNameSpan = document.createElement("span");
+            userNameSpan.textContent = userName;
+
+            // Append icon and username to the container
+            userContent.appendChild(userIcon);
+            userContent.appendChild(userNameSpan);
+
+            // Create a short horizontal line
+            const hr = document.createElement("div");
+            hr.style.width = "80%"; // Shorter width (not full width)
+            hr.style.height = "0.5px";
+            hr.style.backgroundColor = "#ccc"; // Light gray color
+            hr.style.marginTop = "8px";
+            hr.style.borderRadius = "2px";
+
+            // Append the content and horizontal line
+            userItem.appendChild(userContent);
+            userItem.appendChild(hr);
+
+            // Append the new user to the list
+            userList.appendChild(userItem);
+        }
+    }
+
+    // Move to the inner_right_panel
+    document.getElementById("inner_right_panel").scrollIntoView({ behavior: "smooth" });
+
+    // Close the newContent panel
+    const newContent = document.getElementById("newComponent");
+    if (newContent) {
+        newContent.remove();
+    }
+}
+
+
+
+
 
 
 
