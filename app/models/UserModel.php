@@ -185,4 +185,20 @@ class UserModel
             return false;
         }
     }
+
+    public function getAllClients(){
+
+        $query= "SELECT * from users WHERE role = 'client'";
+
+        try {
+            $stmt = $this->connect()->prepare($query);
+            $stmt->execute();
+            $users = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+            return $users;
+        } catch (PDOException $e) {
+            echo "PDO Error: " . $e->getMessage();
+            return false;
+        }
+    }
 }
