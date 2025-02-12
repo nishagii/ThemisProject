@@ -64,23 +64,42 @@ function _(element) {
 
 function get_data(find, type) {
     var xml = new XMLHttpRequest();
+
     xml.onload = function () {
-        if (xml.readyState === 4 && xml.status === 200) {
-            try {
-                var response = JSON.parse(xml.responseText);
-                handle_result(response, type);
-            } catch (e) {
-                console.error("Error parsing JSON response:", e, xml.responseText);
+        if (xml.readyState === 4) {
+            if (xml.status === 200) {
+                try {
+                    // Check if the response is JSON
+                    if (xml.responseText.trim().startsWith('{') || xml.responseText.trim().startsWith('[')) {
+                        var response = JSON.parse(xml.responseText);
+                        console.log("Server Response:", response);
+                        handle_result(response, type);
+                    } else {
+                        console.error("Unexpected response format:", xml.responseText);
+                    }
+                } catch (e) {
+                    console.error("Error parsing JSON response:", e);
+                    console.error("Response text:", xml.responseText);  // Log raw response for debugging
+                }
+            } else {
+                console.error("HTTP Error:", xml.status, xml.statusText);
             }
         }
     };
 
-    var data = JSON.stringify({ find: find, data_type: type });
+    xml.onerror = function () {
+        console.error("Network Error: Failed to make the request.");
+    };
 
-    xml.open("POST", "YOUR_ENDPOINT_URL", true);
-    xml.setRequestHeader("Content-Type", "application/json"); // Ensuring JSON format
+    var data = JSON.stringify({ find: find, data_type: type });
+    console.log("Request Data:", data);
+
+    xml.open("POST", "http://localhost/themisrepo/public/chat", true);
+    xml.setRequestHeader("Content-Type", "application/json");
     xml.send(data);
 }
+
+
 
 
 function handle_result(result, type) {
@@ -98,7 +117,7 @@ function handle_result(result, type) {
     
 }
 
-get_data({}, "user_info");
+// get_data({}, "user_info");
 
 function start_chat(event, userName, receiverId) {
     console.log("start_chat function called with userName:", userName, "Receiver ID:", receiverId); // Debugging log
@@ -248,8 +267,6 @@ function send_message(e, receiverId) {
         alert("Please type something");
         return;
     }
-
-    alert("Receiver ID: " + receiverId); // Display the receiver's ID
 
     get_data({
         message: message_text.value.trim(),

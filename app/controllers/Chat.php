@@ -23,9 +23,42 @@ class Chat
 
         $data['users'] = $users;
 
+        // Handle POST request
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['message'])) {
+            $message = trim($_POST['message']);
+            $receiverId = $_POST['receiver_id'] ?? null;
+
+            if (!empty($message) && $receiverId) {
+                // Add the message to the dummy messages array
+                $dummyMessages[] = [
+                    'sender_id' => $_SESSION['user_id'],
+                    'receiver_id' => $receiverId,
+                    'message' => $message
+                ];
+
+                // Create a response array
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Message received successfully',
+                    'data' => $dummyMessages
+                ];
+
+                // Send JSON response
+                echo json_encode($response);
+                exit; // Ensure no further output
+            } else {
+                // Handle error case
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Message is empty or receiver is missing!'
+                ];
+
+                echo json_encode($response);
+                exit;
+            }
+        }
+
         // Load the view and pass session & users data
         $this->view('/seniorCounsel/chat', $data);
     }
-
-    
 }
