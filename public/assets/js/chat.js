@@ -350,7 +350,7 @@ function send_message(e, receiverId) {
     message_text.value = "";
 
     // Optionally reload messages after sending
-    const msgId = `${currentUserId}#${receiverId}`;
+    const msgId = `${currentUserId}and${receiverId}`;
     setTimeout(() => {
         loadChatMessages(msgId, document.querySelector("h2").textContent.replace("Chat with ", ""), receiverId);
     }, 500);

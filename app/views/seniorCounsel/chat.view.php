@@ -23,6 +23,7 @@
                 
                 <div class="message">
                     <h4>Messages</h4>
+                    
                 </div>
           </div>
 
@@ -30,6 +31,12 @@
             <!-- Chat messages will appear here -->
             
             <!-- Message input area -->
+            <div class="chat-messages">
+            <!-- Messages go here -->
+        </div>
+        <div class="message-input">
+            <!-- Input area content -->
+        </div>
             
           </div>
 
