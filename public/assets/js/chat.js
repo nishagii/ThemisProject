@@ -64,57 +64,50 @@ function _(element) {
 
 function get_data(find, type) {
     var xml = new XMLHttpRequest();
-
+    
     xml.onload = function () {
         if (xml.readyState === 4) {
             if (xml.status === 200) {
                 try {
-                    // Check if the response is JSON
-                    if (xml.responseText.trim().startsWith('{') || xml.responseText.trim().startsWith('[')) {
-                        var response = JSON.parse(xml.responseText);
-                        console.log("Server Response:", response);
-                        handle_result(response, type);
-                    } else {
-                        console.error("Unexpected response format:", xml.responseText);
-                    }
+                    var response = JSON.parse(xml.responseText);
+                    console.log("Server Response:", response);
+                    handle_result(response, type);  // Passing the parsed JSON
                 } catch (e) {
                     console.error("Error parsing JSON response:", e);
-                    console.error("Response text:", xml.responseText);  // Log raw response for debugging
+                    console.error("Response text:", xml.responseText);
                 }
             } else {
                 console.error("HTTP Error:", xml.status, xml.statusText);
             }
         }
     };
-
+    
     xml.onerror = function () {
         console.error("Network Error: Failed to make the request.");
     };
-
-    var data = JSON.stringify({ find: find, data_type: type });
-    console.log("Request Data:", data);
-
+    
+    var data = JSON.stringify({ 
+        find: find, 
+        data_type: type 
+    });
+    
     xml.open("POST", "http://localhost/themisrepo/public/chat", true);
     xml.setRequestHeader("Content-Type", "application/json");
     xml.send(data);
 }
 
 
-
-
 function handle_result(result, type) {
-
-    if (result.trim() != "") {
-
-        var obj = JSON.parse(result);
-        if (!obj.logged_in) {
-            window.location == ROOT + "/Login.php"
-        }else {
-
-            //alert(result);
-        }
+    if (result && Object.keys(result).length > 0) {  // Check if result exists and isn't empty
+        // if (!result.logged_in) {
+        //     window.location = ROOT + "/Login.php";
+        // } else {
+            console.log("Received data:", result);
+            // Handle your data here
+        // }
+    } else {
+        console.error("No data received from server");
     }
-    
 }
 
 // get_data({}, "user_info");
