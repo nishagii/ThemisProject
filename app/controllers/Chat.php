@@ -4,6 +4,9 @@ class Chat {
     
     public function index()
     {
+        // Set timezone to Sri Lanka
+        date_default_timezone_set('Asia/Colombo');
+
         // Ensure session is started
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
@@ -39,7 +42,7 @@ class Chat {
                     'received' => 0,
                     'deleted_sender' => 0,
                     'deleted_receiver' => 0,
-                    'date' => date('Y-m-d H:i:s')
+                    'date' => date('Y-m-d H:i:s') // Capturing the current time in Sri Lankan timezone
                 ];
 
                 // Save message data to the database
@@ -65,7 +68,7 @@ class Chat {
             $chatModel = $this->loadModel('messageModel');
             $messages = $chatModel->getMessagesByMsgId($msgid);
             
-            // Add these debug logs
+            // Debug logs
             error_log("msgid received: " . $msgid);
             error_log("messages from DB: " . print_r($messages, true));
             
@@ -88,7 +91,7 @@ class Chat {
                 ]
             ];
             
-            // Add this debug log
+            // Debug log
             error_log("response being sent: " . json_encode($response));
             
             header('Content-Type: application/json');
