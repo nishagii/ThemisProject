@@ -405,7 +405,7 @@ function send_message(e, receiverId) {
     // Reload messages after sending
     setTimeout(() => {
         loadChatMessages(msgId, document.querySelector("h2").textContent.replace("Chat with ", ""), receiverId);
-    }, 500);
+    }, 100);
 }
 
 
