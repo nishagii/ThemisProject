@@ -30,7 +30,7 @@ class Chat {
             if ($postData && isset($postData['find'])) {
                 // Prepare data in the format your model expects
                 $messageData = [
-                    'msgid' => $postData['find']['userid'] . '#' . $postData['find']['receiverid'], // msgid in senderid#receiverid format
+                    'msgid' => $postData['find']['userid'] . 'and' . $postData['find']['receiverid'], // msgid in senderid#receiverid format
                     'sender' => $postData['find']['userid'],
                     'receiver' => $postData['find']['receiverid'],
                     'message' => $postData['find']['message'],
