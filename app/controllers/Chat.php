@@ -20,7 +20,8 @@ class Chat {
         ] : null;
         
         $data['users'] = $users;
-        
+
+        // Check if a POST request is made for saving a message
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Get JSON input since you're sending JSON from JavaScript
             $jsonData = file_get_contents('php://input');
@@ -29,7 +30,7 @@ class Chat {
             if ($postData && isset($postData['find'])) {
                 // Prepare data in the format your model expects
                 $messageData = [
-                    'msgid' => uniqid(), // Generate a unique ID
+                    'msgid' => $postData['find']['userid'] . '#' . $postData['find']['receiverid'], // msgid in senderid#receiverid format
                     'sender' => $postData['find']['userid'],
                     'receiver' => $postData['find']['receiverid'],
                     'message' => $postData['find']['message'],
@@ -58,9 +59,15 @@ class Chat {
                 exit;
             }
         }
-
-    
         
+        // Check if there is a 'msgid' in the query parameters to get messages
+        if (isset($_GET['msgid'])) {
+            $msgid = $_GET['msgid'];
+            $chatModel = $this->loadModel('messageModel');
+            $messages = $chatModel->getMessagesByMsgId($msgid); // Get all messages by msgid
+            $data['messages'] = $messages;
+        }
+
         // Load the view for GET requests
         $this->view('/seniorCounsel/chat', $data);
     }

@@ -25,4 +25,29 @@ class messageModel {
             return false;
         }
     }
+
+    public function getMessagesByMsgId($msgid)
+{
+    try {
+        $query = "SELECT * FROM {$this->table} 
+                  WHERE msgid = :msgid
+                  ORDER BY date ASC"; // Optional: you can order by date or message ID
+        
+        $params = [
+            ':msgid' => $msgid
+        ];
+
+        $result = $this->query($query, $params);
+
+        if (!$result) {
+            error_log("No messages found with msgid {$msgid}");
+        }
+
+        return $result;
+    } catch (Exception $e) {
+        error_log("Error retrieving messages by msgid: " . $e->getMessage());
+        return false;
+    }
+}
+
 }
