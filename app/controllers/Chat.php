@@ -1,4 +1,3 @@
-
 <?php
 class Chat {
     use Controller;
@@ -22,42 +21,45 @@ class Chat {
         
         $data['users'] = $users;
         
-        // Handle JSON POST request
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            // Get JSON input
-            $json = file_get_contents('php://input');
-            $postData = json_decode($json, true);
-            
-            if ($json && $postData) {
-                // Handle the JSON data
-                $find = $postData['find'] ?? null;
-                $dataType = $postData['data_type'] ?? null;
-                
-                // Process the data and prepare response
-                $response = [
-                    'status' => 'success',
-                    'message' => 'Data received successfully',
-                    'data' => [
-                        'find' => $find,
-                        'type' => $dataType
-                        // Add any additional processed data here
-                    ]
+            // Get JSON input since you're sending JSON from JavaScript
+            $jsonData = file_get_contents('php://input');
+            $postData = json_decode($jsonData, true);
+
+            if ($postData && isset($postData['find'])) {
+                // Prepare data in the format your model expects
+                $messageData = [
+                    'msgid' => uniqid(), // Generate a unique ID
+                    'sender' => $postData['find']['userid'],
+                    'receiver' => $postData['find']['receiverid'],
+                    'message' => $postData['find']['message'],
+                    'files' => null,
+                    'seen' => 0,
+                    'received' => 0,
+                    'deleted_sender' => 0,
+                    'deleted_receiver' => 0,
+                    'date' => date('Y-m-d H:i:s')
                 ];
-                
+
+                // Save message data to the database
+                $chatModel = $this->loadModel('messageModel');
+                $saved = $chatModel->save($messageData);
+
+                // Prepare the response
+                $response = [
+                    'status' => $saved ? 'success' : 'error',
+                    'message' => $saved ? 'Message sent successfully' : 'Failed to save message',
+                    'data' => $messageData
+                ];
+
                 // Send JSON response
                 header('Content-Type: application/json');
                 echo json_encode($response);
                 exit;
-            } else {
-                // Handle invalid JSON
-                header('Content-Type: application/json');
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => 'Invalid JSON data received'
-                ]);
-                exit;
             }
         }
+
+    
         
         // Load the view for GET requests
         $this->view('/seniorCounsel/chat', $data);
