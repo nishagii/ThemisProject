@@ -251,18 +251,7 @@ function start_chat(event, userName, receiverId) {
 
 let currentUserId = userId;
 
-function getMessageInputHTML(receiverId) {
-    return `
-        <div class="message-input">
-            <label for="fileInput" class="file-upload">
-                <span class="upload-icon">+</span>
-            </label>
-            <input type="file" id="message_file" style="display: none;">
-            <input type="text" id="message_text" placeholder="Type your message..." />
-            <button id="sendMessageBtn" onclick='send_message(event, "${receiverId}")'>Send</button>
-        </div>
-    `;
-}
+
 
 
 function loadChatMessages(msgId, userName, receiverId) {
@@ -339,6 +328,19 @@ function loadChatMessages(msgId, userName, receiverId) {
         });
 }
 
+function getMessageInputHTML(receiverId) {
+    return `
+        <div class="message-input">
+            <label for="fileInput" class="file-upload">
+                <span class="upload-icon">+</span>
+            </label>
+            <input type="file" id="message_file" style="display: none;">
+            <input type="text" id="message_text" placeholder="Type your message..." />
+            <button id="sendMessageBtn" onclick='send_message(event, "${receiverId}")'>Send</button>
+        </div>
+    `;
+}
+
 function displayChatMessages(messages, userName, receiverId) {
     const innerRightPanel = document.getElementById("inner_right_panel");
     let chatHTML = `<h2>Chat with ${userName}</h2><div class="chat-messages">`;
@@ -368,6 +370,17 @@ function displayChatMessages(messages, userName, receiverId) {
     const chatMessages = innerRightPanel.querySelector('.chat-messages');
     if (chatMessages) {
         chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Add event listener for Enter key on the message input
+    const messageInput = document.getElementById('message_text');
+    if (messageInput) {
+        messageInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent default form submission
+                send_message(event, receiverId);
+            }
+        });
     }
 }
 
