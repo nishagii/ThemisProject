@@ -60,12 +60,40 @@ class Chat {
             }
         }
         
-        // Check if there is a 'msgid' in the query parameters to get messages
         if (isset($_GET['msgid'])) {
             $msgid = $_GET['msgid'];
             $chatModel = $this->loadModel('messageModel');
-            $messages = $chatModel->getMessagesByMsgId($msgid); // Get all messages by msgid
-            $data['messages'] = $messages;
+            $messages = $chatModel->getMessagesByMsgId($msgid);
+            
+            // Add these debug logs
+            error_log("msgid received: " . $msgid);
+            error_log("messages from DB: " . print_r($messages, true));
+            
+            if (!$messages) {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'No messages found.',
+                    'data' => [
+                        'messages' => []
+                    ]
+                ];
+                echo json_encode($response);
+                exit;
+            }
+            
+            $response = [
+                'status' => 'success',
+                'data' => [
+                    'messages' => $messages
+                ]
+            ];
+            
+            // Add this debug log
+            error_log("response being sent: " . json_encode($response));
+            
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
         }
 
         // Load the view for GET requests

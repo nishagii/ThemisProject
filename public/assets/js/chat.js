@@ -120,20 +120,25 @@ function get_data(find, type) {
 // get_data({}, "user_info");
 
 function start_chat(event, userName, receiverId) {
-    console.log("start_chat function called with userName:", userName, "Receiver ID:", receiverId); // Debugging log
+    console.log("start_chat function called with userName:", userName, "Receiver ID:", receiverId);
 
     const messageDiv = document.querySelector(".message");
     const innerRightPanel = document.getElementById("inner_right_panel");
-    const messageInputArea = document.querySelector(".message-input"); // Get the message input area
+    const messageInputArea = document.querySelector(".message-input");
 
     if (!innerRightPanel) {
-        console.error("Error: inner_right_panel not found!"); // Debugging log
+        console.error("Error: inner_right_panel not found!");
         return;
     }
 
-    // Show the message input area when a contact is clicked
+    // Create msgId using sender and receiver IDs
+    const msgId = `${currentUserId}and${receiverId}`;
+    
+    // Load messages for this chat
+    loadChatMessages(msgId, userName, receiverId);
+
     if (messageInputArea) {
-        messageInputArea.style.display = "flex"; // Show the message input field
+        messageInputArea.style.display = "flex";
     }
 
     if (messageDiv) {
@@ -232,24 +237,8 @@ function start_chat(event, userName, receiverId) {
         }
     }
 
-    // **Ensure inner_right_panel updates when function runs**
-    console.log("Updating inner_right_panel...");
-    innerRightPanel.innerHTML = `    
-    <h2>Chat with ${userName}</h2>
-    <div class="chat-bubble received">Hello ${userName}, how can I help you?</div>
-    <div class="chat-bubble">Hi ${userName}, let's start our conversation!</div>
-    <div class="message-input">
-        <label for="fileInput" class="file-upload">
-            <span class="upload-icon">+</span>
-        </label>
-        <input type="file" id="message_file" style="display: none;">
-        <input type="text" id="message_text" placeholder="Type your message..." />
-        <button id="sendMessageBtn" onclick='send_message(event, "${receiverId}")'>Send</button>
-    </div>
-`;
-
-    // Move to the inner_right_panel smoothly
-    innerRightPanel.scrollIntoView({ behavior: "smooth" });
+    // Store the receiverId globally to be used in send_message
+    window.receiverId = receiverId;
 
     // Close the newContent panel if it exists
     const newContent = document.getElementById("newComponent");
@@ -261,6 +250,89 @@ function start_chat(event, userName, receiverId) {
 
 let currentUserId = userId;
 
+// Add new function to load chat messages
+function loadChatMessages(msgId, userName, receiverId) {
+    const innerRightPanel = document.getElementById("inner_right_panel");
+    
+    // Show loading state
+    innerRightPanel.innerHTML = `    
+        <h2>Chat with ${userName}</h2>
+        <div class="chat-messages">
+            <div style="text-align: center; padding: 20px;">Loading messages...</div>
+        </div>
+    `;
+
+    var xml = new XMLHttpRequest();
+    xml.onload = function () {
+        if (xml.readyState === 4) {
+            if (xml.status === 200) {
+                try {
+                    var response = JSON.parse(xml.responseText);
+                    displayChatMessages(response.data.messages, userName, receiverId);
+                } catch (e) {
+                    console.error("Error parsing messages:", e);
+                    innerRightPanel.innerHTML = `
+                        <h2>Chat with ${userName}</h2>
+                        <div class="chat-messages">
+                            <div>No messages yet. Start a conversation!</div>
+                        </div>
+                        ${getMessageInputHTML(receiverId)}
+                    `;
+                }
+            }
+        }
+    };
+
+    xml.open("GET", `http://localhost/themisrepo/public/chat?msgid=${msgId}`, true);
+    xml.send();
+}
+
+// Add function to display chat messages
+function displayChatMessages(messages, userName, receiverId) {
+    const innerRightPanel = document.getElementById("inner_right_panel");
+    let chatHTML = `<h2>Chat with ${userName}</h2><div class="chat-messages">`;
+
+    if (messages && messages.length > 0) {
+        messages.forEach(msg => {
+            const isSender = msg.sender === currentUserId;
+            chatHTML += `
+                <div class="chat-bubble ${isSender ? '' : 'received'}">
+                    ${msg.message}
+                    <small style="font-size: 0.8em; color: #888; display: block; margin-top: 5px;">
+                        ${new Date(msg.date).toLocaleTimeString()}
+                    </small>
+                </div>
+            `;
+        });
+    } else {
+        chatHTML += `<div style="text-align: center; padding: 20px;">No messages yet. Start a conversation!</div>`;
+    }
+
+    chatHTML += `</div>${getMessageInputHTML(receiverId)}`;
+    innerRightPanel.innerHTML = chatHTML;
+
+    // Scroll to bottom of messages
+    const chatMessages = innerRightPanel.querySelector('.chat-messages');
+    if (chatMessages) {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+}
+
+// Helper function to get message input HTML
+function getMessageInputHTML(receiverId) {
+    return `
+        <div class="message-input">
+            <label for="fileInput" class="file-upload">
+                <span class="upload-icon">+</span>
+            </label>
+            <input type="file" id="message_file" style="display: none;">
+            <input type="text" id="message_text" placeholder="Type your message..." />
+            <button id="sendMessageBtn" onclick='send_message(event, "${receiverId}")'>Send</button>
+        </div>
+    `;
+}
+
+// Modify your existing send_message function
 function send_message(e, receiverId) {
     var message_text = _("message_text");
     if (message_text.value.trim() == "") {
@@ -270,9 +342,18 @@ function send_message(e, receiverId) {
 
     get_data({
         message: message_text.value.trim(),
-        userid: currentUserId, // sender
-        receiverid: receiverId // receiver
+        userid: currentUserId,
+        receiverid: receiverId
     }, "send_message");
+
+    // Clear the input field after sending
+    message_text.value = "";
+
+    // Optionally reload messages after sending
+    const msgId = `${currentUserId}#${receiverId}`;
+    setTimeout(() => {
+        loadChatMessages(msgId, document.querySelector("h2").textContent.replace("Chat with ", ""), receiverId);
+    }, 500);
 }
 
 
