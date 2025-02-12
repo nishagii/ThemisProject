@@ -63,6 +63,14 @@ function _(element) {
 }
 
 function get_data(find, type) {
+    // Log the initial data being sent
+    console.log("Sending data:", {
+        message: find.message,
+        sender: find.userid,
+        receiver: find.receiverid,
+        type: type
+    });
+
     var xml = new XMLHttpRequest();
     
     xml.onload = function () {
@@ -70,11 +78,16 @@ function get_data(find, type) {
             if (xml.status === 200) {
                 try {
                     var response = JSON.parse(xml.responseText);
-                    console.log("Server Response:", response);
-                    handle_result(response, type);  // Passing the parsed JSON
+                    // Log the server's response
+                    console.log("Server received:", {
+                        data: response,
+                        requestType: type,
+                        timestamp: new Date().toISOString()
+                    });
+                    // handle_result(response, type);
                 } catch (e) {
                     console.error("Error parsing JSON response:", e);
-                    console.error("Response text:", xml.responseText);
+                    console.error("Raw response:", xml.responseText);
                 }
             } else {
                 console.error("HTTP Error:", xml.status, xml.statusText);
@@ -82,32 +95,26 @@ function get_data(find, type) {
         }
     };
     
+    // Log any network errors
     xml.onerror = function () {
-        console.error("Network Error: Failed to make the request.");
+        console.error("Network Error:", {
+            url: "http://localhost/themisrepo/public/chat",
+            data: find,
+            type: type
+        });
     };
     
     var data = JSON.stringify({ 
         find: find, 
         data_type: type 
     });
+
+    // Log the actual JSON being sent
+    console.log("JSON being sent to server:", data);
     
     xml.open("POST", "http://localhost/themisrepo/public/chat", true);
     xml.setRequestHeader("Content-Type", "application/json");
     xml.send(data);
-}
-
-
-function handle_result(result, type) {
-    if (result && Object.keys(result).length > 0) {  // Check if result exists and isn't empty
-        // if (!result.logged_in) {
-        //     window.location = ROOT + "/Login.php";
-        // } else {
-            console.log("Received data:", result);
-            // Handle your data here
-        // }
-    } else {
-        console.error("No data received from server");
-    }
 }
 
 // get_data({}, "user_info");
