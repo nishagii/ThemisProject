@@ -133,6 +133,7 @@ function start_chat(event, userName, receiverId) {
 
     // Create msgId using sender and receiver IDs
     const msgId = `${currentUserId}and${receiverId}`;
+    const receivedmsgId = `${receiverId }and${currentUserId}`;
     
     // Load messages for this chat
     loadChatMessages(msgId, userName, receiverId);
@@ -250,9 +251,23 @@ function start_chat(event, userName, receiverId) {
 
 let currentUserId = userId;
 
-// Add new function to load chat messages
+function getMessageInputHTML(receiverId) {
+    return `
+        <div class="message-input">
+            <label for="fileInput" class="file-upload">
+                <span class="upload-icon">+</span>
+            </label>
+            <input type="file" id="message_file" style="display: none;">
+            <input type="text" id="message_text" placeholder="Type your message..." />
+            <button id="sendMessageBtn" onclick='send_message(event, "${receiverId}")'>Send</button>
+        </div>
+    `;
+}
+
+
 function loadChatMessages(msgId, userName, receiverId) {
     const innerRightPanel = document.getElementById("inner_right_panel");
+    const receivedmsgId = `${receiverId}and${currentUserId}`;
     
     // Show loading state
     innerRightPanel.innerHTML = `    
@@ -262,32 +277,68 @@ function loadChatMessages(msgId, userName, receiverId) {
         </div>
     `;
 
-    var xml = new XMLHttpRequest();
-    xml.onload = function () {
-        if (xml.readyState === 4) {
-            if (xml.status === 200) {
-                try {
-                    var response = JSON.parse(xml.responseText);
-                    displayChatMessages(response.data.messages, userName, receiverId);
-                } catch (e) {
-                    console.error("Error parsing messages:", e);
-                    innerRightPanel.innerHTML = `
-                        <h2>Chat with ${userName}</h2>
-                        <div class="chat-messages">
-                            <div>No messages yet. Start a conversation!</div>
-                        </div>
-                        ${getMessageInputHTML(receiverId)}
-                    `;
+    // Create promises for both sent and received messages
+    const getSentMessages = new Promise((resolve, reject) => {
+        var xml = new XMLHttpRequest();
+        xml.onload = function () {
+            if (xml.readyState === 4) {
+                if (xml.status === 200) {
+                    try {
+                        var response = JSON.parse(xml.responseText);
+                        resolve(response.data.messages || []);
+                    } catch (e) {
+                        console.error("Error parsing sent messages:", e);
+                        resolve([]);
+                    }
                 }
             }
-        }
-    };
+        };
+        xml.onerror = () => reject("Error loading sent messages");
+        xml.open("GET", `http://localhost/themisrepo/public/chat?msgid=${msgId}`, true);
+        xml.send();
+    });
 
-    xml.open("GET", `http://localhost/themisrepo/public/chat?msgid=${msgId}`, true);
-    xml.send();
+    const getReceivedMessages = new Promise((resolve, reject) => {
+        var xml = new XMLHttpRequest();
+        xml.onload = function () {
+            if (xml.readyState === 4) {
+                if (xml.status === 200) {
+                    try {
+                        var response = JSON.parse(xml.responseText);
+                        resolve(response.data.messages || []);
+                    } catch (e) {
+                        console.error("Error parsing received messages:", e);
+                        resolve([]);
+                    }
+                }
+            }
+        };
+        xml.onerror = () => reject("Error loading received messages");
+        xml.open("GET", `http://localhost/themisrepo/public/chat?msgid=${receivedmsgId}`, true);
+        xml.send();
+    });
+
+    // Combine and display both sent and received messages
+    Promise.all([getSentMessages, getReceivedMessages])
+        .then(([sentMessages, receivedMessages]) => {
+            // Combine messages and sort by date
+            const allMessages = [...sentMessages, ...receivedMessages].sort((a, b) => 
+                new Date(a.date) - new Date(b.date)
+            );
+            displayChatMessages(allMessages, userName, receiverId);
+        })
+        .catch(error => {
+            console.error("Error loading messages:", error);
+            innerRightPanel.innerHTML = `
+                <h2>Chat with ${userName}</h2>
+                <div class="chat-messages">
+                    <div>Error loading messages. Please try again.</div>
+                </div>
+                ${getMessageInputHTML(receiverId)}
+            `;
+        });
 }
 
-// Add function to display chat messages
 function displayChatMessages(messages, userName, receiverId) {
     const innerRightPanel = document.getElementById("inner_right_panel");
     let chatHTML = `<h2>Chat with ${userName}</h2><div class="chat-messages">`;
@@ -296,10 +347,12 @@ function displayChatMessages(messages, userName, receiverId) {
         messages.forEach(msg => {
             const isSender = msg.sender === currentUserId;
             chatHTML += `
-                <div class="chat-bubble ${isSender ? '' : 'received'}">
+                <div class="chat-bubble ${isSender ? '' : 'received'}" 
+                     style="margin-${isSender ? 'left' : 'right'}: auto">
                     ${msg.message}
                     <small style="font-size: 0.8em; color: #888; display: block; margin-top: 5px;">
                         ${new Date(msg.date).toLocaleTimeString()}
+                        ${isSender ? '(Sent)' : '(Received)'}
                     </small>
                 </div>
             `;
@@ -318,21 +371,6 @@ function displayChatMessages(messages, userName, receiverId) {
     }
 }
 
-// Helper function to get message input HTML
-function getMessageInputHTML(receiverId) {
-    return `
-        <div class="message-input">
-            <label for="fileInput" class="file-upload">
-                <span class="upload-icon">+</span>
-            </label>
-            <input type="file" id="message_file" style="display: none;">
-            <input type="text" id="message_text" placeholder="Type your message..." />
-            <button id="sendMessageBtn" onclick='send_message(event, "${receiverId}")'>Send</button>
-        </div>
-    `;
-}
-
-// Modify your existing send_message function
 function send_message(e, receiverId) {
     var message_text = _("message_text");
     if (message_text.value.trim() == "") {
@@ -340,6 +378,8 @@ function send_message(e, receiverId) {
         return;
     }
 
+    const msgId = `${currentUserId}and${receiverId}`;
+    
     get_data({
         message: message_text.value.trim(),
         userid: currentUserId,
@@ -349,8 +389,7 @@ function send_message(e, receiverId) {
     // Clear the input field after sending
     message_text.value = "";
 
-    // Optionally reload messages after sending
-    const msgId = `${currentUserId}and${receiverId}`;
+    // Reload messages after sending
     setTimeout(() => {
         loadChatMessages(msgId, document.querySelector("h2").textContent.replace("Chat with ", ""), receiverId);
     }, 500);
