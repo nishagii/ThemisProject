@@ -29,3 +29,8 @@ define('APP_DESC', "Best website on the planet");
 
 /** true means show errors **/
 define('DEBUG', true);
+
+// stripe API keys
+define('STRIPE_SECRET', 'sk_test');
+define('STRIPE_PUBLIC', 'pk_test'); //update this when using in the END presentation
+

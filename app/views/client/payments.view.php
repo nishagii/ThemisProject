@@ -4,150 +4,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment History</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/client/payments.css">
+    <title>Make a Payment</title>
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/payments.css">
+    <script src="https://js.stripe.com/v3/"></script> <!-- Stripe.js -->
 </head>
 
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
 
-    <div class="payment-container">
-        <!-- Summary Section -->
-        <div class="summary-section">
-            <div class="summary-card">
-                <div class="icon-wrapper">
-                    <i class="fas fa-wallet"></i>
+    <div class="home-section">
+        <div class="payment-header">
+            <h1>Make a Secure Payment</h1>
+        </div>
+        <div class="payment-paragraph">
+            <p>To proceed with the payment, please fill in the following details. Your payment will be processed securely.</p>
+            <p>Card details will not be shared with any third party.</p>
+        </div>
+        <div class="pay_container">
+            <div id="Checkout" class="inline">
+                <h1>Pay Invoice</h1>
+                    <div class="card-row">
+                        <span class="visa"></span>
+                        <span class="mastercard"></span>
+                        <span class="amex"></span>
+                        <span class="discover"></span>
+                    </div>
+
+                    <form id="paymentForm">
+                        <div class="form-group">
+                            <label for="CaseNumber">Case Number</label>
+                            <input id="CaseNumber" class="form-control" type="text" placeholder="Enter Case Number" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="IDNumber">ID Number</label>
+                            <input id="IDNumber" class="form-control" type="text" placeholder="Enter ID Number" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="PaymentAmount">Payment Amount</label>
+                            <div class="amount-placeholder">
+                                <span>LKR</span>
+                                <input id="PaymentAmount" class="form-control amount-input" type="number" min="1000" step="500" placeholder="Enter amount" required />
+                            </div>
+                        </div>
+
+                        <div class="btn_pay">
+                            <button id="PayButton" class="btn btn-block btn-success submit-button" type="submit">
+                                <span class="align-middle">Proceed to Payment</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <h2>Total Payments</h2>
-                <p>Rs. <span id="total-payments">4500</span></p>
-            </div>
-            <div class="summary-card">
-                <div class="icon-wrapper">
-                    <i class="fas fa-exclamation-circle"></i>
-                </div>
-                <h2>Due Payments</h2>
-                <p>Rs. <span id="due-payments">2000</span></p>
-            </div>
-            <div class="summary-card">
-                <div class="icon-wrapper">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <h2>Last Payment</h2>
-                <p>Rs. <span id="due-payments">1500</span></p>
             </div>
         </div>
 
-        <!-- Payment Cards Section -->
-        <div class="payments-section">
-            <h1>Payment History</h1>
-            <div class="cards-container">
-                <div class="payment-card">
-                    <div class="card-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>2024-11-20</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Paid Amount: <strong>Rs.500</strong></p>
-                        <p>Paid To: <strong>Lawyer A</strong></p>
-                    </div>
-                </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const stripe = Stripe("<?= STRIPE_PUBLIC ?>"); // Load Stripe public key
+                const payButton = document.getElementById("PayButton");
+                const paymentForm = document.getElementById("paymentForm");
 
-                <div class="payment-card">
-                    <div class="card-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>2024-11-15</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Paid Amount: <strong>Rs.1000</strong></p>
-                        <p>Paid To: <strong>Lawyer B</strong></p>
-                    </div>
-                </div>
-                <div class="payment-card">
-                    <div class="card-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>2024-11-15</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Paid Amount: <strong>Rs.1000</strong></p>
-                        <p>Paid To: <strong>Lawyer B</strong></p>
-                    </div>
-                </div>
-                <div class="payment-card">
-                    <div class="card-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>2024-11-15</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Paid Amount: <strong>Rs.1000</strong></p>
-                        <p>Paid To: <strong>Lawyer B</strong></p>
-                    </div>
-                </div>
-                <div class="payment-card">
-                    <div class="card-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>2024-11-15</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Paid Amount: <strong>Rs.1000</strong></p>
-                        <p>Paid To: <strong>Lawyer B</strong></p>
-                    </div>
-                </div>
-                <div class="payment-card">
-                    <div class="card-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>2024-11-15</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Paid Amount: <strong>Rs.1000</strong></p>
-                        <p>Paid To: <strong>Lawyer B</strong></p>
-                    </div>
-                </div>
-                <div class="payment-card">
-                    <div class="card-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>2024-11-15</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Paid Amount: <strong>Rs.1000</strong></p>
-                        <p>Paid To: <strong>Lawyer B</strong></p>
-                    </div>
-                </div>
-                <div class="payment-card">
-                    <div class="card-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>2024-11-15</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Paid Amount: <strong>Rs.1000</strong></p>
-                        <p>Paid To: <strong>Lawyer B</strong></p>
-                    </div>
-                </div>
-                <div class="payment-card">
-                    <div class="card-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>2024-11-15</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Paid Amount: <strong>Rs.1000</strong></p>
-                        <p>Paid To: <strong>Lawyer B</strong></p>
-                    </div>
-                </div>
-                <div class="payment-card">
-                    <div class="card-header">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>2024-11-15</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Paid Amount: <strong>Rs.1000</strong></p>
-                        <p>Paid To: <strong>Lawyer B</strong></p>
-                    </div>
-                </div>
-                <!-- Add more payment cards as needed -->
-            </div>
-        </div>
-    </div>
+                paymentForm.addEventListener("submit", function(event) {
+                    event.preventDefault();
+
+                    const caseNumber = document.getElementById("CaseNumber").value.trim();
+                    const idNumber = document.getElementById("IDNumber").value.trim();
+                    const amount = document.getElementById("PaymentAmount").value.trim();
+
+                    if (!caseNumber || !idNumber || !amount) {
+                        alert("Please fill all required fields.");
+                        return;
+                    }
+
+                    fetch("<?= ROOT ?>/PaymentController/createCheckoutSession", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                case_number: caseNumber,
+                                id_number: idNumber,
+                                amount: amount
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.id) {
+                                stripe.redirectToCheckout({
+                                    sessionId: data.id
+                                });
+                            } else {
+                                alert("Payment processing failed.");
+                            }
+                        })
+                        .catch(error => console.error("Error:", error));
+                });
+            });
+        </script>
 </body>
 
 </html>

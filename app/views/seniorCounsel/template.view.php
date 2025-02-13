@@ -24,16 +24,25 @@
 
             <div class="search-container">
                 <input type="text" placeholder="Search here for templates" class="search-bar" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" />
-                <i class="bx bx-sort sort-icon" title="Sort" onclick="sortFunction()"></i>
-                <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
-
-                <!-- Dropdown Menu -->
+                <div class="sort-wrapper">
+                <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu(event)"></i>
                 <div class="sort-dropdown" id="sortMenu">
                     <button class="dropdown-item" onclick="sortBy('name')">Sort by Name</button>
                     <button class="dropdown-item" onclick="sortBy('role')">Sort by Role</button>
                     <button class="dropdown-item" onclick="sortBy('date')">Sort by Date</button>
                 </div>
             </div>
+    
+            <!-- Filter Icon with Dropdown -->
+            <div class="filter-wrapper">
+                <i class="bx bx-filter filter-icon" title="Filter" onclick="toggleFilterMenu(event)"></i>
+                <div class="sort-dropdown" id="filterMenu">
+                    <button class="dropdown-item" onclick="filterBy('all')">Show All</button>
+                    <button class="dropdown-item" onclick="filterBy('recent')">Recent Uploads</button>
+                    <button class="dropdown-item" onclick="filterBy('user')">Uploaded by Me</button>
+                </div>
+            </div>
+        </div>
 
             <div class="add">
             <a href="<?= ROOT ?>/template/create">
@@ -94,6 +103,45 @@
         </div>
     </div>
     <script>
+        // Toggle Sort Menu
+        function toggleSortMenu(event) {
+            event.stopPropagation(); // Prevent click propagation
+            const sortMenu = document.getElementById("sortMenu");
+            closeOtherMenus();
+            sortMenu.style.display = sortMenu.style.display === "block" ? "none" : "block";
+        }
+
+        // Toggle Filter Menu
+        function toggleFilterMenu(event) {
+            event.stopPropagation(); // Prevent click propagation
+            const filterMenu = document.getElementById("filterMenu");
+            closeOtherMenus();
+            filterMenu.style.display = filterMenu.style.display === "block" ? "none" : "block";
+        }
+
+        // Close other menus
+        function closeOtherMenus() {
+            document.querySelectorAll(".sort-dropdown").forEach(menu => {
+                menu.style.display = "none";
+            });
+        }
+
+        // Close dropdown menus when clicking outside
+        document.addEventListener("click", function () {
+            closeOtherMenus();
+        });
+
+        // Example sort function
+        function sortBy(criteria) {
+            console.log(`Sorting by: ${criteria}`);
+            closeOtherMenus();
+        }
+
+        // Example filter function
+        function filterBy(criteria) {
+            console.log(`Filtering by: ${criteria}`);
+            closeOtherMenus();
+        }
         //confirm delete
         function confirmDelete(Id) {
             Swal.fire({
