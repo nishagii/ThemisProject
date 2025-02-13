@@ -10,7 +10,7 @@ class MeetingModel
        
 
         $query = "INSERT INTO {$this->table}
-        (client_id,meeting_date, meeting_time, meeting_purpose, meeting_comments,status)
+        (client_id,meeting_date, meeting_time, meeting_purpose, meeting_comments,meeting_status)
         VALUES
         (:client_id,:meeting_date, :meeting_time, :meeting_purpose, :meeting_comments, :meeting_status)";
 
