@@ -48,20 +48,7 @@
 </div>
 
 <div class="contact-container">
-    <div class="contact-map">
-        <a href="#" class="map-button">
-            <img src="<?= ROOT ?>/assets/images/map.png" height="300" alt="Map Location">
-        </a>
-    </div>
-    <div class="contact-details">
-        <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
-        <p>No. 47, C.W.W. Kannangara Mawatha,<br>
-        Alexandra Place,<br>
-        Colombo 00700</p>
-                <button type="submit">Send Message</button>
-            </form>
-        </div>
-    </div>
+
     <div class="contact-container">
         <div class="contact-map">
 
