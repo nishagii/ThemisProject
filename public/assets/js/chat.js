@@ -416,12 +416,12 @@ function send_message(e, receiverId) {
 // }
 
 // Auto-refresh chat every 10 seconds
-setInterval(() => {
-    if (window.receiverId && currentUserId) {
-        // alert("hey");
-        loadChatMessages(`${currentUserId}and${window.receiverId}`, "Chat", window.receiverId);
-    }
-}, 10000);
+// setInterval(() => {
+//     if (window.receiverId && currentUserId) {
+//         // alert("hey");
+//         loadChatMessages(`${currentUserId}and${window.receiverId}`, "Chat", window.receiverId);
+//     }
+// }, 10000);
 
 
 
