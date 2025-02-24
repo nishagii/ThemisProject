@@ -236,7 +236,7 @@ body{
   position: relative;
   background-color: #f4f8ff;
   min-height: 110vh;
-  top: 0;
+  top: 40px;
   left: 79.8px;
   width: calc(100% - 78px);
   transition: all 0.5s ease;

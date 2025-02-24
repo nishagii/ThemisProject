@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/payments.css">
     <link rel="stylesheet" href="<?= ROOT ?>/assets/js/seniorCounsel/payments.js">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 
 
@@ -17,9 +18,14 @@
 
     <div class="home-section">
         
-        <div class="invoice">
-            <h3>Click here to generate an invoice for the client</h3>
-            <button class="create-invoice-btn">Create Invoice</button>
+        <div class="outline">
+            <div class="badge">
+                <div class="text">
+                <i class='bx bx-file'></i>
+                <span class="prompt">Click Here to Generate an Invoice for the Client</span>
+                </div>
+                <button class="button">CREATE INVOICE</button>
+            </div>
         </div>
             
     </div>
