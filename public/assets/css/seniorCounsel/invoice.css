@@ -1,0 +1,171 @@
+
+.form-container {
+    /* max-width: 900px; */
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: #585858;
+    font-weight: 600;
+}
+
+h2, h3 {
+    color: #333;
+    font-size: 15px;
+}
+
+.brand-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.bill-to, .invoice-info {
+    margin-bottom: 20px;
+    padding: 30px;
+    background: white;
+    border: solid 0.5px rgb(232, 232, 232);
+    border-radius: 8px;
+    min-height: 400px;
+    margin-right: 20px;
+}
+
+.heading {
+    background-color: rgb(245, 245, 245);
+    padding: 10px;  /* Optional: Adds space around the text */
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+
+label {
+    display: block;
+    /* font-weight: bold; */
+    margin: 20px 0;
+    
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+select {
+    margin-top: 5px;
+    width: 85%;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 1px solid #ebebeb;
+    border-radius: 20px;
+    background-color: #f4f8ff;
+    color: #333;
+    
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+select:hover {
+    border-color: #888;
+
+}
+
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+textarea {
+    margin-top: 5px;
+    width: 90%;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    background-color: #f4f8ff;
+    color: #333;
+    resize: vertical; /* Allows vertical resizing only */
+    transition: all 0.3s ease;
+}
+
+textarea:hover {
+    border-color: #888;
+
+}
+
+textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+button {
+    background: #ffaa2b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ffb84e;
+}
+
+.invoice-info input[type="number"],
+.invoice-info input[type="date"] {
+    margin-top: 5px;
+    width: 85%;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 1px solid #ebebeb;
+    border-radius: 20px;
+    background-color: #f4f8ff;
+    color: #333;
+    
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.invoice-info input[type="number"]::-webkit-inner-spin-button,
+.invoice-info input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Removes the default spinner for number inputs */
+}
+
+.invoice-info input[type="number"]:hover,
+.invoice-info input[type="date"]:hover {
+    border-color: #888;
+}
+
+.invoice-info input[type="number"]:focus,
+.invoice-info input[type="date"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+.invoice-info input[type="date"] {
+    cursor: pointer;
+}
+
+.invoice-info input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.5);
+}

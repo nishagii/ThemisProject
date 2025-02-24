@@ -24,7 +24,7 @@
                 <i class='bx bx-file'></i>
                 <span class="prompt">Click Here to Generate an Invoice for the Client</span>
                 </div>
-                <button class="button">CREATE INVOICE</button>
+                <button class="button" onclick="window.location.href='<?= ROOT ?>/invoice'">CREATE INVOICE</button>
             </div>
         </div>
             
