@@ -26,14 +26,14 @@
                     </div>
 
                     <label>Client Name: 
-    <select name="customer_name" required>
-        <?php foreach ($client as $c): ?>
-            <option value="<?= htmlspecialchars($c->id) ?>">
-                <?= htmlspecialchars($c->first_name . ' ' . $c->last_name) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</label>
+                        <select name="customer_name" required>
+                            <?php foreach ($client as $c): ?>
+                                <option value="<?= htmlspecialchars($c->id) ?>">
+                                    <?= htmlspecialchars($c->first_name . ' ' . $c->last_name) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </label>
 
 
                     <!-- Case number dropdown -->
