@@ -72,8 +72,9 @@
                     </label>
 
                     <label>Payment Due Date:
-                        <input type="date" name="payment_due" required>
+                        <input type="date" name="payment_due" required min="<?= date('Y-m-d'); ?>">
                     </label>
+
 
                     <button type="submit">Generate Invoice</button>
                 </div>
