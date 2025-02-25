@@ -39,7 +39,74 @@ class Invoice
     }
 }
 
+public function test() {
+    echo "Invoice controller is working!";
+    exit;
+}
 
+public function createInvoice() {
+    // Get the raw input data
+    $inputData = file_get_contents('php://input');
+    
+    // Try to decode as JSON first
+    $jsonData = json_decode($inputData, true);
+    
+    // If JSON parsing worked, use that data
+    if ($jsonData !== null) {
+        $data = $jsonData;
+        error_log("Received JSON data: " . print_r($data, true));
+    } 
+    // Otherwise, fall back to POST data
+    else {
+        $data = [
+            'clientID' => $_POST['clientID'] ?? '',
+            'caseID' => $_POST['caseID'] ?? '',
+            'comments' => $_POST['comments'] ?? '',
+            'paymentDesc' => $_POST['paymentDesc'] ?? '',
+            'amount' => $_POST['amount'] ?? '',
+            'dueDate' => $_POST['dueDate'] ?? '',
+        ];
+        error_log("Received POST data: " . print_r($data, true));
+    }
+
+    // Validate the data
+    $errors = [];
+    if (empty($data['clientID'])) {
+        $errors['clientID'] = 'Client ID is required';
+    }
+    if (empty($data['caseID'])) {
+        $errors['caseID'] = 'Case ID is required';
+    }
+    if (empty($data['paymentDesc'])) {
+        $errors['paymentDesc'] = 'Payment description is required';
+    }
+    if (empty($data['amount'])) {
+        $errors['amount'] = 'Amount is required';
+    }
+    if (empty($data['dueDate'])) {
+        $errors['dueDate'] = 'Due date is required';
+    }
+
+    // If there are validation errors
+    if (!empty($errors)) {
+        // Return errors as JSON
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'errors' => $errors]);
+        return;
+    }
+
+    // Save the invoice data to the database
+    $invoiceModel = $this->loadModel('InvoiceModel');
+    $result = $invoiceModel->save($data);
+    
+    // Return response
+    header('Content-Type: application/json');
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Invoice created successfully']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to create invoice']);
+    }
+}
     
 }
 
