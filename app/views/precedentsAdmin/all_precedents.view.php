@@ -27,9 +27,9 @@
         <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
 
         <div class="sort-dropdown" id="sortMenu">
-            <button class="dropdown-item" onclick="sortBy('date')">Sort by Date</button>
+            <button class="dropdown-item" onclick="sortBy('judgment_date')">Sort by Date</button>
             <button class="dropdown-item" onclick="sortBy('case_number')">Sort by Case Number</button>
-            <button class="dropdown-item" onclick="sortBy('judge')">Sort by Judge</button>
+            <button class="dropdown-item" onclick="sortBy('judgment_by')">Sort by Judge</button>
         </div>
     </div>
 
@@ -75,18 +75,18 @@
             menu.style.display = menu.style.display === "block" ? "none" : "block";
         }
 
-    // // Sort function - Sends an AJAX request
-    //     function sortBy(criteria) {
-    //         fetch(`<?= ROOT ?>/PrecedentsController/sort/${criteria}`)
-    //             .then(response => response.text())  // Get HTML response
-    //             .then(data => {
-    //                 document.getElementById("precedentsTable").innerHTML = data; // Update table
-    //             })
-    //             .catch(error => console.error("Error:", error));
+        // Sort function - Sends an AJAX request
+        function sortBy(criteria) {
+            fetch(`<?= ROOT ?>/PrecedentsController/sort/${criteria}`)
+                .then(response => response.text())  // Get HTML response
+                .then(data => {
+                    document.getElementById("precedentsTable").innerHTML = data; // Update table
+                })
+                .catch(error => console.error("Error:", error));
 
-    //         // Hide the menu after selection
-    //         toggleSortMenu();
-    //     }
+            // Hide the menu after selection
+            toggleSortMenu();
+        }
 
         // Close the dropdown when clicking outside
         document.addEventListener("click", function (event) {
