@@ -91,6 +91,14 @@ select:focus {
     outline: none;
 }
 
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-top: 5px;
+}
+
+
 textarea {
     margin-top: 5px;
     width: 90%;

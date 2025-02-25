@@ -33,22 +33,16 @@
                                 </option>
                             <?php endforeach; ?>
                         </select>
+                        <div id="client-error" class="error-message"></div>
                     </label>
 
-
-                    <!-- Case number dropdown -->
                     <label>Case Number: 
                         <select name="case_number" required>
-                            <?php 
-                            // Example code for generating dropdown
-                            // while($row = mysqli_fetch_assoc($caseResult)) {
-                            //     echo "<option value='" . $row['case_number'] . "'>" . $row['case_number'] . "</option>";
-                            // }
-                            ?>
                             <option value="Case 001">Case 001</option>
                             <option value="Case 002">Case 002</option>
                             <option value="Case 003">Case 003</option>
                         </select>
+                        <div id="case-error" class="error-message"></div>
                     </label>
 
                     <!-- Comments section -->
@@ -64,15 +58,18 @@
                     </div>
 
                     <label>Payment Description:
-                        <textarea name="payment_description" rows="3" placeholder="Enter payment details..." required></textarea>
+                        <textarea name="payment_description" rows="3" placeholder="Enter payment details..."></textarea>
+                        <div id="payment-description-error" class="error-message"></div>
                     </label>
 
                     <label>Payment Amount:
-                        <input type="number" name="payment_amount" placeholder="Enter amount" step="0.01" min="0" required>
+                        <input type="number" name="payment_amount" placeholder="Enter amount" step="0.01" min="0">
+                        <div id="payment-amount-error" class="error-message"></div>
                     </label>
 
                     <label>Payment Due Date:
-                        <input type="date" name="payment_due" required min="<?= date('Y-m-d'); ?>">
+                        <input type="date" name="payment_due" min="<?= date('Y-m-d'); ?>">
+                        <div id="payment-due-error" class="error-message"></div>
                     </label>
 
 
@@ -89,6 +86,58 @@
     </div>
 
 </body>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        // Clear previous error messages
+        document.querySelectorAll('.error-message').forEach(function(msg) {
+            msg.innerHTML = '';
+        });
+
+        let valid = true;
+
+        // Check Client Name
+        const clientName = document.querySelector('[name="customer_name"]');
+        if (!clientName.value) {
+            document.getElementById('client-error').innerHTML = 'Client name is required.';
+            valid = false;
+        }
+
+        // Check Case Number
+        const caseNumber = document.querySelector('[name="case_number"]');
+        if (!caseNumber.value) {
+            document.getElementById('case-error').innerHTML = 'Case number is required.';
+            valid = false;
+        }
+
+        // Check Payment Description
+        const paymentDescription = document.querySelector('[name="payment_description"]');
+        if (!paymentDescription.value) {
+            document.getElementById('payment-description-error').innerHTML = 'Payment description is required.';
+            valid = false;
+        }
+
+        // Check Payment Amount
+        const paymentAmount = document.querySelector('[name="payment_amount"]');
+        if (!paymentAmount.value) {
+            document.getElementById('payment-amount-error').innerHTML = 'Payment amount is required.';
+            valid = false;
+        }
+
+        // Check Payment Due Date
+        const paymentDue = document.querySelector('[name="payment_due"]');
+        if (!paymentDue.value) {
+            document.getElementById('payment-due-error').innerHTML = 'Payment due date is required.';
+            valid = false;
+        }
+
+        // Prevent form submission if invalid
+        if (!valid) {
+            event.preventDefault();
+        }
+    });
+</script>
+
 
 </html>
 </div>
