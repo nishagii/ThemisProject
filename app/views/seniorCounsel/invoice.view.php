@@ -25,20 +25,16 @@
                         <h3>Bill to:</h3>
                     </div>
 
-                    <!-- Customer name dropdown -->
                     <label>Client Name: 
-                        <select name="customer_name" required>
-                            <?php 
-                            // Example code for generating dropdown
-                            // while($row = mysqli_fetch_assoc($result)) {
-                            //     echo "<option value='" . $row['customer_name'] . "'>" . $row['customer_name'] . "</option>";
-                            // }
-                            ?>
-                            <option value="Customer 1">Customer 1</option>
-                            <option value="Customer 2">Customer 2</option>
-                            <option value="Customer 3">Customer 3</option>
-                        </select>
-                    </label>
+    <select name="customer_name" required>
+        <?php foreach ($client as $c): ?>
+            <option value="<?= htmlspecialchars($c->id) ?>">
+                <?= htmlspecialchars($c->first_name . ' ' . $c->last_name) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</label>
+
 
                     <!-- Case number dropdown -->
                     <label>Case Number: 
@@ -87,7 +83,8 @@
                 
             </form>
         </div>
-            
+
+
     </div>
 
 </body>
