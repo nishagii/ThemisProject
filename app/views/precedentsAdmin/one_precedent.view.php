@@ -115,8 +115,8 @@
                     <p><?= htmlspecialchars($case->case_number) ?></p>
                 </div>
                 <div class="info-item">
-                    <strong>Name of Parties:</strong>
-                    <p><?= htmlspecialchars($case->name_of_parties) ?></p>
+                    <strong>Description:</strong>
+                    <p><?= htmlspecialchars($case->description) ?></p>
                 </div>
                 <div class="info-item">
                     <strong>Judgment By:</strong>
