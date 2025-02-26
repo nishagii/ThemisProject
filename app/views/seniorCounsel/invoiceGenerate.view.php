@@ -22,11 +22,12 @@
         .invoice-box {
             max-width: 850px;
             margin: auto;
-            background: #fff;
+            background: linear-gradient(135deg,rgb(240, 243, 247), #ffffff); /* Light blue to white gradient */
             padding: 40px;
             border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
         }
+
 
         .header {
             /* text-align: center; */
@@ -94,7 +95,7 @@
         .total-row td {
             font-size: 16px;
             font-weight: 700;
-            color: #1d4ed8;
+            color:rgb(11, 38, 112);
         }
 
         .btn {
@@ -103,7 +104,7 @@
             max-width: 200px;
             margin: 30px auto 0;
             padding: 12px 20px;
-            background: #2563eb;
+            background: rgb(11, 38, 112);
             color: #fff;
             border: none;
             border-radius: 8px;
