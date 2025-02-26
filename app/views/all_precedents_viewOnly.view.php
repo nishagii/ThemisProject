@@ -15,18 +15,18 @@
             <h1>All Precedents</h1>
         </div>
 
-        <!-- search bar -->
-        <div class="search-bar-container">
-            <input type="text" 
-            id="searchBar" 
-            class="search-bar" 
-            placeholder="Search precedents..." 
-            oninput="searchPrecedents()" 
-            onfocus="this.placeholder = ''"
-            onblur="this.placeholder = 'Search precedents...' ">
-            <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
-            <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
-        </div>
+    <!-- search bar -->
+    <div class="search-bar-container">
+        <input type="text" 
+        id="searchBar" 
+        class="search-bar" 
+        placeholder="Search precedents..." 
+        oninput="searchPrecedents()" 
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder = 'Search precedents...' ">
+        <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
+        <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
+    </div>
 
     <div class="table-container">
         <table>
@@ -40,7 +40,7 @@
                     <th>View More</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="precedentsTable">
                 <?php if (!empty($cases)): ?>
                     <?php foreach ($cases as $case): ?>
                         <tr>
@@ -64,5 +64,32 @@
             </tbody>
         </table>
     </div>
+    <script>
+        function toggleSortMenu() {
+            let menu = document.getElementById("sortMenu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+
+        // Sort function - Sends an AJAX request
+        function sortBy(criteria) {
+            fetch(`<?= ROOT ?>/PrecedentsController/sort/${criteria}`)
+                .then(response => response.text())  // Get HTML response
+                .then(data => {
+                    document.getElementById("precedentsTable").innerHTML = data; // Update table
+                })
+                .catch(error => console.error("Error:", error));
+
+            // Hide the menu after selection
+            toggleSortMenu();
+        }
+
+        // Close the dropdown when clicking outside
+        document.addEventListener("click", function (event) {
+            let menu = document.getElementById("sortMenu");
+            if (event.target.closest(".sort-icon") === null) {
+                menu.style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>
