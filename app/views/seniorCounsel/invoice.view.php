@@ -18,7 +18,7 @@
     <div class="home-section">
         
         <div class="form-container">
-            <form action="generate_invoice.php" method="POST">
+            <form action="<?= ROOT ?>/invoice/createInvoice" method="POST">
 
             <div class="bill-to">
                     <div class="heading">
@@ -26,7 +26,7 @@
                     </div>
 
                     <label>Client Name: 
-                        <select name="customer_name" required>
+                        <select name="clientID" required>
                             <?php foreach ($client as $c): ?>
                                 <option value="<?= htmlspecialchars($c->id) ?>">
                                     <?= htmlspecialchars($c->first_name . ' ' . $c->last_name) ?>
@@ -37,7 +37,7 @@
                     </label>
 
                     <label>Case Number: 
-                        <select name="case_number" required>
+                        <select name="caseID" required>
                             <option value="Case 001">Case 001</option>
                             <option value="Case 002">Case 002</option>
                             <option value="Case 003">Case 003</option>
@@ -58,17 +58,17 @@
                     </div>
 
                     <label>Payment Description:
-                        <textarea name="payment_description" rows="3" placeholder="Enter payment details..."></textarea>
+                        <textarea name="paymentDesc" rows="3" placeholder="Enter payment details..."></textarea>
                         <div id="payment-description-error" class="error-message"></div>
                     </label>
 
                     <label>Payment Amount:
-                        <input type="number" name="payment_amount" placeholder="Enter amount" step="0.01" min="0">
+                        <input type="number" name="amount" placeholder="Enter amount" step="0.01" min="0">
                         <div id="payment-amount-error" class="error-message"></div>
                     </label>
 
                     <label>Payment Due Date:
-                        <input type="date" name="payment_due" min="<?= date('Y-m-d'); ?>">
+                        <input type="date" name="dueDate" min="<?= date('Y-m-d'); ?>">
                         <div id="payment-due-error" class="error-message"></div>
                     </label>
 
