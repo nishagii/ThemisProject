@@ -201,4 +201,22 @@ class UserModel
             return false;
         }
     }
+
+        public function getUserByID($id)
+    {
+        $query = "SELECT * FROM users WHERE id = :id LIMIT 1";
+        $params = ['id' => $id];
+
+        try {
+            $stmt = $this->connect()->prepare($query);
+            $stmt->execute($params);
+            $user = $stmt->fetch(PDO::FETCH_OBJ);
+
+            return $user ?: null; // Return the user object or null if not found
+        } catch (PDOException $e) {
+            echo "PDO Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
 }
