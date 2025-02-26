@@ -20,9 +20,8 @@
         <div class="temp-section">
             <h1>Document Templates</h1>
         </div>
+        
         <div class="template-container">
-
-
             <div class="search-container">
                 <input type="text" placeholder="Search here for templates" class="search-bar" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" />
                 <div class="sort-wrapper">

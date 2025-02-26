@@ -20,6 +20,30 @@ class Template
     //     // Load the view with data
     //     $this->view('/seniorCounsel/template', $data);
     // }
+    public function sort($criteria) {
+        // Fetch sorted cases based on the criteria
+        $cases = $this->$templateModel->getSorted($criteria);
+
+        // Generate HTML for the sorted table rows
+        $html = '';
+        if (!empty($templates)) {
+            foreach ($templates as $template) {
+                $html .= '<tr>';
+                $html .= '<td>' . $template->name . '</td>';
+                $html .= '<td>' . $template->description . '</td>';
+                $html .= '<td>' . $template->uploaded_by . '</td>';
+                $html .= '<td>' . $template->uploaded_date . '</td>';
+                $html .= '<td><a href="' . $template->document_link . '" target="_blank">View Document</a></td>';
+                $html .= '<td><a href="' . ROOT . '/PrecedentsController/retrieveOne/' . $template->id . '"><button class="more">View more</button></a></td>';
+                $html .= '</tr>';
+            }
+        } else {
+            $html .= '<tr><td colspan="6">No precedents found in the database.</td></tr>';
+        }
+
+        // Return the HTML
+        echo $html;
+    }
 
 /*---------------------Create operation----------------------------- */
 public function create() {
