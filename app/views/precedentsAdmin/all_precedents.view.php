@@ -14,26 +14,24 @@
         <h1>All Precedents</h1>
     </div>
 
-    <!-- search bar -->
-    <div class="search-bar-container">
-        <input type="text" 
-        id="searchBar" 
-        class="search-bar" 
-        placeholder="Search precedents..." 
-        oninput="searchPrecedents()" 
-        onfocus="this.placeholder = ''"
-        onblur="this.placeholder = 'Search precedents...' ">
-        <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
-        <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
-
-        <div class="sort-dropdown" id="sortMenu">
-            <button class="dropdown-item" onclick="sortBy('judgment_date')">Sort by Date</button>
-            <button class="dropdown-item" onclick="sortBy('case_number')">Sort by Case Number</button>
-            <button class="dropdown-item" onclick="sortBy('judgment_by')">Sort by Judge</button>
-        </div>
-    </div>
-
     <div class="table-container">
+        <div class="search-bar-container">
+            <input type="text" 
+            id="searchBar" 
+            class="search-bar" 
+            placeholder="Search precedents..." 
+            oninput="searchPrecedents()" 
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = 'Search precedents...' ">
+            <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
+            <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
+
+            <div class="sort-dropdown" id="sortMenu">
+                <button class="dropdown-item" onclick="sortBy('judgment_date')">Sort by Date</button>
+                <button class="dropdown-item" onclick="sortBy('case_number')">Sort by Case Number</button>
+                <button class="dropdown-item" onclick="sortBy('judgment_by')">Sort by Judge</button>
+            </div>
+        </div>
         <table>
             <thead>
                 <tr>
