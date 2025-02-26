@@ -67,6 +67,9 @@ input[type="file"]::file-selector-button {
     border-radius: 5px;
     cursor: pointer;
 }
+input[type="file"]::file-selector-button:hover {
+    background-color: #5c6bc0;
+}
 
 input:focus, textarea:focus {
     border-color: #fa9800;
