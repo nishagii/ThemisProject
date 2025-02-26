@@ -15,7 +15,8 @@
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
-    <div class='main-container'>
+    <?php include('component/sidebar.view.php'); ?>
+    <div class='main-container home-section'>
         <div class="temp-section">
             <h1>Document Templates</h1>
         </div>
