@@ -128,7 +128,7 @@ public function test() {
             'invoiceNumber' => 'INV' . rand(1000, 9999), // Example invoice number
         ];
 
-        $this->view('invoiceGenerate', $invoiceData);
+        $this->view('seniorCounsel/invoiceGenerate', ['invoiceData' => $invoiceData]);
     }
     
 }
