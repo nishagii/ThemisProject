@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Invoice - <?= htmlspecialchars($invoiceData['invoiceNumber']) ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -114,7 +115,7 @@
         }
 
         .btn:hover {
-            background: #1d4ed8;
+            background: #143db8;
         }
 
         @media (max-width: 600px) {
@@ -131,11 +132,11 @@
         }
 
         .btn-back {
-            background-color: #1d4ed8;
+            background-color: rgb(11, 38, 112);
             color: white;
             padding: 12px 20px;
             border: none;
-            border-radius: 8px;
+            border-radius: 20px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
@@ -149,9 +150,12 @@
 </head>
 
 <body>
-    <div class="back">
-        <button class="btn-back" onclick="window.history.back()">Go Back</button>
-    </div>
+<div class="back">
+    <button class="btn-back" onclick="window.history.back()">
+        <i class='bx bx-arrow-back'></i> <!-- Boxicons arrow-back icon -->
+    </button>
+</div>
+
     <div class="invoice-box">
         <div class="header">
             <div class="header-info">
