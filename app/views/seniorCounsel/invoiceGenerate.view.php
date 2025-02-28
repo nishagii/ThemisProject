@@ -127,7 +127,7 @@
 
         .back {
             display: flex;
-            justify-content: flex-start; /* This pushes the button to the left */
+            justify-content: flex-start;
             margin-top: 20px;
         }
 
@@ -145,6 +145,33 @@
 
         .btn-back:hover {
             background-color: #143db8;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .invoice-box, .invoice-box * {
+                visibility: visible;
+            }
+
+            .invoice-box {
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+            }
+
+            .back {
+                display: none;
+            }
+
+            .btn {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -195,8 +222,8 @@
             </tr>
         </table>
 
-        <button class="btn" onclick="window.print()">Print / Save as PDF</button>
     </div>
+        <button class="btn" onclick="window.print()">Print / Save as PDF</button>
 </body>
 
 </html>
