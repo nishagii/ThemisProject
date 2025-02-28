@@ -8,6 +8,7 @@ body {
     padding: 0;
     background-color: #f4f8ff;
 }
+
 .card-section{
     text-align: center;
 }
@@ -31,6 +32,50 @@ body {
     padding: 30px;
     overflow: hidden;
 }
+
+.documents-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between; /* This will push the <p> to the left and <button> to the right */
+    align-items: center; /* This ensures that both elements are vertically centered */
+}
+
+.documents-card p {
+    margin: 0;
+}
+
+.documents-card button {
+   
+    font-size: 16px;
+    background-color: #5191e4;
+    border: none;
+    color: white;
+    border-radius: 50px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.documents-card button:hover {
+    background-color: #1a73e8;
+    color: #ffffff;
+}
+
+.documents-card p {
+    margin: 0; /* Removes the default margin */
+    color: #767676; /* Sets the text color */
+    font-weight: 500; /* Makes the text slightly bold */
+    line-height: 1.5; /* Adds spacing between lines for readability */
+    flex-grow: 1; /* Makes the <p> element take up available space */
+    text-align: left; /* Ensures text aligns to the left */
+}
+
 
 
 .card-title {
