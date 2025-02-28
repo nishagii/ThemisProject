@@ -5,38 +5,52 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    /* background-color: #E4E9F7; */
+    /* Adding padding to the top to prevent content from hiding behind fixed navbar */
+    padding-top: 100px;
+    background-color: #f4f8ff;
 }
-nav{
+
+/* Making the container fixed */
+.container {
+    background-color: #1d1b31;
+    padding: 0;
+    margin: 0; /* Setting margin to 0 as requested */
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 100px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav {
     height: 100px;
     width: 100%;
+    display: flex;
+    align-items: center;
 }
+
 .navbar-logo {
-    height:100px; 
+    height: 80px; 
     vertical-align: middle; 
     margin-right: 50px;
     margin-left: 10px;
     padding-left: 10px;
 }
 
-
-.container {
-    background-color: #1d1b31;
-    padding: 18px 0;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-}
 /* big navigation bar */
 nav .big-navbar {
     list-style-type: none;
-    float: right;
-    margin-top: 40px;
-    margin-right: 300px;
+    margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
+    flex-grow: 1;
 }
 
 nav .big-navbar li {
@@ -53,8 +67,10 @@ nav .big-navbar li a {
     border-radius: 100px;
     transition: background-color 0.3s;
     text-transform: uppercase;
+    display: block;
 }
-nav .big-navbar li a:before{
+
+nav .big-navbar li a:before {
     position: absolute;
     content: '';
     left: 0;
@@ -65,7 +81,8 @@ nav .big-navbar li a:before{
     transform: scaleX(0);
     transform-origin: right;
 }
-nav .big-navbar li a:hover:before{
+
+nav .big-navbar li a:hover:before {
     transform: scaleX(1);
     transition: transform 0.25s linear;
     transform-origin: left;
@@ -80,6 +97,7 @@ nav .big-navbar li a:active {
     display: flex;
     gap: 20px;
     margin-right: 15px;
+    align-items: center;
 }
 
 .navbar-icons i {
@@ -94,26 +112,23 @@ nav .big-navbar li a:active {
 }
 
 label #btn,/* icons*/
-label #cancel{
+label #cancel {
     color: #ff9800;
     font-size: 25px;
-    float: right;
-    line-height: 80px;
-    margin-right: 20px;
     cursor: pointer;
     display: none;
-    margin-top: 10px;
-
+    margin-right: 20px;
 }
-#check{
+
+#check {
     display: none;
 }
 
 /* Popup Styling */
 .popup {
     position: fixed;
-    top: 15%; /* Adjust based on where you want the popup to appear */
-    right: 5%; /* Adjust based on your layout */
+    top: 120px; /* Adjusted to be below fixed navbar */
+    right: 5%;
     padding: 20px;
     background-color: white;
     border: 1px solid #ccc;
@@ -126,16 +141,14 @@ label #cancel{
     justify-content: space-between;
     align-items: center;
     min-width: 200px;
-  }
+}
   
-  /* Show the popup when active */
-  .popup.active {
+/* Show the popup when active */
+.popup.active {
     transform: scale(1);
-  }
+}
 
-
-
-  .login-button {
+.login-button {
     margin-left: 20px;
     padding: 10px 20px;
     background-color: #f0a636; /* Initial background color */
@@ -160,143 +173,25 @@ label #cancel{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduce shadow effect */
 }
 
-
-/* screen sizes lower than 1375px*/
-@media (max-width: 1375px){
-    nav .big-navbar {
-        margin-right: 170px;
-    }
-}
-
-@media (max-width: 1210px){
-    nav .big-navbar {
-        margin-right: 60px;
-    }
-}
-/* screen sizes lower than 1075px*/
-@media (max-width: 1075px){
-    nav .big-navbar {
-        margin-right:50px;
-    }
-    nav .big-navbar li a {
-        font-size: 12px;
-    }
-    .login-button {
-        padding: 5px 10px;
-        border-radius: 50px;
-        font-size: 11px;
-    }
-}
-/* screen sizes lower than 936px*/
-@media (max-width: 936px){
-
-
-     nav .big-navbar li a {
-        font-size: 12px;
-        padding: 5px;
-    }
-    .navbar-logo{
-        margin-right: 10px;
-        height: 80px;
-        width: auto;
-        margin-top: 6px;
-    }
-    .small-navbar a{
-        text-align: center;
-        font-size: 12px;
-        padding: 10px 6px 0 10px;
-    }
-    
-}
-/* screen sizes lower than 768 px.phones and tablets*/
-@media (max-width: 768px){
-
-    label #btn{
-        display: block;
-    }
-    .big-navbar{
-        position: fixed;
-        width: 100%;
-        height: 40vh;
-        background: rgb(255, 255, 255);
-        top: 120px;
-        left: -100%;
-        text-align: center;
-        transition:  all 0.5s;
-        flex-direction: column;
-        display: none;
-        
-    }
-    nav .big-navbar li {
-         display:block;
-         line-height: 30px;
-         margin-top: 5px;
-         margin-bottom: 5px;
-        
-    }
-    nav .big-navbar li a{
-        font-size: 15px;
-        display: block;
-        padding: 0;
-        color: #1d1b31;
-    } 
-    .login-button {
-        margin-right: 20px;
-        margin-bottom: 10px;
-    }
-    a:hover,a.active{
-        background: none ;
-    }
-    #check:checked ~ .big-navbar{
-        left: 0;
-    }
-    .container{
-        padding: 0;
-    }
-    .navbar-logo{
-        width: auto;
-        margin-top: 12px;
-        height: 70px;
-    }
-    .small-navbar{
-        display: flex;
-        flex-direction: column;
-    }
-    .small-navbar a{
-        font-size: 13px;
-    }
-
-    .search-bar {
-        width: 90%; /* Almost full-width on small screens */
-        max-width: 500px;
-        font-size: 14px; /* Adjust font size */
-        height: 30px;
-        margin-top: 30px;
-    }
-    .navbar-icons i {
-        font-size: 21px;
-    }
-}
-
 /* Settings menu container styling */
 .settings-menu {
-    position: absolute; /* Allows precise positioning relative to the parent */
-    top: 90px; /* Adjust to position below the settings icon */
-    right: 10px; /* Aligns the menu to the right */
-    background: #ffffff; /* White background for the menu */
-    border: 1px solid #ccc; /* Light border for better visibility */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    z-index: 1000; /* Ensures it appears above other elements */
-    display: none; /* Hidden by default */
-    width: 150px; /* Adjust based on the content */
+    position: absolute;
+    top: 70px; /* Adjusted to account for fixed navbar */
+    right: 10px;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1001; /* Higher than the navbar */
+    display: none;
+    width: 150px;
 }
 
 /* Menu list styling */
 .settings-menu ul {
-    list-style: none; /* Removes bullet points */
-    margin: 0; /* Removes default margin */
-    padding: 0; /* Removes default padding */
+    list-style: none;
+    margin: 0;
+    padding: 0;
     color: #1d1b31;
 }
 
@@ -307,24 +202,186 @@ label #cancel{
 
 /* Menu item styling */
 .settings-menu li {
-    padding: 10px 15px; /* Space inside each item */
-    cursor: pointer; /* Shows pointer cursor on hover */
-    text-align: left; /* Aligns text to the left */
-    font-size: 14px; /* Adjusts font size */
-    color: #000000; /* Dark text color */
+    padding: 10px 15px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+    color: #000000;
 }
 
-.settings-menu li a{
-   
-    color: #000000; /* Dark text color */
+.settings-menu li a {
+    color: #000000;
+    text-decoration: none;
+    display: block;
 }
 
 /* Hover effect for menu items */
 .settings-menu li:hover {
-    background-color: #f4f4f4; /* Light gray background on hover */
+    background-color: #f4f4f4;
 }
 
 /* Class to hide the menu */
 .hidden {
     display: none;
+}
+
+/* Responsive breakpoints */
+/* screen sizes lower than 1375px*/
+@media (max-width: 1375px) {
+    nav .big-navbar {
+        gap: 5px;
+    }
+    
+    .navbar-logo {
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 1210px) {
+    nav .big-navbar li {
+        margin: 0 10px;
+    }
+    
+    .navbar-logo {
+        margin-right: 15px;
+    }
+}
+
+/* screen sizes lower than 1075px*/
+@media (max-width: 1075px) {
+    nav .big-navbar li a {
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+    
+    .login-button {
+        padding: 5px 10px;
+        border-radius: 50px;
+        font-size: 11px;
+    }
+    
+    .navbar-logo {
+        height: 70px;
+    }
+}
+
+/* screen sizes lower than 936px*/
+@media (max-width: 936px) {
+    nav .big-navbar li a {
+        font-size: 12px;
+        padding: 5px;
+    }
+    
+    .navbar-logo {
+        margin-right: 10px;
+        height: 70px;
+        margin-top: 0;
+    }
+    
+    .navbar-icons i {
+        font-size: 20px;
+    }
+    
+    .navbar-icons {
+        gap: 15px;
+    }
+}
+
+/* screen sizes lower than 768 px (phones and tablets) */
+@media (max-width: 768px) {
+    body {
+        padding-top: 80px; /* Adjust padding for smaller navbar height */
+    }
+    
+    .container {
+        height: 80px;
+    }
+    
+    nav {
+        height: 80px;
+    }
+    
+    label #btn {
+        display: block;
+        line-height: 80px;
+    }
+    
+    .navbar-logo {
+        height: 60px;
+    }
+    
+    .big-navbar {
+        position: fixed;
+        width: 100%;
+        height: auto;
+        background: rgb(255, 255, 255);
+        top: 80px; /* Position directly below the fixed navbar */
+        left: -100%;
+        text-align: center;
+        transition: all 0.5s;
+        flex-direction: column;
+        box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    nav .big-navbar li {
+        display: block;
+        line-height: 30px;
+        margin: 10px 0;
+    }
+    
+    nav .big-navbar li a {
+        font-size: 15px;
+        color: #1d1b31;
+    }
+    
+    a:hover, a.active {
+        background: none;
+    }
+    
+    #check:checked ~ .big-navbar {
+        left: 0;
+        display: flex;
+        padding: 10px 0;
+    }
+    
+    .navbar-icons {
+        gap: 15px;
+    }
+    
+    .navbar-icons i {
+        font-size: 18px;
+    }
+    
+    .popup {
+        top: 90px;
+        width: 80%;
+        right: 10%;
+    }
+    
+    .settings-menu {
+        top: 60px;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+    .navbar-logo {
+        height: 50px;
+        margin-left: 5px;
+    }
+    
+    .navbar-icons {
+        gap: 10px;
+        margin-right: 10px;
+    }
+    
+    .navbar-icons i {
+        font-size: 16px;
+    }
+    
+    label #btn, 
+    label #cancel {
+        font-size: 20px;
+        margin-right: 10px;
+    }
 }

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div>
+    <div class="small-body">
         <ul class="small-navbar">
             <li><a href="<?= ROOT ?>/CalendarLawyer">Calendar</a></li>
             <li><a href="<?= ROOT ?>/tasklawyer">Task Board</a></li>

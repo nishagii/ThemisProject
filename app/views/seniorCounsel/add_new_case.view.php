@@ -16,7 +16,8 @@
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
-    <main>
+    <?php include('component/sidebar.view.php'); ?>
+    <main class="home-section">
         <?php if (!empty($errors)): ?>
             <div class="error-container">
                 <?php foreach ($errors as $field => $error): ?>

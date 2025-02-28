@@ -13,8 +13,9 @@
 
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
+    <?php include('component/sidebar.view.php'); ?>
     
-    <div class="parent-container">
+    <div class="parent-container home-section">
         <h1 class="task-heading">
             Task Management
         </h1>
