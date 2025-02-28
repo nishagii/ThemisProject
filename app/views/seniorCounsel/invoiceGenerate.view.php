@@ -22,35 +22,33 @@
         .invoice-box {
             max-width: 850px;
             margin: auto;
-            background: linear-gradient(135deg,rgb(240, 243, 247), #ffffff); /* Light blue to white gradient */
+            background: linear-gradient(135deg, rgb(240, 243, 247), #ffffff);
             padding: 40px;
             border-radius: 16px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
         }
 
-
         .header {
-            /* text-align: center; */
             margin-bottom: 40px;
             display: flex;
-            justify-content: space-between; /* Pushes items to opposite ends */
-            align-items: center; /* Vertically centers the content */
+            justify-content: space-between;
+            align-items: center;
         }
 
         .header-info {
-            text-align: left; /* Ensures text is aligned to the left */
-            }
+            text-align: left;
+        }
 
-            .logo {
-            text-align: right; /* Ensures the logo content is aligned to the right */
-            }
+        .logo {
+            text-align: right;
+        }
 
-            .logo img {
-                max-height: 100px; /* Adjust the logo size */
-                max-width: 100%; /* Make sure the image scales properly */
-                display: block; /* Remove any extra space below the image */
-                margin: 0; /* Optional: Remove default margin */
-            }
+        .logo img {
+            max-height: 100px;
+            max-width: 100%;
+            display: block;
+            margin: 0;
+        }
 
         .header h2 {
             font-size: 28px;
@@ -95,14 +93,14 @@
         .total-row td {
             font-size: 16px;
             font-weight: 700;
-            color:rgb(11, 38, 112);
+            color: rgb(11, 38, 112);
         }
 
         .btn {
             display: block;
             width: 100%;
             max-width: 200px;
-            margin: 30px auto 0;
+            margin: 15px auto 0;
             padding: 12px 20px;
             background: rgb(11, 38, 112);
             color: #fff;
@@ -112,6 +110,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: background 0.3s ease;
+            text-align: center;
         }
 
         .btn:hover {
@@ -124,10 +123,35 @@
                 padding: 10px;
             }
         }
+
+        .back {
+            display: flex;
+            justify-content: flex-start; /* This pushes the button to the left */
+            margin-top: 20px;
+        }
+
+        .btn-back {
+            background-color: #1d4ed8;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: #143db8;
+        }
     </style>
 </head>
 
 <body>
+    <div class="back">
+        <button class="btn-back" onclick="window.history.back()">Go Back</button>
+    </div>
     <div class="invoice-box">
         <div class="header">
             <div class="header-info">
