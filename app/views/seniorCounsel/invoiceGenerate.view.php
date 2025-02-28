@@ -223,7 +223,10 @@
         </table>
 
     </div>
+    <div class="back">
         <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+        <button class="btn send-btn" onclick="sendInvoice()">Send Invoice</button>
+    </div>
 </body>
 
 </html>
