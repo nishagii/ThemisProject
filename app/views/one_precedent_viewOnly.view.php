@@ -100,6 +100,7 @@
     </style>
 </head>
 
+
 <body>
     <div class="case-details-card">
         <h2 class="card-title">Precedent Details</h2>

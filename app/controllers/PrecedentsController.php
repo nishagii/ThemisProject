@@ -13,6 +13,13 @@ class PrecedentsController {
     {
         $this->view('/precedentsAdmin/PrecedentsAdmin_Home');
     }
+
+    // public function sort($criteria) {
+    //     $cases = $this->precedentModel->getSorted($criteria);
+    //     header('Content-Type: application/json');
+    //     echo json_encode($cases);
+    //     exit;
+    // }
     
 /*---------------------Create operation----------------------------- */
 public function create() {
@@ -54,7 +61,7 @@ public function create() {
         $data = [
             'judgment_date' => $_POST['judgment_date'],
             'case_number' => $_POST['case_number'],
-            'name_of_parties' => $_POST['parties'],
+            'description' => $_POST['description'],
             'judgment_by' => $_POST['judgment_by'],
             'document_link' => $documentLink  // Use the correct variable here
         ];
@@ -140,7 +147,7 @@ public function create() {
     $data = [
         'judgment_date' => $_POST['judgment_date'],
         'case_number' => $_POST['case_number'],
-        'name_of_parties' => $_POST['name_of_parties'],
+        'description' => $_POST['description'],
         'judgment_by' => $_POST['judgment_by'],
         'document_link' => $_POST['current_document_link'], // Keep this for the case where no file is uploaded
         'id' => $_POST['id'],

@@ -33,9 +33,9 @@
             </div>
 
             <div class="form-group">
-                <label for="parties">Name of Parties:</label>
-                <textarea id="parties" name="parties" required></textarea>
-                <div class="error" id="partiesError"></div>
+                <label for="description">Case Description:</label>
+                <textarea id="description" name="description" required></textarea>
+                <div class="error" id="descriptionError"></div>
             </div>
 
             <div class="form-group">
@@ -68,21 +68,21 @@
             // Get form fields
             const date = document.getElementById('date').value;
             const caseNumber = document.getElementById('case_number').value.trim();
-            const parties = document.getElementById('parties').value.trim();
+            const description = document.getElementById('description').value.trim();
             const judgmentBy = document.getElementById('judgment_by').value.trim();
             const documentLink = document.getElementById('document_link').value.trim();
 
             // Error elements
             const dateError = document.getElementById('dateError');
             const caseNumberError = document.getElementById('caseNumberError');
-            const partiesError = document.getElementById('partiesError');
+            const descriptionError = document.getElementById('descriptionError');
             const judgmentByError = document.getElementById('judgmentByError');
             const documentLinkError = document.getElementById('documentLinkError');
 
             // Reset error messages
             dateError.textContent = '';
             caseNumberError.textContent = '';
-            partiesError.textContent = '';
+            descriptionError.textContent = '';
             judgmentByError.textContent = '';
             documentLinkError.textContent = '';
 
@@ -98,8 +98,8 @@
                 caseNumberError.textContent = 'Case number is required.';
                 isValid = false;
             }
-            if (!parties) {
-                partiesError.textContent = 'Name of parties is required.';
+            if (!description) {
+                descriptionError.textContent = 'Description is required.';
                 isValid = false;
             }
             if (!judgmentBy) {

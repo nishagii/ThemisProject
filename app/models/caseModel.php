@@ -126,4 +126,21 @@ class CaseModel
 
         return $this->query($query, $params);
     }
+
+    // Get case number by email
+    public function getCaseNumberByEmail($email)
+    {
+        $query = "SELECT case_number FROM {$this->table} WHERE client_email = :email OR attorney_email = :email OR junior_counsel_email = :email";
+        $params = ['email' => $email];
+
+        $result = $this->query($query, $params);
+
+        // Check if result is empty
+        if (empty($result)) {
+            return null; // Return null if no case is found for the given email
+        }
+
+        return $result[0]['case_number']; // Return the case number
+    }
+
 }

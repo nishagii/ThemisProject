@@ -9,22 +9,24 @@
 <body>
 <?php include('seniorCounsel/component/bigNav.view.php'); ?>
 <?php include('seniorCounsel/component/smallNav1.view.php'); ?>
-    <div class="header">
-        <h1>All Precedents</h1>
-    </div>
+<?php include('seniorCounsel/component/sidebar.view.php'); ?>
+    <div class="home-section">
+        <div class="header">
+            <h1>All Precedents</h1>
+        </div>
 
-    <!-- search bar -->
-    <div class="search-bar-container">
-        <input type="text" 
-        id="searchBar" 
-        class="search-bar" 
-        placeholder="Search precedents..." 
-        oninput="searchPrecedents()" 
-        onfocus="this.placeholder = ''"
-        onblur="this.placeholder = 'Search precedents...' ">
-        <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
-        <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
-    </div>
+        <!-- search bar -->
+        <div class="search-bar-container">
+            <input type="text" 
+            id="searchBar" 
+            class="search-bar" 
+            placeholder="Search precedents..." 
+            oninput="searchPrecedents()" 
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = 'Search precedents...' ">
+            <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
+            <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
+        </div>
 
     <div class="table-container">
         <table>
@@ -32,7 +34,7 @@
                 <tr>
                     <th>Date</th>
                     <th>Case Number</th>
-                    <th>Name of Parties</th>
+                    <th>Description</th>
                     <th>Judgment By</th>
                     <th>Document Link</th>
                     <th>View More</th>
@@ -44,7 +46,7 @@
                         <tr>
                             <td><?php echo $case->judgment_date; ?></td>
                             <td><?php echo $case->case_number; ?></td>
-                            <td><?php echo $case->name_of_parties; ?></td>
+                            <td><?php echo $case->description; ?></td>
                             <td><?php echo $case->judgment_by; ?></td>
                             <td><a href="<?php echo $case->document_link; ?>" target="_blank">View Document</a></td>
                             <td>

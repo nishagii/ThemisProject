@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Make a Payment</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/payments.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/client/payments.css">
     <script src="https://js.stripe.com/v3/"></script> <!-- Stripe.js -->
 </head>
 

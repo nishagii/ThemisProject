@@ -20,6 +20,7 @@ h1{
     padding-top:20px ;
     padding-bottom: 10px;
     text-transform: uppercase;
+    margin-top: 50px;
 }
 .home-section {
   display: flex;

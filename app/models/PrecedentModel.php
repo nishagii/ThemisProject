@@ -7,18 +7,23 @@ class PrecedentModel {
 
     public function insert($data) {
         $query = "INSERT INTO {$this->table} 
-              (judgment_date, case_number, name_of_parties, judgment_by, document_link)
+              (judgment_date, case_number, description, judgment_by, document_link)
               VALUES 
-              (:judgment_date, :case_number, :name_of_parties, :judgment_by, :document_link)";
+              (:judgment_date, :case_number, :description, :judgment_by, :document_link)";
 
         $params = [
             'judgment_date' => $_POST['judgment_date'],
             'case_number' => $_POST['case_number'],
-            'name_of_parties' => $_POST['parties'],
+            'description' => $_POST['description'],
             'judgment_by' => $_POST['judgment_by'],
             'document_link' => $data['document_link']
         ];
         $this->query($query, $params);
+    }
+
+    public function getSorted($column){
+        $query = "SELECT * FROM $this->table ORDER BY {$column} ASC";
+        return $this->query($query);
     }
 
     public function getAll() {
@@ -45,14 +50,14 @@ class PrecedentModel {
                 SET 
                     judgment_date = :judgment_date,
                     case_number = :case_number,
-                    name_of_parties = :name_of_parties,
+                    description = :description,
                     judgment_by = :judgment_by,
                     document_link = :document_link
                     WHERE id = :id";
         $params = [
             'judgment_date' => $data['judgment_date'],
             'case_number' => $data['case_number'],
-            'name_of_parties' => $data['name_of_parties'],
+            'description' => $data['description'],
             'judgment_by' => $data['judgment_by'],
             'document_link' => $data['document_link'],
             ':id' => $data['id'],

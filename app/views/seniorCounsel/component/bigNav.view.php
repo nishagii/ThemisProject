@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +7,9 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/bigNav.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- this is imported to use icons -->
-
 </head>
-
 <body>
     <div class="container">
-
         <nav>
             <input type="checkbox" id="check"> <!-- check box to check and uncheck the menu in 768px screen -->
             <label for="check">
@@ -29,7 +25,7 @@
                 <!-- <li><a href="blog">Blogs</a></li> -->
             </ul>
         </nav>
-
+        
         <div class="navbar-icons">
             <i data-modal-target="#popup" class="fas fa-envelope" id="envelope-icon"></i>
             <i class="fas fa-bell"></i>
@@ -41,21 +37,48 @@
                     <li><a href="logout">Logout</a></li>
                 </ul>
             </div>
-
-
             <a href="<?= ROOT ?>/profile">
                 <i class="fas fa-user-circle" id="profile-icon"></i>
             </a>
-
         </div>
-
-        <!-- Popup element -->
-        <div id="popup" class="popup">
-            <p>This is your memo popup content.</p>
-        </div>
-
     </div>
-    <script src="<?= ROOT ?>/assets/js/memo.js"> </script>
+    
+    <!-- Popup element outside the fixed container -->
+    <div id="popup" class="popup">
+        <p>This is your memo popup content.</p>
+    </div>
+    
+    <!-- Add a small script to close the mobile menu when a link is clicked -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close mobile menu when links are clicked
+            const navLinks = document.querySelectorAll('.big-navbar li a');
+            const checkBox = document.getElementById('check');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    checkBox.checked = false;
+                });
+            });
+            
+            // Settings menu toggle
+            const settingsIcon = document.getElementById('settings-icon');
+            const settingsMenu = document.getElementById('settings-menu');
+            
+            settingsIcon.addEventListener('click', function(e) {
+                e.preventDefault();
+                settingsMenu.classList.toggle('hidden');
+            });
+            
+            // Close settings menu when clicking elsewhere
+            document.addEventListener('click', function(e) {
+                if (!settingsIcon.contains(e.target) && !settingsMenu.contains(e.target)) {
+                    settingsMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+    
+    <script src="<?= ROOT ?>/assets/js/memo.js"></script>
 </body>
-
 </html>
