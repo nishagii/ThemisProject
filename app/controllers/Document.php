@@ -12,9 +12,9 @@ class Document
     }
 
     // Add a new case
-    public function addDocument()
+    public function add_Document()
     {
-       
+        $this->view('/seniorCounsel/document_upload');
     }
 
     public function retrieveCaseDocuments()
