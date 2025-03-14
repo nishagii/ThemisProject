@@ -23,20 +23,20 @@
         <h1 class="card-section">Upload Documents</h1>
 
         <div class="case-details-card">
-            <form action="upload.php" method="POST" enctype="multipart/form-data">
+            <form action="<?= ROOT ?>/document/save_Document" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="docName">Document Name</label>
-                    <input type="text" id="docName" name="docName" required>
+                    <input type="text" id="docName" name="doc_name" required>
                 </div>
 
                 <div class="form-group">
                     <label for="docDescription">Description</label>
-                    <textarea id="docDescription" name="docDescription" rows="4" required></textarea>
+                    <textarea id="docDescription" name="doc_description" rows="4" required></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="fileUpload">Upload Document</label>
-                    <input type="file" id="fileUpload" name="fileUpload" required>
+                    <input type="file" id="fileUpload" name="document_file" required>
                 </div>
 
                 <button type="submit" class="btn-submit">Upload Document</button>

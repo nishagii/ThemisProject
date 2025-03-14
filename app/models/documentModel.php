@@ -13,23 +13,33 @@ class DocumentModel
      */
     public function save($data)
     {
-        // Prepare the query to insert data into the "documents" table
-        $query = "INSERT INTO {$this->table} 
-                  (case_id, doc_name, doc_description, file_path, uploaded_by)
-                  VALUES 
-                  (:case_id, :doc_name, :doc_description, :file_path, :uploaded_by)";
-
-        // Bind parameters to prevent SQL injection
-        $params = [
-            'case_id' => $data['case_id'],
-            'doc_name' => $data['doc_name'],
-            'doc_description' => $data['doc_description'],
-            'file_path' => $data['file_path'],
-            'uploaded_by' => $data['uploaded_by'],
-        ];
-
-        // Execute the query using the parent Model class's query method
-        return $this->query($query, $params);
+        try {
+            // Prepare the query
+            $query = "INSERT INTO {$this->table} 
+                    (case_id, doc_name, doc_description, file_path, uploaded_by) 
+                    VALUES 
+                    (:case_id, :doc_name, :doc_description, :file_path, :uploaded_by)";
+            
+            // Bind parameters
+            $params = [
+                'case_id' => $data['case_id'],
+                'doc_name' => $data['doc_name'],
+                'doc_description' => $data['doc_description'],
+                'file_path' => $data['file_path'],
+                'uploaded_by' => $data['uploaded_by'],
+            ];
+            
+            // Debug: Print the query and parameters
+            // echo "Query: $query"; echo "<pre>"; print_r($params); echo "</pre>"; exit;
+            
+            // Execute the query
+            $result = $this->query($query, $params);
+            return $result;
+        } catch (Exception $e) {
+            // Log the error for debugging
+            error_log("Database Error: " . $e->getMessage());
+            return false;
+        }
     }
 
     /**

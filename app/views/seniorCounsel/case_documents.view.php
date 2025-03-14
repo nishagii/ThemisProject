@@ -100,6 +100,13 @@
                 }
             });
         }
+
+        function handleUpload() {
+            // Redirect to the upload page
+            window.location.href = "<?= ROOT ?>/document/add_Document";
+        }
+
+
     </script>
 
 
