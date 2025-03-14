@@ -51,7 +51,7 @@ issue was in the core controller view function -->
                         <div class="button">
 
                             <a href="<?= ROOT ?>/cases/retrieveCase/<?= $case->id; ?>">
-                                <button class="more">More details</button>
+                                <button class="more">Open Case</button>
                             </a>
 
                             <a href="<?= ROOT ?>/cases/editCase/<?= $case->id; ?>">
