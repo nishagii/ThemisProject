@@ -1,0 +1,64 @@
+<?php
+
+class DocumentModel
+{
+    use Model; 
+    protected $table = 'documents'; // Name of the database table for documents
+
+    /**
+     * Save a new document to the database.
+     *
+     * @param array $data Associative array containing document details.
+     * @return bool True if the operation was successful, false otherwise.
+     */
+    public function save($data)
+    {
+        // Prepare the query to insert data into the "documents" table
+        $query = "INSERT INTO {$this->table} 
+                  (case_id, doc_name, doc_description, file_path, uploaded_by)
+                  VALUES 
+                  (:case_id, :doc_name, :doc_description, :file_path, :uploaded_by)";
+
+        // Bind parameters to prevent SQL injection
+        $params = [
+            'case_id' => $data['case_id'],
+            'doc_name' => $data['doc_name'],
+            'doc_description' => $data['doc_description'],
+            'file_path' => $data['file_path'],
+            'uploaded_by' => $data['uploaded_by'],
+        ];
+
+        // Execute the query using the parent Model class's query method
+        return $this->query($query, $params);
+    }
+
+    /**
+     * Get all documents for a specific case.
+     *
+     * @param int $case_id The case ID to fetch documents for.
+     * @return array List of documents associated with the case.
+     */
+    public function getDocumentsByCase($case_id)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE case_id = :case_id";
+        $params = ['case_id' => $case_id];
+
+        // Execute the query and return the result
+        return $this->query($query, $params);
+    }
+
+    /**
+     * Get document details by document ID.
+     *
+     * @param int $document_id The ID of the document.
+     * @return array The document details.
+     */
+    public function getDocumentById($document_id)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE document_id = :document_id";
+        $params = ['document_id' => $document_id];
+
+        // Execute the query and return the result
+        return $this->query($query, $params);
+    }
+}

@@ -17,6 +17,11 @@ class Document
         $this->view('/seniorCounsel/document_upload');
     }
 
+    public function save_Document()
+    {
+        
+    }
+
     public function retrieveCaseDocuments()
     {
         
