@@ -130,6 +130,28 @@ public function test() {
 
         $this->view('seniorCounsel/invoiceGenerate', ['invoiceData' => $invoiceData]);
     }
+
+    public function markInvoiceAsSent($id)
+    {
+        // Check if ID is valid
+        if (!$id || !is_numeric($id)) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'message' => 'Invalid or missing invoice ID']);
+            return;
+        }
+    
+        $invoiceModel = $this->loadModel('InvoiceModel');
+        $result = $invoiceModel->markAsSent($id);
+    
+        header('Content-Type: application/json');
+        if ($result) {
+            echo json_encode(['success' => true, 'message' => 'Invoice marked as sent']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to update invoice']);
+        }
+    }
+    
+
     
 }
 

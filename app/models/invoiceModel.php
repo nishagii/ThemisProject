@@ -33,4 +33,19 @@ class InvoiceModel
         return $this->query($query, $params);
     }
 
+    public function markAsSent($invoiceID)
+    {
+        // Prepare the query to update the "sent" column to 1
+        $query = "UPDATE {$this->table} 
+                  SET sent = 1 
+                  WHERE invoiceID = :invoiceID";
+
+        // Bind the invoiceID parameter
+        $params = [
+            'invoiceID' => $invoiceID,
+        ];
+
+        // Execute the query using the parent Model class's query method
+        return $this->query($query, $params);
+    }
 }
