@@ -14,7 +14,7 @@
     top: 100px;
     left: 0;
     width: 100%; /* Full width */
-    z-index: 1000; /* Ensures it's above other content */
+    z-index: 100; /* Ensures it's above other content */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow for depth */
 }
 
