@@ -16,6 +16,7 @@ body {
 .calendar-container {
     max-width: 1500px;
     margin: 2rem auto;
+    margin-top: 0;
     padding: 1.5rem;
     background-color: #fff;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -23,8 +24,6 @@ body {
 
 /* Calendar Header */
 .calendar-header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
@@ -32,9 +31,11 @@ body {
 }
 
 .calendar-header h1 {
-    font-size: 2rem;
+    font-size: 3rem;
     color: #2c3e50;
     font-weight: 600;
+    text-align: center;
+
 }
 
 .btn {
@@ -54,22 +55,13 @@ body {
 }
 
 .btn-add {
-    background-color: #4caf50;
+    background-color: #1d1b31;
     color: white;
     margin-right: 10px;
 }
-
-.btn-add:hover {
-    background-color: #3d9140;
-}
-
 .btn-revoke {
-    background-color: #f44336;
+    background-color: #fa9800;
     color: white;
-}
-
-.btn-revoke:hover {
-    background-color: #d32f2f;
 }
 
 /* Success Message */
@@ -192,7 +184,7 @@ body {
 .btn-edit, .btn-delete {
     padding: 0.4rem;
     border-radius: 4px;
-    color: #fff;
+    color: #1d1b31;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -200,22 +192,6 @@ body {
     width: 32px;
     height: 32px;
     transition: all 0.2s ease;
-}
-
-.btn-edit {
-    background-color: #3498db;
-}
-
-.btn-edit:hover {
-    background-color: #2980b9;
-}
-
-.btn-delete {
-    background-color: #e74c3c;
-}
-
-.btn-delete:hover {
-    background-color: #c0392b;
 }
 
 .event-time, .event-location {
@@ -423,32 +399,45 @@ textarea {
     margin-top: 20px;
 }
 
-.btn-edit, .btn-delete {
+.btn-edit, .btn-deletee {
     display: inline-flex;
     align-items: center;
     gap: 5px;
     padding: 8px 15px;
     border-radius: 4px;
     text-decoration: none;
-    color: white;
-}
-
-.btn-edit {
-    background-color: #4285f4;
-}
-
-.btn-delete {
-    background-color: #f44336;
-}
-
-.btn-edit:hover {
-    background-color: #3367d6;
-}
-
-.btn-delete:hover {
-    background-color: #d32f2f;
+    color: #3498db;
 }
 
 #event-details-description {
     white-space: pre-line;
 }
+ .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 4px;
+        color: white;
+        font-weight: bold;
+        z-index: 9999;
+        animation: fadeIn 0.3s, fadeOut 0.3s 2.7s;
+    }
+    
+    .notification.success {
+        background-color: #4CAF50;
+    }
+    
+    .notification.error {
+        background-color: #f44336;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
