@@ -236,4 +236,41 @@ class Calendar
         $_SESSION['success'] = 'Event deleted successfully!';
         redirect('calendar');
     }
+
+    public function revokeAccess()
+    {
+        // Path to the token file
+        $tokenPath = '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/token.json';
+
+        // Check if we have a valid client and access token
+        if ($this->client && $this->client->getAccessToken()) {
+            try {
+                // Revoke the token
+                $this->client->revokeToken();
+
+                // Delete the token file if it exists
+                if (file_exists($tokenPath)) {
+                    unlink($tokenPath);
+                }
+
+                // Clear any session data related to Google auth
+                if (isset($_SESSION['authUrl'])) {
+                    unset($_SESSION['authUrl']);
+                }
+
+                // Set success message
+                $_SESSION['success'] = 'Google Calendar access successfully revoked.';
+            } catch (Exception $e) {
+                // Log any exceptions
+                error_log('Exception revoking access: ' . $e->getMessage());
+                $_SESSION['error'] = 'Failed to revoke access: ' . $e->getMessage();
+            }
+        } else {
+            $_SESSION['info'] = 'No active Google Calendar connection to revoke.';
+        }
+
+        // Redirect back to calendar page
+        redirect('calendar');
+        exit;
+    }
 }
