@@ -1,17 +1,18 @@
 <?php
-
-// HomeAdmin class
 class HomeJunior
 {
     use Controller;
 
     public function index()
     {
+        // Redirect if not logged in
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
 
-        // Set username from session, or default to 'User'
-        $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
-
-        // Load the view with data
+        $data['username'] = $_SESSION['username'] ?? 'User';
         $this->view('/juniorCounsel/home', $data);
     }
 }
+
