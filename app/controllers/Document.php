@@ -8,11 +8,15 @@ class Document
     public function index()
     {
         
-        // Render the "add new case" view with an empty errors array
-        $this->view('/seniorCounsel/case_documents');
+            //change this later 
+        $caseID = 11; 
+        
+        
+        $documentModel = $this->loadModel('documentModel');
+        $documents = $documentModel->getDocumentsByCase($caseID);
+        $this->view('/seniorCounsel/case_documents', ['documents' => $documents]);
     }
 
-    // Add a new case
     public function add_Document()
     {
         $this->view('/seniorCounsel/document_upload');
