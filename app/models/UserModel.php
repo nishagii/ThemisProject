@@ -219,4 +219,14 @@ class UserModel
         }
     }
 
+    public function getUsersByRole($role)
+    {
+        // Query to select all users with the specified role
+        $query = "SELECT * FROM {$this->table} WHERE role = :role";
+        $params = ['role' => $role];
+
+        // Execute the query and return the results
+        return $this->query($query, $params);
+    }
+
 }

@@ -16,6 +16,7 @@
 
 <?php include('component/bigNav.view.php'); ?>
 <?php include('component/smallNav1.view.php'); ?>
+<?php include('component/sidebar.view.php'); ?>
 
 <div class="center">
         <div class="tab-container">
@@ -38,35 +39,46 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Task 1</td>
-                                <td>2024-11-15</td>
-                                <td>2024-11-20</td>
-                                <td>5 days</td>
-                                <td><button class="done"><i class="fas fa-check"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>Task 2</td>
-                                <td>2024-11-16</td>
-                                <td>2024-11-22</td>
-                                <td>6 days</td>
-                                <td><button class="done"><i class="fas fa-check"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>Task 3</td>
-                                <td>2024-11-17</td>
-                                <td>2024-11-25</td>
-                                <td>8 days</td>
-                                <td><button class="done"><i class="fas fa-check"></i></button></td>
-                            </tr>
-                            <tr>
-                                <td>Task 3</td>
-                                <td>2024-11-17</td>
-                                <td>2024-11-25</td>
-                                <td class="overdue">-1 day</td>
-                                <td><button class="done-overdue"><i class="fas fa-check"></i></button></td>
-                            </tr>
+                            <?php if (!empty($tasks)): ?>
+                                <?php foreach ($tasks as $task): ?>
+                                    <?php
+                                        // Calculate duration
+                                        $assigned = new DateTime($task->assignedDate);
+                                        $deadline = new DateTime($task->deadlineDate);
+                                        $today = new DateTime();
+                                        $interval = $assigned->diff($deadline);
+                                        $days = $interval->days;
+
+                                        // Check if overdue
+                                        $remaining = $today->diff($deadline)->format('%r%a');
+                                        $isOverdue = ($remaining < 0);
+                                    ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($task->name) ?></td>
+                                        <td><?= htmlspecialchars($task->assignedDate) ?></td>
+                                        <td><?= htmlspecialchars($task->deadlineDate) ?></td>
+                                        <td class="<?= $isOverdue ? 'overdue' : '' ?>">
+                                            <?= $isOverdue ? $remaining . ' day(s)' : $days . ' day(s)' ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($task->status !== 'completed'): ?>
+                                                <a href="<?= ROOT ?>/task/complete/<?= $task->taskID ?>" class="<?= $isOverdue ? 'done-overdue' : 'done' ?>">
+                                                    <i class="fas fa-check"></i>
+                                                </a>
+                                            <?php else: ?>
+                                                <span class="completed-btn">✔️ Completed</span>
+                                            <?php endif; ?>
+                                        </td>
+
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="5">No current tasks assigned to you.</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
+
                     </table>
                 </div>
 
