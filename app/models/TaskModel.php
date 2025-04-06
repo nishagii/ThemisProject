@@ -91,5 +91,17 @@ class TaskModel
         return $this->query($query, $params);
     }
 
+    public function getTaskByUserId($userId)
+    {
+        $query = "SELECT taskID, name, description, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority 
+                FROM {$this->table} 
+                WHERE assigneeID = :userId";
+
+        $params = ['userId' => $userId];
+
+        return $this->query($query, $params);
+    }
+
+
 
 }
