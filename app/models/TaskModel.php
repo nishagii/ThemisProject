@@ -102,6 +102,16 @@ class TaskModel
         return $this->query($query, $params);
     }
 
+    public function completeTask($taskID)
+    {
+        $query = "UPDATE {$this->table} 
+                SET status = 'completed' 
+                WHERE taskID = :taskID";
+
+        $params = ['taskID' => $taskID];
+
+        return $this->query($query, $params);
+    }
 
 
 }

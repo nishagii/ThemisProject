@@ -23,4 +23,21 @@ class Task
         // Load the view and pass the data
         $this->view('/juniorCounsel/task', $data);
     }
+
+    public function complete($taskID)
+    {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
+
+        $taskModel = $this->loadModel('TaskModel');
+
+        // Mark the task as completed
+        $taskModel->completeTask($taskID);
+
+        // Redirect back to the task page
+        redirect('task');
+    }
+
 }

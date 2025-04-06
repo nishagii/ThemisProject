@@ -61,10 +61,15 @@
                                             <?= $isOverdue ? $remaining . ' day(s)' : $days . ' day(s)' ?>
                                         </td>
                                         <td>
-                                            <button class="<?= $isOverdue ? 'done-overdue' : 'done' ?>">
-                                                <i class="fas fa-check"></i>
-                                            </button>
+                                            <?php if ($task->status !== 'completed'): ?>
+                                                <a href="<?= ROOT ?>/task/complete/<?= $task->taskID ?>" class="<?= $isOverdue ? 'done-overdue' : 'done' ?>">
+                                                    <i class="fas fa-check"></i>
+                                                </a>
+                                            <?php else: ?>
+                                                <span class="completed-btn">✔️ Completed</span>
+                                            <?php endif; ?>
                                         </td>
+
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>
