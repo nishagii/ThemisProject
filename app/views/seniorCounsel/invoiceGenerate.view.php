@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Invoice - <?= htmlspecialchars($invoiceData['invoiceID']) ?></title>
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -174,6 +175,8 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -241,8 +244,13 @@
                     console.log("Invoice ID from button:", invoiceId); // Debug log
                     
                     if (!invoiceId) {
-                        alert('Invoice ID is missing');
-                        return;
+                        
+                            return;Swal.fire({
+                            icon: 'error',
+                            title: 'Oops!',
+                            text: 'Invoice ID is missing.',
+                        });
+                    return;
                     }
 
                     fetch(`<?= ROOT ?>/invoice/markInvoiceAsSent/${invoiceId}`, {
@@ -254,17 +262,31 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert('Invoice sent successfully!');
-                            
-                            this.textContent = 'Invoice Sent';
-                            this.disabled = true;
+                            Swal.fire({
+                            icon: 'success',
+                            title: 'Invoice Sent!',
+                            text: 'The invoice was successfully sent.',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+
+                        sendBtn.textContent = 'Invoice Sent';
+                        sendBtn.disabled = true;
                         } else {
-                            alert('Failed to mark invoice as sent: ' + data.message);
+                            Swal.fire({
+                            icon: 'error',
+                            title: 'Failed!',
+                            text: data.message || 'Failed to mark invoice as sent.',
+                        });
                         }
                     })
                     .catch(error => {
-                        console.error('Error:', error);
-                        alert('An error occurred while sending the invoice');
+                        
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'An error occurred while sending the invoice.',
+                        });
                     });
                 });
             }
