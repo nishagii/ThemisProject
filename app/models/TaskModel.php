@@ -37,7 +37,7 @@ class TaskModel
     {
         // Prepare the SQL query to fetch all tasks
         $query = "SELECT taskID, name, description, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority 
-                  FROM {$this->table}";
+                  FROM {$this->table}  ORDER BY taskID DESC ";
 
         // Execute the query and return the results
         return $this->query($query);
