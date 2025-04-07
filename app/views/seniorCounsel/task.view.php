@@ -19,6 +19,15 @@
         <h1 class="task-heading">
             Task Management
         </h1>
+
+        <!-- Add Task Button -->
+        <div class="add">
+            <a href="<?= ROOT ?>/addTask">
+                <button class="add-button">
+                    <i class="bx bx-plus"></i> New Task 
+                </button>
+            </a>
+        </div>
         <div class="counters-container">
             <div class="counter total">
                 <div class="counter-icon">
@@ -52,14 +61,7 @@
             </div>
         </div>
 
-        <!-- Add Task Button -->
-        <div class="add">
-            <a href="<?= ROOT ?>/addTask">
-                <button class="add-button">
-                    <i class="bx bx-plus"></i> Assign New Task 
-                </button>
-            </a>
-        </div>
+        
 
         <div class="task-table-container">
     <table class="task-table">
