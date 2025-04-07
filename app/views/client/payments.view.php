@@ -12,6 +12,8 @@
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
+    <?php include(__DIR__ . '/../seniorCounsel/component/sidebar.view.php'); ?>
+
 
     <div class="home-section">
         <div class="payment-header">

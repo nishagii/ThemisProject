@@ -3,7 +3,11 @@
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 
 require_once '../vendor/autoload.php';
-require_once '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/app/core/config.php';
+// require_once '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/app/core/config.php'; //for MAC
+//for windows 
+
+require_once 'C:\xampp\htdocs\themisrepo\app\core\config.php';
+
 
 class PaymentController
 {
