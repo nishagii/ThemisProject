@@ -15,9 +15,9 @@ class InvoiceModel
     {
         // Prepare the query to insert data into the "invoice" table
         $query = "INSERT INTO {$this->table} 
-                  (clientID, caseID, comments, paymentDesc, amount, dueDate)
+                  (clientID, caseID, comments, paymentDesc, amount, dueDate, invoiceID)
                   VALUES 
-                  (:clientID, :caseID, :comments, :paymentDesc, :amount, :dueDate)";
+                  (:clientID, :caseID, :comments, :paymentDesc, :amount, :dueDate, :invoiceID)";
 
         // Bind parameters to prevent SQL injection
         $params = [
@@ -27,6 +27,7 @@ class InvoiceModel
             'paymentDesc' => $data['paymentDesc'],
             'amount' => $data['amount'],
             'dueDate' => $data['dueDate'],
+            'invoiceID' => $data['invoiceID']
         ];
 
         // Execute the query using the parent Model class's query method

@@ -57,6 +57,7 @@ public function test() {
             error_log("Received JSON data: " . print_r($data, true));
         } 
         // Otherwise, fall back to POST data
+        // Otherwise, fall back to POST data
         else {
             $data = [
                 'clientID' => $_POST['clientID'] ?? '',
@@ -65,6 +66,7 @@ public function test() {
                 'paymentDesc' => $_POST['paymentDesc'] ?? '',
                 'amount' => $_POST['amount'] ?? '',
                 'dueDate' => $_POST['dueDate'] ?? '',
+                'invoiceID' => 'INV' . rand(1000, 9999)  // Corrected line
             ];
             error_log("Received POST data: " . print_r($data, true));
         }
@@ -115,7 +117,7 @@ public function test() {
             echo json_encode(['success' => false, 'message' => 'Client not found']);
             return;
         }
-
+        
 
         $invoiceData = [
             'client' => $client,
@@ -125,7 +127,7 @@ public function test() {
             'dueDate' => $data['dueDate'],
             'comments' => $data['comments'],
             'invoiceDate' => date('Y-m-d'),
-            'invoiceNumber' => 'INV' . rand(1000, 9999), // Example invoice number
+            'invoiceID' => $data['invoiceID']
         ];
 
         $this->view('seniorCounsel/invoiceGenerate', ['invoiceData' => $invoiceData]);
@@ -134,7 +136,7 @@ public function test() {
     public function markInvoiceAsSent($id)
     {
         // Check if ID is valid
-        if (!$id || !is_numeric($id)) {
+        if (!$id) {
             header('Content-Type: application/json');
             echo json_encode(['success' => false, 'message' => 'Invalid or missing invoice ID']);
             return;

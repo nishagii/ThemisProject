@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Invoice - <?= htmlspecialchars($invoiceData['invoiceNumber']) ?></title>
+    <title>Invoice - <?= htmlspecialchars($invoiceData['invoiceID']) ?></title>
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
@@ -177,18 +177,18 @@
 </head>
 
 <body>
-<div class="back">
-    <button class="btn-back" onclick="window.history.back()">
-        <i class='bx bx-arrow-back'></i> <!-- Boxicons arrow-back icon -->
-    </button>
-</div>
+    <div class="back">
+        <button class="btn-back" onclick="window.history.back()">
+            <i class='bx bx-arrow-back'></i> <!-- Boxicons arrow-back icon -->
+        </button>
+    </div>
 
     <div class="invoice-box">
         <div class="header">
             <div class="header-info">
                 <h1>THEMIS</h1>
                 <h4>INVOICE</h4>
-                <p><strong>Invoice #: </strong><?= htmlspecialchars($invoiceData['invoiceNumber']) ?></p>
+                <p><strong>Invoice #: </strong><?= htmlspecialchars($invoiceData['invoiceID']) ?></p>
                 <p><strong>Due: </strong><?= htmlspecialchars($invoiceData['dueDate']) ?></p>
             </div>
             <div class="logo">
@@ -225,8 +225,51 @@
     </div>
     <div class="back">
         <button class="btn" onclick="window.print()">Print / Save as PDF</button>
-        <button class="btn send-btn" onclick="sendInvoice()">Send Invoice</button>
+        <button class="btn send-btn" data-invoice-id="<?= htmlspecialchars($invoiceData['invoiceID'] ?? '') ?>">Send Invoice</button>
+        
     </div>
+
+   
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sendBtn = document.querySelector('.send-btn');
+            
+            if (sendBtn) {
+                sendBtn.addEventListener('click', function() {
+                    // Get the invoice ID - you'll need to add this as a data attribute to the button
+                    const invoiceId = this.getAttribute('data-invoice-id');
+                    console.log("Invoice ID from button:", invoiceId); // Debug log
+                    
+                    if (!invoiceId) {
+                        alert('Invoice ID is missing');
+                        return;
+                    }
+
+                    fetch(`<?= ROOT ?>/invoice/markInvoiceAsSent/${invoiceId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Invoice sent successfully!');
+                            
+                            this.textContent = 'Invoice Sent';
+                            this.disabled = true;
+                        } else {
+                            alert('Failed to mark invoice as sent: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while sending the invoice');
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
