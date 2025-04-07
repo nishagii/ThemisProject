@@ -113,4 +113,11 @@ class TaskModel
         $params = ['taskID' => $taskID];
         return $this->query($query, $params);
     }
+
+    public function getTaskCount() 
+    {
+        $query = "SELECT COUNT(taskID) AS count FROM {$this->table}";
+        return $this->query($query);
+    }
+
 }

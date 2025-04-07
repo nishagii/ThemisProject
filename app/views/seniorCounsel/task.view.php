@@ -25,7 +25,7 @@
                     <i class="fas fa-tasks"></i> <!-- Updated icon -->
                 </div>
                 <strong>Total No of Tasks Assigned:</strong>
-                <span class="total-users">200</span>
+                <span class="total-users"><?= $count[0]->count ?></span>
             </div>
             <div class="individual">
                 <div class="counter active">

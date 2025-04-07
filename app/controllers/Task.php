@@ -19,6 +19,7 @@ class Task
         // Get tasks assigned to the logged-in user
         $userId = $_SESSION['user_id'];
         $data['tasks'] = $taskModel->getTaskByUserId($userId);
+        
 
         // Load the view and pass the data
         $this->view('/juniorCounsel/task', $data);
