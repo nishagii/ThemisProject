@@ -71,7 +71,7 @@
                 <th>Description</th>
                 <th>Assigned To</th>
                 <th>Deadline Date</th>
-                <th>Deadline Time</th>
+                
                 <th>Priority</th>
                 <th>Status</th>
                 <th>Actions</th> <!-- Added Actions Column -->
@@ -84,7 +84,7 @@
                 <td><?= htmlspecialchars($t->description) ?></td>
                 <td><?= htmlspecialchars($t->assigneeID) ?></td>
                 <td><?= htmlspecialchars($t->deadlineDate) ?></td>
-                <td><?= htmlspecialchars($t->deadlineTime) ?></td>
+                
                 <td><?= htmlspecialchars($t->priority) ?></td>
                 <td><?= htmlspecialchars($t->status) ?></td>
                 <td>

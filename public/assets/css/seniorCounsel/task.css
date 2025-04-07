@@ -261,35 +261,37 @@ small {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background-color: #f4f8ff;
+  background-color: #ffffff;
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 50px;
 }
 
 .task-table th, .task-table td {
-  padding: 12px 15px;
-  text-align: left;
+  
+  text-align: center;
   border: 1px solid #ddd;
 }
 
 .task-table th {
-  background-color: #1d1b31;
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
+    padding: 20px 5px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #718EBF;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .task-table td {
   font-size: 14px;
+  padding: 20px 15px;
 }
 
 .task-table tr:nth-child(even) {
-  background-color: #E4E9F7;
+  background-color: #ffffff;
 }
 
 .task-table tr:hover {
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   cursor: pointer;
 }
 
