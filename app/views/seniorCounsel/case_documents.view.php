@@ -44,10 +44,10 @@
                             <div class="transaction-uploader"><?php echo htmlspecialchars($document->uploaded_by); ?></div>
                             <div><a href="<?= ROOT ?>/assets/documents/<?= $document->file_path ?>" download class="download-button">Download</a></div>
                             <div class="action-buttons">
-                                <button class="edit-button" onclick="handleEdit(<?php echo $document->id; ?>)">
+                                <button class="edit-button" onclick="handleEdit(<?php echo $document->document_id; ?>)">
                                     <i class='bx bx-edit-alt'></i>
                                 </button>
-                                <button class="delete-button" onclick="confirmDelete(<?php echo $document->id; ?>)">
+                                <button class="delete-button" onclick="confirmDelete(<?php echo $document->document_id; ?>)">
                                     <i class='bx bx-trash'></i>
                                 </button>
                             </div>
