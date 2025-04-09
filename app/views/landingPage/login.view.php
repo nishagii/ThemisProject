@@ -53,7 +53,7 @@
                 <!-- Boxicon for registration -->
                 <a href="landingpage"><button class="home"><i class="fas fa-arrow-left"></i> </button></a>
                 <a href="registeruser"><button class="button register">Register </button></a>
-           
+
             </div>
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" class="white-logo">
             <div class="heading">
@@ -82,7 +82,7 @@
                 </div>
                 <input type="submit" value="Log In" class="login"> <br />
             </form>
-            <a href="">Forgot password ?</a> <br>
+            <a href="<?= ROOT ?>/forgotpassword">Forgot password ?</a> <br>
         </div>
         <div class="colour">
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" class="colour-logo">
