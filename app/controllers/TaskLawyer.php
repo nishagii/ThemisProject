@@ -8,9 +8,13 @@ class TaskLawyer
     {
         $TaskModel = $this->loadModel('TaskModel'); 
         $task = $TaskModel->getAllTasks(); // Fetch cases data
-
-        // Pass data to the view
-        $this->view('/seniorCounsel/task', ['task' => $task]);
+        $count = $TaskModel->getTaskCount();
+        
+        $this->view('/seniorCounsel/task', [
+            'task' => $task,
+            'count' => $count
+        ]);
+        
     }
 
     //get the case details by id and pass it to the view

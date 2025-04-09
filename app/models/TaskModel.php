@@ -37,7 +37,7 @@ class TaskModel
     {
         // Prepare the SQL query to fetch all tasks
         $query = "SELECT taskID, name, description, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority 
-                  FROM {$this->table}";
+                  FROM {$this->table}  ORDER BY taskID DESC ";
 
         // Execute the query and return the results
         return $this->query($query);
@@ -113,4 +113,11 @@ class TaskModel
         $params = ['taskID' => $taskID];
         return $this->query($query, $params);
     }
+
+    public function getTaskCount() 
+    {
+        $query = "SELECT COUNT(taskID) AS count FROM {$this->table}";
+        return $this->query($query);
+    }
+
 }
