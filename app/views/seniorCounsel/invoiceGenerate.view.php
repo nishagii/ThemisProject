@@ -104,7 +104,7 @@
             max-width: 200px;
             margin: 15px auto 0;
             padding: 12px 20px;
-            background: rgb(11, 38, 112);
+            background: #5191e4;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -116,7 +116,7 @@
         }
 
         .btn:hover {
-            background: #143db8;
+            background:rgb(94, 153, 230);
         }
 
         @media (max-width: 600px) {
@@ -133,7 +133,7 @@
         }
 
         .btn-back {
-            background-color: rgb(11, 38, 112);
+            background-color: #5191e4;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -217,11 +217,11 @@
             </tr>
             <tr>
                 <td><?= htmlspecialchars($invoiceData['paymentDesc']) ?></td>
-                <td>$<?= number_format((float)$invoiceData['amount'], 2) ?></td>
+                <td>LKR <?= number_format((float)$invoiceData['amount'], 2) ?></td>
             </tr>
             <tr class="total-row">
                 <td>Total Amount</td>
-                <td>$<?= number_format((float)$invoiceData['amount'], 2) ?></td>
+                <td>LKR <?= number_format((float)$invoiceData['amount'], 2) ?></td>
             </tr>
         </table>
 
