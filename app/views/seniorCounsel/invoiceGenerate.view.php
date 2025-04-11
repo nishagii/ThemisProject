@@ -261,25 +261,28 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        if (data.success) {
-                            Swal.fire({
-                            icon: 'success',
-                            title: 'Invoice Sent!',
-                            text: 'The invoice was successfully sent.',
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
+    if (data.success) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Invoice Sent!',
+            text: 'The invoice was successfully sent.',
+            timer: 2000,
+            showConfirmButton: false
+        }).then(() => {
+            sendBtn.textContent = 'Invoice Sent';
+            sendBtn.disabled = true;
+            window.location.href = '<?= ROOT ?>/invoice';
+        });
 
-                        sendBtn.textContent = 'Invoice Sent';
-                        sendBtn.disabled = true;
-                        } else {
-                            Swal.fire({
-                            icon: 'error',
-                            title: 'Failed!',
-                            text: data.message || 'Failed to mark invoice as sent.',
-                        });
-                        }
-                    })
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Failed!',
+            text: data.message || 'Failed to mark invoice as sent.',
+        });
+    }
+})
+
                     .catch(error => {
                         
                         Swal.fire({

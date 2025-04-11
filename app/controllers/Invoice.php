@@ -151,7 +151,7 @@ public function test() {
         } else {
             echo json_encode(['success' => false, 'message' => 'Failed to update invoice']);
         }
-        // redirect('invoice');
+        
     }
     
     
