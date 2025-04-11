@@ -14,8 +14,15 @@
     <?php include('component/smallNav1.view.php'); ?>
     <?php include(__DIR__ . '/../seniorCounsel/component/sidebar.view.php'); ?>
 
+    
 
     <div class="home-section">
+        <div class="invoice-container">
+            <div class="documents-card">
+                <p>Click here to view payment invoices</p>
+                <a href="<?= ROOT ?>/document"><button>Invoices</button></a>
+            </div>
+        </div>
         <div class="payment-header">
             <h1>Make a Secure Payment</h1>
         </div>
