@@ -49,4 +49,19 @@ class InvoiceModel
         // Execute the query using the parent Model class's query method
         return $this->query($query, $params);
     }
+    public function getSentInvoicesByClient($clientID)
+    {
+        // Prepare the query to retrieve sent invoices for a specific client
+        $query = "SELECT * FROM {$this->table}
+                WHERE sent = 1 AND clientID = :clientID";
+
+        // Bind the clientID parameter
+        $params = [
+            'clientID' => $clientID
+        ];
+
+        // Execute the query and return the results
+        return $this->query($query, $params);
+    }
+
 }

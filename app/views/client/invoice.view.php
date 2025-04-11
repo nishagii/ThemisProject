@@ -31,35 +31,26 @@
                     <div>Proceed to Pay</div>
                 </div>
 
-                <!-- Updated transactions -->
-                <div class="transaction-row">
-                    <div class="amount">$250</div>
-                    <div class="transaction-description">Invoice for Legal Consultation</div>
-                    <div class="transaction-sent-date">2025-04-10</div>
-                    <div class="due-date">2025-04-17</div>
-                    <div><a href="<?= ROOT ?>/assets/documents/invoice1.pdf" download class="download-button">Download</a></div>
-                    <button class="pay-button"><i class='bx bx-right-arrow-circle'></i></button>
+                <?php if (!empty($sent_invoices)) : ?>
+                    <?php foreach ($sent_invoices as $invoice) : ?>
+                        <div class="transaction-row">
+                            <div class="amount">$<?= htmlspecialchars($invoice->amount) ?></div>
+                            <div class="transaction-description"><?= htmlspecialchars($invoice->paymentDesc) ?></div>
+                            <div class="transaction-sent-date"><?= htmlspecialchars($invoice->sentDate ?? 'N/A') ?></div>
+                            <div class="due-date"><?= htmlspecialchars($invoice->dueDate) ?></div>
+                            <div>
+                                <a href="<?= ROOT ?>/assets/documents/<?= htmlspecialchars($invoice->invoiceID) ?>.pdf"
+                                download class="download-button">Download</a>
+                            </div>
+                            <button class="pay-button"><i class='bx bx-right-arrow-circle'></i></button>
+                            </div>
+                            <?php endforeach; ?>
+                            <?php else : ?>
+                                <div class="transaction-row">
+                                    <div colspan="6">No sent invoices found.</div>
+                                </div>
+                <?php endif; ?>
 
-                </div>
-
-                <div class="transaction-row">
-                    <div class="amount">$75</div>
-                    <div class="transaction-description">Court Filing Receipt</div>
-                    <div class="transaction-sent-date">2025-04-05</div>
-                    <div class="due-date">2025-04-12</div>
-                    <div><a href="<?= ROOT ?>/assets/documents/filing_receipt.pdf" download class="download-button">Download</a></div>
-                    <button class="pay-button"><i class='bx bx-right-arrow-circle'></i></button>
-                </div>
-
-                <div class="transaction-row">
-                    <div class="amount">$120</div>
-                    <div class="transaction-description">Evidence Document</div>
-                    <div class="transaction-sent-date">2025-03-30</div>
-                    <div class="due-date">2025-04-06</div>
-                    <div><a href="<?= ROOT ?>/assets/documents/evidence_doc.pdf" download class="download-button">Download</a></div>
-                    <button class="pay-button"><i class='bx bx-right-arrow-circle'></i></button>
-                </div>
-            </div>
 
         </div>
     </div>
