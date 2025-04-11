@@ -15,7 +15,14 @@ class PaymentController
 
     public function index()
     {
-        $this->view('/client/payments');
+        // Redirect if not logged in
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
+
+        $data['username'] = $_SESSION['username'] ?? 'User';
+        $this->view('/client/payments', $data);
     }
 
     // Create a new payment session using Stripe
