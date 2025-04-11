@@ -20,7 +20,7 @@
         <div class="invoice-container">
             <div class="documents-card">
                 <p>Click here to view payment invoices</p>
-                <a href="<?= ROOT ?>"><button>Invoices</button></a>
+                <a href="<?= ROOT ?>/clientinvoice"><button>Invoices</button></a>
             </div>
         </div>
         <div class="payment-header">
