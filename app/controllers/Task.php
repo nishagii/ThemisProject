@@ -19,6 +19,7 @@ class Task
         // Get tasks assigned to the logged-in user
         $userId = $_SESSION['user_id'];
         $data['tasks'] = $taskModel->getTaskByUserId($userId);
+        
 
         // Load the view and pass the data
         $this->view('/juniorCounsel/task', $data);
@@ -49,7 +50,7 @@ class Task
             foreach ($lawyers as $lawyer) {
                 $notification = [
                     'user_id' => $lawyer->id,
-                    'message' => "Task '{$task->name}' (ID: $taskID) has been marked as completed.",
+                    'message' => "Task '{$task->name}' has been marked as completed.",
                     'timestamp' => date('Y-m-d H:i:s'),
                     'status' => 'unread'
                 ];

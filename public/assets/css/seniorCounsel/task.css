@@ -96,16 +96,15 @@
   }
   
   .add-button {
-    background-color: #1d1b31; /* Green background */
-    color: white;              /* White text color */
-    border: none;              /* Remove border */
-    border-radius: 5px;       /* Rounded corners */
-    padding: 10px 20px;       /* Vertical and horizontal padding */
-    font-size: 16px;           /* Font size */
-    cursor: pointer;           /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Transition for background color */
-    display: flex;             /* Enable flexbox for the button */
-    align-items: center;       /* Center items vertically */
+    padding: 10px 15px;
+    background-color: white;
+    border: 2px solid #4f46e5;
+    border-radius: 20px;
+    color: #4f46e5;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    font-weight: 600;
   }
   
   .add-button i {
@@ -114,7 +113,7 @@
   }
   
   .add-button:hover {
-    background-color: #3b395c; /* Darker green on hover */
+    background-color: #bfbed0; /* Darker green on hover */
   }
   
   .add-button:focus {
@@ -126,6 +125,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      margin-top: 60px;
 }
 
   .modal {
@@ -241,13 +241,13 @@ small {
 }
 
 .active{
-  background-color: rgba(55, 255, 37, 0.2);
+  background-color: rgba(139, 243, 130, 0.2);
 }
 .completed{
-  background-color: rgba(37, 255, 251, 0.2);
+  background-color: rgba(115, 255, 253, 0.2);
 }
 .incomplete{
-   background-color: rgba(255, 37, 37, 0.2);
+   background-color: rgba(254, 113, 113, 0.2);
 }
 
 .task-table-container {
@@ -262,35 +262,37 @@ small {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  background-color: #f4f8ff;
+  background-color: #ffffff;
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 50px;
 }
 
 .task-table th, .task-table td {
-  padding: 12px 15px;
-  text-align: left;
+  
+  text-align: center;
   border: 1px solid #ddd;
 }
 
 .task-table th {
-  background-color: #1d1b31;
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
+    padding: 20px 5px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #718EBF;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .task-table td {
   font-size: 14px;
+  padding: 20px 15px;
 }
 
 .task-table tr:nth-child(even) {
-  background-color: #E4E9F7;
+  background-color: #ffffff;
 }
 
 .task-table tr:hover {
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   cursor: pointer;
 }
 

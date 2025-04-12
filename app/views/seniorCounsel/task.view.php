@@ -19,13 +19,22 @@
         <h1 class="task-heading">
             Task Management
         </h1>
+
+        <!-- Add Task Button -->
+        <div class="add">
+            <a href="<?= ROOT ?>/addTask">
+                <button class="add-button">
+                    <i class="bx bx-plus"></i> New Task 
+                </button>
+            </a>
+        </div>
         <div class="counters-container">
             <div class="counter total">
                 <div class="counter-icon">
                     <i class="fas fa-tasks"></i> <!-- Updated icon -->
                 </div>
                 <strong>Total No of Tasks Assigned:</strong>
-                <span class="total-users">200</span>
+                <span class="total-users"><?= $count[0]->count ?></span>
             </div>
             <div class="individual">
                 <div class="counter active">
@@ -52,14 +61,7 @@
             </div>
         </div>
 
-        <!-- Add Task Button -->
-        <div class="add">
-            <a href="<?= ROOT ?>/addTask">
-                <button class="add-button">
-                    <i class="bx bx-plus"></i> Assign New Task 
-                </button>
-            </a>
-        </div>
+        
 
         <div class="task-table-container">
     <table class="task-table">
@@ -69,7 +71,7 @@
                 <th>Description</th>
                 <th>Assigned To</th>
                 <th>Deadline Date</th>
-                <th>Deadline Time</th>
+                
                 <th>Priority</th>
                 <th>Status</th>
                 <th>Actions</th> <!-- Added Actions Column -->
@@ -82,7 +84,7 @@
                 <td><?= htmlspecialchars($t->description) ?></td>
                 <td><?= htmlspecialchars($t->assigneeID) ?></td>
                 <td><?= htmlspecialchars($t->deadlineDate) ?></td>
-                <td><?= htmlspecialchars($t->deadlineTime) ?></td>
+                
                 <td><?= htmlspecialchars($t->priority) ?></td>
                 <td><?= htmlspecialchars($t->status) ?></td>
                 <td>
