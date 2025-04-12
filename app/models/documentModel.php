@@ -3,7 +3,7 @@
 class DocumentModel {
     use Model;
     
-    protected $table = 'documents'; // Name of the database table for documents
+    protected $table = 'documents'; 
     
     /**
      * Save a new document to the database.

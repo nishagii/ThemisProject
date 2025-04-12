@@ -189,23 +189,21 @@ class Document
         $this->view('/seniorCounsel/document_details', ['document' => $document]);
     }
     
-    public function editDocument($documentID)
+    public function editDocument($id)
     {
-        // Load the document model
         $documentModel = $this->loadModel('documentModel');
         
-        // Get document by ID
-        $document = $documentModel->getDocumentById($documentID)[0] ?? null;
+        $document = $documentModel->getDocumentById($id); // Fetch by ID
+
         
-        if (!$document) {
-            $_SESSION['error'] = "Document not found.";
-            header("Location: " . ROOT . "/document/index");
-            exit;
+        if ($document) {
+            $this->view('seniorCounsel/edit_document', ['document' => $document]);
+        } else {
+            // Optionally show 404 or redirect
+            echo "Document not found!";
         }
-        
-        // Display edit form with document data pre-filled
-        $this->view('/seniorCounsel/document_edit', ['document' => $document]);
     }
+    
 
     // Handle update
     public function updateDocument()
