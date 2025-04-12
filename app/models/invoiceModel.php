@@ -53,7 +53,7 @@ class InvoiceModel
     {
         // Prepare the query to retrieve sent invoices for a specific client
         $query = "SELECT * FROM {$this->table}
-                WHERE sent = 1 AND clientID = :clientID";
+                WHERE sent = 1 AND clientID = :clientID ORDER BY id DESC";
 
         // Bind the clientID parameter
         $params = [
