@@ -1,0 +1,86 @@
+.invoice-table {
+
+    padding: 50px;
+
+}
+
+.table-div {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 200px 150px 100px; /* Added a column for 'Uploaded By' */
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    color: #718EBF;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.transaction-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 200px 150px 100px; /* Same as header */
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: center;
+}
+
+.transaction-description {
+    font-weight: 500;
+    color: #111827;
+}
+
+.transaction-date, 
+.transaction-uploader {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.download-button {
+    padding: 10px 15px;
+    background-color: white;
+    border: 1px solid #4f46e5;
+    border-radius: 20px;
+    color: #4f46e5;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.download-button:hover {
+    background-color: #f9fafb;
+    border: 1px solid #123288;
+    color: #123288;
+}
+
+.amount {
+    font-weight: 600;
+    color: rgb(47, 164, 47);
+}
+
+.due-date {
+    color: red;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.transaction-sent-date {
+    font-size: 13px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.pay-button {
+    background-color: white;
+    color: #111827;
+    font-size: 20px;
+}
+
+.pay-button:hover {
+    background-color: rgb(230, 227, 227);
+}
