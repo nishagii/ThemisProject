@@ -141,17 +141,53 @@ public function test() {
             echo json_encode(['success' => false, 'message' => 'Invalid or missing invoice ID']);
             return;
         }
-    
-        $invoiceModel = $this->loadModel('InvoiceModel');
-        $result = $invoiceModel->markAsSent($id);
-    
-        header('Content-Type: application/json');
-        if ($result) {
-            echo json_encode(['success' => true, 'message' => 'Invoice marked as sent']);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Failed to update invoice']);
-        }
+
+        error_log("Starting markInvoiceAsSent for invoice ID: $id");
         
+        $invoiceModel = $this->loadModel('InvoiceModel');
+        
+        // First, get the invoice details to find the client ID
+        try {
+            $invoice = $invoiceModel->getInvoiceById($id);
+            error_log("Invoice data retrieved: " . print_r($invoice, true));
+            
+            if (!$invoice) {
+                error_log("Invoice not found with ID: $id");
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => 'Invoice not found']);
+                return;
+            }
+            
+            // Mark the invoice as sent
+            $result = $invoiceModel->markAsSent($id);
+            error_log("markAsSent result: " . ($result ? 'success' : 'failed'));
+            
+            if ($result) {
+                // Create a notification for the client
+                $notificationModel = $this->loadModel('NotificationModel');
+                
+                $notificationData = [
+                    'user_id' => $invoice->clientID, // Using the client ID as user ID
+                    'message' => "Invoice #$id has been sent to you. Please check your email.",
+                    'timestamp' => date('Y-m-d H:i:s'),
+                    'status' => 'unread'
+                ];
+                error_log("Creating notification with data: " . print_r($notificationData, true));
+                
+                $notificationResult = $notificationModel->createNotification($notificationData);
+                error_log("createNotification result: " . ($notificationResult ? 'success' : 'failed'));
+                
+                header('Content-Type: application/json');
+                echo json_encode(['success' => true, 'message' => 'Invoice marked as sent and notification created']);
+            } else {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'message' => 'Failed to update invoice']);
+            }
+        } catch (Exception $e) {
+            error_log("Exception in markInvoiceAsSent: " . $e->getMessage());
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'message' => 'An error occurred: ' . $e->getMessage()]);
+        }
     }
     
     

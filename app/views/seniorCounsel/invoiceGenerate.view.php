@@ -235,65 +235,77 @@
    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const sendBtn = document.querySelector('.send-btn');
-            
-            if (sendBtn) {
-                sendBtn.addEventListener('click', function() {
-                    // Get the invoice ID - you'll need to add this as a data attribute to the button
-                    const invoiceId = this.getAttribute('data-invoice-id');
-                    console.log("Invoice ID from button:", invoiceId); // Debug log
-                    
-                    if (!invoiceId) {
-                        
-                            return;Swal.fire({
-                            icon: 'error',
-                            title: 'Oops!',
-                            text: 'Invoice ID is missing.',
-                        });
+        const sendBtn = document.querySelector('.send-btn');
+        
+        if (sendBtn) {
+            sendBtn.addEventListener('click', function() {
+                // Get the invoice ID from the button's data attribute
+                const invoiceId = this.getAttribute('data-invoice-id');
+                console.log("Invoice ID from button:", invoiceId); // Debug log
+                
+                if (!invoiceId) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops!',
+                        text: 'Invoice ID is missing.',
+                    });
                     return;
+                }
+
+                // Show loading state
+                Swal.fire({
+                    title: 'Sending invoice...',
+                    text: 'Please wait',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
                     }
+                });
 
-                    fetch(`<?= ROOT ?>/invoice/markInvoiceAsSent/${invoiceId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-    if (data.success) {
-        Swal.fire({
-            icon: 'success',
-            title: 'Invoice Sent!',
-            text: 'The invoice was successfully sent.',
-            timer: 2000,
-            showConfirmButton: false
-        }).then(() => {
-            sendBtn.textContent = 'Invoice Sent';
-            sendBtn.disabled = true;
-            window.location.href = '<?= ROOT ?>/invoice';
-        });
-
-    } else {
-        Swal.fire({
-            icon: 'error',
-            title: 'Failed!',
-            text: data.message || 'Failed to mark invoice as sent.',
-        });
-    }
-})
-
-                    .catch(error => {
-                        
+                fetch(`<?= ROOT ?>/invoice/markInvoiceAsSent/${invoiceId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Invoice Sent!',
+                            text: 'The invoice was successfully sent.',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            sendBtn.textContent = 'Invoice Sent';
+                            sendBtn.disabled = true;
+                            window.location.href = '<?= ROOT ?>/invoice';
+                        });
+                    } else {
                         Swal.fire({
                             icon: 'error',
-                            title: 'Error!',
-                            text: 'An error occurred while sending the invoice.',
+                            title: 'Failed!',
+                            text: data.message || 'Failed to mark invoice as sent.',
                         });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'An error occurred while sending the invoice.',
                     });
                 });
-            }
-        });
+            });
+        }
+    });
     </script>
 </body>
 

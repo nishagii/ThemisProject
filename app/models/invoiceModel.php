@@ -63,5 +63,18 @@ class InvoiceModel
         // Execute the query and return the results
         return $this->query($query, $params);
     }
+    
+    public function getInvoiceById($id)
+    {
+        $query = "SELECT * FROM invoice WHERE invoiceID = :id LIMIT 1";
+        $result = $this->query($query, ['id' => $id]);
+        
+        if ($result) {
+            return $result[0];
+        }
+        
+        return false;
+    }
+
 
 }
