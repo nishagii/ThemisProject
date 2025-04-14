@@ -15,18 +15,18 @@
             <h1>All Precedents</h1>
         </div>
 
-    <!-- search bar -->
-    <div class="search-bar-container">
-        <input type="text" 
-        id="searchBar" 
-        class="search-bar" 
-        placeholder="Search precedents..." 
-        oninput="searchPrecedents()" 
-        onfocus="this.placeholder = ''"
-        onblur="this.placeholder = 'Search precedents...' ">
-        <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
-        <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
-    </div>
+        <!-- search bar -->
+        <div class="search-bar-container">
+            <input type="text" 
+            id="searchBar" 
+            class="search-bar" 
+            placeholder="Search precedents..." 
+            oninput="searchPrecedents()" 
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = 'Search precedents...' ">
+            <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
+            <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
+        </div>
 
     <div class="table-container">
         <table>
