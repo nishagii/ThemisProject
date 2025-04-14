@@ -7,7 +7,7 @@
     margin-top: 100px;
     display: flex;
     gap: 20px;
-    padding: 40px;
+    padding: 20px;
     justify-content: center;
   }
   
@@ -65,3 +65,74 @@
   .purple {
     color: #a97efe;
   }
+
+  .quick-action {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .action-icon {
+    width: 48px;
+    height: 48px;
+    position: relative;
+  }
+
+  .action-icon::before, .action-icon::after {
+    content: "";
+    position: absolute;
+    background-color: #bbb;
+    border-radius: 2px;
+  }
+
+  .action-icon::before {
+    width: 40px;
+    height: 25px;
+    top: 12px;
+    left: 4px;
+    background: linear-gradient(to right, #ccc 50%, #999 50%);
+  }
+
+  .action-icon::after {
+    width: 8px;
+    height: 20px;
+    background-color: #888;
+    top: 0;
+    left: 20px;
+  }
+
+  .label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .actions {
+    
+    padding: 10px;
+  }
+
+  .add-user-btn {
+    background-color: rgb(133, 192, 254);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.add-user-btn i {
+    margin-right: 6px;
+}
+
+.add-user-btn:hover {
+    background-color: rgb(108, 178, 252);
+}

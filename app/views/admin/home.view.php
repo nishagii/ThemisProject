@@ -38,6 +38,18 @@
             </div>
         </div>
 
+        <div class="actions">
+            <div class="quick-action">
+                <div class="action-icon"></div>
+                <div class="label">Click here to add users</div>
+                <button class="add-user-btn" onclick="window.location.href='<?= ROOT ?>/admin'">
+    <i class="fas fa-user-plus"></i> Add User
+</button>
+
+            </div>
+            
+        </div>
+
 
     </div>
 
