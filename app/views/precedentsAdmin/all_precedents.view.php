@@ -69,7 +69,9 @@
     </div>
     <script>
         function toggleSortMenu() {
+            event.stopPropagation()
             let menu = document.getElementById("sortMenu");
+            closeOtherMenus();
             menu.style.display = menu.style.display === "block" ? "none" : "block";
         }
 
@@ -93,6 +95,11 @@
                 menu.style.display = "none";
             }
         });
+        function closeOtherMenus() {
+            document.querySelectorAll(".sort-dropdown").forEach(menu => {
+                menu.style.display = "none";
+            });
+        }
     </script>
 </body>
 </html>
