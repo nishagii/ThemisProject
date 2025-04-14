@@ -22,19 +22,19 @@
             <div class="card white-card">
                 <div class="icon purple"><i class="fas fa-users"></i></div>
                 <h3>Total Users</h3>
-                <p>200</p>
+                <p><?= htmlspecialchars($total_users) ?></p>
             </div>
 
             <div class="card blue-card">
                 <div class="icon green"><i class="fas fa-balance-scale"></i></div>
                 <h3>Legal Team</h3>
-                <p>6</p>
+                <p><?= htmlspecialchars($total_users - $total_clients) ?></p>
             </div>
 
             <div class="card dark-card">
                 <div class="icon"><i class="fas fa-user-tie"></i></div>
                 <h3>Clients</h3>
-                <p>194</p>
+                <p><?= htmlspecialchars($total_clients) ?></p>
             </div>
         </div>
 
