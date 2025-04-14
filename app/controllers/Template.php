@@ -22,19 +22,24 @@ class Template
     // }
     public function sort($criteria) {
         // Fetch sorted cases based on the criteria
-        $cases = $this->$templateModel->getSorted($criteria);
+        $templates = $this->templateModel->getSorted($criteria);
 
         // Generate HTML for the sorted table rows
         $html = '';
         if (!empty($templates)) {
             foreach ($templates as $template) {
                 $html .= '<tr>';
-                $html .= '<td>' . $template->name . '</td>';
-                $html .= '<td>' . $template->description . '</td>';
-                $html .= '<td>' . $template->uploaded_by . '</td>';
-                $html .= '<td>' . $template->uploaded_date . '</td>';
-                $html .= '<td><a href="' . $template->document_link . '" target="_blank">View Document</a></td>';
-                $html .= '<td><a href="' . ROOT . '/PrecedentsController/retrieveOne/' . $template->id . '"><button class="more">View more</button></a></td>';
+                $html .= '<td>' . htmlspecialchars($template->name) . '</td>';
+                $html .= '<td>' . htmlspecialchars($template->description) . '</td>';
+                $html .= '<td>' . htmlspecialchars($template->uploaded_by) . '</td>';
+                $html .= '<td>' . htmlspecialchars($template->uploaded_date) . '</td>';
+                $html .= '<td><div class="action-menu">';
+                $html .= '<button class="dots-btn">⋮</button>';
+                $html .= '<div class="dropdown">';
+                $html .= '<a href="' . htmlspecialchars($template->document_link) . '" target="_blank" class="dropdown-item">Download</a>';
+                $html .= '<a href="' . ROOT . '/template/edit/' . $template->id . '" class="dropdown-item">Edit</a>';
+                $html .= '<a href="javascript:void(0);" onclick="confirmDelete(' . $template->id . ')" class="dropdown-item">Delete</a>';
+                $html .= '</div></div></td>';
                 $html .= '</tr>';
             }
         } else {
