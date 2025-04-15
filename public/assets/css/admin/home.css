@@ -12,7 +12,7 @@
   }
   
   .card {
-    width: 300px;
+    width: 350px;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -115,9 +115,11 @@
   }
 
   .actions {
-    
-    padding: 10px;
+    padding: 30px;
+    display: flex;
+    gap: 20px; /* Adjust the value as needed */
   }
+  
 
   .add-user-btn {
     background-color: rgb(133, 192, 254);
@@ -135,4 +137,108 @@
 
 .add-user-btn:hover {
     background-color: rgb(108, 178, 252);
+}
+
+.login-container {
+  max-width: 600px;
+  width: 400px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  padding: 30px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.subtext {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+.filters {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.filter {
+  font-size: 14px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.filter.active {
+  color: white;
+  background-color: #333;
+  border-radius: 8px;
+  padding: 4px 10px;
+}
+
+.song-list {
+  margin-top: 30px;
+}
+
+.song {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.song-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.play-button {
+  background-color: #b2e8e0;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.text-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.artist-name {
+  font-size: 12px;
+  color: #999;
+}
+
+.created {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.rating {
+  color: #a264f8;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 4px;
 }

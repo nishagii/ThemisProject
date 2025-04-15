@@ -43,9 +43,76 @@
                 <div class="action-icon"></div>
                 <div class="label">Click here to add users</div>
                 <button class="add-user-btn" onclick="window.location.href='<?= ROOT ?>/admin'">
-    <i class="fas fa-user-plus"></i> Add User
-</button>
+                    <i class="fas fa-user-plus"></i> Add User
+                </button>
 
+            </div>
+
+            <div class="login-container">
+                <div class="header">
+                    <h2>Recent Login Activity</h2>
+                    
+                
+                
+                </div>
+
+                <div class="song-list">
+                <div class="song">
+                    <div class="song-info">
+                    <div class="play-button"><i class="fas fa-key"></i></div>
+                    <div class="text-info">
+                        <div class="song-title">Today</div>
+                        <div class="artist-name">1 min ago</div>
+                    </div>
+                    </div>
+                    <div>
+                    <div class="created">192.168.1.1</div>
+                    <div class="rating">success</div>
+                    </div>
+                </div>
+
+                <div class="song">
+                    <div class="song-info">
+                    <div class="play-button"><i class="fas fa-key"></i></div>
+                    <div class="text-info">
+                        <div class="song-title">Today</div>
+                        <div class="artist-name">1 hour ago</div>
+                    </div>
+                    </div>
+                    <div>
+                    <div class="created">192.168.1.1</div>
+                    <div class="rating">success</div>
+                    </div>
+                </div>
+
+                <div class="song">
+                    <div class="song-info">
+                    <div class="play-button"><i class="fas fa-key"></i></div>
+                    <div class="text-info">
+                        <div class="song-title">Yesterday</div>
+                        <div class="artist-name">4:00 pm</div>
+                    </div>
+                    </div>
+                    <div>
+                    <div class="created">192.168.1.1</div>
+                    <div class="rating">success</div>
+                    </div>
+                </div>
+
+                <div class="song">
+                    <div class="song-info">
+                    <div class="play-button"><i class="fas fa-key"></i></div>
+                    <div class="text-info">
+                        <div class="song-title">Yesterday</div>
+                        <div class="artist-name">12:00 pm</div>
+                    </div>
+                    </div>
+                    <div>
+                    <div class="created">192.168.1.1</div>
+                    <div class="rating">success</div>
+                    </div>
+                </div>
+                </div>
             </div>
             
         </div>
