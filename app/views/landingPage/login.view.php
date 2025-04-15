@@ -68,6 +68,12 @@
                 </div>
             <?php endif; ?>
 
+            <?php if (isset($_GET['reset']) && $_GET['reset'] === 'success'): ?>
+                <div class="success-message">
+                    <p>Your password has been reset successfully. You can now log in with your new password.</p>
+                </div>
+            <?php endif; ?>
+
             <form action="" method="POST">
                 <input type="text" name="username" placeholder="Enter username or email" required> <br />
                 <div class="pword">
