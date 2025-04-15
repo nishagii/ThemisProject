@@ -3,389 +3,314 @@
     flex-direction: column;
   }
   
-  
-  /* Counters Container */
-  .counters-container {
-      width: 100%;
-      margin-left: 70px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-      margin-top: 125px;
-     
-  }
-  
-  /* Individual Counter Styles */
-  .counter {
-      background-color: #eaf1fd;
-      color: #333;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      width: 300px;
-      font-size: 16px;
-      font-weight: 500;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-  }
-  
-  .counter:hover {
-      transform: scale(1.01);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Total Counter Styling */
-  .total {
-      width: 85vw;
-      height: 30vh;
-      font-size: 25px;
-  }
-  
-  /* Counter Icons */
-  .counter-icon {
-      font-size: 40px;
-      color: #1d1b31;
-      margin-bottom: 10px;
-  }
-  
-  /* Hover Effects */
-  .counter:hover .counter-icon {
-      color: #646576;
-  }
-  
-  /* Text Colors */
-  .counter h3, .counter strong {
-      margin: 0;
-      color: #1d1b31;
-  }
-  
-  /* Individual Counter Group */
-  .individual {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-  }
-  
-  .search-container {
+  .card-container {
+    margin-top: 100px;
     display: flex;
-    justify-content: center; /* Centers horizontally */
-    width: 100%;
-    margin-top: 30px; /* Adjust as needed to move up and down the search bar*/
-    margin-left: 85px;
-  }
-  /* search bar settings*/
-  .search-bar{
-    border-radius: 50px;
-    padding: 3px;
-    width: 700px;
-    height: 40px;
-    border:#676767;
-    transition: box-shadow 0.3s ease; 
-    caret-color: transparent;
-    padding-left: 20px; 
-    font-size: 16px;
-    border-radius:30px;
-    border:1px solid #dcdcdc;
-  }
-  
-  .search-bar:hover {
-    box-shadow: 1px 1px 8px 1px #dcdcdc;
-  }
-  
-  .search-bar:focus {
-    outline: none;
-  }
-  
-  .search-bar::placeholder {
-    color: #aaa; 
-    opacity: 1;
-    font-size: 16px;
-    padding-left: 10px;
-  }
-  
-  /* Icon styles */
-  .sort-icon,
-  .filter-icon {
-      font-size: 23px; /* Adjust icon size */
-      color: #1d1b31; /* Default icon color */
-      cursor: pointer; /* Pointer on hover */
-      transition: color 0.3s;
-      margin-left: 10px;
-      margin-top: 5px;
-  }
-  
-  .sort-icon:hover,
-  .filter-icon:hover {
-      color: #b57c30; /* Change color on hover */
-  }
-  
-  .sort-dropdown {
-    display: none;
-    position: absolute;
-    top: 580px; /* Adjust based on your layout */
-    left: 80%; /* Align below the sort icon */
-    transform: translateX(-50%);
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    z-index: 1000;
-  }
-  
-  .filter-dropdown {
-    display: none;
-    position: absolute;
-    top: 585px; /* Adjust based on your layout */
-    left: 85%; /* Align below the sort icon */
-    transform: translateX(-50%);
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    z-index: 1000;
-  }
-  
-  .sort-dropdown .dropdown-item,
-  .filter-dropdown .dropdown-item {
-    display: block;
-    padding: 8px 16px;
-    cursor: pointer;
-    text-align: left;
-    background: none;
-    border: none;
-    width: 100%;
-  }
-  
-  .sort-dropdown .dropdown-item:hover,
-  .filter-dropdown .dropdown-item:hover {
-    background-color: #f0f0f0;
-  }
-  
-  /* Style for the arrow icon */
-  .arrow-icon {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid #000;
-    border-bottom: 2px solid #000;
-    transform: rotate(45deg); /* Default downward arrow */
-    transition: transform 0.3s ease;
-  }
-  
-  /* Hover effect to change arrow appearance */
-  .dropdown-item:hover .arrow-icon {
-    transform: rotate(-50deg); /* Rotate to upward arrow */
-  }
-  
-  /* Submenu styles */
-  .submenu {
-    display: none; /* Hidden by default */
-    position: absolute;
-    left: 100%;
-    width: 100px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-    font-size: 11px;
-  }
-  
-  .up {
-    top: 10%; /* Position below the dropdown item */
-  }
-  
-  .down {
-    top:60%;
-  }
-  
-  /* Show submenu when hovering over the dropdown item */
-  .dropdown-item:hover .submenu {
-    display: block;
-  }
-  
-  /* Radio button styles */
-  .submenu label {
-    display: block;
-    margin-bottom: 5px;
-    cursor: pointer;
-  }
-  
-  .submenu label:last-child {
-    margin-bottom: 0;
-  }
-  
-  .user-management {
-    margin: 20px auto;
-    width: 90%;
-    display: block;
-    max-width: 1200px;
-    background-color: #ffffff;
-    border-radius: 8px;
+    gap: 20px;
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-left: 150px;
-  }
-  
-  .user-management h2 {
-    text-align: center;
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: 600;
-  }
-  
-  .add-user {
-    display: flex;              /* Use flexbox for alignment */
-    justify-content: flex-end;  /* Align items to the right */
-    margin-top: 20px;          /* Optional: Add margin to position it vertically */
-  }
-  
-  .add-user-button {
-    background-color: #ffb028; /* Green background */
-    color: white;              /* White text color */
-    border: none;              /* Remove border */
-    border-radius: 5px;       /* Rounded corners */
-    padding: 10px 20px;       /* Vertical and horizontal padding */
-    font-size: 16px;           /* Font size */
-    cursor: pointer;           /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Transition for background color */
-    display: flex;             /* Enable flexbox for the button */
-    align-items: center;       /* Center items vertically */
-  }
-  
-  .add-user-button i {
-    margin-right: 8px;        /* Space between icon and text */
-    font-size: 20px;          /* Adjust icon size */
-  }
-  
-  .add-user-button:hover {
-    background-color: #3b395c; /* Darker green on hover */
-  }
-  
-  .add-user-button:focus {
-    outline: none;             /* Remove outline on focus */
-  }
-  
-  .add-user-button:active {
-    background-color: #3e8e41; /* Even darker green when clicked */
-  }
-  
-  
-  .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
   }
   
-  .user-table {
-    width: 100%;
-    border-collapse: collapse;
+  .card {
+    width: 350px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+
   }
   
-  .user-table th,
-  .user-table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+  .card:hover {
+    transform: translateY(-5px);
   }
   
-  
-  .user-table th {
-    background-color: #f4f8ff;
-    color: #333;
-    font-weight: bold;
-    text-transform: uppercase;
+  .card .icon {
+    font-size: 30px;
+    margin-bottom: 20px;
   }
   
-  .user-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .user-table tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Styling for the action menu */
-  .action-menu {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Three-dots button */
-  .dots-btn {
-    background: none;
-    border: none;
+  .card h3 {
+    margin: 0;
     font-size: 18px;
-    cursor: pointer;
+    font-weight: 600;
   }
   
-  /* Dropdown menu hidden by default */
-  .dropdown {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: white;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    z-index: 1;
-    min-width: 100px;
+  .card p {
+    margin-top: 5px;
+    color: #888;
+    font-size: 17px;
+    font-weight: 500;
   }
   
-  /* Dropdown items styling */
-  .dropdown-item {
-    background: none;
-    border: none;
-    width: 100%;
-    text-align: left;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-size: 14px;
+  /* Specific Card Backgrounds */
+  .white-card {
+    background-color: #ffffff;
     color: #333;
   }
   
-  .dropdown-item:hover {
-    background-color: #f1f1f1;
+  .blue-card {
+    background-color: #e5edfd;
+    color: #101010;
   }
   
-  /* Show dropdown when .action-menu is active */
-  .action-menu.active .dropdown {
-    display: block;
+  .dark-card {
+    background-color: #1a1b2f;
+    color: #ffffff;
+  }
+
+  .green {
+    color: #50CD89;
+  }
+
+  .purple {
+    color: #a97efe;
+  }
+
+  .quick-action {
+    width: 200px;
+    background-color: white;
+    /* background-image: url("<?= ROOT ?>/assets/images/report.png"); */
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .action-icon {
+    width: 48px;
+    height: 48px;
+    position: relative;
+  }
+
+  .action-icon::before, .action-icon::after {
+    content: "";
+    position: absolute;
+    background-color: #bbb;
+    border-radius: 2px;
+  }
+
+  .action-icon::before {
+    width: 40px;
+    height: 25px;
+    top: 12px;
+    left: 4px;
+    background: linear-gradient(to right, #ccc 50%, #999 50%);
+  }
+
+  .action-icon::after {
+    width: 8px;
+    height: 20px;
+    background-color: #888;
+    top: 0;
+    left: 20px;
+  }
+
+  .label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .actions {
+    padding: 30px;
+    display: flex;
+    gap: 20px; /* Adjust the value as needed */
   }
   
-  /* Show dropdown when .show is added */
-  .dropdown.show {
-    display: block;
-  }
-  
-  
-  .status {
-    padding: 3px 5px;           /* Padding around the text */
-    border-radius: 5px;        /* Rounded corners */         /* Bold text */
-    display: inline-block;       /* Makes the span behave like a block for padding */
-    font-size: 12px;
-  }
-  
-  .status.active {
-    background-color: #e0f7e0;  /* Light green background */
-    border: 1px solid #4CAF50;  /* Green border */
-    color: #4CAF50;              /* Green text */
-  }
-  
-  .status.inactive {
-    background-color: #f0f0f0;  /* Light gray background */
-    border: 1px solid #a0a0a0;  /* Gray border */
-    color: #a0a0a0;              /* Gray text */
-  }
-  
+
+  .add-user-btn {
+    background-color: rgb(133, 192, 254);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.add-user-btn i {
+    margin-right: 6px;
+}
+
+.add-user-btn:hover {
+    background-color: rgb(108, 178, 252);
+}
+
+.login-container {
+  max-width: 600px;
+  width: 450px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  padding: 30px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.subtext {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+
+
+.login-list {
+  margin-top: 30px;
+}
+
+.login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.login-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.login-icon {
+  background-color: #b2e8e0;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.text-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.time {
+  font-size: 12px;
+  color: #999;
+}
+
+.ip {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.status {
+  color: #a264f8;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.right-container {
+  width: 450px;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.right-header {
+  background-color: #d1d1d1;
+  color: white;
+  padding: 24px;
+  position: relative;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.right-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.export-button {
+  position: absolute;
+  right: 20px;
+  top: 24px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.wave {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="10" d="M0,60 C360,120 1080,0 1440,60"/></svg>') repeat-x;
+  background-size: contain;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 30px 20px;
+}
+
+.left-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-radius: 16px;
+  padding: 20px;
+  height: 100px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.left-card i {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.yellow {
+  background-color: #fdf3dc;
+  color: #dba400;
+}
+
+.right-purple {
+  background-color: #f0eaff;
+  color: #a06cf5;
+}
+
+.pink {
+  background-color: #fde5e9;
+  color: #f18ba3;
+}
+
+.teal {
+  background-color: #d9f7f7;
+  color: #4da6a6;
+}
