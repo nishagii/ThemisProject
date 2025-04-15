@@ -14,26 +14,24 @@
         <h1>All Precedents</h1>
     </div>
 
-    <!-- search bar -->
-    <div class="search-bar-container">
-        <input type="text" 
-        id="searchBar" 
-        class="search-bar" 
-        placeholder="Search precedents..." 
-        oninput="searchPrecedents()" 
-        onfocus="this.placeholder = ''"
-        onblur="this.placeholder = 'Search precedents...' ">
-        <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
-        <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
-
-        <div class="sort-dropdown" id="sortMenu">
-            <button class="dropdown-item" onclick="sortBy('date')">Sort by Date</button>
-            <button class="dropdown-item" onclick="sortBy('case_number')">Sort by Case Number</button>
-            <button class="dropdown-item" onclick="sortBy('judge')">Sort by Judge</button>
-        </div>
-    </div>
-
     <div class="table-container">
+        <div class="search-bar-container">
+            <input type="text" 
+            id="searchBar" 
+            class="search-bar" 
+            placeholder="Search precedents..." 
+            oninput="searchPrecedents()" 
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = 'Search precedents...' ">
+            <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
+            <i class="bx bx-filter filter-icon" title="Filter" onclick="filterFunction()"></i>
+
+            <div class="sort-dropdown" id="sortMenu">
+                <button class="dropdown-item" onclick="sortBy('judgment_date')">Sort by Date</button>
+                <button class="dropdown-item" onclick="sortBy('case_number')">Sort by Case Number</button>
+                <button class="dropdown-item" onclick="sortBy('judgment_by')">Sort by Judge</button>
+            </div>
+        </div>
         <table>
             <thead>
                 <tr>
@@ -71,22 +69,24 @@
     </div>
     <script>
         function toggleSortMenu() {
+            event.stopPropagation()
             let menu = document.getElementById("sortMenu");
+            closeOtherMenus();
             menu.style.display = menu.style.display === "block" ? "none" : "block";
         }
 
-    // // Sort function - Sends an AJAX request
-    //     function sortBy(criteria) {
-    //         fetch(`<?= ROOT ?>/PrecedentsController/sort/${criteria}`)
-    //             .then(response => response.text())  // Get HTML response
-    //             .then(data => {
-    //                 document.getElementById("precedentsTable").innerHTML = data; // Update table
-    //             })
-    //             .catch(error => console.error("Error:", error));
+        // Sort function - Sends an AJAX request
+        function sortBy(criteria) {
+            fetch(`<?= ROOT ?>/PrecedentsController/sort/${criteria}`)
+                .then(response => response.text())  // Get HTML response
+                .then(data => {
+                    document.getElementById("precedentsTable").innerHTML = data; // Update table
+                })
+                .catch(error => console.error("Error:", error));
 
-    //         // Hide the menu after selection
-    //         toggleSortMenu();
-    //     }
+            // Hide the menu after selection
+            toggleSortMenu();
+        }
 
         // Close the dropdown when clicking outside
         document.addEventListener("click", function (event) {
@@ -95,6 +95,11 @@
                 menu.style.display = "none";
             }
         });
+        function closeOtherMenus() {
+            document.querySelectorAll(".sort-dropdown").forEach(menu => {
+                menu.style.display = "none";
+            });
+        }
     </script>
 </body>
 </html>

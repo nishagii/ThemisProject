@@ -93,10 +93,11 @@ a{
   padding: 8px;
   z-index: 1000;
   border-radius: 4px;
+  min-width: 150px;
 }
   
 .sort-dropdown .dropdown-item {
-  display: block;
+    display: block;
     padding: 8px 12px;
     cursor: pointer;
     text-align: left;
@@ -114,7 +115,7 @@ a{
 
 
 .add {
-  
+  max-width: 250px;
   margin-top: 20px;          /* Optional: Add margin to position it vertically */
 }
 
