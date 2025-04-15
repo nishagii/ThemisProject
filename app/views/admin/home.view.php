@@ -39,14 +39,7 @@
         </div>
 
         <div class="actions">
-            <div class="quick-action">
-                <div class="action-icon"></div>
-                <div class="label">Click here to add users</div>
-                <button class="add-user-btn" onclick="window.location.href='<?= ROOT ?>/admin'">
-                    <i class="fas fa-user-plus"></i> Add User
-                </button>
-
-            </div>
+            
 
             <div class="login-container">
                 <div class="header">
@@ -81,6 +74,45 @@
                         <p>No login history available.</p>
                     <?php endif; ?>
                 </div>
+
+            </div>
+
+            <div class="right-container">
+                <div class="right-header">
+                <h2>Quick Actions</h2>
+                
+                <div class="wave"></div>
+                </div>
+                <div class="categories">
+                <div class="left-card yellow">
+                <i class="fas fa-cogs"></i> <!-- Multiple gears -->
+                    <div>System Status</div>
+                </div>
+                <div class="left-card right-purple">
+                    <i class="fas fa-user-plus"></i>
+                    <div>New Users</div>
+                </div>
+                <div class="left-card pink">
+                    <i class="fas fa-star"></i>
+
+                    <div>Ratings and Feedbacks</div>
+                </div>
+                <div class="left-card teal">
+                    <i class="fas fa-bug"></i>
+                    <div>Bug Complaints</div>
+                </div>
+                </div>
+            </div>
+
+            <div class="quick-action">
+                <div class="action-icon"></div>
+                <div class="label">Reports</div>
+                <button class="add-user-btn" onclick="window.location.href='<?= ROOT ?>/admin'">
+                    <i class="fas fa-file-alt"></i>
+                    View
+                </button>
+
+                
 
             </div>
             
