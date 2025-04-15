@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Invoice - <?= htmlspecialchars($invoiceData['invoiceNumber']) ?></title>
+    <title>Invoice - <?= htmlspecialchars($invoiceData['invoiceID']) ?></title>
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -103,7 +104,7 @@
             max-width: 200px;
             margin: 15px auto 0;
             padding: 12px 20px;
-            background: rgb(11, 38, 112);
+            background: #5191e4;
             color: #fff;
             border: none;
             border-radius: 8px;
@@ -115,7 +116,7 @@
         }
 
         .btn:hover {
-            background: #143db8;
+            background:rgb(94, 153, 230);
         }
 
         @media (max-width: 600px) {
@@ -132,7 +133,7 @@
         }
 
         .btn-back {
-            background-color: rgb(11, 38, 112);
+            background-color: #5191e4;
             color: white;
             padding: 12px 20px;
             border: none;
@@ -174,21 +175,23 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
-<div class="back">
-    <button class="btn-back" onclick="window.history.back()">
-        <i class='bx bx-arrow-back'></i> <!-- Boxicons arrow-back icon -->
-    </button>
-</div>
+    <div class="back">
+        <button class="btn-back" onclick="window.history.back()">
+            <i class='bx bx-arrow-back'></i> <!-- Boxicons arrow-back icon -->
+        </button>
+    </div>
 
     <div class="invoice-box">
         <div class="header">
             <div class="header-info">
                 <h1>THEMIS</h1>
                 <h4>INVOICE</h4>
-                <p><strong>Invoice #: </strong><?= htmlspecialchars($invoiceData['invoiceNumber']) ?></p>
+                <p><strong>Invoice #: </strong><?= htmlspecialchars($invoiceData['invoiceID']) ?></p>
                 <p><strong>Due: </strong><?= htmlspecialchars($invoiceData['dueDate']) ?></p>
             </div>
             <div class="logo">
@@ -214,19 +217,96 @@
             </tr>
             <tr>
                 <td><?= htmlspecialchars($invoiceData['paymentDesc']) ?></td>
-                <td>$<?= number_format((float)$invoiceData['amount'], 2) ?></td>
+                <td>LKR <?= number_format((float)$invoiceData['amount'], 2) ?></td>
             </tr>
             <tr class="total-row">
                 <td>Total Amount</td>
-                <td>$<?= number_format((float)$invoiceData['amount'], 2) ?></td>
+                <td>LKR <?= number_format((float)$invoiceData['amount'], 2) ?></td>
             </tr>
         </table>
 
     </div>
     <div class="back">
         <button class="btn" onclick="window.print()">Print / Save as PDF</button>
-        <button class="btn send-btn" onclick="sendInvoice()">Send Invoice</button>
+        <button class="btn send-btn" data-invoice-id="<?= htmlspecialchars($invoiceData['invoiceID'] ?? '') ?>">Send Invoice</button>
+        
     </div>
+
+   
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const sendBtn = document.querySelector('.send-btn');
+        
+        if (sendBtn) {
+            sendBtn.addEventListener('click', function() {
+                // Get the invoice ID from the button's data attribute
+                const invoiceId = this.getAttribute('data-invoice-id');
+                console.log("Invoice ID from button:", invoiceId); // Debug log
+                
+                if (!invoiceId) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops!',
+                        text: 'Invoice ID is missing.',
+                    });
+                    return;
+                }
+
+                // Show loading state
+                Swal.fire({
+                    title: 'Sending invoice...',
+                    text: 'Please wait',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                fetch(`<?= ROOT ?>/invoice/markInvoiceAsSent/${invoiceId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Invoice Sent!',
+                            text: 'The invoice was successfully sent.',
+                            timer: 2000,
+                            showConfirmButton: false
+                        }).then(() => {
+                            sendBtn.textContent = 'Invoice Sent';
+                            sendBtn.disabled = true;
+                            window.location.href = '<?= ROOT ?>/invoice';
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Failed!',
+                            text: data.message || 'Failed to mark invoice as sent.',
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'An error occurred while sending the invoice.',
+                    });
+                });
+            });
+        }
+    });
+    </script>
 </body>
 
 </html>

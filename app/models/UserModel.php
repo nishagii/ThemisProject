@@ -229,6 +229,38 @@ class UserModel
         return $this->query($query, $params);
     }
 
+    public function countUsers()
+    {
+        $query = "SELECT COUNT(*) as total FROM {$this->table}";
+        try {
+            $stmt = $this->connect()->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            return $result['total']; // Return just the number
+        } catch (PDOException $e) {
+            echo "PDO Error: " . $e->getMessage();
+            return 0;
+        }
+        
+    }
+    
+    public function countClients()
+    {
+        $query = "SELECT COUNT(*) as total FROM {$this->table} WHERE role = 'client'";
+        
+        try {
+            $stmt = $this->connect()->prepare($query);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result['total']; // Return the number of clients
+        } catch (PDOException $e) {
+            echo "PDO Error: " . $e->getMessage();
+            return 0;
+        }
+    }
+
     // Save OTP for password reset
     public function saveResetOTP($email, $otp)
     {

@@ -108,7 +108,7 @@ nav .big-navbar li a:active {
 }
 
 .navbar-icons i:hover {
-    color: orange;
+    color: rgb(175, 175, 175);
 }
 
 label #btn,/* icons*/

@@ -3,7 +3,11 @@
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 
 require_once '../vendor/autoload.php';
-require_once '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/app/core/config.php';
+// require_once '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/app/core/config.php'; //for MAC
+//for windows 
+
+require_once 'C:\xampp\htdocs\themisrepo\app\core\config.php';
+
 
 class PaymentController
 {
@@ -11,7 +15,14 @@ class PaymentController
 
     public function index()
     {
-        $this->view('/client/payments');
+        // Redirect if not logged in
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
+
+        $data['username'] = $_SESSION['username'] ?? 'User';
+        $this->view('/client/payments', $data);
     }
 
     // Create a new payment session using Stripe

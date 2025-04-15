@@ -20,6 +20,35 @@ class Template
     //     // Load the view with data
     //     $this->view('/seniorCounsel/template', $data);
     // }
+    public function sort($criteria) {
+        // Fetch sorted cases based on the criteria
+        $templates = $this->templateModel->getSorted($criteria);
+
+        // Generate HTML for the sorted table rows
+        $html = '';
+        if (!empty($templates)) {
+            foreach ($templates as $template) {
+                $html .= '<tr>';
+                $html .= '<td>' . htmlspecialchars($template->name) . '</td>';
+                $html .= '<td>' . htmlspecialchars($template->description) . '</td>';
+                $html .= '<td>' . htmlspecialchars($template->uploaded_by) . '</td>';
+                $html .= '<td>' . htmlspecialchars($template->uploaded_date) . '</td>';
+                $html .= '<td><div class="action-menu">';
+                $html .= '<button class="dots-btn">⋮</button>';
+                $html .= '<div class="dropdown">';
+                $html .= '<a href="' . htmlspecialchars($template->document_link) . '" target="_blank" class="dropdown-item">Download</a>';
+                $html .= '<a href="' . ROOT . '/template/edit/' . $template->id . '" class="dropdown-item">Edit</a>';
+                $html .= '<a href="javascript:void(0);" onclick="confirmDelete(' . $template->id . ')" class="dropdown-item">Delete</a>';
+                $html .= '</div></div></td>';
+                $html .= '</tr>';
+            }
+        } else {
+            $html .= '<tr><td colspan="6">No precedents found in the database.</td></tr>';
+        }
+
+        // Return the HTML
+        echo $html;
+    }
 
 /*---------------------Create operation----------------------------- */
 public function create() {

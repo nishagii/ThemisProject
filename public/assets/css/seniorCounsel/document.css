@@ -6,7 +6,7 @@
 
 .transaction-header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 100px; /* Added a column for 'Uploaded By' */
+    grid-template-columns: 1fr 1fr 1fr 130px 100px; /* Added a column for Actions */
     padding: 10px 0;
     border-bottom: 1px solid #f0f0f0;
     color: #718EBF;
@@ -16,7 +16,7 @@
 
 .transaction-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 100px; /* Same as header */
+    grid-template-columns: 1fr 1fr 1fr 130px 100px; /* Same as header */
     padding: 15px 0;
     border-bottom: 1px solid #f0f0f0;
     align-items: center;
@@ -27,14 +27,14 @@
     color: #111827;
 }
 
-.transaction-date, 
+.transaction-date,
 .transaction-uploader {
     color: #6b7280;
     font-size: 14px;
 }
 
 .download-button {
-    padding: 10px 15px;
+    padding: 8px 12px;
     background-color: white;
     border: 1px solid #4f46e5;
     border-radius: 20px;
@@ -77,3 +77,37 @@
     font-size: 18px; /* Adjust icon size if needed */
 }
 
+/* New styles for action buttons */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-button, .delete-button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    border: none;
+}
+
+.edit-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #45a049;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}

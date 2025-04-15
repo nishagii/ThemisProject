@@ -23,7 +23,16 @@
        <i class='bx bx-menu' id="side-btn" ></i>
    </div>
    <ul class="nav-list">
+
+            <li>
+                <a href="<?= ROOT ?>/homeadmin">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+                <span class="tooltip">Dashboard</span>
+            </li>
      <li>
+      
        <a href="<?= ROOT ?>/admin">
            <i class='bx bx-user'></i>
            <span class="links_name">Add User</span>
