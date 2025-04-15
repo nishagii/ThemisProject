@@ -2,26 +2,41 @@
 
 class LoginModel 
 {
-    use Model; // Assumes the Model trait handles database queries
-    protected $table = 'login_logs'; // Name of the database table
+    use Model; 
+    protected $table = 'login_logs'; 
 
-    // Save login details into the login_logs table
+    
     public function save($data)
     {
-        // Prepare the query to insert data into the "login_logs" table
+       
         $query = "INSERT INTO {$this->table} 
                   (user_id, login_time, ip_address, status)
                   VALUES 
                   (:user_id, NOW(), :ip_address, :status)";
 
-        // Bind parameters to prevent SQL injection
+        
         $params = [
             'user_id'    => $data['user_id'],
             'ip_address' => $data['ip_address'],
             'status'     => $data['status'],
         ];
 
-        // Execute the query using the parent Model class's query method
+        
+        return $this->query($query, $params);
+    }
+
+    
+    public function getLoginDetailsByUserId($userId)
+    {
+       
+        $query = "SELECT * FROM {$this->table} WHERE user_id = :user_id ORDER BY login_time DESC";
+
+        
+        $params = [
+            'user_id' => $userId
+        ];
+
+    
         return $this->query($query, $params);
     }
 }

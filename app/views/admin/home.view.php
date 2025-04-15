@@ -56,63 +56,32 @@
                 
                 </div>
 
-                <div class="song-list">
-                <div class="song">
-                    <div class="song-info">
-                    <div class="play-button"><i class="fas fa-key"></i></div>
-                    <div class="text-info">
-                        <div class="song-title">Today</div>
-                        <div class="artist-name">1 min ago</div>
-                    </div>
-                    </div>
-                    <div>
-                    <div class="created">192.168.1.1</div>
-                    <div class="rating">success</div>
-                    </div>
+                <div class="login-list">
+                    <?php if (!empty($login_details)): ?>
+                        <?php foreach ($login_details as $login): ?>
+                            <div class="login">
+                                <div class="login-info">
+                                    <div class="login-icon"><i class="fas fa-key"></i></div>
+                                    <div class="text-info">
+                                        <div class="date">
+                                            <?php echo date('F j, Y', strtotime($login->login_time)); ?>
+                                        </div>
+                                        <div class="time">
+                                            <?php echo date('g:i a', strtotime($login->login_time)); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="ip"><?php echo htmlspecialchars($login->ip_address); ?></div>
+                                    <div class="status"><?php echo htmlspecialchars($login->status); ?></div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p>No login history available.</p>
+                    <?php endif; ?>
                 </div>
 
-                <div class="song">
-                    <div class="song-info">
-                    <div class="play-button"><i class="fas fa-key"></i></div>
-                    <div class="text-info">
-                        <div class="song-title">Today</div>
-                        <div class="artist-name">1 hour ago</div>
-                    </div>
-                    </div>
-                    <div>
-                    <div class="created">192.168.1.1</div>
-                    <div class="rating">success</div>
-                    </div>
-                </div>
-
-                <div class="song">
-                    <div class="song-info">
-                    <div class="play-button"><i class="fas fa-key"></i></div>
-                    <div class="text-info">
-                        <div class="song-title">Yesterday</div>
-                        <div class="artist-name">4:00 pm</div>
-                    </div>
-                    </div>
-                    <div>
-                    <div class="created">192.168.1.1</div>
-                    <div class="rating">success</div>
-                    </div>
-                </div>
-
-                <div class="song">
-                    <div class="song-info">
-                    <div class="play-button"><i class="fas fa-key"></i></div>
-                    <div class="text-info">
-                        <div class="song-title">Yesterday</div>
-                        <div class="artist-name">12:00 pm</div>
-                    </div>
-                    </div>
-                    <div>
-                    <div class="created">192.168.1.1</div>
-                    <div class="rating">success</div>
-                    </div>
-                </div>
-                </div>
             </div>
             
         </div>

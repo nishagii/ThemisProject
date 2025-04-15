@@ -165,30 +165,13 @@
   margin-top: 4px;
 }
 
-.filters {
-  display: flex;
-  gap: 16px;
-  margin-top: 10px;
-}
 
-.filter {
-  font-size: 14px;
-  color: #aaa;
-  cursor: pointer;
-}
 
-.filter.active {
-  color: white;
-  background-color: #333;
-  border-radius: 8px;
-  padding: 4px 10px;
-}
-
-.song-list {
+.login-list {
   margin-top: 30px;
 }
 
-.song {
+.login {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -196,13 +179,13 @@
   border-bottom: 1px solid #eee;
 }
 
-.song-info {
+.login-info {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-.play-button {
+.login-icon {
   background-color: #b2e8e0;
   border-radius: 50%;
   width: 30px;
@@ -221,22 +204,22 @@
   flex-direction: column;
 }
 
-.song-title {
+.date {
   font-weight: 600;
   font-size: 15px;
 }
 
-.artist-name {
+.time {
   font-size: 12px;
   color: #999;
 }
 
-.created {
+.ip {
   font-size: 12px;
   color: #aaa;
 }
 
-.rating {
+.status {
   color: #a264f8;
   font-weight: bold;
   font-size: 14px;
