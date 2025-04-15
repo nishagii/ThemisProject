@@ -198,6 +198,9 @@
     border-radius: 5px;
     cursor: pointer;
     }
+    input[type="file"]::file-selector-button:hover {
+    background-color: #5c6bc0;
+    }
 </style>
 
 <body>

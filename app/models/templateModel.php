@@ -38,7 +38,11 @@
             }
             return $result[0];
         }
-
+        public function getSorted($column){
+            $query = "SELECT * FROM $this->table ORDER BY {$column} ASC";
+            return $this->query($query);
+        }
+        
         public function update($data) {
             $query = "UPDATE {$this->table}
                     SET 
