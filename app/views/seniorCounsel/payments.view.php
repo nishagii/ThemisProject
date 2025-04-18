@@ -56,7 +56,7 @@
                             <div class="due-date">akhgfdigf</div>
                             <div class="client">kdjhf</div>
                             <div class="amount">lskjdhf</div>
-                            <div><a href="#" download class="view-button">View Invoice</a></div>
+                            <div><a href="#" download class="view-button">View</a></div>
                             <div><a href="#" download class="send-button">Send</a></div>
                             <div class="status">kdjhf</div>
                         </div>
