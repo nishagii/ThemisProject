@@ -76,5 +76,16 @@ class InvoiceModel
         return false;
     }
 
+    public function getAllInvoices()
+    {
+        $query = "SELECT invoice.*, users.first_name AS clientName
+                FROM invoice
+                JOIN users ON invoice.clientID = users.id
+                ORDER BY invoice.id DESC";
+
+        return $this->query($query);
+    }
+
+
 
 }

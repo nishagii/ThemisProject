@@ -190,8 +190,20 @@ public function test() {
         }
     }
     
-    
-    
+    public function viewInvoice($invoiceID)  // Changed from view() to viewInvoice()
+    {
+        $InvoiceModel = $this->loadModel('InvoiceModel');
+        $invoiceData = $InvoiceModel->getInvoiceById($invoiceID);
+
+        if ($invoiceData !== false && isset($invoiceData->invoiceID)) {
+            $this->view('seniorCounsel/invoiceView', ['invoiceData' => $invoiceData]);
+        } else {
+            echo "Invoice not found.";
+        }
+    }
 }
+
+    
+
 
 

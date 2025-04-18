@@ -71,3 +71,119 @@
         font-size: 14px;
     }
 }
+
+.invoice-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 30px;
+  overflow: hidden;
+}
+
+.invoice-container {
+  width: 100%;
+  max-width: 800px;
+  padding: 10px;
+}
+
+.payment-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
+.payment-button {
+  background-color: white;
+  border: solid 1px rgb(36, 173, 36);
+  color: rgb(36, 173, 36);
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: 500;
+  display: flex;
+  gap: 5px
+}
+
+.payment-button:hover {
+  background-color: rgb(232, 230, 230);
+}
+
+.payment-button i {
+  font-size: 18px; /* Adjust icon size if needed */
+}
+
+.invoice-header {
+  display: grid;
+  grid-template-columns: 2fr 2fr 130px 100px 100px 80px; 
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  color: #718EBF;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.invoice-row {
+  display: grid;
+  grid-template-columns: 2fr 2fr 130px 100px 100px 80px; 
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+}
+
+.description {
+  font-weight: 500;
+  color: #111827;
+}
+
+.due-date {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.view-button {
+  padding: 8px 12px;
+  background-color: white;
+  border: 1px solid #4f46e5;
+  border-radius: 20px;
+  color: #4f46e5;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.view-button:hover {
+  background-color: #f9fafb;
+  border: 1px solid #123288;
+  color: #123288;
+}
+
+a {
+  text-decoration: none;
+}
+
+.send-button {
+  background-color: #b6d7fa;
+  color: rgb(1, 1, 1);
+  padding: 3px 6px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-size: 13px;
+  border: none;
+}
+
+.send-button:hover {
+  background-color: #9fcdff;
+}
+
+.invoice-sent-label {
+  padding: 3px 6px;
+  border: solid 1px #28a745;
+  color: #28a745;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 13px;
+}
