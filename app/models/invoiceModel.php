@@ -76,5 +76,12 @@ class InvoiceModel
         return false;
     }
 
+    public function getAllInvoices()
+    {
+        
+        $query = "SELECT * FROM {$this->table} ORDER BY id DESC";
+        return $this->query($query);
+    }
+
 
 }
