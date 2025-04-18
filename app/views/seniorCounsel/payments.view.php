@@ -27,6 +27,42 @@
                 <button class="button" onclick="window.location.href='<?= ROOT ?>/invoice'">CREATE INVOICE</button>
             </div>
         </div>
+
+        <div class="invoice-card">
+
+            
+            <div class="invoice-container">
+
+                <div class="payment-section">
+                        <button class="payment-button">
+                            <i class='bx bx-file'></i> <p>View Paid Receipts</p>
+                        </button>
+                </div>
+                
+                <div class="invoice-header">
+                    <div>Description</div>
+                    <div>Created Date</div>
+                    <div>Due Date</div>
+                    <div>Client</div>
+                    <div>Amount</div>
+                    <div>Invoice</div>
+                    <div>Send to Client</div>
+                    <div>Payment Status</div>
+                </div>
+                
+                        <div class="invoice-row">
+                            <div class="description">hfdgfyud</div>
+                            <div class="created-date">shdkjfhdgf</div>
+                            <div class="due-date">akhgfdigf</div>
+                            <div class="client">kdjhf</div>
+                            <div class="amount">lskjdhf</div>
+                            <div><a href="#" download class="view-button">View Invoice</a></div>
+                            <div><a href="#" download class="send-button">Send</a></div>
+                            <div class="status">kdjhf</div>
+                        </div>
+                
+            </div>
+        </div>
             
     </div>
 
