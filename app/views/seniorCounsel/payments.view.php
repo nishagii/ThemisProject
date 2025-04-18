@@ -62,8 +62,13 @@
 
                             </div>
                             <div>
-                                <a href="#" class="send-button">Send</a>
+                                <?php if ($invoice->sent): ?>
+                                    <span class="invoice-sent-label">Invoice Sent</span>
+                                <?php else: ?>
+                                    <a href="#" class="send-button">Send</a>
+                                <?php endif; ?>
                             </div>
+
                             <div class="status"><?= $invoice->sent ? 'Sent' : 'Pending' ?></div>
                         </div>
                     <?php endforeach; ?>
