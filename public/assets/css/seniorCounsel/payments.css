@@ -118,7 +118,7 @@
 
 .invoice-header {
   display: grid;
-  grid-template-columns: 2fr 2fr 130px 100px 100px 80px; /* Added a column for Actions */
+  grid-template-columns: 2fr 2fr 130px 100px 100px 80px; 
   padding: 10px 0;
   border-bottom: 1px solid #f0f0f0;
   color: #718EBF;
@@ -128,7 +128,7 @@
 
 .invoice-row {
   display: grid;
-  grid-template-columns: 2fr 2fr 130px 100px 100px 80px; /* Same as header */
+  grid-template-columns: 2fr 2fr 130px 100px 100px 80px; 
   padding: 15px 0;
   border-bottom: 1px solid #f0f0f0;
   align-items: center;
@@ -172,6 +172,7 @@ a {
   text-decoration: none;
   transition: background-color 0.3s ease;
   font-size: 13px;
+  border: none;
 }
 
 .send-button:hover {

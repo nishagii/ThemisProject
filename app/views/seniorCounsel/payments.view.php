@@ -65,7 +65,7 @@
                                 <?php if ($invoice->sent): ?>
                                     <span class="invoice-sent-label">Invoice Sent</span>
                                 <?php else: ?>
-                                    <a href="#" class="send-button">Send</a>
+                                    <a href="<?= ROOT ?>/invoice/markInvoiceAsSent/<?= $invoice->invoiceID ?>" class="send-button">Send</a>
                                 <?php endif; ?>
                             </div>
 
