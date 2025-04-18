@@ -115,3 +115,13 @@
 .payment-button i {
   font-size: 18px; /* Adjust icon size if needed */
 }
+
+.invoice-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 130px 100px 100px 100px; /* Added a column for Actions */
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  color: #718EBF;
+  font-size: 14px;
+  font-weight: 600;
+}

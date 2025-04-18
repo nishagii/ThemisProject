@@ -41,7 +41,7 @@
                 
                 <div class="invoice-header">
                     <div>Description</div>
-                    <div>Created Date</div>
+                    
                     <div>Due Date</div>
                     <div>Client</div>
                     <div>Amount</div>
@@ -52,7 +52,7 @@
                 
                         <div class="invoice-row">
                             <div class="description">hfdgfyud</div>
-                            <div class="created-date">shdkjfhdgf</div>
+                            
                             <div class="due-date">akhgfdigf</div>
                             <div class="client">kdjhf</div>
                             <div class="amount">lskjdhf</div>
