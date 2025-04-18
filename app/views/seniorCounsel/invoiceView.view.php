@@ -228,7 +228,11 @@
     </div>
     <div class="back">
         <button class="btn" onclick="window.print()">Print / Save as PDF</button>
-        <button class="btn send-btn" data-invoice-id="<?= htmlspecialchars($invoiceData->invoiceID ?? '') ?>">Send Invoice</button>
+        <button class="btn send-btn" 
+                data-invoice-id="<?= htmlspecialchars($invoiceData->invoiceID ?? '') ?>"
+                <?= $invoiceData->sent == 1 ? 'disabled' : '' ?>>
+            <?= $invoiceData->sent == 1 ? 'Invoice Sent' : 'Send Invoice' ?>
+        </button>
         
     </div>
 
@@ -238,7 +242,20 @@
         const sendBtn = document.querySelector('.send-btn');
         
         if (sendBtn) {
+            // Check if the invoice has already been sent
+            const invoiceAlreadySent = <?= $invoiceData->sent == 1 ? 'true' : 'false' ?>;
+            
+            if (invoiceAlreadySent) {
+                sendBtn.disabled = true;
+                sendBtn.textContent = 'Invoice Sent';
+            }
+        
             sendBtn.addEventListener('click', function() {
+                // Skip if already sent
+                if (this.disabled) {
+                    return;
+                }
+                
                 // Get the invoice ID from the button's data attribute
                 const invoiceId = this.getAttribute('data-invoice-id');
                 console.log("Invoice ID from button:", invoiceId); // Debug log
@@ -285,7 +302,7 @@
                         }).then(() => {
                             sendBtn.textContent = 'Invoice Sent';
                             sendBtn.disabled = true;
-                            window.location.href = '<?= ROOT ?>/invoice';
+                            window.location.href = '<?= ROOT ?>/paymentgate';
                         });
                     } else {
                         Swal.fire({
