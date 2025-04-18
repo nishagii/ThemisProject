@@ -58,10 +58,11 @@
                             <div class="client"><?= htmlspecialchars($invoice->clientName) ?></div>
                             <div class="amount">Rs. <?= htmlspecialchars($invoice->amount) ?></div>
                             <div>
-                                <a href="<?= ROOT ?>/invoices/view/<?= $invoice->invoiceID ?>" class="view-button">View</a>
+                                <a href="<?= ROOT ?>/invoice/viewInvoice/<?= $invoice->invoiceID ?>" class="view-button">View</a>
+
                             </div>
                             <div>
-                                <a href="<?= ROOT ?>/invoices/send/<?= $invoice->invoiceID ?>" class="send-button">Send</a>
+                                <a href="#" class="send-button">Send</a>
                             </div>
                             <div class="status"><?= $invoice->sent ? 'Sent' : 'Pending' ?></div>
                         </div>
