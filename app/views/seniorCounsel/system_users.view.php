@@ -34,83 +34,41 @@
 
             <!-- User Cards -->
             <div class="user-container" id="clients">
-                <!-- Example user card for clients -->
+                <?php if (!empty($clients)): ?>
+                    <?php foreach ($clients as $client): ?>
                 <div class="user-card">
                     <div class="icon"><i class="fas fa-user"></i></div>
-                    <h3>Nadhiya Nashath</h3>
-                    <p>nadhiya@example.com</p>
+                    <h3><?= htmlspecialchars($client->username); ?></h3>
+                    <p><?= htmlspecialchars($client->email); ?></p>
                 </div>
-                <div class="user-card">
-                    <div class="icon"><i class="fas fa-user"></i></div>
-                    <h3>Nishagi Jeewantha</h3>
-                    <p>nish@example.com</p>
-                </div>
-                <div class="user-card">
-                    <div class="icon"><i class="fas fa-user"></i></div>
-                    <h3>Sawani Vihanga</h3>
-                    <p>sawani@example.com</p>
-                </div>
-                <div class="user-card">
-                    <div class="icon"><i class="fas fa-user"></i></div>
-                    <h3>Chamath Abeysinghe</h3>
-                    <p>chamath@example.com</p>
-                </div>
-                <div class="user-card">
-                    <div class="icon"><i class="fas fa-user"></i></div>
-                    <h3>John Doe</h3>
-                    <p>john.doe@example.com</p>
-                </div>
-                <div class="user-card">
-                    <div class="icon"><i class="fas fa-user"></i></div>
-                    <h3>Doe</h3>
-                    <p>doe@example.com</p>
-                </div>
-                <div class="user-card">
-                    <div class="icon"><i class="fas fa-user"></i></div>
-                    <h3>Mark</h3>
-                    <p>Mark.doe@example.com</p>
-                </div>
+                <?php endforeach; ?>
+
+                <?php else: ?>
+                    <p>No clients found.</p>
+                <?php endif; ?>
             </div>
 
+
             <div class="user-container" id="attorneys" style="display: none;">
-                <!-- Example user card for attorneys -->
-                <div class="user-card">
-                    <div class="icon"><i class="fas fa-user-tie"></i></div>
-                    <h3>Jane Smith</h3>
-                    <p>jane.smith@example.com</p>
-                </div>
+                <?php foreach ($attorneys as $attorney): ?>
+                    <div class="user-card">
+                        <div class="icon"><i class="fas fa-user-tie"></i></div>
+                        <h3><?= htmlspecialchars($attorney->username); ?></h3>
+                        <p><?= htmlspecialchars($attorney->email); ?></p>
+                    </div>
+                <?php endforeach; ?>
 
-                <div class="user-card">
-                    <div class="icon"><i class="fas fa-user-tie"></i></div>
-                    <h3>Smith</h3>
-                    <p>smith@example.com</p>
-                </div>
-
-                <div class="user-card">
-                    <div class="icon"><i class="fas fa-user-tie"></i></div>
-                    <h3>Jaya</h3>
-                    <p>jaya@example.com</p>
-                </div>
-
-                <div class="user-card">
-                    <div class="icon"><i class="fas fa-user-tie"></i></div>
-                    <h3>Sunny</h3>
-                    <p>sunny@example.com</p>
-                </div>
             </div>
 
             <div class="user-container" id="juniors" style="display: none;">
-                <!-- Example user card for juniors -->
+            <?php foreach ($juniors as $junior): ?>
                 <div class="user-card">
                     <div class="icon"><i class="fas fa-user-graduate"></i></div>
-                    <h3>Emma Brown</h3>
-                    <p>emma.brown@example.com</p>
+                    <h3><?= htmlspecialchars($junior->username); ?></h3>
+                    <p><?= htmlspecialchars($junior->email); ?></p>
                 </div>
-                <div class="user-card">
-                    <div class="icon"><i class="fas fa-user-graduate"></i></div>
-                    <h3>Em</h3>
-                    <p>em@example.com</p>
-                </div>
+            <?php endforeach; ?>
+
             </div>
         </div>
     </div>

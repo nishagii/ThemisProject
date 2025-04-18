@@ -1,6 +1,6 @@
 <?php
 
-//Users class 
+// Users class 
 
 class Users
 {
@@ -8,6 +8,18 @@ class Users
 
     public function index()
     {
-        $this->view('/seniorCounsel/system_users');
+        $userModel = $this->loadModel('UserModel');
+
+        $clients = $userModel->getUsersByRole('client');
+        $attorneys = $userModel->getUsersByRole('attorney');
+        $juniors = $userModel->getUsersByRole('junior');
+
+        $data = [
+            'clients' => $clients,
+            'attorneys' => $attorneys,
+            'juniors' => $juniors
+        ];
+
+        $this->view('/seniorCounsel/system_users', $data);
     }
 }
