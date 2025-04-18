@@ -40,7 +40,7 @@
                 </div>
                 
                 <div class="invoice-header">
-                    <div>Description</div>
+                   
                     
                     <div>Due Date</div>
                     <div>Client</div>
@@ -50,16 +50,26 @@
                     <div>Payment Status</div>
                 </div>
                 
+                <?php if (!empty($invoices)): ?>
+                    <?php foreach ($invoices as $invoice): ?>
                         <div class="invoice-row">
-                            <div class="description">hfdgfyud</div>
                             
-                            <div class="due-date">akhgfdigf</div>
-                            <div class="client">kdjhf</div>
-                            <div class="amount">lskjdhf</div>
-                            <div><a href="#" download class="view-button">View</a></div>
-                            <div><a href="#" download class="send-button">Send</a></div>
-                            <div class="status">kdjhf</div>
+                            <div class="due-date"><?= htmlspecialchars($invoice->dueDate) ?></div>
+                            <div class="client"><?= htmlspecialchars($invoice->clientID) ?></div>
+                            <div class="amount">Rs. <?= htmlspecialchars($invoice->amount) ?></div>
+                            <div>
+                                <a href="<?= ROOT ?>/invoices/view/<?= $invoice->invoiceID ?>" class="view-button">View</a>
+                            </div>
+                            <div>
+                                <a href="<?= ROOT ?>/invoices/send/<?= $invoice->invoiceID ?>" class="send-button">Send</a>
+                            </div>
+                            <div class="status"><?= $invoice->sent ? 'Sent' : 'Pending' ?></div>
                         </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p style="text-align:center; margin-top: 20px;">No invoices found.</p>
+                <?php endif; ?>
+
                 
             </div>
         </div>
