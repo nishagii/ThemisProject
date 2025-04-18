@@ -15,7 +15,10 @@ class Calendar
         $this->client = new Google_Client();
         $this->client->setApplicationName('Themis Calendar Integration');
         $this->client->setScopes(\Google\Service\Calendar::CALENDAR);
-        $this->client->setAuthConfig('/Applications/XAMPP/xamppfiles/htdocs/themisrepo/credentials.json'); // Use absolute path
+        // $this->client->setAuthConfig('/Applications/XAMPP/xamppfiles/htdocs/themisrepo/credentials.json'); // Use absolute path
+
+        //for windows 
+        $this->client->setAuthConfig('C:/xampp/htdocs/themisrepo/credentials.json');
         $this->client->setAccessType('offline');
         $this->client->setPrompt('select_account consent');
         $this->client->setRedirectUri('http://localhost/themisrepo/public/calendar/auth'); // Explicitly set redirect URI
