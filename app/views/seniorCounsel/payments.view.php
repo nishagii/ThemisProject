@@ -55,7 +55,7 @@
                         <div class="invoice-row">
                             
                             <div class="due-date"><?= htmlspecialchars($invoice->dueDate) ?></div>
-                            <div class="client"><?= htmlspecialchars($invoice->clientID) ?></div>
+                            <div class="client"><?= htmlspecialchars($invoice->clientName) ?></div>
                             <div class="amount">Rs. <?= htmlspecialchars($invoice->amount) ?></div>
                             <div>
                                 <a href="<?= ROOT ?>/invoices/view/<?= $invoice->invoiceID ?>" class="view-button">View</a>
