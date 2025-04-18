@@ -102,7 +102,10 @@ class Calendar
                 }
 
                 // Store the access token
-                $tokenPath = '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/token.json'; // Use absolute path
+                // $tokenPath = '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/token.json'; // Use absolute path
+
+                //for windows 
+                $tokenPath = 'C:/xampp/htdocs/themisrepo/token.json';
                 if (!file_put_contents($tokenPath, json_encode($accessToken))) {
                     // Log the error if we couldn't save the token
                     error_log('Failed to save token to: ' . $tokenPath);
