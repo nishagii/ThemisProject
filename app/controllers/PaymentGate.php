@@ -17,7 +17,7 @@ class PaymentGate
     public function paidReceipts()
     {
         $paymentModel = $this->loadModel('PaymentModel');
-        $payments = $paymentModel->getAllPayments();
+        $payments = $paymentModel->getAllPaymentsWithCaseDetails();
 
         $this->view('seniorCounsel/paidReciepts', [
             'payments' => $payments
