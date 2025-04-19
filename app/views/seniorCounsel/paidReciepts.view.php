@@ -13,6 +13,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <!-- DataTables Responsive Extension -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 </head>
 
 <body>
@@ -36,11 +39,14 @@
         </div>
 
         <div class="table-container">
-            <table class="table table-bordered" id="paymentsTable" width="100%" cellspacing="0">
+            <table class="table table-bordered display responsive nowrap" id="paymentsTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Case Number</th>
+                        <th>Client Name</th>
                         <th>ID Number</th>
+                        <th>Client Number</th>
+                        <th>Court</th>
                         <th>Amount</th>
                         <th>Payment Status</th>
                         <th>Date</th>
@@ -51,16 +57,19 @@
                     <?php if (!empty($payments)): ?>
                         <?php foreach ($payments as $payment): ?>
                             <tr>
-                                <td><?= $payment->case_number ?></td>
-                                <td><?= $payment->id_number ?></td>
-                                <td><?= number_format($payment->amount, 2) ?></td>
-                                <td>
+                                <td data-title="Case Number"><?= $payment->case_number ?></td>
+                                <td data-title="Client Name"><?= $payment->client_name ?? 'N/A' ?></td>
+                                <td data-title="ID Number"><?= $payment->id_number ?></td>
+                                <td data-title="Client Number"><?= $payment->client_number ?? 'N/A' ?></td>
+                                <td data-title="Court"><?= $payment->court ?? 'N/A' ?></td>
+                                <td data-title="Amount"><?= number_format($payment->amount, 2) ?></td>
+                                <td data-title="Status">
                                     <span class="status-badge <?= $payment->payment_status == 'Paid' ? 'status-paid' : 'status-pending' ?>">
                                         <?= $payment->payment_status ?>
                                     </span>
                                 </td>
-                                <td><?= date('M d, Y', strtotime($payment->created_at)) ?></td>
-                                <td>
+                                <td data-title="Date"><?= date('M d, Y', strtotime($payment->created_at)) ?></td>
+                                <td data-title="Actions">
                                     <div class="action-buttons">
                                         <a href="<?= ROOT ?>/paymentGate/viewReceipt/<?= $payment->id ?>">
                                             <button class="view-button">
@@ -78,7 +87,7 @@
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" style="text-align: center;">No payment records found</td>
+                            <td colspan="9" style="text-align: center;">No payment records found</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -89,9 +98,23 @@
     <script>
         $(document).ready(function() {
             $('#paymentsTable').DataTable({
+                responsive: true,
                 "order": [
-                    [4, "desc"]
-                ] // Sort by date (column 4) in descending order
+                    [7, "desc"]
+                ], // Sort by date (column 7) in descending order
+                "columnDefs": [{
+                        "responsivePriority": 1,
+                        "targets": [0, 5, 6, 8]
+                    }, // Prioritize these columns
+                    {
+                        "responsivePriority": 2,
+                        "targets": [1, 7]
+                    },
+                    {
+                        "responsivePriority": 3,
+                        "targets": [2, 3, 4]
+                    }
+                ]
             });
         });
 
