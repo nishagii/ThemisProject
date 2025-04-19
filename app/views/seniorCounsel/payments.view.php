@@ -17,12 +17,12 @@
     <?php include('component/sidebar.view.php'); ?>
 
     <div class="home-section">
-        
+
         <div class="outline">
             <div class="badge">
                 <div class="text">
-                <i class='bx bx-file'></i>
-                <span class="prompt">Click Here to Generate an Invoice for the Client</span>
+                    <i class='bx bx-file'></i>
+                    <span class="prompt">Click Here to Generate an Invoice for the Client</span>
                 </div>
                 <button class="button" onclick="window.location.href='<?= ROOT ?>/invoice'">CREATE INVOICE</button>
             </div>
@@ -30,18 +30,19 @@
 
         <div class="invoice-card">
 
-            
+
             <div class="invoice-container">
 
                 <div class="payment-section">
-                        <button class="payment-button">
-                            <i class='bx bx-file'></i> <p>View Paid Receipts</p>
-                        </button>
+                    <button class="payment-button" onclick="window.location.href='<?= ROOT ?>/paymentGate/paidReceipts'">
+                        <i class='bx bx-file'></i>
+                        <p>View Paid Receipts</p>
+                    </button>
                 </div>
-                
+
                 <div class="invoice-header">
-                   
-                    
+
+
                     <div>Due Date</div>
                     <div>Client</div>
                     <div>Amount</div>
@@ -49,11 +50,11 @@
                     <div>Send to Client</div>
                     <div>Payment Status</div>
                 </div>
-                
+
                 <?php if (!empty($invoices)): ?>
                     <?php foreach ($invoices as $invoice): ?>
                         <div class="invoice-row">
-                            
+
                             <div class="due-date"><?= htmlspecialchars($invoice->dueDate) ?></div>
                             <div class="client"><?= htmlspecialchars($invoice->clientName) ?></div>
                             <div class="amount">Rs. <?= htmlspecialchars($invoice->amount) ?></div>
@@ -76,10 +77,10 @@
                     <p style="text-align:center; margin-top: 20px;">No invoices found.</p>
                 <?php endif; ?>
 
-                
+
             </div>
         </div>
-            
+
     </div>
 
 </body>
