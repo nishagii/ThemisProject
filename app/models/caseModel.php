@@ -116,4 +116,13 @@ class CaseModel
 
         return $result[0]['case_number']; // Return the case number
     }
+
+    // Add this method to the CaseModel class
+    public function getCasesByClientEmail($email)
+    {
+        $query = "SELECT id, case_number, client_name FROM {$this->table} WHERE client_email = :email";
+        $params = ['email' => $email];
+
+        return $this->query($query, $params);
+    }
 }
