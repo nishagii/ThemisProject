@@ -2,13 +2,23 @@
 
 class Cases
 {
-
     use Controller;
 
     public function index()
     {
-        // Render the "add new case" view with an empty errors array
-        $this->view('/seniorCounsel/add_new_case');
+        // Load the UserModel to get attorneys and juniors
+        $userModel = $this->loadModel('UserModel');
+
+        // Get attorneys and juniors from the database
+        $attorneys = $userModel->getUsersByRole('attorney');
+        $juniors = $userModel->getUsersByRole('junior');
+
+        // Render the "add new case" view with users data
+        $this->view('/seniorCounsel/add_new_case', [
+            'attorneys' => $attorneys,
+            'juniors' => $juniors,
+            'errors' => []
+        ]);
     }
 
     // Add a new case
@@ -21,19 +31,13 @@ class Cases
             'client_email' => $_POST['client_email'] ?? '',
             'client_address' => $_POST['client_address'] ?? '',
             'attorney_name' => $_POST['attorney_name'] ?? '',
-            'attorney_number' => $_POST['attorney_number'] ?? '',
-            'attorney_email' => $_POST['attorney_email'] ?? '',
-            'attorney_address' => $_POST['attorney_address'] ?? '',
             'junior_counsel_name' => $_POST['junior_counsel_name'] ?? '',
-            'junior_counsel_number' => $_POST['junior_counsel_number'] ?? '',
-            'junior_counsel_email' => $_POST['junior_counsel_email'] ?? '',
-            'junior_counsel_address' => $_POST['junior_counsel_address'] ?? '',
             'case_number' => $_POST['case_number'] ?? '',
             'court' => $_POST['court'] ?? '',
             'notes' => $_POST['notes'] ?? '',
         ];
 
-        // Save data to the database (assuming a "Case" model exists)
+        // Save data to the database
         $caseModel = $this->loadModel('CaseModel');
         $caseModel->save($data);
 
@@ -42,6 +46,7 @@ class Cases
         redirect('cases/extendRetrieveAllCases');
     }
 
+    // Rest of the code remains the same...
     public function retrieveAllCases()
     {
         $caseModel = $this->loadModel('CaseModel'); // Ensure correct model loading
@@ -50,7 +55,6 @@ class Cases
         // Pass data to the view
         $this->view('/seniorCounsel/all_cases', ['cases' => $cases]);
     }
-
 
     // Retrieve all cases
     public function extendRetrieveAllCases()
@@ -93,21 +97,22 @@ class Cases
     public function editCase($caseId)
     {
         $caseModel = $this->loadModel('CaseModel');
+        $userModel = $this->loadModel('UserModel');
 
         $case = $caseModel->getCaseById($caseId);
-
-
-        // Debugging: Output the $case variable to check its content
-        // var_dump($case);
-        // die(); // Stop execution after dumping the data to see the output
-
+        $attorneys = $userModel->getUsersByRole('attorney');
+        $juniors = $userModel->getUsersByRole('junior');
 
         if (!$case) {
             die("Case not found or invalid ID."); // Handle missing case data
         }
 
         // Pass the case data to the view
-        $this->view('/seniorCounsel/edit_case', ['case' => $case]);
+        $this->view('/seniorCounsel/edit_case', [
+            'case' => $case,
+            'attorneys' => $attorneys,
+            'juniors' => $juniors
+        ]);
     }
 
     // Handle case update
@@ -121,13 +126,7 @@ class Cases
             'client_email' => $_POST['client_email'] ?? '',
             'client_address' => $_POST['client_address'] ?? '',
             'attorney_name' => $_POST['attorney_name'] ?? '',
-            'attorney_number' => $_POST['attorney_number'] ?? '',
-            'attorney_email' => $_POST['attorney_email'] ?? '',
-            'attorney_address' => $_POST['attorney_address'] ?? '',
             'junior_counsel_name' => $_POST['junior_counsel_name'] ?? '',
-            'junior_counsel_number' => $_POST['junior_counsel_number'] ?? '',
-            'junior_counsel_email' => $_POST['junior_counsel_email'] ?? '',
-            'junior_counsel_address' => $_POST['junior_counsel_address'] ?? '',
             'case_number' => $_POST['case_number'] ?? '',
             'court' => $_POST['court'] ?? '',
             'notes' => $_POST['notes'] ?? '',
@@ -139,7 +138,5 @@ class Cases
 
         // Redirect to a success page or the list of cases
         redirect('cases/extendRetrieveAllCases');
-
-        
     }
 }
