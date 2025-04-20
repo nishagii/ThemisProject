@@ -15,39 +15,39 @@
             <i class='bx bx-menu' id="btn"></i>
         </div>
         <ul class="nav-list">
-            <li>
+            <!-- <li>
                 <i class='bx bx-search'></i>
                 <input type="text" placeholder="Search...">
                 <span class="tooltip">Search</span>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
                 <a href="<?= ROOT ?>/homelawyer">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
                 </a>
                 <span class="tooltip">Dashboard</span>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
                 <a href="<?= ROOT ?>/meetingslawyer/index/client">
                     <i class='bx bx-user'></i>
                     <span class="links_name">Client</span>
                 </a>
                 <span class="tooltip">Client</span>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
                 <a href="<?= ROOT ?>/meetingslawyer/index/attorney">
                     <i class='bx bx-user'></i>
                     <span class="links_name">Attorney</span>
                 </a>
                 <span class="tooltip">Attorney</span>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
                 <a href="<?= ROOT ?>/meetingslawyer/index/junior">
                     <i class='bx bx-user'></i>
                     <span class="links_name">Junior Councel</span>
                 </a>
                 <span class="tooltip">Junior Councel</span>
-            </li>
+            </li> -->
             <li>
                 <a href="#">
                     <i class='bx bx-chat'></i>
