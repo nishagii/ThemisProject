@@ -55,19 +55,11 @@
                         <strong>Attorney Name:</strong>
                         <p><?= htmlspecialchars($case->attorney_name) ?></p>
                     </div>
-                    <div class="info-item">
-                        <strong>Attorney Email:</strong>
-                        <p><?= htmlspecialchars($case->attorney_email) ?></p>
-                    </div>
                 </div>
                 <div class="info-row">
                     <div class="info-item">
                         <strong>Junior Counsel Name:</strong>
                         <p><?= htmlspecialchars($case->junior_counsel_name) ?></p>
-                    </div>
-                    <div class="info-item">
-                        <strong>Junior Counsel Email:</strong>
-                        <p><?= htmlspecialchars($case->junior_counsel_email) ?></p>
                     </div>
                 </div>
                 <div class="info-row">
@@ -78,16 +70,6 @@
                     <div class="info-item">
                         <strong>Case Address:</strong>
                         <p><?= htmlspecialchars($case->client_address) ?></p>
-                    </div>
-                </div>
-                <div class="info-row">
-                    <div class="info-item">
-                        <strong>Attorney Address:</strong>
-                        <p><?= htmlspecialchars($case->attorney_address) ?></p>
-                    </div>
-                    <div class="info-item">
-                        <strong>Junior Counsel Address:</strong>
-                        <p><?= htmlspecialchars($case->junior_counsel_address) ?></p>
                     </div>
                 </div>
                 <div class="info-row">

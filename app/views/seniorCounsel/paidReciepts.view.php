@@ -50,7 +50,6 @@
                         <th>Amount</th>
                         <th>Payment Status</th>
                         <th>Date</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,20 +68,6 @@
                                     </span>
                                 </td>
                                 <td data-title="Date"><?= date('M d, Y', strtotime($payment->created_at)) ?></td>
-                                <td data-title="Actions">
-                                    <div class="action-buttons">
-                                        <a href="<?= ROOT ?>/paymentGate/viewReceipt/<?= $payment->id ?>">
-                                            <button class="view-button">
-                                                <i class="bx bx-show"></i> View
-                                            </button>
-                                        </a>
-                                        <a href="<?= ROOT ?>/paymentGate/printReceipt/<?= $payment->id ?>">
-                                            <button class="print-button">
-                                                <i class="bx bx-printer"></i> Print
-                                            </button>
-                                        </a>
-                                    </div>
-                                </td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
