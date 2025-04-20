@@ -100,7 +100,7 @@ class TaskModel
     {
         $query = "SELECT taskID, name, description, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority 
                 FROM {$this->table} 
-                WHERE assigneeID = :userId";
+                WHERE assigneeID = :userId ORDER BY taskID DESC";
 
         $params = ['userId' => $userId];
 
