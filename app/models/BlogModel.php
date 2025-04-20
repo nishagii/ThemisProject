@@ -27,5 +27,15 @@ class BlogModel {
         }
     }
 
-    
+    public function getAllBlogs()
+    {
+        try {
+            $query = "SELECT * FROM {$this->table}";
+            return $this->query($query);
+        } catch (Exception $e) {
+            error_log("Database Error [BlogModel:getAllBlogs]: " . $e->getMessage());
+            return false;
+        }
+    }
+
 }
