@@ -50,7 +50,7 @@ class TaskModel
     // Get a specific case by ID
     public function getTaskById($taskID)
     {
-        $query = "SELECT * FROM {$this->table} WHERE taskID = :taskID";
+        $query = "SELECT t.*, users.username as assigneeName FROM {$this->table} t inner join users on t.assigneeID = users.id WHERE taskID = :taskID";
         $params = ['taskID' => $taskID];
 
         $result = $this->query($query, $params);

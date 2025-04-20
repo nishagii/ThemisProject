@@ -78,7 +78,7 @@ class TaskLawyer
     }
 
     public function overdueTask($taskID)
-{
+    {
         // Load the TaskModel
         $taskModel = $this->loadModel('TaskModel');
 
@@ -90,5 +90,25 @@ class TaskLawyer
         echo json_encode(['status' => 'success', 'message' => "Task $taskID marked as overdue"]);
     }
 
+        // Display task details
+    public function details($taskID)
+    {
+        // Load the Task model
+        $taskModel = $this->loadModel('TaskModel');
+        
+        // Get the task by ID
+        $task = $taskModel->getTaskById($taskID);
+        
+        // Check if task exists
+        if (!$task) {
+            die("Task not found or invalid ID.");
+        }
+        
+        
+        // Pass the task data to the view
+        $this->view('/seniorCounsel/task_details', [
+            'task' => $task
+        ]);
+    }
 
 }

@@ -50,7 +50,7 @@ class Task
             foreach ($lawyers as $lawyer) {
                 $notification = [
                     'user_id' => $lawyer->id,
-                    'message' => "Task '{$task->name}' has been marked as completed.",
+                    'message' => "Task '{$task->name}' has been marked as completed. Check out the task board for review",
                     'timestamp' => date('Y-m-d H:i:s'),
                     'status' => 'unread'
                 ];
