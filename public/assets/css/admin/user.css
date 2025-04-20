@@ -200,4 +200,88 @@
       overflow-x: auto;
     }
   }
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.badge-active {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.badge-inactive {
+    background-color: #fafafa;
+    color: #757575;
+}
+
+/* Action Buttons */
+.actions {
+    white-space: nowrap;
+  }
+  
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    color: #555;
+    transition: all 0.2s ease;
+    margin-right: 6px;
+  }
+  
+  .action-btn:hover {
+    background-color: #f0f0f5;
+  }
+  
+  .action-btn i {
+    font-size: 18px;
+  }
+  
+  .view-btn:hover {
+    color: #3f51b5;
+    background-color: rgba(63, 81, 181, 0.1);
+  }
+  
+  .edit-btn:hover {
+    color: #2196f3;
+    background-color: rgba(33, 150, 243, 0.1);
+  }
+  
+  .delete-btn:hover {
+    color: #f44336;
+    background-color: rgba(244, 67, 54, 0.1);
+  }
+  
+  /* Optional: Add a tooltip */
+  .action-btn {
+    position: relative;
+  }
+  
+  .action-btn:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  a {
+    text-decoration: none;
+  }
   

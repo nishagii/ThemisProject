@@ -61,15 +61,13 @@
                                 </span>
                             </td>
                             <td>
-                                <span class="status-indicator <?= ($user->active ?? true) ? 'active' : 'inactive' ?>"></span>
-                                <?= ($user->active ?? true) ? 'Active' : 'Inactive' ?>
+                                <span class="status-badge <?= ($user->active ?? true) ? 'badge-active' : 'badge-inactive' ?>">
+                                    <?= ($user->active ?? true) ? 'Active' : 'Inactive' ?>
+                                </span>
                             </td>
                             <td class="actions">
                                 <a href="<?= ROOT ?>/admin/users/view/<?= $user->id ?>" class="action-btn view-btn" title="View Details">
                                     <i class="bx bx-show"></i>
-                                </a>
-                                <a href="<?= ROOT ?>/admin/users/edit/<?= $user->id ?>" class="action-btn edit-btn" title="Edit User">
-                                    <i class="bx bx-edit"></i>
                                 </a>
                                 <a href="<?= ROOT ?>/admin/users/delete/<?= $user->id ?>" class="action-btn delete-btn" title="Delete User" 
                                    onclick="return confirm('Are you sure you want to delete this user?');">
@@ -110,14 +108,7 @@
     <script>
         // Add any JavaScript functionality you need here
         document.addEventListener('DOMContentLoaded', function() {
-            // Example: Filter functionality
-            const filterTags = document.querySelectorAll('.filter-tag .close');
-            filterTags.forEach(tag => {
-                tag.addEventListener('click', function() {
-                    this.parentElement.remove();
-                    // Here you would typically trigger a filter update
-                });
-            });
+            
             
             // Example: Search functionality
             const searchInput = document.querySelector('.search-box input');
