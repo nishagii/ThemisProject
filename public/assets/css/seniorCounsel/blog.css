@@ -183,3 +183,111 @@ input[type="file"] + label:hover {
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+
+/* Main Container Styling */
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 30px;
+}
+
+/* Header Styling */
+.blog-container header {
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+}
+
+.blog-container header h1 {
+    font-size: 2rem;
+    color: #333;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+
+/* Blog Posts Styling */
+.blogs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 30px;
+}
+
+.blogs > div {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blogs > div:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.blogs h2 {
+    font-size: 1.5rem;
+    margin: 20px 20px 15px;
+    color: #333;
+    line-height: 1.3;
+}
+
+.blogs p {
+    padding: 0 20px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Blog Image Styling */
+.blog-image {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Blog Footer Styling */
+.blog-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #777;
+    background-color: #fafafa;
+}
+
+.blog-footer p {
+    margin: 0;
+    padding: 0;
+}
+
+/* No Blogs Message */
+main > p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #777;
+    margin-top: 40px;
+    font-style: italic;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .blogs {
+        grid-template-columns: 1fr;
+    }
+    
+    .blog-container header h1 {
+        font-size: 2rem;
+    }
+}
