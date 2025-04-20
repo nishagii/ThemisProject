@@ -315,7 +315,7 @@ small {
 .task-table td[colspan="7"] {
   text-align: center;
   font-style: italic;
-  color: #777;
+ 
 }
 
 
@@ -368,3 +368,4 @@ small {
 input.valid {
   border: 2px solid green;
 }
+

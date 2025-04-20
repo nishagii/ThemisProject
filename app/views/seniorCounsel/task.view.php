@@ -64,34 +64,39 @@
         
 
         <div class="task-table-container">
-    <table class="task-table">
-        <thead>
-            <tr>
-                <th>Task Name</th>
-                <th>Description</th>
-                <th>Assigned To</th>
-                <th>Deadline Date</th>
-                
-                <th>Priority</th>
-                <th>Status</th>
-                <th>Actions</th> <!-- Added Actions Column -->
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($task as $t): ?>
-            <tr>
-                <td><?= htmlspecialchars($t->name) ?></td>
-                <td><?= htmlspecialchars($t->description) ?></td>
-                <td><?= htmlspecialchars($t->assigneeID) ?></td>
-                <td><?= htmlspecialchars($t->deadlineDate) ?></td>
-                
-                <td><?= htmlspecialchars($t->priority) ?></td>
-                <td><?= htmlspecialchars($t->status) ?></td>
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Assigned To</th>
+                        <th>Deadline Date</th>
+                        
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Actions</th> <!-- Added Actions Column -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($task as $t): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($t->name) ?></td>
+                        <td><?= htmlspecialchars($t->assigneeName) ?></td>
+                        <div class="deadline"><td><?= htmlspecialchars($t->deadlineDate) ?></td></div>
+                        
+                        <td><?= htmlspecialchars($t->priority) ?></td>
+                        <td class="status" 
+                            data-taskid="<?= $t->taskID ?>" 
+                            data-deadlinedate="<?= $t->deadlineDate ?>" 
+                            data-deadlinetime="<?= $t->deadlineTime ?>" 
+                            data-status="<?= $t->status ?>">
+                        </td>
+
+
                 <td>
 
-                    <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $t->taskID ?>" class="edit-btn">Edit</a> <!-- Edit Link -->
+                    <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $t->taskID ?>" class="edit-btn"><i class="fas fa-edit"></i> </a> <!-- Edit Link -->
                    
-                    <a href="javascript:void(0);" class="delete-btn" onclick="confirmDelete(<?= $t->taskID; ?>)">Delete</a> <!-- Delete Link -->
+                    <a href="javascript:void(0);" class="delete-btn" onclick="confirmDelete(<?= $t->taskID; ?>)"><i class="fas fa-trash"></i> </a> <!-- Delete Link -->
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -120,6 +125,44 @@
                 }
             });
         }
+
+        document.querySelectorAll('.status').forEach(cell => {
+        const taskID = cell.dataset.taskid;
+        const deadlineDate = cell.dataset.deadlinedate;
+        const deadlineTime = cell.dataset.deadlinetime;
+        const originalStatus = cell.dataset.status;
+
+        const deadline = new Date(`${deadlineDate}T${deadlineTime}`);
+        const now = new Date();
+
+        if (originalStatus === 'completed') {
+            cell.textContent = 'Completed';
+            cell.style.color = 'green';
+        } else if (now > deadline && originalStatus !== 'overdue') {
+            cell.textContent = 'Overdue';
+            cell.style.color = 'red';
+
+            // ✅ Send API call to update status
+            fetch(`<?= ROOT ?>/tasklawyer/overdueTask/${taskID}`, {
+                method: 'POST',
+            })
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to update task.");
+                return response.json();
+            })
+            .then(data => {
+                console.log(`Task ${taskID} marked as overdue.`);
+            })
+            .catch(error => {
+                console.error("Error updating task status:", error);
+            });
+
+        } else {
+            cell.textContent = originalStatus.charAt(0).toUpperCase() + originalStatus.slice(1);
+            cell.style.color = 'orange';
+        }
+    });
+
         </script>
 
 </body>

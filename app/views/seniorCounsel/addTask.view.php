@@ -92,7 +92,7 @@
 
                 <script>
    // Function to validate the selected date and time
-function validateDateAndTime() {
+    function validateDateAndTime() {
     const today = new Date();
     const dateInput = document.getElementById("deadlineDate");
     const timeInput = document.getElementById("deadlineTime");
