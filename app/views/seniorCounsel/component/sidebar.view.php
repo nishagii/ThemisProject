@@ -55,6 +55,14 @@
                 </a>
                 <span class="tooltip">Messages</span>
             </li>
+            <li>
+                <a href="<?= ROOT ?>/blog">
+                    <i class='bx bx-news'></i>
+                    <span class="links_name">Blog</span>
+                </a>
+                <span class="tooltip">Blog</span>
+            </li>
+
             <li class="profile">
                 <div class="profile-details">
                     <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="profileImg">

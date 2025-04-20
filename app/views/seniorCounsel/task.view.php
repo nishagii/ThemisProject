@@ -8,6 +8,23 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- this is imported to use icons -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* Add style for clickable rows */
+        .task-table tbody tr {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .task-table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* Ensure action buttons don't trigger the row click */
+        .edit-btn, .delete-btn {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
 </head>
 <body>
 
@@ -61,47 +78,49 @@
             </div>
         </div>
 
-        
-
         <div class="task-table-container">
-    <table class="task-table">
-        <thead>
-            <tr>
-                <th>Task Name</th>
-                <th>Description</th>
-                <th>Assigned To</th>
-                <th>Deadline Date</th>
-                
-                <th>Priority</th>
-                <th>Status</th>
-                <th>Actions</th> <!-- Added Actions Column -->
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($task as $t): ?>
-            <tr>
-                <td><?= htmlspecialchars($t->name) ?></td>
-                <td><?= htmlspecialchars($t->description) ?></td>
-                <td><?= htmlspecialchars($t->assigneeID) ?></td>
-                <td><?= htmlspecialchars($t->deadlineDate) ?></td>
-                
-                <td><?= htmlspecialchars($t->priority) ?></td>
-                <td><?= htmlspecialchars($t->status) ?></td>
-                <td>
-
-                    <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $t->taskID ?>" class="edit-btn">Edit</a> <!-- Edit Link -->
-                   
-                    <a href="javascript:void(0);" class="delete-btn" onclick="confirmDelete(<?= $t->taskID; ?>)">Delete</a> <!-- Delete Link -->
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
-
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Assigned To</th>
+                        <th>Deadline Date</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Actions</th> <!-- Added Actions Column -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($task as $t): ?>
+                    <tr onclick="viewTaskDetails(<?= $t->taskID ?>)">
+                        <td><?= htmlspecialchars($t->name) ?></td>
+                        <td><?= htmlspecialchars($t->assigneeName) ?></td>
+                        <div class="deadline"><td><?= htmlspecialchars($t->deadlineDate) ?></td></div>
+                        <td><?= htmlspecialchars($t->priority) ?></td>
+                        <td class="status" 
+                            data-taskid="<?= $t->taskID ?>" 
+                            data-deadlinedate="<?= $t->deadlineDate ?>" 
+                            data-deadlinetime="<?= $t->deadlineTime ?>" 
+                            data-status="<?= $t->status ?>">
+                        </td>
+                        <td>
+                            <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $t->taskID ?>" class="edit-btn" onclick="event.stopPropagation()"><i class="fas fa-edit"></i></a> <!-- Edit Link -->
+                            <a href="javascript:void(0);" class="delete-btn" onclick="event.stopPropagation(); confirmDelete(<?= $t->taskID; ?>)"><i class="fas fa-trash"></i></a> <!-- Delete Link -->
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-        <script>
-            function confirmDelete(taskID) {
+
+    <script>
+        function viewTaskDetails(taskId) {
+            // Redirect to the task details page
+            window.location.href = "<?= ROOT ?>/tasklawyer/details/" + taskId;
+        }
+
+        function confirmDelete(taskID) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you really want to delete this task? This action cannot be undone!",
@@ -120,7 +139,42 @@
                 }
             });
         }
-        </script>
 
+        document.querySelectorAll('.status').forEach(cell => {
+            const taskID = cell.dataset.taskid;
+            const deadlineDate = cell.dataset.deadlinedate;
+            const deadlineTime = cell.dataset.deadlinetime;
+            const originalStatus = cell.dataset.status;
+
+            const deadline = new Date(`${deadlineDate}T${deadlineTime}`);
+            const now = new Date();
+
+            if (originalStatus === 'completed') {
+                cell.textContent = 'Completed';
+                cell.style.color = 'green';
+            } else if (now > deadline && originalStatus !== 'overdue') {
+                cell.textContent = 'Overdue';
+                cell.style.color = 'red';
+
+                // Send API call to update status
+                fetch(`<?= ROOT ?>/tasklawyer/overdueTask/${taskID}`, {
+                    method: 'POST',
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error("Failed to update task.");
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(`Task ${taskID} marked as overdue.`);
+                })
+                .catch(error => {
+                    console.error("Error updating task status:", error);
+                });
+            } else {
+                cell.textContent = originalStatus.charAt(0).toUpperCase() + originalStatus.slice(1);
+                cell.style.color = 'orange';
+            }
+        });
+    </script>
 </body>
 </html>
