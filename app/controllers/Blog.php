@@ -58,9 +58,9 @@ class Blog
             $blogData = [
                 'title' => $title,
                 'content' => $content,
-                'author_id' => $authorID,
+                'author' => $authorID,         // Changed from 'author_id' to 'author'
                 'created_at' => $createdAt,
-                'cover_image' => $imageFileName ?? null
+                'image_url' => $imageFileName ?? null  // Changed from 'cover_image' to 'image_url'
             ];
 
             $result = $blogModel->save($blogData);
