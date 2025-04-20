@@ -19,7 +19,7 @@
     <div class="parent-container home-section">
        
         <div class="card-container">
-            <a href="<?= ROOT ?>/admin/users" class="card-link">
+            <a href="<?= ROOT ?>/UsersAdmin" class="card-link">
                 <div class="card white-card">
                     <div class="icon purple"><i class="fas fa-users"></i></div>
                     <h3>Total Users</h3>
