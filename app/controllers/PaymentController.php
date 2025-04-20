@@ -3,10 +3,15 @@
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 
 require_once '../vendor/autoload.php';
+
 // require_once '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/app/core/config.php'; //for MAC
+
 //for windows 
 
-require_once 'C:\xampp\htdocs\themisrepo\app\core\config.php';
+// require_once 'C:\xampp\htdocs\themisrepo\app\core\config.php';
+
+// Use a relative path from the current file (fixed this to avoid hardcoding the path for different environments) 
+require_once dirname(__DIR__) . '/core/config.php';
 
 
 class PaymentController
@@ -21,8 +26,25 @@ class PaymentController
             return;
         }
 
-        $data['username'] = $_SESSION['username'] ?? 'User';
-        $this->view('/client/payments', $data);
+        // Get username and email from session
+        $username = $_SESSION['username'] ?? 'User';
+        $email = $_SESSION['email'] ?? NULL;
+
+        // Prepare data array
+        $data = [
+            'username' => $username,
+            'user_email' => $email,
+            'cases' => []
+        ];
+
+        // If email is available, fetch the user's cases
+        if ($email) {
+            $caseModel = $this->loadModel('CaseModel');
+            $data['cases'] = $caseModel->getCasesByClientEmail($email);
+        }
+
+        // Load the payments view with data
+        $this->view('client/payments', $data);
     }
 
     // Create a new payment session using Stripe
