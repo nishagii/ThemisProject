@@ -15,6 +15,12 @@ function esc($str)
 
 function redirect($path)
 {
-	header("Location: " . ROOT."/".$path);
+	if (preg_match('/^https?:\/\//', $path)) {
+		// External URL like Google's auth link
+		header("Location: " . $path);
+	} else {
+		// Internal route
+		header("Location: " . ROOT . "/" . ltrim($path, '/'));
+	}
 	die;
 }

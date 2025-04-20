@@ -8,10 +8,13 @@ class HomeClient
     public function index()
     {
 
-        // Set username from session, or default to 'User'
-        $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
+        // Redirect if not logged in
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
 
-        // Load the view with data
+        $data['username'] = $_SESSION['username'] ?? 'User';
         $this->view('/client/home', $data);
     }
 }

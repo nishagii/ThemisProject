@@ -198,6 +198,9 @@
     border-radius: 5px;
     cursor: pointer;
     }
+    input[type="file"]::file-selector-button:hover {
+    background-color: #5c6bc0;
+    }
 </style>
 
 <body>
@@ -220,9 +223,9 @@
                     <div class="error" id="caseNumberError"></div>
                 </div>
                 <div class="form-group">
-                    <label for="name_of_parties">Names of parties:</label>
-                    <textarea id="name_of_parties" type="text" name="name_of_parties" value="<?= htmlspecialchars($case->name_of_parties) ?>" required><?= htmlspecialchars($case->name_of_parties) ?></textarea>
-                    <div class="error" id="partiesError"></div>
+                    <label for="description">Description:</label>
+                    <textarea id="description" type="text" name="description" value="<?= htmlspecialchars($case->description) ?>" required><?= htmlspecialchars($case->description) ?></textarea>
+                    <div class="error" id="descriptionError"></div>
                 </div>
                 <div class="form-group">
                     <label for="judgment_by">Judgment by:</label>
@@ -249,19 +252,19 @@
             // Get form fields
             const date = document.getElementById('judgment_date').value;
             const caseNumber = document.getElementById('case_number').value.trim();
-            const parties = document.getElementById('name_of_parties').value.trim();
+            const description = document.getElementById('description').value.trim();
             const judgmentBy = document.getElementById('judgment_by').value.trim();
         
             // Error elements
             const dateError = document.getElementById('dateError');
             const caseNumberError = document.getElementById('caseNumberError');
-            const partiesError = document.getElementById('partiesError');
+            const descriptionError = document.getElementById('descriptionError');
             const judgmentByError = document.getElementById('judgmentByError');
             
             // Reset error messages
             dateError.textContent = '';
             caseNumberError.textContent = '';
-            partiesError.textContent = '';
+            descriptionError.textContent = '';
             judgmentByError.textContent = '';
 
             // Flag to check if form is valid
@@ -277,7 +280,7 @@
                 isValid = false;
             }
             if (!parties) {
-                partiesError.textContent = 'Name of parties is required.';
+                descriptionError.textContent = 'Name of parties is required.';
                 isValid = false;
             }
             if (!judgmentBy) {

@@ -67,23 +67,15 @@
             text-align: center;
         }
 
-        .btn-edit {
-            background-color: #4CAF50;
+        .btn-back {
+            background-color: #3f51b5;
             color: white;
         }
 
-        .btn-edit:hover {
-            background-color: #45a049;
+        .btn-back:hover {
+            background-color: #5c6bc0;
         }
 
-        .btn-delete {
-            background-color: #f44336;
-            color: white;
-        }
-
-        .btn-delete:hover {
-            background-color: #e53935;
-        }
         a{
             color: #3f51b5;
             text-decoration: none;
@@ -100,6 +92,7 @@
     </style>
 </head>
 
+
 <body>
     <div class="case-details-card">
         <h2 class="card-title">Precedent Details</h2>
@@ -114,20 +107,22 @@
                     <p><?= htmlspecialchars($case->case_number) ?></p>
                 </div>
                 <div class="info-item">
-                    <strong>Name of Parties:</strong>
-                    <p><?= htmlspecialchars($case->name_of_parties) ?></p>
+                    <strong>Description:</strong>
+                    <p><?= htmlspecialchars($case->description) ?></p>
                 </div>
                 <div class="info-item">
                     <strong>Judgment By:</strong>
                     <p><?= htmlspecialchars($case->judgment_by) ?></p>
                 </div>
                 <div class="info-item">
-                    <strong>Document:</strong>
-                    <a href="htmlspecialchars($case->document_link)">Download</a>
+                <strong>Document:</strong>
+                <a href="<?php echo $case->document_link; ?>" target="_blank">View Document</a>
                 </div>
             </div>
         </div>
-        
+        <div class="card-footer">
+            <a href="<?= ROOT ?>/PrecedentsController/retrieveAllViewOnly" class="btn btn-back">Go Back</a>
+        </div> 
     </div>
 </body>
 

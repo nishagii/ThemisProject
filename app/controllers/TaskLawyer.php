@@ -8,9 +8,13 @@ class TaskLawyer
     {
         $TaskModel = $this->loadModel('TaskModel'); 
         $task = $TaskModel->getAllTasks(); // Fetch cases data
-
-        // Pass data to the view
-        $this->view('/seniorCounsel/task', ['task' => $task]);
+        $count = $TaskModel->getTaskCount();
+        
+        $this->view('/seniorCounsel/task', [
+            'task' => $task,
+            'count' => $count
+        ]);
+        
     }
 
     //get the case details by id and pass it to the view
@@ -69,8 +73,42 @@ class TaskLawyer
         // Delete the case
         $taskModel->deleteTask($taskID);
 
-        // Redirect to the list of tasks or a success page
+        
     redirect('tasklawyer');
+    }
+
+    public function overdueTask($taskID)
+    {
+        // Load the TaskModel
+        $taskModel = $this->loadModel('TaskModel');
+
+        // Update the task status to "overdue"
+        $taskModel->updateTaskStatus($taskID, 'overdue');
+
+        // Send JSON response
+        header('Content-Type: application/json');
+        echo json_encode(['status' => 'success', 'message' => "Task $taskID marked as overdue"]);
+    }
+
+        // Display task details
+    public function details($taskID)
+    {
+        // Load the Task model
+        $taskModel = $this->loadModel('TaskModel');
+        
+        // Get the task by ID
+        $task = $taskModel->getTaskById($taskID);
+        
+        // Check if task exists
+        if (!$task) {
+            die("Task not found or invalid ID.");
+        }
+        
+        
+        // Pass the task data to the view
+        $this->view('/seniorCounsel/task_details', [
+            'task' => $task
+        ]);
     }
 
 }

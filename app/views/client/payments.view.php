@@ -5,15 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Make a Payment</title>
-    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/payments.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/client/payments.css">
     <script src="https://js.stripe.com/v3/"></script> <!-- Stripe.js -->
 </head>
 
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
+    <?php include(__DIR__ . '/../seniorCounsel/component/sidebar.view.php'); ?>
+
+    
 
     <div class="home-section">
+        <div class="invoice-container">
+            <div class="documents-card">
+                <p>Click here to view payment invoices</p>
+                <a href="<?= ROOT ?>/clientinvoice"><button>Invoices</button></a>
+            </div>
+        </div>
         <div class="payment-header">
             <h1>Make a Secure Payment</h1>
         </div>

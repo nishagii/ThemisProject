@@ -13,6 +13,32 @@ class PrecedentsController {
     {
         $this->view('/precedentsAdmin/PrecedentsAdmin_Home');
     }
+
+    public function sort($criteria) {
+        // Fetch sorted cases based on the criteria
+        $cases = $this->precedentModel->getSorted($criteria);
+
+        // Generate HTML for the sorted table rows
+        $html = '';
+        if (!empty($cases)) {
+            foreach ($cases as $case) {
+                $html .= '<tr>';
+                $html .= '<td>' . $case->judgment_date . '</td>';
+                $html .= '<td>' . $case->case_number . '</td>';
+                $html .= '<td>' . $case->description . '</td>';
+                $html .= '<td>' . $case->judgment_by . '</td>';
+                $html .= '<td><a href="' . $case->document_link . '" target="_blank">View Document</a></td>';
+                $html .= '<td><a href="' . ROOT . '/PrecedentsController/retrieveOne/' . $case->id . '"><button class="more">View more</button></a></td>';
+                $html .= '</tr>';
+            }
+        } else {
+            $html .= '<tr><td colspan="6">No precedents found in the database.</td></tr>';
+        }
+
+        // Return the HTML
+        echo $html;
+    }
+
     
 /*---------------------Create operation----------------------------- */
 public function create() {
@@ -54,9 +80,9 @@ public function create() {
         $data = [
             'judgment_date' => $_POST['judgment_date'],
             'case_number' => $_POST['case_number'],
-            'name_of_parties' => $_POST['parties'],
+            'description' => $_POST['description'],
             'judgment_by' => $_POST['judgment_by'],
-            'document_link' => $documentLink  // Use the correct variable here
+            'document_link' => $documentLink // Use the uploaded file path if available
         ];
 
         // Insert into database
@@ -140,7 +166,7 @@ public function create() {
     $data = [
         'judgment_date' => $_POST['judgment_date'],
         'case_number' => $_POST['case_number'],
-        'name_of_parties' => $_POST['name_of_parties'],
+        'description' => $_POST['description'],
         'judgment_by' => $_POST['judgment_by'],
         'document_link' => $_POST['current_document_link'], // Keep this for the case where no file is uploaded
         'id' => $_POST['id'],

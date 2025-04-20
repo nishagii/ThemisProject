@@ -1,0 +1,56 @@
+/* Styling for form labels and inputs */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+input[type="text"], textarea, input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, textarea:focus, input[type="file"]:focus {
+    border-color: #007bff;
+}
+
+/* Styling for textarea */
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Styling for the submit button */
+button[type="submit"] {
+    background-color: #5191e4;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: auto; /* Adjust width to auto or a specific width */
+    max-width: 200px; /* Optional: Set a max width for the button */
+    margin-left: auto; /* Center the button */
+    margin-right: auto; /* Center the button */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}

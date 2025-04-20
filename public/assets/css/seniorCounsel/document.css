@@ -1,0 +1,113 @@
+.document-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 10px;
+}
+
+.transaction-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 130px 100px; /* Added a column for Actions */
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    color: #718EBF;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.transaction-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 130px 100px; /* Same as header */
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: center;
+}
+
+.transaction-description {
+    font-weight: 500;
+    color: #111827;
+}
+
+.transaction-date,
+.transaction-uploader {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.download-button {
+    padding: 8px 12px;
+    background-color: white;
+    border: 1px solid #4f46e5;
+    border-radius: 20px;
+    color: #4f46e5;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.download-button:hover {
+    background-color: #f9fafb;
+    border: 1px solid #123288;
+    color: #123288;
+}
+
+.upload-section {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.upload-button {
+    background-color: #5191e4;
+    color: white;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: 500;
+    display: flex;
+    gap: 5px
+}
+
+.upload-button:hover {
+    background-color: #659feb;
+}
+
+.upload-button i {
+    font-size: 18px; /* Adjust icon size if needed */
+}
+
+/* New styles for action buttons */
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-button, .delete-button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    border: none;
+}
+
+.edit-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #45a049;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}

@@ -4,52 +4,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>templates</title>
+    <title>Document Templates</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/template.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- this is imported to use icons -->
-
 </head>
 
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
-    <div class='main-container'>
+    <?php include('component/sidebar.view.php'); ?>
+    <div class='main-container home-section'>
         <div class="temp-section">
             <h1>Document Templates</h1>
         </div>
+
         <div class="template-container">
-
-
             <div class="search-container">
-                <input type="text" placeholder="Search here for templates" class="search-bar" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" />
+                <input type="text"
+                class="search-bar"  
+                placeholder="Search here for templates" 
+                oninput="searchTemplates()"
+                onfocus="this.placeholder = ''" 
+                onblur="this.placeholder = 'Search here for templates'" />
                 <div class="sort-wrapper">
-                <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu(event)"></i>
-                <div class="sort-dropdown" id="sortMenu">
-                    <button class="dropdown-item" onclick="sortBy('name')">Sort by Name</button>
-                    <button class="dropdown-item" onclick="sortBy('role')">Sort by Role</button>
-                    <button class="dropdown-item" onclick="sortBy('date')">Sort by Date</button>
+                    <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
+                    <div class="sort-dropdown" id="sortMenu">
+                        <button class="dropdown-item" onclick="sortBy('name')">Sort by Name</button>
+                        <button class="dropdown-item" onclick="sortBy('uploaded_by')">Sort by Role</button>
+                        <button class="dropdown-item" onclick="sortBy('uploaded_date')">Sort by Date</button>
+                    </div>
                 </div>
-            </div>
     
-            <!-- Filter Icon with Dropdown -->
-            <div class="filter-wrapper">
-                <i class="bx bx-filter filter-icon" title="Filter" onclick="toggleFilterMenu(event)"></i>
-                <div class="sort-dropdown" id="filterMenu">
-                    <button class="dropdown-item" onclick="filterBy('all')">Show All</button>
-                    <button class="dropdown-item" onclick="filterBy('recent')">Recent Uploads</button>
-                    <button class="dropdown-item" onclick="filterBy('user')">Uploaded by Me</button>
+                <!-- Filter Icon with Dropdown -->
+                <div class="filter-wrapper">
+                    <i class="bx bx-filter filter-icon" title="Filter" onclick="toggleFilterMenu(event)"></i>
+                    <div class="sort-dropdown" id="filterMenu">
+                        <button class="dropdown-item" onclick="filterBy('all')">Show All</button>
+                        <button class="dropdown-item" onclick="filterBy('recent')">Recent Uploads</button>
+                        <button class="dropdown-item" onclick="filterBy('user')">Uploaded by Me</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
             <div class="add">
-            <a href="<?= ROOT ?>/template/create">
-                <button class="add-button">
-                    <i class="bx bx-plus"></i> Upload New Template
-                </button>
-            </a>
+                <a href="<?= ROOT ?>/template/create">
+                    <button class="add-button">
+                        <i class="bx bx-plus"></i> Upload New Template
+                    </button>
+                </a>
             </div>
 
             <div class="template">
@@ -69,7 +73,7 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="templatesTable">
                     <?php if (!empty($templates)): ?>
                     <?php foreach ($templates as $template): ?>
                         <tr>
@@ -94,7 +98,7 @@
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="6">No precedents found in the database.</td>
+                        <td colspan="6">No templates found in the database.</td>
                     </tr>
                 <?php endif; ?>
                     </tbody>
@@ -104,11 +108,25 @@
     </div>
     <script>
         // Toggle Sort Menu
-        function toggleSortMenu(event) {
+        function toggleSortMenu() {
             event.stopPropagation(); // Prevent click propagation
             const sortMenu = document.getElementById("sortMenu");
             closeOtherMenus();
             sortMenu.style.display = sortMenu.style.display === "block" ? "none" : "block";
+        }
+
+        // Sort function - Sends an AJAX request
+        function sortBy(criteria) {
+            fetch(`<?= ROOT ?>/Template/sort/${criteria}`)
+                .then(response => response.text())  // Get HTML response
+                .then(data => {
+                    document.getElementById("templatesTable").innerHTML = data; // Update table
+                    attachDropdownListeners(); // Re-attach event listeners
+                })
+                .catch(error => console.error("Error:", error));
+
+            // Hide the menu after selection
+            toggleSortMenu();
         }
 
         // Toggle Filter Menu
@@ -131,22 +149,17 @@
             closeOtherMenus();
         });
 
-        // Example sort function
-        function sortBy(criteria) {
-            console.log(`Sorting by: ${criteria}`);
-            closeOtherMenus();
-        }
-
         // Example filter function
         function filterBy(criteria) {
             console.log(`Filtering by: ${criteria}`);
             closeOtherMenus();
         }
-        //confirm delete
+
+        // Confirm delete
         function confirmDelete(Id) {
             Swal.fire({
                 title: 'Are you sure?',
-                text: "Do you really want to delete this case? This action cannot be undone!",
+                text: "Do you really want to delete this template? This action cannot be undone!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -162,8 +175,9 @@
                 }
             });
         }
-    // Toggle the dropdown menu
-        document.addEventListener("DOMContentLoaded", function () {
+
+        // Attach event listeners to dropdown buttons
+        function attachDropdownListeners() {
             const actionMenus = document.querySelectorAll(".action-menu");
 
             actionMenus.forEach(menu => {
@@ -183,7 +197,12 @@
                     dropdown.style.display = "none";
                 });
             });
+        }
+
+        // Initial attachment of event listeners
+        document.addEventListener("DOMContentLoaded", function () {
+            attachDropdownListeners();
         });
-</script>
+    </script>
 </body>
 </html>

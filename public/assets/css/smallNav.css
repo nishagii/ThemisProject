@@ -1,68 +1,79 @@
-/* small navigation bar */
+.small-body {
+    background-color: #301fcd;
+}
+/* Small navigation bar */
 .small-navbar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    list-style: none;
     background-color: #2e2b4b;
     display: flex;
-    justify-content: center;    
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    padding: 5px 0;
+    position: fixed; /* Fixed to the top */
+    top: 100px;
+    left: 0;
+    width: 100%; /* Full width */
+    z-index: 100; /* Ensures it's above other content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow for depth */
 }
 
 .small-navbar li {
-    margin: 0 15px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 5px 10px;
 }
 
 .small-navbar a {
     font-size: 14.5px;
     font-weight: bold;
     text-decoration: none;
-    color: rgb(255, 255, 255);
-    padding: 14px 20px;
+    color: #fff;
+    padding: 10px 16px;
     border-radius: 4px;
-     transition: all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.small-navbar li a:hover{
+.small-navbar a:hover {
     color: #a5bdff;
     transform: scale(1.05);
 }
 
-.small-navbar li a:active {
+.small-navbar a:active {
     font-weight: bold;
 }
 
 
-/* screen sizes lower than 1075px*/
-@media (max-width: 1075px){
-    
-     .small-navbar a{
+
+/* ≤1075px: Slight font size reduction */
+@media (max-width: 1075px) {
+    .small-navbar a {
         font-size: 13px;
     }
-
 }
-/* screen sizes lower than 936px*/
-@media (max-width: 936px){
-    
-    .small-navbar a{
-        text-align: center;
+
+/* ≤936px: Adjust padding & font size */
+@media (max-width: 936px) {
+    .small-navbar a {
         font-size: 12px;
-        padding: 10px 6px 0 10px;
+        padding: 8px 12px;
+        text-align: center;
     }
-    
 }
-/* screen sizes lower than 768 px.phones and tablets*/
-@media (max-width: 768px){
 
-   
-    .small-navbar{
-        display: flex;
+/* ≤768px: Stack items vertically */
+@media (max-width: 768px) {
+    .small-navbar {
         flex-direction: column;
-    }
-    .small-navbar a{
-        font-size: 13px;
+        top: 80px;
     }
 
-    
+    .small-navbar a {
+        font-size: 13px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .small-navbar li {
+        width: 100%;
+    }
 }
+

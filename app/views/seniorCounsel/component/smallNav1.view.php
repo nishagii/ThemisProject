@@ -12,9 +12,9 @@
 </head>
 
 <body>
-    <div>
+    <div class="small-body">
         <ul class="small-navbar">
-            <li><a href="<?= ROOT ?>/CalendarLawyer">Calendar</a></li>
+            <li><a href="<?= ROOT ?>/Calendar">Calendar</a></li>
             <li><a href="<?= ROOT ?>/tasklawyer">Task Board</a></li>
             <li><a href="<?= ROOT ?>/meetingslawyer">Meeting</a></li>
             <li><a href="<?= ROOT ?>/template">Document templates</a></li>

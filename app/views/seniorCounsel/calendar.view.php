@@ -12,7 +12,8 @@
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
-    <div class="align">
+    <?php include('component/sidebar.view.php'); ?>
+    <div class="align home-section">
     <div class="calendar-container">
                 <div class="calendar-header">
                   <h3>Calendar</h3>

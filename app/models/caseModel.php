@@ -2,8 +2,6 @@
 
 class CaseModel
 {
-
-    
     use Model;
     protected $table = 'cases'; // Name of the database table
 
@@ -18,14 +16,10 @@ class CaseModel
         // Prepare the query to insert data into the "cases" table
         $query = "INSERT INTO {$this->table} 
                   (client_name, client_number, client_email, client_address, 
-                   attorney_name, attorney_number, attorney_email, attorney_address,
-                   junior_counsel_name, junior_counsel_number, junior_counsel_email, junior_counsel_address, 
-                   case_number, court, notes)
+                   attorney_name, junior_counsel_name, case_number, court, notes)
                   VALUES 
                   (:client_name, :client_number, :client_email, :client_address, 
-                   :attorney_name, :attorney_number, :attorney_email, :attorney_address,
-                   :junior_counsel_name, :junior_counsel_number, :junior_counsel_email, :junior_counsel_address, 
-                   :case_number, :court, :notes)";
+                   :attorney_name, :junior_counsel_name, :case_number, :court, :notes)";
 
         // Bind parameters to prevent SQL injection
         $params = [
@@ -34,13 +28,7 @@ class CaseModel
             'client_email' => $data['client_email'],
             'client_address' => $data['client_address'],
             'attorney_name' => $data['attorney_name'],
-            'attorney_number' => $data['attorney_number'],
-            'attorney_email' => $data['attorney_email'],
-            'attorney_address' => $data['attorney_address'],
             'junior_counsel_name' => $data['junior_counsel_name'],
-            'junior_counsel_number' => $data['junior_counsel_number'],
-            'junior_counsel_email' => $data['junior_counsel_email'],
-            'junior_counsel_address' => $data['junior_counsel_address'],
             'case_number' => $data['case_number'],
             'court' => $data['court'],
             'notes' => $data['notes'],
@@ -65,7 +53,6 @@ class CaseModel
         return $this->query($query, $params);
     }
 
-
     // Get a specific case by ID
     public function getCaseById($id)
     {
@@ -82,7 +69,6 @@ class CaseModel
         return $result[0]; // Return the first (and expected only) result
     }
 
-
     // Update an existing case
     public function updateCase($data)
     {
@@ -93,13 +79,7 @@ class CaseModel
                   client_email = :client_email,
                   client_address = :client_address,
                   attorney_name = :attorney_name,
-                  attorney_number = :attorney_number,
-                  attorney_email = :attorney_email,
-                  attorney_address = :attorney_address,
                   junior_counsel_name = :junior_counsel_name,
-                  junior_counsel_number = :junior_counsel_number,
-                  junior_counsel_email = :junior_counsel_email,
-                  junior_counsel_address = :junior_counsel_address,
                   case_number = :case_number,
                   court = :court,
                   notes = :notes
@@ -112,18 +92,28 @@ class CaseModel
             'client_email' => $data['client_email'],
             'client_address' => $data['client_address'],
             'attorney_name' => $data['attorney_name'],
-            'attorney_number' => $data['attorney_number'],
-            'attorney_email' => $data['attorney_email'],
-            'attorney_address' => $data['attorney_address'],
             'junior_counsel_name' => $data['junior_counsel_name'],
-            'junior_counsel_number' => $data['junior_counsel_number'],
-            'junior_counsel_email' => $data['junior_counsel_email'],
-            'junior_counsel_address' => $data['junior_counsel_address'],
             'case_number' => $data['case_number'],
             'court' => $data['court'],
             'notes' => $data['notes'],
         ];
 
         return $this->query($query, $params);
+    }
+
+    // Get case number by email
+    public function getCaseNumberByEmail($email)
+    {
+        $query = "SELECT case_number FROM {$this->table} WHERE client_email = :email";
+        $params = ['email' => $email];
+
+        $result = $this->query($query, $params);
+
+        // Check if result is empty
+        if (empty($result)) {
+            return null; // Return null if no case is found for the given email
+        }
+
+        return $result[0]['case_number']; // Return the case number
     }
 }

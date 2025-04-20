@@ -13,7 +13,7 @@
     <div class="container">
         
         <nav>
-            <input type="checkbox" id="check"> <!-- check box to check and uncheck the menu in 768px screen -->
+            <input type="checkbox" id="check"> 
             <label for="check">
                 <i class="fas fa-bars" id="btn"></i><!-- dropmenu 3 bars -->
                 <i class="fas fa-times" id="cancel"></i>
@@ -29,7 +29,21 @@
 
                     <div class="navbar-icons">
             <i data-modal-target="#popup" class="fas fa-envelope" id="envelope-icon"></i>
-            <i class="fas fa-bell"></i>
+            <div class="notification-container">
+                <i class="fas fa-bell" id="notification-icon"></i>
+                <span class="notification-badge" id="notification-count">0</span>
+                <div id="notification-dropdown" class="notification-dropdown hidden">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                    </div>
+                    <div class="notification-list" id="notification-list">
+                        <!-- notifications -->
+                    </div>
+                    <div class="notification-footer">
+                        <a href="#">View All</a>
+                    </div>
+                </div>
+            </div>
             <a href="#" id="settings-icon">
                 <i class="fas fa-cog"></i>
             </a>
@@ -51,5 +65,10 @@
 
     </div>
     <script src="<?= ROOT ?>/assets/js/memo.js"> </script>
+    <script>
+       
+        const ROOT = '<?= ROOT ?>';
+    </script>
+    <script src="<?= ROOT ?>/assets/js/notifications.js"></script>
 </body>
 </html>
