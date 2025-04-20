@@ -79,17 +79,6 @@
                     </tbody>
                 </table>
                 
-                <div class="pagination">
-                    <button class="pagination-btn prev" <?= $page <= 1 ? 'disabled' : '' ?>>
-                        <i class="bx bx-chevron-left"></i> Previous
-                    </button>
-                    <div class="page-info">
-                        Page <span class="current-page"><?= $page ?? 1 ?></span> of <span class="total-pages"><?= $totalPages ?? 1 ?></span>
-                    </div>
-                    <button class="pagination-btn next" <?= ($page ?? 1) >= ($totalPages ?? 1) ? 'disabled' : '' ?>>
-                        Next <i class="bx bx-chevron-right"></i>
-                    </button>
-                </div>
             <?php else : ?>
                 <div class="empty-state">
                     <div class="empty-icon">
@@ -97,9 +86,6 @@
                     </div>
                     <h3>No users found</h3>
                     <p>There are no users matching your criteria.</p>
-                    <button class="create-button">
-                        <i class="bx bx-plus"></i> Add New User
-                    </button>
                 </div>
             <?php endif; ?>
         </div>
