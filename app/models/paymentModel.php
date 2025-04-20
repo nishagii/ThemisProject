@@ -67,4 +67,19 @@ class PaymentModel
 
         return $this->query($query, $params);
     }
+
+
+    /**
+     * Retrieve all payments with associated case details.
+     *
+     * @return array List of all payments with case details.
+     */
+    public function getAllPaymentsWithCaseDetails()
+    {
+        $query = "SELECT p.*, c.case_number, c.client_name , c.court, c.client_number
+                  FROM {$this->table}  p
+                  LEFT JOIN cases c ON p.case_number = c.case_number";
+
+                  return $this->query($query);
+    }
 }

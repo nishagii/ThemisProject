@@ -1,0 +1,349 @@
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f8ff;
+}
+
+.allcases-section {
+    text-align: center;
+}
+
+.paragraph-all-cases {
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.allcases-section h1 {
+    color: #1d1b31;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 10px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* Button Styles */
+button {
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+button i {
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+button:hover {
+    background-color: #9392a3;
+}
+
+button:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    margin: 10px 20px;
+}
+
+.add {
+    background-color: #93a8e3; /* Blue */
+}
+
+.more {
+    background-color: #fa9800; /* Orange */
+    font-size: 13px;
+}
+
+.delete {
+    background-color: #555555;
+}
+
+.delete:hover {
+    background-color: #d33;
+}
+
+.edit {
+    background-color: #93a8e3; /* Blue */
+}
+
+/* Payments Table Styling */
+#paymentsTable {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+}
+
+#paymentsTable th, 
+#paymentsTable td {
+    padding: 12px 15px;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+}
+
+#paymentsTable th {
+    background-color: #1d1b31;
+    color: #ffffff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+#paymentsTable tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#paymentsTable tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+#paymentsTable tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Status Badge Styling */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.85rem;
+    display: inline-block;
+    min-width: 80px;
+}
+
+.status-paid {
+    background-color: #28a745;
+    color: white;
+}
+
+.status-pending {
+    background-color: #ffc107;
+    color: white;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* Table Container */
+.table-container {
+    margin: 20px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow-x: auto; /* Enable horizontal scrolling on small screens */
+}
+
+/* Page Header */
+.page-header {
+    margin-bottom: 20px;
+}
+
+.page-header h1 {
+    color: #1d1b31;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.page-description {
+    color: #6c757d;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.highlight {
+    color: #fa9800;
+    font-weight: bold;
+}
+
+/* DataTables Customization */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+    margin-bottom: 10px;
+    color: #1d1b31;
+    padding: 5px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 4px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #1d1b31;
+    color: white !important;
+    border: 1px solid #1d1b31;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #f1f1f1;
+    color: #1d1b31 !important;
+    border: 1px solid #ddd;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-buttons button {
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.action-buttons .view-button {
+    background-color: #fa9800; /* Orange */
+}
+
+.action-buttons .print-button {
+    background-color: #93a8e3; /* Blue */
+}
+
+.action-buttons .delete-button {
+    background-color: #e53935;
+}
+
+.action-buttons button:hover {
+    opacity: 0.8;
+}
+
+/* Home Section */
+.home-section {
+    width: 100%;
+    padding: 20px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_length {
+        text-align: left;
+        float: none;
+        margin-bottom: 15px;
+    }
+    
+    .dataTables_wrapper .dataTables_filter input {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 992px) {
+    .allcases-section h1 {
+        font-size: 24px;
+    }
+    
+    .table-container {
+        margin: 15px 10px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    #paymentsTable th,
+    #paymentsTable td {
+        font-size: 12px;
+        padding: 8px 5px;
+    }
+    
+    .action-buttons {
+        gap: 5px;
+    }
+    
+    .action-buttons button {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+    
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+        min-width: 60px;
+    }
+    
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0.3em 0.6em;
+    }
+    
+    .paragraph-all-cases {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    .allcases-section h1 {
+        font-size: 20px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 3px;
+    }
+    
+    .action-buttons button {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    #paymentsTable th:nth-child(2),
+    #paymentsTable td:nth-child(2),
+    #paymentsTable th:nth-child(4),
+    #paymentsTable td:nth-child(4) {
+        display: none; /* Hide less important columns on very small screens */
+    }
+    
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        padding: 0.2em 0.4em;
+        font-size: 12px;
+    }
+    
+    .button .add {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Responsive DataTables */
+.dataTables_wrapper {
+    width: 100%;
+    overflow-x: auto;
+}

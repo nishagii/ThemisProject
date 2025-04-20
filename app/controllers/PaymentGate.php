@@ -13,4 +13,16 @@ class PaymentGate
             'invoices' => $invoices
         ]);
     }
+
+    public function paidReceipts()
+    {
+        $paymentModel = $this->loadModel('PaymentModel');
+        $payments = $paymentModel->getAllPaymentsWithCaseDetails();
+
+        $this->view('seniorCounsel/paidReciepts', [
+            'payments' => $payments
+        ]);
+    }
+
+
 }
