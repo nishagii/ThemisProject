@@ -14,8 +14,9 @@
     <?php include('component/smallNav1.view.php'); ?>
     <?php include('component/sidebar.view.php'); ?>
 
-    <div class="form-body">
+    <div class="home-section">
 
+    <div class="form-body">
 
         <div class="modal" id="modal">
                         <?php if (!empty($errors)): ?>
@@ -85,7 +86,8 @@
             </div>
         </div>
     </div>
-                </div>
+    </div>
+    </div>
     
 
                 <script>
