@@ -79,4 +79,20 @@ class Blog
         }
     }
 
+    public function view()
+    {
+        // Load the BlogModel
+        $blogModel = $this->loadModel('BlogModel');
+        $blogs = $blogModel->getAllBlogs();
+
+        if ($blogs) {
+            // Pass the blog posts to the view for rendering
+            $this->view('/seniorCounsel/blog_view', ['blogs' => $blogs]);
+        } else {
+            // If no blogs are found, show an error message or a placeholder
+            $_SESSION['error'] = "No blogs available.";
+            $this->view('/seniorCounsel/blog_view', ['blogs' => []]);
+        }
+    }
+
 }
