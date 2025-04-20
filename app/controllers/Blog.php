@@ -79,7 +79,7 @@ class Blog
         }
     }
 
-    public function view()
+    public function viewBlog()
     {
         // Load the BlogModel
         $blogModel = $this->loadModel('BlogModel');

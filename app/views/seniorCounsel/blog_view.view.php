@@ -16,19 +16,18 @@
         <?php if (!empty($blogs)): ?>
             <div class="blogs">
                 <?php foreach ($blogs as $blog): ?>
-                    <div class="blog-post">
-                        <h2><?php echo htmlspecialchars($blog['title']); ?></h2>
-                        <p><?php echo nl2br(htmlspecialchars($blog['content'])); ?></p>
-                        <?php if ($blog['image_url']): ?>
-                            <div class="blog-image">
-                                <img src="/assets/blog_images/<?php echo htmlspecialchars($blog['image_url']); ?>" alt="Blog Image">
-                            </div>
-                        <?php endif; ?>
-                        <div class="blog-footer">
-                            <p>Written by: <?php echo htmlspecialchars($blog['author']); ?></p>
-                            <p>Published on: <?php echo htmlspecialchars($blog['created_at']); ?></p>
+                    <h2><?php echo htmlspecialchars($blog->title); ?></h2>
+                    <p><?php echo nl2br(htmlspecialchars($blog->content)); ?></p>
+                    <?php if ($blog->image_url): ?>
+                        <div class="blog-image">
+                            <img src="<?= ROOT ?>/assets/blog_images/<?php echo htmlspecialchars($blog->image_url); ?>" alt="Blog Image">
                         </div>
+                    <?php endif; ?>
+                    <div class="blog-footer">
+                        <p>Written by: <?php echo htmlspecialchars($blog->author); ?></p>
+                        <p>Published on: <?php echo htmlspecialchars($blog->created_at); ?></p>
                     </div>
+
                 <?php endforeach; ?>
             </div>
         <?php else: ?>
