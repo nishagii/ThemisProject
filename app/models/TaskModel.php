@@ -35,18 +35,22 @@ class TaskModel
 
     public function getAllTasks()
     {
-        // Prepare the SQL query to fetch all tasks
-        $query = "SELECT taskID, name, description, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority 
-                  FROM {$this->table}  ORDER BY taskID DESC ";
+        // Prepare the SQL query to fetch all tasks with the username of the assignee
+        $query = "SELECT t.taskID, t.name, t.description, t.assigneeID, u.username AS assigneeName, 
+                        t.assignedDate, t.deadlineDate, t.deadlineTime, t.status, t.priority 
+                FROM {$this->table} t
+                INNER JOIN users u ON t.assigneeID = u.id
+                ORDER BY t.taskID DESC";
 
         // Execute the query and return the results
         return $this->query($query);
     }
 
+
     // Get a specific case by ID
     public function getTaskById($taskID)
     {
-        $query = "SELECT * FROM {$this->table} WHERE taskID = :taskID";
+        $query = "SELECT t.*, users.username as assigneeName FROM {$this->table} t inner join users on t.assigneeID = users.id WHERE taskID = :taskID";
         $params = ['taskID' => $taskID];
 
         $result = $this->query($query, $params);
@@ -96,7 +100,7 @@ class TaskModel
     {
         $query = "SELECT taskID, name, description, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority 
                 FROM {$this->table} 
-                WHERE assigneeID = :userId";
+                WHERE assigneeID = :userId ORDER BY taskID DESC";
 
         $params = ['userId' => $userId];
 
@@ -119,5 +123,20 @@ class TaskModel
         $query = "SELECT COUNT(taskID) AS count FROM {$this->table}";
         return $this->query($query);
     }
+
+    public function updateTaskStatus($taskID, $status)
+    {
+        $query = "UPDATE {$this->table} 
+                SET status = :status 
+                WHERE taskID = :taskID";
+
+        $params = [
+            'status' => $status,
+            'taskID' => $taskID
+        ];
+
+        return $this->query($query, $params);
+    }
+
 
 }

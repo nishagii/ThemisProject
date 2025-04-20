@@ -14,8 +14,9 @@
     <?php include('component/smallNav1.view.php'); ?>
     <?php include('component/sidebar.view.php'); ?>
 
-    <div class="form-body">
+    <div class="home-section">
 
+    <div class="form-body">
 
         <div class="modal" id="modal">
                         <?php if (!empty($errors)): ?>
@@ -85,12 +86,13 @@
             </div>
         </div>
     </div>
-                </div>
+    </div>
+    </div>
     
 
                 <script>
    // Function to validate the selected date and time
-function validateDateAndTime() {
+    function validateDateAndTime() {
     const today = new Date();
     const dateInput = document.getElementById("deadlineDate");
     const timeInput = document.getElementById("deadlineTime");

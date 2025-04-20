@@ -19,3 +19,18 @@ tabs.forEach((tab, index) => {
         all_content[index].classList.add('active');
     });
 });
+
+function completeTask(taskID) {
+    // Show SweetAlert with confirmation message
+    Swal.fire({
+        icon: 'info',
+        title: 'Task Completion Sent for Review',
+        text: 'This task will be reviewed before final completion.',
+        confirmButtonText: 'OK'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect to complete the task action
+            window.location.href = "<?= ROOT ?>/task/complete/" + taskID;
+        }
+    });
+}
