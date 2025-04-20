@@ -64,7 +64,7 @@ class AddTask
 
         $notification = [
             'user_id' => $assignee,
-            'message' => "Task '$name' has been assigned to you.",
+            'message' => "Task '$name' has been assigned to you. Check your task board",
             'timestamp' => date('Y-m-d H:i:s'),
             'status' => 'unread'
         ];
