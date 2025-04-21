@@ -159,7 +159,7 @@
 }
   
   
-  
+
   /* Table Styles */
   table {
     width: 100%;
@@ -394,4 +394,74 @@
   a {
     text-decoration: none;
   }
+
+/* Empty state styling */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 2rem 0;
+  text-align: center;
+  border: 1px dashed #dee2e6;
+}
+
+.empty-state .empty-icon {
+  font-size: 4rem;
+  color: #adb5bd;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+  color: #495057;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.empty-state p {
+  color: #6c757d;
+  font-size: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Make the empty state responsive */
+@media (max-width: 768px) {
+  .empty-state {
+      padding: 2rem 1rem;
+  }
+  
+  .empty-state .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+  }
+  
+  .empty-state h3 {
+      font-size: 1.1rem;
+  }
+  
+  .empty-state p {
+      font-size: 0.9rem;
+  }
+}
+
+/* Animation for the empty state when it appears */
+#no-results {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
   

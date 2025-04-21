@@ -20,7 +20,7 @@
                 <div class="flex">
                     <div class="search-box">
                         <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Search by name, email, role...">
+                        <input type="text" id="search-input" placeholder="Search by name, email, role...">
                     </div>
 
                     <div class="sort-dropdown">
@@ -28,7 +28,6 @@
                             <option value="">Sort by</option>
                             <option value="name">Name</option>
                             <option value="email">Email</option>
-                        
                         </select>
                     </div>
 
@@ -86,7 +85,7 @@
 
             
             <?php if (!empty($users)) : ?>
-                <table>
+                <table id="users-table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -97,31 +96,37 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="user-table-body">
                     <?php foreach ($users as $user) : ?>
-                        <tr>
+                        <?php 
+                            $status = ($user->active ?? true) ? 'active' : 'inactive';
+                            $role = strtolower(htmlspecialchars($user->role));
+                            $username = htmlspecialchars($user->username);
+                            $email = htmlspecialchars($user->email);
+                        ?>
+                        <tr data-name="<?= strtolower($username) ?>" data-email="<?= strtolower($email) ?>" data-role="<?= $role ?>" data-status="<?= $status ?>">
                             <td><?= htmlspecialchars($user->id) ?></td>
                             <td>
                                 <div class="user-info">
                                     <div class="user-avatar">
-                                        <span><?= strtoupper(substr(htmlspecialchars($user->username), 0, 1)) ?></span>
+                                        <span><?= strtoupper(substr($username, 0, 1)) ?></span>
                                     </div>
 
-                                    <?= htmlspecialchars($user->username) ?>
+                                    <?= $username ?>
                                     <?php if ($user->verified ?? false) : ?>
                                         <span class="verified-badge"><i class="fas fa-check"></i></span>
                                     <?php endif; ?>
                                 </div>
                             </td>
-                            <td><?= htmlspecialchars($user->email) ?></td>
+                            <td><?= $email ?></td>
                             <td>
-                                <span class="status-tag <?= strtolower(htmlspecialchars($user->role)) === 'admin' ? 'status-customer' : 'status-prospect' ?>">
+                                <span class="status-tag <?= $role === 'admin' ? 'status-customer' : 'status-prospect' ?>">
                                     <?= htmlspecialchars($user->role) ?>
                                 </span>
                             </td>
                             <td>
-                                <span class="status-badge <?= ($user->active ?? true) ? 'badge-active' : 'badge-inactive' ?>">
-                                    <?= ($user->active ?? true) ? 'Active' : 'Inactive' ?>
+                                <span class="status-badge <?= $status === 'active' ? 'badge-active' : 'badge-inactive' ?>">
+                                    <?= ucfirst($status) ?>
                                 </span>
                             </td>
                             <td class="actions">
@@ -138,6 +143,13 @@
                     </tbody>
                 </table>
                 
+                <div id="no-results" class="empty-state" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="bx bx-user-x"></i>
+                    </div>
+                    <h3>No users found</h3>
+                    <p>There are no users matching your criteria.</p>
+                </div>
             <?php else : ?>
                 <div class="empty-state">
                     <div class="empty-icon">
@@ -215,7 +227,9 @@
             }
             
             // Apply search as user types
-            searchInput.addEventListener('input', applyFilters);
+            if (searchInput) {
+                searchInput.addEventListener('input', applyFilters);
+            }
             
             // Apply button for filters
             document.getElementById('apply-filters').addEventListener('click', function() {
@@ -228,38 +242,32 @@
                 document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
                     checkbox.checked = false;
                 });
+                searchInput.value = '';
                 applyFilters();
             });
             
-            // Sorting functionality (existing code)
+            // Sorting functionality
             const sortSelect = document.getElementById('sort-users');
-            const tableBody = document.querySelector('tbody');
+            const tableBody = document.getElementById('user-table-body');
 
-            sortSelect.addEventListener('change', function () {
-                const sortBy = this.value;
-                if (!sortBy) return;
+            if (sortSelect && tableBody) {
+                sortSelect.addEventListener('change', function() {
+                    const sortBy = this.value;
+                    if (!sortBy) return;
 
-                const rows = Array.from(tableBody.querySelectorAll('tr:not([style*="display: none"])')); // Only sort visible rows
+                    const rows = Array.from(tableBody.querySelectorAll('tr'));
 
-                const getText = (row, selectorIndex) =>
-                    row.children[selectorIndex].innerText.trim().toLowerCase();
+                    // Sort rows based on data attributes directly
+                    rows.sort((a, b) => {
+                        const aValue = a.getAttribute('data-' + sortBy).toLowerCase();
+                        const bValue = b.getAttribute('data-' + sortBy).toLowerCase();
+                        return aValue.localeCompare(bValue);
+                    });
 
-                let indexMap = {
-                    name: 1,     // Name column index
-                    email: 2,    // Email column index
-                };
-
-                const columnIndex = indexMap[sortBy];
-
-                rows.sort((a, b) => {
-                    const aText = getText(a, columnIndex);
-                    const bText = getText(b, columnIndex);
-                    return aText.localeCompare(bText);
+                    // Re-append sorted rows
+                    rows.forEach(row => tableBody.appendChild(row));
                 });
-
-                // Re-append sorted rows
-                rows.forEach(row => tableBody.appendChild(row));
-            });
+            }
         });
     </script>
 </body>
