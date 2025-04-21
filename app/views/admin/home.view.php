@@ -19,11 +19,14 @@
     <div class="parent-container home-section">
        
         <div class="card-container">
-            <div class="card white-card">
-                <div class="icon purple"><i class="fas fa-users"></i></div>
-                <h3>Total Users</h3>
-                <p><?= htmlspecialchars($total_users) ?></p>
-            </div>
+            <a href="<?= ROOT ?>/UsersAdmin" class="card-link">
+                <div class="card white-card">
+                    <div class="icon purple"><i class="fas fa-users"></i></div>
+                    <h3>Total Users</h3>
+                    <p><?= htmlspecialchars($total_users) ?></p>
+                </div>
+            </a>
+
 
             <div class="card blue-card">
                 <div class="icon green"><i class="fas fa-balance-scale"></i></div>

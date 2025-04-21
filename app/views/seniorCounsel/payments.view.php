@@ -33,6 +33,18 @@
 
             <div class="invoice-container">
 
+                <!-- Sort Button Section -->
+                <div class="sort-section">
+                    <label for="sort-invoices">Sort by:</label>
+                    <select id="sort-invoices" onchange="sortInvoices()">
+                        <option value="date-desc">Due Date (Newest)</option>
+                        <option value="date-asc">Due Date (Oldest)</option>
+                        <option value="amount-asc">Amount (Low to High)</option>
+                        <option value="amount-desc">Amount (High to Low)</option>
+                    </select>
+                </div>
+
+
                 <div class="payment-section">
                     <button class="payment-button" onclick="window.location.href='<?= ROOT ?>/paymentGate/paidReceipts'">
                         <i class='bx bx-file'></i>
@@ -82,6 +94,40 @@
         </div>
 
     </div>
+    <script>
+        function sortInvoices() {
+    const option = document.getElementById("sort-invoices").value;
+    const rows = Array.from(document.querySelectorAll(".invoice-row"));
+    const container = document.querySelector(".invoice-container");
+
+    rows.sort((a, b) => {
+        const dateA = new Date(a.querySelector(".due-date").textContent.trim());
+        const dateB = new Date(b.querySelector(".due-date").textContent.trim());
+        const clientA = a.querySelector(".client").textContent.trim().toLowerCase();
+        const clientB = b.querySelector(".client").textContent.trim().toLowerCase();
+        const amountA = parseFloat(a.querySelector(".amount").textContent.replace(/[^\d.]/g, ""));
+        const amountB = parseFloat(b.querySelector(".amount").textContent.replace(/[^\d.]/g, ""));
+
+        switch (option) {
+            case "date-asc":
+                return dateA - dateB;
+            case "date-desc":
+                return dateB - dateA;
+            case "client-asc":
+                return clientA.localeCompare(clientB);
+            case "client-desc":
+                return clientB.localeCompare(clientA);
+            case "amount-asc":
+                return amountA - amountB;
+            case "amount-desc":
+                return amountB - amountA;
+        }
+    });
+
+    rows.forEach(row => container.appendChild(row));
+}
+
+    </script>
 
 </body>
 

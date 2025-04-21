@@ -312,3 +312,16 @@ a {
         justify-content: center;
     }
 }
+
+.sort-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.sort-section select {
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
