@@ -17,8 +17,19 @@
     <div class="home-section">
         <h1 class="card-section">Case Documents</h1>
         
+        <!-- Sort Button Section -->
         
         <div class="case-details-card">
+            <div class="sort-section">
+                <label for="sort-options">Sort by:</label>
+                <select id="sort-options" onchange="sortDocuments()">
+                    <option value="date-desc">Date (Newest)</option>
+                    <option value="date-asc">Date (Oldest)</option>
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                </select>
+            </div>
+
             <div class="document-container">
                 
                 <!-- Upload Button Section -->
@@ -93,6 +104,32 @@
             // Redirect to the upload page
             window.location.href = "<?= ROOT ?>/document/add_Document";
         }
+        function sortDocuments() {
+        const sortOption = document.getElementById("sort-options").value;
+        const rows = Array.from(document.querySelectorAll(".transaction-row"));
+        const container = document.querySelector(".document-container");
+
+        rows.sort((a, b) => {
+            const nameA = a.querySelector(".transaction-description").textContent.trim().toLowerCase();
+            const nameB = b.querySelector(".transaction-description").textContent.trim().toLowerCase();
+            const dateA = new Date(a.querySelector(".transaction-date").textContent.trim());
+            const dateB = new Date(b.querySelector(".transaction-date").textContent.trim());
+
+            switch (sortOption) {
+                case "date-desc":
+                    return dateB - dateA;
+                case "date-asc":
+                    return dateA - dateB;
+                case "name-asc":
+                    return nameA.localeCompare(nameB);
+                case "name-desc":
+                    return nameB.localeCompare(nameA);
+            }
+        });
+
+        rows.forEach(row => container.appendChild(row));
+    }
+
     </script>
 </body>
 </html>

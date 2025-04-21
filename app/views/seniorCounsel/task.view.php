@@ -78,7 +78,19 @@
             </div>
         </div>
 
+        
+
+
         <div class="task-table-container">
+            <div class="sort-section">
+                <label for="sort-tasks">Sort by:</label>
+                <select id="sort-tasks" onchange="sortTasks()">
+                    <option value="deadline-desc">Deadline (Newest)</option>
+                    <option value="deadline-asc">Deadline (Oldest)</option>
+                    <option value="priority-asc">Priority (Low to High)</option>
+                    <option value="priority-desc">Priority (High to Low)</option>
+                </select>
+            </div>
             <table class="task-table">
                 <thead>
                     <tr>
@@ -175,6 +187,43 @@
                 cell.style.color = 'orange';
             }
         });
+
+        function sortTasks() {
+        const sortValue = document.getElementById("sort-tasks").value;
+        const table = document.querySelector(".task-table tbody");
+        const rows = Array.from(table.querySelectorAll("tr"));
+
+        rows.sort((a, b) => {
+            const getText = (el, index) => el.cells[index].textContent.trim().toLowerCase();
+            const getDate = (el, index) => new Date(el.cells[index].textContent.trim());
+            const getPriorityValue = (priority) => {
+                // Adjust depending on your priority naming
+                if (priority === "high") return 3;
+                if (priority === "medium") return 2;
+                if (priority === "low") return 1;
+                return 0;
+            };
+
+            switch (sortValue) {
+                case "deadline-desc":
+                    return getDate(b, 2) - getDate(a, 2);
+                case "deadline-asc":
+                    return getDate(a, 2) - getDate(b, 2);
+                case "priority-asc":
+                    return getPriorityValue(getText(a, 3)) - getPriorityValue(getText(b, 3));
+                case "priority-desc":
+                    return getPriorityValue(getText(b, 3)) - getPriorityValue(getText(a, 3));
+                case "name-asc":
+                    return getText(a, 0).localeCompare(getText(b, 0));
+                case "name-desc":
+                    return getText(b, 0).localeCompare(getText(a, 0));
+            }
+        });
+
+        table.innerHTML = '';
+        rows.forEach(row => table.appendChild(row));
+    }
+
     </script>
 </body>
 </html>

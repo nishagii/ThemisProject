@@ -4,6 +4,20 @@
     padding: 10px;
 }
 
+.sort-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 8px;
+}
+
+.sort-section select {
+    padding: 4px 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
 .transaction-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 130px 100px; /* Added a column for Actions */
