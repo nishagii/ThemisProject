@@ -120,7 +120,7 @@ class CaseModel
     // Add this method to the CaseModel class
     public function getCasesByClientEmail($email)
     {
-        $query = "SELECT id, case_number, client_name FROM {$this->table} WHERE client_email = :email";
+        $query = "SELECT * FROM {$this->table} WHERE client_email = :email";
         $params = ['email' => $email];
 
         return $this->query($query, $params);
