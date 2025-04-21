@@ -17,17 +17,75 @@
             <h1>System Users</h1>
             
             <div class="controls-row">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search by name, email, role...">
+                <div class="flex">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Search by name, email, role...">
+                    </div>
+
+                    <div class="sort-dropdown">
+                        <select id="sort-users">
+                            <option value="">Sort by</option>
+                            <option value="name">Name</option>
+                            <option value="email">Email</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-dropdown">
+                        <button class="filter-btn" id="filter-btn">
+                            <i class="fas fa-filter"></i> Filter
+                        </button>
+                        <div class="filter-menu" id="filter-menu">
+                            <div class="filter-group">
+                                <h4>Role</h4>
+                                <div class="filter-options">
+                                    <div class="filter-option">
+                                        <label>
+                                            <input type="checkbox" data-filter="role" value="admin"> Admin
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <label>
+                                            <input type="checkbox" data-filter="role" value="client"> Client
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <h4>Status</h4>
+                                <div class="filter-options">
+                                    <div class="filter-option">
+                                        <label>
+                                            <input type="checkbox" data-filter="status" value="active"> Active
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <label>
+                                            <input type="checkbox" data-filter="status" value="inactive"> Inactive
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-actions">
+                                <button class="reset-btn" id="reset-filters">Reset</button>
+                                <button class="apply-btn" id="apply-filters">Apply</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button class="create-button">
-                    <i class="bx bx-plus"></i> Create User
-                </button>
+
+                <a href="<?= ROOT ?>/admin">
+                    <button class="create-button">
+                        <i class="bx bx-plus"></i> Create User
+                    </button>
+                </a>
             </div>
+
             
             <?php if (!empty($users)) : ?>
-                <table>
+                <table id="users-table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -38,35 +96,41 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="user-table-body">
                     <?php foreach ($users as $user) : ?>
-                        <tr>
+                        <?php 
+                            $status = ($user->active ?? true) ? 'active' : 'inactive';
+                            $role = strtolower(htmlspecialchars($user->role));
+                            $username = htmlspecialchars($user->username);
+                            $email = htmlspecialchars($user->email);
+                        ?>
+                        <tr data-name="<?= strtolower($username) ?>" data-email="<?= strtolower($email) ?>" data-role="<?= $role ?>" data-status="<?= $status ?>">
                             <td><?= htmlspecialchars($user->id) ?></td>
                             <td>
                                 <div class="user-info">
                                     <div class="user-avatar">
-                                        <span><?= strtoupper(substr(htmlspecialchars($user->username), 0, 1)) ?></span>
+                                        <span><?= strtoupper(substr($username, 0, 1)) ?></span>
                                     </div>
 
-                                    <?= htmlspecialchars($user->username) ?>
+                                    <?= $username ?>
                                     <?php if ($user->verified ?? false) : ?>
                                         <span class="verified-badge"><i class="fas fa-check"></i></span>
                                     <?php endif; ?>
                                 </div>
                             </td>
-                            <td><?= htmlspecialchars($user->email) ?></td>
+                            <td><?= $email ?></td>
                             <td>
-                                <span class="status-tag <?= strtolower(htmlspecialchars($user->role)) === 'admin' ? 'status-customer' : 'status-prospect' ?>">
+                                <span class="status-tag <?= $role === 'admin' ? 'status-customer' : 'status-prospect' ?>">
                                     <?= htmlspecialchars($user->role) ?>
                                 </span>
                             </td>
                             <td>
-                                <span class="status-badge <?= ($user->active ?? true) ? 'badge-active' : 'badge-inactive' ?>">
-                                    <?= ($user->active ?? true) ? 'Active' : 'Inactive' ?>
+                                <span class="status-badge <?= $status === 'active' ? 'badge-active' : 'badge-inactive' ?>">
+                                    <?= ucfirst($status) ?>
                                 </span>
                             </td>
                             <td class="actions">
-                                <a href="<?= ROOT ?>/admin/users/view/<?= $user->id ?>" class="action-btn view-btn" title="View Details">
+                                <a href="<?= ROOT ?>/UsersAdmin/viewUser/<?= $user->id ?>" class="action-btn view-btn" title="View Details">
                                     <i class="bx bx-show"></i>
                                 </a>
                                 <a href="<?= ROOT ?>/admin/users/delete/<?= $user->id ?>" class="action-btn delete-btn" title="Delete User" 
@@ -79,6 +143,13 @@
                     </tbody>
                 </table>
                 
+                <div id="no-results" class="empty-state" style="display: none;">
+                    <div class="empty-icon">
+                        <i class="bx bx-user-x"></i>
+                    </div>
+                    <h3>No users found</h3>
+                    <p>There are no users matching your criteria.</p>
+                </div>
             <?php else : ?>
                 <div class="empty-state">
                     <div class="empty-icon">
@@ -91,23 +162,6 @@
         </div>
     </div>
 
-    <script>
-        // Add any JavaScript functionality you need here
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            
-            // Example: Search functionality
-            const searchInput = document.querySelector('.search-box input');
-            if (searchInput) {
-                searchInput.addEventListener('keyup', function(e) {
-                    if (e.key === 'Enter') {
-                        // Handle search
-                        console.log('Searching for:', this.value);
-                        // You would typically submit a form or make an AJAX call here
-                    }
-                });
-            }
-        });
-    </script>
+    <script src="<?= ROOT ?>/assets/js/admin/user.js"> </script>
 </body>
 </html>
