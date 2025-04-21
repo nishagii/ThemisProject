@@ -16,8 +16,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
   }
+
+  .sort-dropdown {
+    margin-left: 10px;
+}
+
+.sort-dropdown select {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.flex {
+  display: flex;
+  gap: 10px;
+}
+
   
   .search-box {
     position: relative;

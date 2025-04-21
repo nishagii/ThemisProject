@@ -17,14 +17,31 @@
             <h1>System Users</h1>
             
             <div class="controls-row">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search by name, email, role...">
+                <div class="flex">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search by name, email, role...">
+                    </div>
+
+                    <div class="sort-dropdown">
+                        <select id="sort-users">
+                            <option value="">Sort by</option>
+                            <option value="name">Name</option>
+                            <option value="email">Email</option>
+                        
+                        </select>
+                    </div>
                 </div>
-                <button class="create-button">
-                    <i class="bx bx-plus"></i> Create User
-                </button>
+
+
+
+                <a href="<?= ROOT ?>/admin">
+                    <button class="create-button">
+                        <i class="bx bx-plus"></i> Create User
+                    </button>
+                </a>
             </div>
+
             
             <?php if (!empty($users)) : ?>
                 <table>
@@ -107,6 +124,41 @@
                     }
                 });
             }
+
+           
+
+            const sortSelect = document.getElementById('sort-users');
+            const tableBody = document.querySelector('tbody');
+
+            sortSelect.addEventListener('change', function () {
+                const sortBy = this.value;
+                if (!sortBy) return;
+
+                const rows = Array.from(tableBody.querySelectorAll('tr'));
+
+                const getText = (row, selectorIndex) =>
+                    row.children[selectorIndex].innerText.trim().toLowerCase();
+
+                let indexMap = {
+                    name: 1,     // Name column index
+                    email: 2,    // Email column index
+                  
+                };
+
+                const columnIndex = indexMap[sortBy];
+
+                rows.sort((a, b) => {
+                    const aText = getText(a, columnIndex);
+                    const bText = getText(b, columnIndex);
+                    return aText.localeCompare(bText);
+                });
+
+                // Re-append sorted rows
+                rows.forEach(row => tableBody.appendChild(row));
+        
+        });
+
+
         });
     </script>
 </body>
