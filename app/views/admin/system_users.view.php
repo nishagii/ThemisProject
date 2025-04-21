@@ -31,9 +31,51 @@
                         
                         </select>
                     </div>
+
+                    <div class="filter-dropdown">
+                        <button class="filter-btn" id="filter-btn">
+                            <i class="fas fa-filter"></i> Filter
+                        </button>
+                        <div class="filter-menu" id="filter-menu">
+                            <div class="filter-group">
+                                <h4>Role</h4>
+                                <div class="filter-options">
+                                    <div class="filter-option">
+                                        <label>
+                                            <input type="checkbox" data-filter="role" value="admin"> Admin
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <label>
+                                            <input type="checkbox" data-filter="role" value="client"> Client
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <h4>Status</h4>
+                                <div class="filter-options">
+                                    <div class="filter-option">
+                                        <label>
+                                            <input type="checkbox" data-filter="status" value="active"> Active
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <label>
+                                            <input type="checkbox" data-filter="status" value="inactive"> Inactive
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-actions">
+                                <button class="reset-btn" id="reset-filters">Reset</button>
+                                <button class="apply-btn" id="apply-filters">Apply</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-
 
                 <a href="<?= ROOT ?>/admin">
                     <button class="create-button">
@@ -109,24 +151,87 @@
     </div>
 
     <script>
-        // Add any JavaScript functionality you need here
         document.addEventListener('DOMContentLoaded', function() {
+            // Filter button toggle
+            const filterBtn = document.getElementById('filter-btn');
+            const filterMenu = document.getElementById('filter-menu');
             
+            filterBtn.addEventListener('click', function() {
+                filterMenu.classList.toggle('active');
+            });
             
-            // Example: Search functionality
-            const searchInput = document.querySelector('.search-box input');
-            if (searchInput) {
-                searchInput.addEventListener('keyup', function(e) {
-                    if (e.key === 'Enter') {
-                        // Handle search
-                        console.log('Searching for:', this.value);
-                        // You would typically submit a form or make an AJAX call here
+            // Close filter menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!filterBtn.contains(event.target) && !filterMenu.contains(event.target)) {
+                    filterMenu.classList.remove('active');
+                }
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('search-input');
+            const userRows = document.querySelectorAll('#user-table-body tr');
+            const noResults = document.getElementById('no-results');
+            
+            function applyFilters() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedRoles = Array.from(document.querySelectorAll('input[data-filter="role"]:checked')).map(el => el.value);
+                const selectedStatuses = Array.from(document.querySelectorAll('input[data-filter="status"]:checked')).map(el => el.value);
+                
+                let visibleCount = 0;
+                
+                userRows.forEach(row => {
+                    const name = row.getAttribute('data-name');
+                    const email = row.getAttribute('data-email');
+                    const role = row.getAttribute('data-role');
+                    const status = row.getAttribute('data-status');
+                    
+                    // Search term matching
+                    const matchesSearch = searchTerm === '' || 
+                                        name.includes(searchTerm) || 
+                                        email.includes(searchTerm) || 
+                                        role.includes(searchTerm);
+                    
+                    // Role filtering
+                    const matchesRole = selectedRoles.length === 0 || selectedRoles.includes(role);
+                    
+                    // Status filtering
+                    const matchesStatus = selectedStatuses.length === 0 || selectedStatuses.includes(status);
+                    
+                    // Show/hide row based on all criteria
+                    if (matchesSearch && matchesRole && matchesStatus) {
+                        row.style.display = '';
+                        visibleCount++;
+                    } else {
+                        row.style.display = 'none';
                     }
                 });
+                
+                // Show "no results" message if needed
+                if (visibleCount === 0 && userRows.length > 0) {
+                    noResults.style.display = 'flex';
+                } else {
+                    noResults.style.display = 'none';
+                }
             }
-
-           
-
+            
+            // Apply search as user types
+            searchInput.addEventListener('input', applyFilters);
+            
+            // Apply button for filters
+            document.getElementById('apply-filters').addEventListener('click', function() {
+                applyFilters();
+                filterMenu.classList.remove('active');
+            });
+            
+            // Reset filters
+            document.getElementById('reset-filters').addEventListener('click', function() {
+                document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                applyFilters();
+            });
+            
+            // Sorting functionality (existing code)
             const sortSelect = document.getElementById('sort-users');
             const tableBody = document.querySelector('tbody');
 
@@ -134,7 +239,7 @@
                 const sortBy = this.value;
                 if (!sortBy) return;
 
-                const rows = Array.from(tableBody.querySelectorAll('tr'));
+                const rows = Array.from(tableBody.querySelectorAll('tr:not([style*="display: none"])')); // Only sort visible rows
 
                 const getText = (row, selectorIndex) =>
                     row.children[selectorIndex].innerText.trim().toLowerCase();
@@ -142,7 +247,6 @@
                 let indexMap = {
                     name: 1,     // Name column index
                     email: 2,    // Email column index
-                  
                 };
 
                 const columnIndex = indexMap[sortBy];
@@ -155,10 +259,7 @@
 
                 // Re-append sorted rows
                 rows.forEach(row => tableBody.appendChild(row));
-        
-        });
-
-
+            });
         });
     </script>
 </body>
