@@ -130,7 +130,7 @@
                                 </span>
                             </td>
                             <td class="actions">
-                                <a href="<?= ROOT ?>/admin/users/view/<?= $user->id ?>" class="action-btn view-btn" title="View Details">
+                                <a href="<?= ROOT ?>/UsersAdmin/viewUser/<?= $user->id ?>" class="action-btn view-btn" title="View Details">
                                     <i class="bx bx-show"></i>
                                 </a>
                                 <a href="<?= ROOT ?>/admin/users/delete/<?= $user->id ?>" class="action-btn delete-btn" title="Delete User" 
