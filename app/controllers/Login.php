@@ -23,6 +23,7 @@ class Login
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['username'] = $user->username;
                 $_SESSION['role'] = $user->role;
+                $_SESSION['email'] = $user->email; // Add email to the session
 
                 // Log successful login attempt
                 $loginData = [
