@@ -322,10 +322,12 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
     min-width: 800px;
+   
 }
 
 th, td {
     padding: 15px;
+    font-size: 13px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
@@ -446,4 +448,60 @@ tr:hover {
 .filter-btn.active {
     transform: scale(1.1);
     box-shadow: 0 2px 5px #00000033;
+}
+/* Status select options - softer colors */
+.status-select option[value="Pending"] {
+    background-color: #f9c784;
+    color: #664500;
+}
+
+.status-select option[value="Accepted"] {
+    background-color: #a8d5ba;
+    color: #2c5741;
+}
+
+.status-select option[value="Rejected"] {
+    background-color: #f2b6b6;
+    color: #7a3333;
+}
+
+/* Styling for the select element based on current value - softer colors */
+.status-select[data-current="Pending"] {
+    background-color: rgba(249, 199, 132, 0.8);
+    color: #664500;
+}
+
+.status-select[data-current="Accepted"] {
+    background-color: rgba(168, 213, 186, 0.8);
+    color: #2c5741;
+}
+
+.status-select[data-current="Rejected"] {
+    background-color: rgba(242, 182, 182, 0.8);
+    color: #7a3333;
+}
+
+/* Filter buttons - softer colors */
+.filter-btn.pending {
+    background-color: #f9c784;
+    color: #664500;
+}
+
+.filter-btn.accepted {
+    background-color: #a8d5ba;
+    color: #2c5741;
+}
+
+.filter-btn.rejected {
+    background-color: #f2b6b6;
+    color: #7a3333;
+}
+
+/* Status text colors */
+.status.approved {
+    color: #2c5741;
+}
+
+.status.declined {
+    color: #7a3333;
 }
