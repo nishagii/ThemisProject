@@ -54,7 +54,7 @@
 
                 <div class="login-list">
                     <?php if (!empty($login_details)): ?>
-                        <?php foreach ($login_details as $login): ?>
+                        <?php foreach (array_slice($login_details, 0, 3) as $login): ?>
                             <div class="login">
                                 <div class="login-info">
                                     <div class="login-icon"><i class="fas fa-key"></i></div>
@@ -73,10 +73,14 @@
                                 </div>
                             </div>
                         <?php endforeach; ?>
+                        <div class="view-all-button">
+                            <a href="<?= ROOT ?>/LoginHistory" class="btn">View All</a>
+                        </div>
                     <?php else: ?>
                         <p>No login history available.</p>
                     <?php endif; ?>
                 </div>
+
 
             </div>
 
