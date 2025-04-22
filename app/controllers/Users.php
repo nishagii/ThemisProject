@@ -28,4 +28,23 @@ class Users
         $this->view('/seniorCounsel/system_users', $data);
     }
 
+    // In app/controllers/Users.php
+    public function getUserDetails($userId = null)
+    {
+        if (!$userId) {
+            echo json_encode(['success' => false, 'message' => 'No user ID provided']);
+            exit;
+        }
+
+        $userModel = $this->loadModel('UserModel');
+        $user = $userModel->getUserByID($userId);
+
+        if ($user) {
+            echo json_encode(['success' => true, 'user' => $user]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'User not found']);
+        }
+        exit;
+    }
+
 }
