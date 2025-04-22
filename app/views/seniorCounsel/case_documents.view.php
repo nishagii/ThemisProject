@@ -220,18 +220,75 @@
         }
     }
 
+        
+        // Function to get the current user's information
+        // This uses PHP to directly inject the username value into JavaScript
         function getCurrentUser() {
-            // This is a placeholder - you should replace this with how you get the current user in your system
-            // For example, you might have a global PHP variable you can access via JavaScript
-            // If you're using PHP sessions, you might use something like:
-            // return '<?php echo $_SESSION['user_name']; ?>';
-            
-            // For now, let's assume we have a hidden input field with the current user's name
-            const userElement = document.getElementById('current-user');
-            return userElement ? userElement.value : null;
+            // This will be replaced with the actual username value when PHP processes the file
+            return '<?php echo htmlspecialchars($username ?? ""); ?>';
         }
 
+        // Similarly, if you need the user ID
+        function getCurrentUserId() {
+            return '<?php echo htmlspecialchars($user_id ?? ""); ?>';
+        }
 
+        // Your filter function using the direct PHP variable
+        function filterDocuments() {
+            const filterOption = document.getElementById('filter-options').value;
+            const rows = document.querySelectorAll('.transaction-row');
+            let hasResults = false;
+            
+            // Get current username directly from PHP variable
+            const currentUser = '<?php echo htmlspecialchars($username ?? ""); ?>'.toLowerCase();
+            
+            rows.forEach(row => {
+                // First, apply any existing search filter
+                const searchTerm = document.getElementById('document-search').value.toLowerCase();
+                const description = row.querySelector('.transaction-description').textContent.toLowerCase();
+                const uploader = row.querySelector('.transaction-uploader').textContent.toLowerCase();
+                const date = row.querySelector('.transaction-date').textContent.toLowerCase();
+                
+                let matchesSearch = true;
+                
+                if (searchTerm.length > 0) {
+                    matchesSearch = description.includes(searchTerm) || 
+                                uploader.includes(searchTerm) || 
+                                date.includes(searchTerm);
+                }
+                
+                // Then apply user filter
+                let matchesFilter = true;
+                
+                if (filterOption === 'my-uploads') {
+                    matchesFilter = uploader.trim() === currentUser;
+                }
+                
+                // Show row only if it matches both filters
+                if (matchesSearch && matchesFilter) {
+                    row.style.display = '';
+                    hasResults = true;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            
+            // Update no results message
+            let noResultsElement = document.getElementById('no-search-results');
+            
+            if (!hasResults) {
+                if (!noResultsElement) {
+                    noResultsElement = document.createElement('p');
+                    noResultsElement.id = 'no-search-results';
+                    noResultsElement.classList.add('no-results-message');
+                    noResultsElement.textContent = 'No documents match your criteria.';
+                    document.querySelector('.document-container').appendChild(noResultsElement);
+                }
+                noResultsElement.style.display = 'block';
+            } else if (noResultsElement) {
+                noResultsElement.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>

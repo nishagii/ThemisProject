@@ -6,13 +6,26 @@ class Document
 
     public function index()
     {
-        //change this later 
-        $caseID = 11; 
-        
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
+    
+        $user_id = $_SESSION['user_id'];
+        $username = $_SESSION['username'] ?? 'User';
+        $caseID = 11; // hardcoded for now
+    
         $documentModel = $this->loadModel('documentModel');
         $documents = $documentModel->getDocumentsByCase($caseID);
-        $this->view('/seniorCounsel/case_documents', ['documents' => $documents]);
+    
+        // Pass both documents and user data to the view
+        $this->view('/seniorCounsel/case_documents', [
+            'documents' => $documents,
+            'user_id' => $user_id,
+            'username' => $username
+        ]);
     }
+    
 
     public function add_Document()
     {
