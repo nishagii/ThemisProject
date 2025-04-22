@@ -59,7 +59,7 @@
                     <div>Date</div>
                     <div>Uploaded By</div>
                     <div>Receipt</div>
-                    <div>Actions</div>
+                    <div> </div>
                 </div>
                 
                 <!-- Loop through the documents and display each one -->
@@ -71,18 +71,22 @@
                             <div class="transaction-uploader"><?php echo htmlspecialchars($document->first_name); ?></div>
                             <div><a href="<?= ROOT ?>/assets/documents/<?= $document->file_path ?>" download class="download-button">Download</a></div>
                             <div class="action-buttons">
-                                <button class="edit-button" onclick="handleEdit(<?php echo $document->document_id; ?>)">
-                                    <i class='bx bx-edit-alt'></i>
-                                </button>
-                                <button class="delete-button" onclick="confirmDelete(<?php echo $document->document_id; ?>)">
-                                    <i class='bx bx-trash'></i>
-                                </button>
+                                <?php if ($document->uploaded_by == $_SESSION['user_id']): ?>
+                                    <!-- Show Edit and Delete buttons only if the current user is the uploader -->
+                                    <button class="edit-button" onclick="handleEdit(<?php echo $document->document_id; ?>)">
+                                        <i class='bx bx-edit-alt'></i>
+                                    </button>
+                                    <button class="delete-button" onclick="confirmDelete(<?php echo $document->document_id; ?>)">
+                                        <i class='bx bx-trash'></i>
+                                    </button>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <p>No documents found for this case.</p>
                 <?php endif; ?>
+
                 
             </div>
         </div>
