@@ -10,7 +10,6 @@
     <style>
         .task-details-container {
             padding: 30px;
-
             overflow: hidden;
         }
 
@@ -45,6 +44,35 @@
 
         .status-overdue {
             background: #dc3545;
+        }
+
+        /* Priority Badge Styles */
+        .priority-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .priority-high {
+            background-color: #ffecec;
+            color: #dc3545;
+            border: 1px solid #ffc9c9;
+        }
+
+        .priority-medium {
+            background-color: #fff8ec;
+            color: #fd7e14;
+            border: 1px solid #ffe5c0;
+        }
+
+        .priority-low {
+            background-color: #ecf5ff;
+            color: #007bff;
+            border: 1px solid #c9e0ff;
         }
 
         .task-body {
@@ -178,6 +206,57 @@
             border-left: 4px solid #dc3545;
             color: #721c24;
         }
+        
+        /* Completion Comments Form Styles */
+        .completion-comments {
+            display: none;
+            margin-top: 20px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        
+        .completion-comments h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .completion-comments textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 100px;
+            margin-bottom: 15px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        .completion-comments-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .submit-button {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .submit-button:hover {
+            background-color: #218838;
+        }
+        
+        .cancel-button {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .cancel-button:hover {
+            background-color: #c82333;
+        }
 
         @media (max-width: 768px) {
             .info-grid {
@@ -191,6 +270,10 @@
             .action-button {
                 width: 100%;
                 justify-content: center;
+            }
+            
+            .completion-comments-buttons {
+                flex-direction: column;
             }
         }
     </style>
@@ -240,8 +323,32 @@
                         </div>
                         <div class="info-item">
                             <span class="info-label">Priority</span>
-                            <span class="info-value"><?= htmlspecialchars(ucfirst($task->priority)) ?></span>
+                            <span class="info-value">
+                                <?php
+                                    $priorityClass = '';
+                                    $priority = strtolower($task->priority);
+                                    
+                                    if ($priority === 'high') {
+                                        $priorityClass = 'priority-high';
+                                    } elseif ($priority === 'medium') {
+                                        $priorityClass = 'priority-medium';
+                                    } elseif ($priority === 'low') {
+                                        $priorityClass = 'priority-low';
+                                    }
+                                ?>
+                                <span class="priority-badge <?= $priorityClass ?>">
+                                    <?php if ($priority === 'high'): ?>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    <?php elseif ($priority === 'medium'): ?>
+                                        <i class="fas fa-dot-circle"></i>
+                                    <?php else: ?>
+                                        <i class="fas fa-arrow-circle-down"></i>
+                                    <?php endif; ?>
+                                    <?= htmlspecialchars(ucfirst($priority)) ?>
+                                </span>
+                            </span>
                         </div>
+
                         <div class="info-item">
                             <span class="info-label">Assigned By</span>
                             <span class="info-value"><?= htmlspecialchars($task->assignerName ?? 'System') ?></span>
@@ -292,7 +399,7 @@
                     </button>
                     
                     <?php if ($task->status !== 'completed'): ?>
-                    <button class="action-button complete-button" onclick="confirmComplete(<?= $task->taskID ?>)">
+                    <button class="action-button complete-button" id="completeButton">
                         <i class="fas fa-check"></i> Mark as Complete
                     </button>
                     <?php else: ?>
@@ -300,6 +407,22 @@
                         <i class="fas fa-check-circle"></i> Task Completed
                     </button>
                     <?php endif; ?>
+                </div>
+                
+                <!-- Completion Comments Form -->
+                <div class="completion-comments" id="completionComments">
+                    <h3>Completion Comments (Optional)</h3>
+                    <form id="completeTaskForm" action="<?= ROOT ?>/task/complete/<?= $task->taskID ?>" method="post">
+                        <textarea name="completionComments" placeholder="Add any comments about your task completion (optional)"></textarea>
+                        <div class="completion-comments-buttons">
+                            <button type="submit" class="action-button submit-button">
+                                <i class="fas fa-check"></i> Submit
+                            </button>
+                            <button type="button" class="action-button cancel-button" id="cancelButton">
+                                <i class="fas fa-times"></i> Cancel
+                            </button>
+                        </div>
+                    </form>
                 </div>
                 
                 <?php if (!empty($task->notes)): ?>
@@ -315,10 +438,23 @@
     </div>
 
     <script>
-        function confirmComplete(taskId) {
-            if (confirm('Are you sure you want to mark this task as complete?')) {
-                window.location.href = "<?= ROOT ?>/task/complete/" + taskId;
-            }
+        // Show/hide completion comments form
+        const completeButton = document.getElementById('completeButton');
+        const completionComments = document.getElementById('completionComments');
+        const cancelButton = document.getElementById('cancelButton');
+        
+        if (completeButton) {
+            completeButton.addEventListener('click', function() {
+                completionComments.style.display = 'block';
+                completeButton.style.display = 'none';
+            });
+        }
+        
+        if (cancelButton) {
+            cancelButton.addEventListener('click', function() {
+                completionComments.style.display = 'none';
+                completeButton.style.display = 'inline-flex';
+            });
         }
     </script>
 </body>
