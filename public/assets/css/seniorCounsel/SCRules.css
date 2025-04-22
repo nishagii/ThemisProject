@@ -4,17 +4,16 @@ body {
     padding: 0;
 }
 .rules-header{
-      text-align: center;
-}
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(29, 27, 49);
+    margin-bottom: 5px;
+    padding: 20px;
+    text-align: center;
+}    
 
 .rules-header h1{
-    color: #1d1b31;
-    background-color: #f4f8ff;
-    font-size: 30px;
-    margin-bottom: 10px;
-    padding: 10px;
-    text-transform: uppercase;
-    font-weight: bold;
+    margin: 0;
+    font-size: 2rem;
 }
 
 /* General container styling */
