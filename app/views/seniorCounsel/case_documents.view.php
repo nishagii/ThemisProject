@@ -108,26 +108,55 @@
         const sortOption = document.getElementById("sort-options").value;
         const rows = Array.from(document.querySelectorAll(".transaction-row"));
         const container = document.querySelector(".document-container");
-
+        
+        // Get the header and upload button elements
+        const header = document.querySelector(".transaction-header");
+        const uploadSection = document.querySelector(".upload-section");
+        
         rows.sort((a, b) => {
             const nameA = a.querySelector(".transaction-description").textContent.trim().toLowerCase();
             const nameB = b.querySelector(".transaction-description").textContent.trim().toLowerCase();
-            const dateA = new Date(a.querySelector(".transaction-date").textContent.trim());
-            const dateB = new Date(b.querySelector(".transaction-date").textContent.trim());
-
+            
+            // Improved date parsing
+            const dateStrA = a.querySelector(".transaction-date").textContent.trim();
+            const dateStrB = b.querySelector(".transaction-date").textContent.trim();
+            
+            // Parse dates properly - this handles various date formats better
+            const dateA = new Date(dateStrA);
+            const dateB = new Date(dateStrB);
+            
+            // Check if dates are valid
+            const isValidDateA = !isNaN(dateA.getTime());
+            const isValidDateB = !isNaN(dateB.getTime());
+            
             switch (sortOption) {
                 case "date-desc":
-                    return dateB - dateA;
+                    if (isValidDateA && isValidDateB) return dateB - dateA;
+                    return 0;
                 case "date-asc":
-                    return dateA - dateB;
+                    if (isValidDateA && isValidDateB) return dateA - dateB;
+                    return 0;
                 case "name-asc":
                     return nameA.localeCompare(nameB);
                 case "name-desc":
                     return nameB.localeCompare(nameA);
             }
         });
-
-        rows.forEach(row => container.appendChild(row));
+        
+        // Remove all rows from container
+        const rowsParent = rows[0].parentNode;
+        rows.forEach(row => rowsParent.removeChild(row));
+        
+        // Append the header and upload section first (if they were removed)
+        if (!container.contains(header)) {
+            container.appendChild(header);
+        }
+        if (!container.contains(uploadSection)) {
+            container.appendChild(uploadSection);
+        }
+        
+        // Then append all sorted rows
+        rows.forEach(row => rowsParent.appendChild(row));
     }
 
     </script>

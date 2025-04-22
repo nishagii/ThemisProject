@@ -50,7 +50,7 @@ class DocumentModel {
      */
     public function getDocumentsByCase($case_id)
     {
-        $query = "SELECT * FROM {$this->table} WHERE case_id = :case_id";
+        $query = "SELECT * FROM {$this->table} WHERE case_id = :case_id ORDER BY document_id DESC";
         $params = ['case_id' => $case_id];
         
         // Execute the query and return the result
