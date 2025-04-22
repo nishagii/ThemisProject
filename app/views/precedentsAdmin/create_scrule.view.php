@@ -56,64 +56,57 @@
         </form>
     </div>
     <script>
-        
-        window.addEventListener('DOMContentLoaded', function () {
+    window.addEventListener('DOMContentLoaded', function () {
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('date').setAttribute('max', today);
-        });
-        
-        // Form Validation
-        document.getElementById('scRulesForm').addEventListener('submit', function(event) {
-            // Get form fields
-            const ruleNumber = document.getElementById('rule_number').value.trim();
-            const date = document.getElementById('date').value;
-            const sinhalaLink = document.getElementById('sinhala_link').value.trim();
-            const TamilLink = document.getElementById('tamil_link').value.trim();
-            const englishLink = document.getElementById('english_link').value.trim();
+    });
 
-            // Error elements
-            const ruleNumberError = document.getElementById('ruleNumberError');
-            const dateError = document.getElementById('dateError');
-            const sinhalaLinkError = document.getElementById('sinhalaLinkError');
-            const tamilLinkError = document.getElementById('tamilLinkError');
-            const englishLinkError = document.getElementById('englishLinkError');
+    document.getElementById('scRulesForm').addEventListener('submit', function(event) {
+        const ruleNumber = document.getElementById('rule_number').value.trim();
+        const date = document.getElementById('date').value;
+        const sinhalaLink = document.getElementById('sinhala_link').value.trim();
+        const tamilLink = document.getElementById('tamil_link').value.trim();
+        const englishLink = document.getElementById('english_link').value.trim();
 
-            // Reset error messages
-            ruleNumberError.textContent = '';
-            dateError.textContent = '';
-            sinhalaLinkError.textContent = '';
-            tamilLinkError.textContent = '';
-            englishLinkError.textContent = '';
+        const ruleNumberError = document.getElementById('ruleNumberError');
+        const dateError = document.getElementById('dateError');
+        const sinhalaLinkError = document.getElementById('sinhalaLinkError');
+        const tamilLinkError = document.getElementById('tamilLinkError');
+        const englishLinkError = document.getElementById('englishLinkError');
 
-            // Flag to check if form is valid
-            let isValid = ture;
+        ruleNumberError.textContent = '';
+        dateError.textContent = '';
+        sinhalaLinkError.textContent = '';
+        tamilLinkError.textContent = '';
+        englishLinkError.textContent = '';
 
-            // Validation checks
-            if (!ruleNumber) {
-                ruleNumberError.textContent = 'Rule number is required.';
-                isValid = false;
-            }
-            if (!date) {
-                dateError.textContent = 'Published Date is required.';
-                isValid = false;
-            }
-            if (!sinhalaLink) {
-                sinhalaLinkError.textContent = 'Sinhala document is required.';
-                isValid = false;
-            }
-            if (!tamilLink) {
-                tamilLinkError.textContent = 'Tamil document is required.';
-                isValid = false;
-            }
-            if (!englishLink) {
-                englishLinkError.textContent = 'English document is required.';
-                isValid = false;
-            }
-            // If form is not valid, prevent submission
-            if (!isValid) {
-                event.preventDefault();
-            }
-        });
+        let isValid = true;
+
+        if (!ruleNumber) {
+            ruleNumberError.textContent = 'Rule number is required.';
+            isValid = false;
+        }
+        if (!date) {
+            dateError.textContent = 'Published Date is required.';
+            isValid = false;
+        }
+        if (!sinhalaLink) {
+            sinhalaLinkError.textContent = 'Sinhala document is required.';
+            isValid = false;
+        }
+        if (!tamilLink) {
+            tamilLinkError.textContent = 'Tamil document is required.';
+            isValid = false;
+        }
+        if (!englishLink) {
+            englishLinkError.textContent = 'English document is required.';
+            isValid = false;
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
     </script>
 </body>
 </html>
