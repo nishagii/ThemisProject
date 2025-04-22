@@ -21,7 +21,7 @@
 
         <div class="documents-card">
             <p>Click here to add or view case documents</p>
-            <a href="<?= ROOT ?>/document"><button>Documents</button></a>
+            <a href="<?= ROOT ?>/document/<?= $case->id ?>"><button>Documents</button></a>
         </div>
 
         <div class="case-details-card">
