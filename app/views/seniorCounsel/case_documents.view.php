@@ -20,15 +20,30 @@
         <!-- Sort Button Section -->
         
         <div class="case-details-card">
-            <div class="sort-section">
-                <label for="sort-options">Sort by:</label>
-                <select id="sort-options" onchange="sortDocuments()">
-                    <option value="date-desc">Date (Newest)</option>
-                    <option value="date-asc">Date (Oldest)</option>
-                    <option value="name-asc">Name (A-Z)</option>
-                    <option value="name-desc">Name (Z-A)</option>
-                </select>
+            <div class="flex">
+                <div class="search-container">
+                    <input type="text" id="document-search" placeholder="Search documents..." onkeyup="searchDocuments()">
+                    
+                </div>
+                <div class="sort-section">
+                    <label for="sort-options">Sort by:</label>
+                    <select id="sort-options" onchange="sortDocuments()">
+                        <option value="date-desc">Date (Newest)</option>
+                        <option value="date-asc">Date (Oldest)</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                    </select>
+                </div>
+
+                <div class="filter-container">
+                    <label for="filter-options">Filter:</label>
+                    <select id="filter-options" onchange="filterDocuments()">
+                        <option value="all">All Documents</option>
+                        <option value="my-uploads">Uploaded by me</option>
+                    </select>
+                </div>
             </div>
+            
 
             <div class="document-container">
                 
@@ -158,6 +173,64 @@
         // Then append all sorted rows
         rows.forEach(row => rowsParent.appendChild(row));
     }
+
+        function searchDocuments() {
+        const searchTerm = document.getElementById("document-search").value.toLowerCase();
+        const rows = document.querySelectorAll(".transaction-row");
+        let hasResults = false;
+        
+        rows.forEach(row => {
+            const description = row.querySelector(".transaction-description").textContent.toLowerCase();
+            const uploader = row.querySelector(".transaction-uploader").textContent.toLowerCase();
+            const date = row.querySelector(".transaction-date").textContent.toLowerCase();
+            
+            // Check if the search term is found in any of the fields
+            if (description.includes(searchTerm) || 
+                uploader.includes(searchTerm) || 
+                date.includes(searchTerm)) {
+                row.style.display = ""; // Show the row
+                hasResults = true;
+                
+                // Add highlight effect
+                if (searchTerm.length > 0) {
+                    row.classList.add("highlight");
+                } else {
+                    row.classList.remove("highlight");
+                }
+            } else {
+                row.style.display = "none"; // Hide the row
+                row.classList.remove("highlight");
+            }
+        });
+        
+        // Show or hide the "No results" message
+        let noResultsElement = document.getElementById("no-search-results");
+        
+        if (!hasResults && searchTerm.length > 0) {
+            if (!noResultsElement) {
+                noResultsElement = document.createElement("p");
+                noResultsElement.id = "no-search-results";
+                noResultsElement.classList.add("no-results-message");
+                noResultsElement.textContent = "No documents match your search criteria.";
+                document.querySelector(".document-container").appendChild(noResultsElement);
+            }
+            noResultsElement.style.display = "block";
+        } else if (noResultsElement) {
+            noResultsElement.style.display = "none";
+        }
+    }
+
+        function getCurrentUser() {
+            // This is a placeholder - you should replace this with how you get the current user in your system
+            // For example, you might have a global PHP variable you can access via JavaScript
+            // If you're using PHP sessions, you might use something like:
+            // return '<?php echo $_SESSION['user_name']; ?>';
+            
+            // For now, let's assume we have a hidden input field with the current user's name
+            const userElement = document.getElementById('current-user');
+            return userElement ? userElement.value : null;
+        }
+
 
     </script>
 </body>
