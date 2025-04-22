@@ -15,7 +15,7 @@
     <?php include('component/sidebar.view.php'); ?>
     
     <div class="home-section">
-        <h1 class="card-section">Case Documents</h1>
+        <h1 class="card-section">Case ID: <?php echo htmlspecialchars($case_id); ?> Documents</h1>
         
         <!-- Sort Button Section -->
         
@@ -49,7 +49,7 @@
                 
                 <!-- Upload Button Section -->
                 <div class="upload-section">
-                    <button class="upload-button" onclick="handleUpload()">
+                    <button class="upload-button" onclick="handleUpload('<?php echo htmlspecialchars($case_id); ?>')">
                         <i class='bx bx-plus'></i> <p>Upload</p>
                     </button>
                 </div>
@@ -119,9 +119,9 @@
             window.location.href = "<?= ROOT ?>/document/editDocument/" + documentId;
         }
         
-        function handleUpload() {
+        function handleUpload(case_id) {
             // Redirect to the upload page
-            window.location.href = "<?= ROOT ?>/document/add_Document";
+            window.location.href = "<?= ROOT ?>/document/add_Document/" + case_id;
         }
         function sortDocuments() {
         const sortOption = document.getElementById("sort-options").value;

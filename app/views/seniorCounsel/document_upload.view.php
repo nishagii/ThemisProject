@@ -20,10 +20,13 @@
     <?php include('component/sidebar.view.php'); ?>
 
     <div class="home-section">
-        <h1 class="card-section">Upload Documents</h1>
+        <h1 class="card-section">Upload Documents for Case ID: <?= $case_id ?></h1>
+
 
         <div class="case-details-card">
             <form action="<?= ROOT ?>/document/save_Document" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="case_id" value="<?= $case_id ?>">
+
                 <div class="form-group">
                     <label for="docName">Document Name</label>
                     <input type="text" id="docName" name="doc_name" required>

@@ -4,7 +4,7 @@ class Document
 {
     use Controller;
 
-    public function index()
+    public function index($caseID)
     {
         if (empty($_SESSION['user_id'])) {
             redirect('login');
@@ -13,7 +13,6 @@ class Document
     
         $user_id = $_SESSION['user_id'];
         $username = $_SESSION['username'] ?? 'User';
-        $caseID = 11; // hardcoded for now
     
         $documentModel = $this->loadModel('documentModel');
         $documents = $documentModel->getDocumentsByCase($caseID);
@@ -22,12 +21,13 @@ class Document
         $this->view('/seniorCounsel/case_documents', [
             'documents' => $documents,
             'user_id' => $user_id,
-            'username' => $username
+            'username' => $username,
+            'case_id' => $caseID
         ]);
     }
     
 
-    public function add_Document()
+    public function add_Document($caseID)
     {
         if (empty($_SESSION['user_id'])) {
             redirect('login');
@@ -39,7 +39,8 @@ class Document
 
         $this->view('/seniorCounsel/document_upload', [
             'user_id' => $user_id,
-            'username' => $username
+            'username' => $username,
+            'case_id' =>  $caseID
         ]);
     }
 
@@ -56,7 +57,7 @@ class Document
             $docName = filter_input(INPUT_POST, 'doc_name', FILTER_SANITIZE_STRING);
             $docDescription = filter_input(INPUT_POST, 'doc_description', FILTER_SANITIZE_STRING);
     
-            $caseID = 11; // Ideally get this dynamically later
+            $caseID = filter_input(INPUT_POST, 'case_id', FILTER_SANITIZE_NUMBER_INT); 
             $uploadedBy = $_SESSION['user_id'] ?? null;
     
             if (isset($_FILES['document_file']) && $_FILES['document_file']['error'] === UPLOAD_ERR_OK) {
@@ -90,26 +91,26 @@ class Document
     
                     if ($result) {
                         $_SESSION['success'] = "Document uploaded successfully!";
-                        header("Location: " . ROOT . "/document/index");
+                        header("Location: " . ROOT . "/document/index/$caseID");
                         exit;
                     } else {
                         $_SESSION['error'] = "Database error. Could not save document information.";
-                        header("Location: " . ROOT . "/document/add_Document");
+                        header("Location: " . ROOT . "/document/add_Document/$caseID");
                         exit;
                     }
                 } else {
                     $_SESSION['error'] = "Error moving uploaded file.";
-                    header("Location: " . ROOT . "/document/add_Document");
+                    header("Location: " . ROOT . "/document/add_Document/$caseID");
                     exit;
                 }
             } else {
                 $uploadError = $_FILES['document_file']['error'];
                 $_SESSION['error'] = "File upload error: " . $this->getFileUploadErrorMessage($uploadError);
-                header("Location: " . ROOT . "/document/add_Document");
+                header("Location: " . ROOT . "/document/add_Document/$caseID");
                 exit;
             }
         } else {
-            header("Location: " . ROOT . "/document/add_Document");
+            header("Location: " . ROOT . "/Cases");
             exit;
         }
     }
