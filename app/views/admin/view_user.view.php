@@ -28,12 +28,11 @@
                     <p><strong>Role:</strong> <span><?= htmlspecialchars($user->role) ?></span></p>
                     <p>
                         <strong>Status:</strong>
-                        <span class="status-badge <?= ($user->active ?? true) ? 'status-active' : 'status-inactive' ?>">
+                        <span class="view-badge <?= ($user->active ?? true) ? 'view-active' : 'view-inactive' ?>">
                             <?= ($user->active ?? true) ? 'Active' : 'Inactive' ?>
                         </span>
                     </p>
-
-                    <p ><strong>Verified:</strong> <span><?= ($user->verified ?? false) ? 'Yes' : 'No' ?></span></p>
+                    
                 </div>
 
                 <a href="<?= ROOT ?>/UsersAdmin" class="back-btn">

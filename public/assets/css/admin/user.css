@@ -530,7 +530,7 @@
 }
 
 /* Badge styling for status */
-.status-badge {
+.view-badge {
   display: inline-block;
   padding: 4px 10px;
   border-radius: 12px;
@@ -542,12 +542,12 @@
 }
 
 /* Green for Active */
-.status-active {
+.view-active {
   background-color: #4fc66b;
 }
 
 /* Red for Inactive */
-.status-inactive {
+.view-inactive {
   background-color: #dc3545;
 }
 
