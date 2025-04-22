@@ -68,7 +68,7 @@
                         <div class="transaction-row">
                             <div class="transaction-description"><?php echo htmlspecialchars($document->doc_name); ?></div>
                             <div class="transaction-date"><?php echo htmlspecialchars($document->uploaded_at); ?></div>
-                            <div class="transaction-uploader"><?php echo htmlspecialchars($document->uploaded_by); ?></div>
+                            <div class="transaction-uploader"><?php echo htmlspecialchars($document->first_name); ?></div>
                             <div><a href="<?= ROOT ?>/assets/documents/<?= $document->file_path ?>" download class="download-button">Download</a></div>
                             <div class="action-buttons">
                                 <button class="edit-button" onclick="handleEdit(<?php echo $document->document_id; ?>)">

@@ -50,13 +50,7 @@ class DocumentModel {
      */
     public function getDocumentsByCase($case_id)
     {
-            $query = "
-            SELECT d.*, u.first_name 
-            FROM {$this->table} d
-            INNER JOIN users u ON d.uploaded_by = u.id
-            WHERE d.case_id = :case_id
-            ORDER BY d.document_id DESC
-        ";
+        $query = "SELECT d.*, users.first_name AS first_name FROM {$this->table} d INNER JOIN users ON d.uploaded_by = users.id WHERE case_id = :case_id ORDER BY document_id DESC";
         $params = ['case_id' => $case_id];
         
         // Execute the query and return the result
