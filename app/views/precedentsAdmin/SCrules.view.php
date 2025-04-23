@@ -29,6 +29,7 @@
                                 <span><a href="<?php echo $rule->sinhala_link; ?>" target="_blank">Sinhala</a></span>
                                 <span><a href="<?php echo $rule->tamil_link; ?>" target="_blank">Tamil</a></span>
                                 <span><a href="<?php echo $rule->english_link; ?>" target="_blank">English</a></span>
+                                <span><a href="<?= ROOT ?>/SCrules/edit/<?= $rule->id ?>" class="btn btn-edit">Edit Rule</a></span>
                             </span>
                             </li>
                         </ul>

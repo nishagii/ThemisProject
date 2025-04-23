@@ -85,62 +85,61 @@ public function create() {
 /*-------------------Update---------------------------------- */
    
     public function edit($id) {
-        $caseModel = $this->loadModel('PrecedentModel');
-        $case = $caseModel->getByCaseId($id);
+        $SCrulesModel = $this->loadModel('SCrulesModel');
+        $rule = $SCrulesModel->getRuleByRuleId($id);
 
-        if (!$case) {
-            die("Case not found or invalid ID.");
+        if (!$rule) {
+            die("Rule not found or invalid ID.");
         }
-        $this->view('precedentsAdmin/edit_precedent', ['case' => $case]);
+        $this->view('precedentsAdmin/edit_scrule', ['rule' => $rule]);
     }
 
-    public function updatePrecedent(){
-    // Collect POST data
-    $data = [
-        'judgment_date' => $_POST['judgment_date'],
-        'case_number' => $_POST['case_number'],
-        'description' => $_POST['description'],
-        'judgment_by' => $_POST['judgment_by'],
-        'document_link' => $_POST['current_document_link'], // Keep this for the case where no file is uploaded
-        'id' => $_POST['id'],
-    ];
-
-    // Check if a file was uploaded
-    if (isset($_FILES['document_upload']) && $_FILES['document_upload']['error'] === UPLOAD_ERR_OK) {
-        // Define allowed file types
+    public function updateRule() {
+        $uploadDir = '../public/assets/scrulesUploads/';
         $allowedTypes = ['application/pdf'];
-
-        $fileTmpPath = $_FILES['document_upload']['tmp_name'];
-        $fileName = $_FILES['document_upload']['name'];
-        $fileType = $_FILES['document_upload']['type'];
-        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
-
-        // Validate file type
-        if (!in_array($fileType, $allowedTypes)) {
-            die("Invalid file type. Please upload a PDF or Word document.");
+    
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
         }
-
-        $uploadDir = '../public/assets/precedentsUploads/';
-        $sanitizedFileName = uniqid('precedent_', true) . '.' . $fileExtension;
-        $uploadPath = $uploadDir . $sanitizedFileName;
-
-        // Move the uploaded file to the server
-        if (move_uploaded_file($fileTmpPath, $uploadPath)) {
-                // Save the relative path to the database
-                $data['document_link'] = '/themisrepo/public/assets/precedentsUploads/' . $sanitizedFileName;
+    
+        function uploadIfExists($fieldName, $uploadDir, $allowedTypes, $currentPathKey) {
+            if (isset($_FILES[$fieldName]) && $_FILES[$fieldName]['error'] === UPLOAD_ERR_OK) {
+                $tmp = $_FILES[$fieldName]['tmp_name'];
+                $name = $_FILES[$fieldName]['name'];
+                $type = $_FILES[$fieldName]['type'];
+                $ext = pathinfo($name, PATHINFO_EXTENSION);
+    
+                if (!in_array($type, $allowedTypes)) {
+                    die("Invalid file type for $fieldName. Please upload a PDF.");
+                }
+    
+                $newName = uniqid($fieldName . '_', true) . '.' . $ext;
+                $path = $uploadDir . $newName;
+    
+                if (move_uploaded_file($tmp, $path)) {
+                    return '/themisrepo/public/assets/scrulesUploads/' . $newName;
+                } else {
+                    die("Failed to upload file for $fieldName.");
+                }
             } else {
-                die('File upload failed. Please try again.');
+                return $_POST[$currentPathKey] ?? null;
+            }
         }
+    
+        $data = [
+            'id' => $_POST['id'],
+            'rule_number' => $_POST['rule_number'],
+            'published_date' => $_POST['published_date'],
+            'sinhala_link' => uploadIfExists('sinhala_link', $uploadDir, $allowedTypes, 'current_sinhala_link'),
+            'tamil_link' => uploadIfExists('tamil_link', $uploadDir, $allowedTypes, 'current_tamil_link'),
+            'english_link' => uploadIfExists('english_link', $uploadDir, $allowedTypes, 'current_english_link'),
+        ];
+    
+        $model = $this->loadModel('SCrulesModel');
+        $model->update($data);
+    
+        redirect('SCrules/retrieve');
     }
-
-    // Update the case in the database
-    $caseModel = $this->loadModel('PrecedentModel');
-    $caseModel->update($data);
-
-    // Redirect to a success page or the list of cases
-    redirect('PrecedentsController/retrieveAll');
-}
-
 /*-------------------Delete----------------------------------- */
     public function deletePrecedent($id)
     {

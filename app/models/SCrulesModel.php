@@ -31,7 +31,7 @@ class SCrulesModel {
         return $this->query($query);
     }
 
-    public function getByCaseId($id)
+    public function getRuleByRuleId($id)
     {
         $query = "SELECT * FROM {$this->table} WHERE id = :id";
         $params = ['id' => $id];
@@ -47,21 +47,23 @@ class SCrulesModel {
     //update precedents
     public function update($data) {
         $query = "UPDATE {$this->table}
-                SET 
-                    judgment_date = :judgment_date,
-                    case_number = :case_number,
-                    description = :description,
-                    judgment_by = :judgment_by,
-                    document_link = :document_link
-                    WHERE id = :id";
+                  SET 
+                      rule_number = :rule_number,
+                      published_date = :published_date,
+                      sinhala_link = :sinhala_link,
+                      tamil_link = :tamil_link,
+                      english_link = :english_link
+                  WHERE id = :id";
+    
         $params = [
-            'judgment_date' => $data['judgment_date'],
-            'case_number' => $data['case_number'],
-            'description' => $data['description'],
-            'judgment_by' => $data['judgment_by'],
-            'document_link' => $data['document_link'],
-            ':id' => $data['id'],
+            ':rule_number' => $data['rule_number'],
+            ':published_date' => $data['published_date'],
+            ':sinhala_link' => $data['sinhala_link'],
+            ':tamil_link' => $data['tamil_link'],
+            ':english_link' => $data['english_link'],
+            ':id' => $data['id']
         ];
+    
         return $this->query($query, $params);
     }
 
