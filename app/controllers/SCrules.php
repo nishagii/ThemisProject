@@ -141,15 +141,14 @@ public function create() {
         redirect('SCrules/retrieve');
     }
 /*-------------------Delete----------------------------------- */
-    public function deletePrecedent($id)
+    public function delete($id)
     {
         // Load the CaseModel
-        $caseModel = $this->loadModel('PrecedentModel');
+        $caseModel = $this->loadModel('SCrulesModel');
 
         // Delete the case
         $caseModel->delete($id);
 
-        // Redirect to the home page or success page
-        redirect('PrecedentsController/retrieveAll');
+        redirect('SCrules/retrieve');
     }
 }

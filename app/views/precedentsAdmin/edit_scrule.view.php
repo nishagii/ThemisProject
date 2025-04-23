@@ -204,6 +204,7 @@
 </style>
 
 <body>
+    <?php include('components/bigNav.view.php'); ?>
     <form id="scruleEditForm"
     action="<?= ROOT ?>/SCrules/updateRule" method="POST" 
     enctype="multipart/form-data"
