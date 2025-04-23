@@ -44,6 +44,10 @@ section h2 {
     gap: 10px;
 }
 
+.case-progress {
+    margin-top: 10px;
+}
+
 /* Case Progress Section */
 .case-card {
     border: 1px solid #ddd;
