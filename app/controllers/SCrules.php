@@ -65,6 +65,9 @@ public function create() {
 
         // Insert into database
         $this->SCrulesModel->insert($data);
+
+        header('Location: ' . ROOT . '/SCrules/create');
+        exit;
     }
 
     $this->view('precedentsAdmin/create_scrule');
