@@ -35,7 +35,8 @@ class PaymentModel
      */
     public function getAllPayments()
     {
-        $query = "SELECT * FROM {$this->table}";
+        $query = "SELECT * FROM {$this->table}
+        ORDER BY created_at ASC";
         return $this->query($query);
     }
 
@@ -78,7 +79,8 @@ class PaymentModel
     {
         $query = "SELECT p.*, c.case_number, c.client_name , c.court, c.client_number
                   FROM {$this->table}  p
-                  LEFT JOIN cases c ON p.case_number = c.case_number";
+                  LEFT JOIN cases c ON p.case_number = c.case_number
+                  ORDER BY p.created_at DESC";
 
                   return $this->query($query);
     }
