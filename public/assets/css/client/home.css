@@ -1,4 +1,4 @@
-/* General Styles */
+
 body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
@@ -75,49 +75,8 @@ section h2 {
     color: #27ae60;
 }
 
-/* Payments Section */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: #ffffff;
-}
-
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-table th {
-    background-color: #e4e9f7;
-}
-
-table .paid {
-    color: #27ae60;
-    font-weight: bold;
-}
-
-table .pending {
-    color: #e74c3c;
-    font-weight: bold;
-}
-
-/* Notifications Section */
-.notifications ul {
-    list-style: none;
-    padding: 0;
-}
-
-.notifications ul li {
-    background: #ffffff;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
 i{
-    color: #f89000;
+    color: #4d71b3;
 }
 i:hover{
     color: #396eff;
@@ -137,7 +96,7 @@ i:hover{
   
   .no-cases-icon i {
     font-size: 24px;
-    color: #6c757d;
+    color: #f39c12;
     margin-right: 15px;
   }
   
@@ -268,7 +227,7 @@ i:hover{
 
 .no-invoices-icon i {
     font-size: 24px;
-    color: #6c757d;
+    color: #f39c12;
     margin-right: 15px;
 }
 
@@ -287,4 +246,92 @@ i:hover{
     color: #6c757d;
     font-size: 14px;
 }
+
+.login-container {
+    max-width: 600px;
+    width: 450px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    padding: 30px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header h2 {
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  .subtext {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 4px;
+  }
+  
+  
+  
+  .login-list {
+    margin-top: 30px;
+  }
+  
+  .login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .login-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .login-icon {
+    background-color: #b2e8e0;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .text-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .date {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  
+  .time {
+    font-size: 12px;
+    color: #999;
+  }
+  
+  .ip {
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  .status {
+    color: #a264f8;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  
   

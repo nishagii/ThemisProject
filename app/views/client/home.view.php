@@ -39,81 +39,116 @@
             <div class="home-body">
                 <header class="header">
                     <h1>Welcome, <span class="user-name"><?= htmlspecialchars($username) ?></span>!</h1>
-                    <p>Your case updates and notifications are here.</p>
                 </header>
 
-                <!-- Case Progress Section -->
-            <section id="case-progress" class="case-progress">
-                <h2><i class="fas fa-tasks"></i> Case Progress</h2>
+                    <!-- Case Progress Section -->
+                <section id="case-progress" class="case-progress">
+                    <h2><i class="fas fa-tasks"></i> Case Progress</h2>
 
-                <?php if (!empty($cases) && is_array($cases)): ?>
-                    <?php foreach ($cases as $case): ?>
-                        <div class="case-card">
-                            <h3>Case: <?= htmlspecialchars($case['case_number']) ?></h3>
-                            <p>Status: 
-                                <span class="status <?= strtolower(str_replace(' ', '-', $case['status'])) ?>">
-                                    <?= htmlspecialchars($case['status']) ?>
-                                </span>
-                            </p>
-                            <p>
-                                <i class="fas fa-clock"></i> Last Updated: <?= htmlspecialchars($case['last_updated']) ?>
-                            </p>
-                        </div>
-                    <?php endforeach; ?>
-                    <?php else: ?>
-                        <div class="no-cases-message">
-                            <div class="no-cases-icon">
-                                <i class="fas fa-folder-open"></i>
+                    <?php if (!empty($cases) && is_array($cases)): ?>
+                        <?php foreach ($cases as $case): ?>
+                            <div class="case-card">
+                                <h3>Case: <?= htmlspecialchars($case['case_number']) ?></h3>
+                                <p>Status: 
+                                    <span class="status <?= strtolower(str_replace(' ', '-', $case['status'])) ?>">
+                                        <?= htmlspecialchars($case['status']) ?>
+                                    </span>
+                                </p>
+                                <p>
+                                    <i class="fas fa-clock"></i> Last Updated: <?= htmlspecialchars($case['last_updated']) ?>
+                                </p>
                             </div>
-                            <div class="no-cases-content">
-                                <h4>No Cases Found</h4>
-                                <p>You are not currently assigned to any legal cases.</p>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="no-cases-message">
+                                <div class="no-cases-icon">
+                                    <i class="fas fa-folder-open"></i>
+                                </div>
+                                <div class="no-cases-content">
+                                    <h4>No Cases Found</h4>
+                                    <p>You are not currently assigned to any legal cases.</p>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                </section>
+
+                <!-- Invoices Section -->
+                <section id="invoices" class="invoices">
+                    <h2><i class="fas fa-file-invoice-dollar"></i> Recent Invoices</h2>
+                    
+                    <?php if (!empty($invoices) && is_array($invoices)): ?>
+                        <?php foreach ($invoices as $invoice): ?>
+                            <div class="invoice-card">
+                                <h3>Invoice: #<?= htmlspecialchars($invoice['invoice_number']) ?></h3>
+                                <p>Amount: $<?= htmlspecialchars(number_format($invoice['amount'], 2)) ?></p>
+                                <p>Status: 
+                                    <span class="status <?= strtolower(str_replace(' ', '-', $invoice['status'])) ?>">
+                                        <?= htmlspecialchars($invoice['status']) ?>
+                                    </span>
+                                </p>
+                                <p>
+                                    <i class="fas fa-calendar-alt"></i> Due Date: <?= htmlspecialchars($invoice['due_date']) ?>
+                                </p>
+                                <div class="invoice-actions">
+                                    <a href="<?= ROOT ?>/client/viewInvoice/<?= $invoice['id'] ?>" class="view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <?php if ($invoice['status'] !== 'Paid'): ?>
+                                        <a href="<?= ROOT ?>/client/payInvoice/<?= $invoice['id'] ?>" class="pay-btn">
+                                            <i class="fas fa-credit-card"></i> Pay Now
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="no-invoices-message">
+                            <div class="no-invoices-icon">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                            <div class="no-invoices-content">
+                                <h4>No Invoices Found</h4>
+                                <p>You don't have any recent invoices.</p>
                             </div>
                         </div>
                     <?php endif; ?>
-            </section>
+                </section>
 
-            <!-- Invoices Section -->
-            <section id="invoices" class="invoices">
-                <h2><i class="fas fa-file-invoice-dollar"></i> Recent Invoices</h2>
-                
-                <?php if (!empty($invoices) && is_array($invoices)): ?>
-                    <?php foreach ($invoices as $invoice): ?>
-                        <div class="invoice-card">
-                            <h3>Invoice: #<?= htmlspecialchars($invoice['invoice_number']) ?></h3>
-                            <p>Amount: $<?= htmlspecialchars(number_format($invoice['amount'], 2)) ?></p>
-                            <p>Status: 
-                                <span class="status <?= strtolower(str_replace(' ', '-', $invoice['status'])) ?>">
-                                    <?= htmlspecialchars($invoice['status']) ?>
-                                </span>
-                            </p>
-                            <p>
-                                <i class="fas fa-calendar-alt"></i> Due Date: <?= htmlspecialchars($invoice['due_date']) ?>
-                            </p>
-                            <div class="invoice-actions">
-                                <a href="<?= ROOT ?>/client/viewInvoice/<?= $invoice['id'] ?>" class="view-btn">
-                                    <i class="fas fa-eye"></i> View
-                                </a>
-                                <?php if ($invoice['status'] !== 'Paid'): ?>
-                                    <a href="<?= ROOT ?>/client/payInvoice/<?= $invoice['id'] ?>" class="pay-btn">
-                                        <i class="fas fa-credit-card"></i> Pay Now
-                                    </a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="no-invoices-message">
-                        <div class="no-invoices-icon">
-                            <i class="fas fa-file-invoice"></i>
-                        </div>
-                        <div class="no-invoices-content">
-                            <h4>No Invoices Found</h4>
-                            <p>You don't have any recent invoices.</p>
-                        </div>
+                <div class="login-container">
+                    <div class="header">
+                        <h2>Recent Login Activity</h2>
+                        
+                    
+                    
                     </div>
-                <?php endif; ?>
-            </section>
+
+                    <div class="login-list">
+                        <?php if (!empty($logins)): ?>
+                            <?php foreach ($logins as $login): ?>
+                                <div class="login">
+                                    <div class="login-info">
+                                        <div class="login-icon"><i class="fas fa-key"></i></div>
+                                        <div class="text-info">
+                                            <div class="date">
+                                                <?php echo date('F j, Y', strtotime($login->login_time)); ?>
+                                            </div>
+                                            <div class="time">
+                                                <?php echo date('g:i a', strtotime($login->login_time)); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="ip"><?php echo htmlspecialchars($login->ip_address); ?></div>
+                                        <div class="status"><?php echo htmlspecialchars($login->status); ?></div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p>No login history available.</p>
+                        <?php endif; ?>
+                    </div>
+
+                </div>
 
             </div>
             
