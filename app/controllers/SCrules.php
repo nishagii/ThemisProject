@@ -82,6 +82,14 @@ public function create() {
         // Pass data to the view
         $this->view('precedentsAdmin/SCrules', ['rules' => $rules]);
     }
+
+    public function retrieveForView(){
+        $rulesModel = $this->loadModel('SCrulesModel'); 
+        $rules = $rulesModel->getAll();
+
+        // Pass data to the view
+        $this->view('precedentsAdmin/SCrulesViewOnly', ['rules' => $rules]);
+    }
 /*-------------------Update---------------------------------- */
    
     public function edit($id) {
