@@ -332,7 +332,7 @@ class Cases
 
         // Redirect to a success page or the list of cases
         $_SESSION['success'] = 'Case updated successfully!';
-        redirect('cases/extendRetrieveAllCases');
+        redirect('cases/RetrieveAllCases');
     }
 
     // Update case status via AJAX
