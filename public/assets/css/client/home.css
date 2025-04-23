@@ -122,3 +122,38 @@ i{
 i:hover{
     color: #396eff;
 }
+
+/* Enhanced styling for the "no cases" message */
+.no-cases-message {
+    background-color: #f8f9fa;
+    border-left: 4px solid #6c757d;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .no-cases-icon i {
+    font-size: 24px;
+    color: #6c757d;
+    margin-right: 15px;
+  }
+  
+  .no-cases-content {
+    flex: 1;
+  }
+  
+  .no-cases-content h4 {
+    margin: 0 0 5px 0;
+    color: #495057;
+    font-size: 18px;
+  }
+  
+  .no-cases-content p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 14px;
+  }
+  

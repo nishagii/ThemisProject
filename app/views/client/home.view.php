@@ -43,19 +43,36 @@
                 </header>
 
                 <!-- Case Progress Section -->
-                <section id="case-progress" class="case-progress">
-                    <h2><i class="fas fa-tasks"></i> Case Progress</h2>
-                    <div class="case-card">
-                        <h3>Case: 2212/54</h3>
-                        <p>Status: <span class="status in-progress">In Progress</span></p>
-                        <p><i class="fas fa-clock"></i> Last Updated: 2024-11-25</p>
-                    </div>
-                    <div class="case-card">
-                        <h3>Case: 2195/28</h3>
-                        <p>Status: <span class="status closed">Closed</span></p>
-                        <p><i class="fas fa-calendar-check"></i> Last Updated: 2024-10-15</p>
-                    </div>
-                </section>
+            <section id="case-progress" class="case-progress">
+                <h2><i class="fas fa-tasks"></i> Case Progress</h2>
+
+                <?php if (!empty($cases) && is_array($cases)): ?>
+                    <?php foreach ($cases as $case): ?>
+                        <div class="case-card">
+                            <h3>Case: <?= htmlspecialchars($case['case_number']) ?></h3>
+                            <p>Status: 
+                                <span class="status <?= strtolower(str_replace(' ', '-', $case['status'])) ?>">
+                                    <?= htmlspecialchars($case['status']) ?>
+                                </span>
+                            </p>
+                            <p>
+                                <i class="fas fa-clock"></i> Last Updated: <?= htmlspecialchars($case['last_updated']) ?>
+                            </p>
+                        </div>
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="no-cases-message">
+                            <div class="no-cases-icon">
+                                <i class="fas fa-folder-open"></i>
+                            </div>
+                            <div class="no-cases-content">
+                                <h4>No Cases Found</h4>
+                                <p>You are not currently assigned to any legal cases.</p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+            </section>
+
 
                 <!-- Upcoming Hearings Section -->
                 <section id="hearings" class="upcoming-hearings">
