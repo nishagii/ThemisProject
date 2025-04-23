@@ -119,14 +119,17 @@
                 <div class="login-container">
                     <div class="header">
                         <h2>Recent Login Activity</h2>
-                        
-                    
-                    
                     </div>
 
                     <div class="login-list">
                         <?php if (!empty($logins)): ?>
-                            <?php foreach ($logins as $login): ?>
+                            <?php 
+                            // Display only the first 3 logins
+                            $loginCount = count($logins);
+                            $displayLogins = array_slice($logins, 0, 3);
+                            
+                            foreach ($displayLogins as $login): 
+                            ?>
                                 <div class="login">
                                     <div class="login-info">
                                         <div class="login-icon"><i class="fas fa-key"></i></div>
@@ -145,11 +148,19 @@
                                     </div>
                                 </div>
                             <?php endforeach; ?>
+                            
+                            <?php if ($loginCount > 3): ?>
+                                <div class="view-more-container">
+                                    <a href="<?= ROOT ?>/client/loginHistory" class="view-more-btn">
+                                        <i class="fas fa-history"></i> View All Login History
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                            
                         <?php else: ?>
                             <p>No login history available.</p>
                         <?php endif; ?>
                     </div>
-
                 </div>
 
                                     <!-- Meetings Section -->

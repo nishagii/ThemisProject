@@ -44,10 +44,14 @@ section h2 {
     gap: 10px;
 }
 
-.case-progress {
-    margin-top: 10px;
-}
 
+.case-progress {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #E4E9F7;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
 /* Case Progress Section */
 .case-card {
     border: 1px solid #ddd;
@@ -56,6 +60,7 @@ section h2 {
     border-radius: 8px;
     background: #ffffff;
     transition: transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .case-card:hover {
@@ -85,19 +90,25 @@ i:hover{
 /* Enhanced styling for the "no cases" message */
 .no-cases-message {
     background-color: #f8f9fa;
-    border-left: 4px solid #6c757d;
-    border-radius: 4px;
-    padding: 20px;
-    margin: 15px 0;
+    border-radius: 8px;
+    padding: 30px 25px;
+    margin: 20px 0;
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #f39c12;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .no-cases-message:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   }
   
   .no-cases-icon i {
-    font-size: 24px;
+    font-size: 36px;
     color: #f39c12;
-    margin-right: 15px;
+    margin-right: 25px;
   }
   
   .no-cases-content {
@@ -105,20 +116,22 @@ i:hover{
   }
   
   .no-cases-content h4 {
-    margin: 0 0 5px 0;
-    color: #495057;
-    font-size: 18px;
+    margin: 0 0 12px 0;
+    color: #343a40;
+    font-size: 22px;
+    font-weight: 600;
   }
   
   .no-cases-content p {
-    margin: 0;
-    color: #6c757d;
-    font-size: 14px;
+    margin-top: 12px;
+    color: #495057;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
 /* Invoice Section Styling */
 .invoices {
-    background-color: #fff;
+    background-color: #E4E9F7;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 25px;
@@ -370,7 +383,7 @@ i:hover{
 .request-meeting-btn {
     display: inline-block;
     margin-top: 1rem;
-    background-color: #2e86de;
+    background-color: #69a6e2;
     color: white;
     padding: 0.6rem 1.2rem;
     border-radius: 6px;
@@ -379,7 +392,37 @@ i:hover{
 }
 
 .request-meeting-btn:hover {
-    background-color: #1b4f72;
+    background-color: #4f95c4;
+}
+
+.view-more-container {
+    text-align: center;
+    padding: 15px 0 5px;
+    margin-top: 10px;
+    border-top: 1px solid #eaeaea;
+}
+
+.view-more-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f8f9fa;
+    color: #495057;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid #dee2e6;
+}
+
+.view-more-btn:hover {
+    background-color: #e9ecef;
+    color: #212529;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.view-more-btn i {
+    margin-right: 5px;
 }
 
   
