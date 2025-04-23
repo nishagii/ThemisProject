@@ -62,4 +62,41 @@ class Task
         redirect('task');
     }
 
+    public function details($taskID)
+    {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
+        
+        // Load the task model
+        $taskModel = $this->loadModel('TaskModel');
+        
+        // Get the task by ID
+        $task = $taskModel->getTaskById($taskID);
+        
+        
+        if (!$task) {
+            redirect('task');
+            return;
+        }
+        
+        // Check if the user has access to this task
+        $userId = $_SESSION['user_id'];
+        if ($task->assigneeID != $userId) {
+            
+            redirect('task');
+            return;
+        }
+        
+        // Prepare data for the view
+        $data = [
+            'username' => $_SESSION['username'] ?? 'User',
+            'task' => $task
+        ];
+        
+        // Load the task details view
+        $this->view('/juniorCounsel/taskDetails', $data);
+    }
+
 }

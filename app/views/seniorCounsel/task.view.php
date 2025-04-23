@@ -24,6 +24,54 @@
             position: relative;
             z-index: 2;
         }
+
+        /* Search bar styling */
+        .search-container {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            max-width: 600px;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-container input:focus {
+            border-color: #93a8e3;
+        }
+
+        .search-container button {
+            margin-left: 8px;
+            padding: 10px 15px;
+            background-color: #93a8e3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-container button:hover {
+            background-color: #7088cc;
+        }
+
+        /* No results message */
+        .no-results {
+            display: none;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 15px;
+            color: #6c757d;
+        }
     </style>
 </head>
 <body>
@@ -46,7 +94,7 @@
             </a>
         </div>
         <div class="counters-container">
-            <div class="counter total">
+            <div class="counter total" id="total-counter">
                 <div class="counter-icon">
                     <i class="fas fa-tasks"></i> <!-- Updated icon -->
                 </div>
@@ -54,25 +102,25 @@
                 <span class="total-users"><?= $count[0]->count ?></span>
             </div>
             <div class="individual">
-                <div class="counter active">
+                <div class="counter active" id="active-counter">
                     <div class="counter-icon">
                         <i class="fas fa-spinner"></i> <!-- Icon for active tasks -->
                     </div>
                     <h3>Active Tasks</h3>
                     <span>50</span>
                 </div>
-                <div class="counter completed">
+                <div class="counter completed" id="completed-counter">
                     <div class="counter-icon">
                         <i class="fas fa-check-circle"></i> <!-- Icon for completed tasks -->
                     </div>
                     <h3>Completed Tasks</h3>
                     <span>25</span>
                 </div>
-                <div class="counter incomplete">
+                <div class="counter incomplete" id="incomplete-counter">
                     <div class="counter-icon">
                         <i class="fas fa-times-circle"></i> <!-- Icon for incomplete tasks -->
                     </div>
-                    <h3>Incomplete Tasks</h3>
+                    <h3>Overdue Tasks</h3>
                     <span>25</span>
                 </div>
             </div>
@@ -80,8 +128,13 @@
 
         
 
-
         <div class="task-table-container">
+                <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="task-search" placeholder="Search tasks by name, assignee, priority...">
+                <button onclick="searchTasks()"><i class="fas fa-search"></i> Search</button>
+            </div>
+            
             <div class="sort-section">
                 <label for="sort-tasks">Sort by:</label>
                 <select id="sort-tasks" onchange="sortTasks()">
@@ -91,7 +144,7 @@
                     <option value="priority-desc">Priority (High to Low)</option>
                 </select>
             </div>
-            <table class="task-table">
+            <table class="task-table" id="task-table">
                 <thead>
                     <tr>
                         <th>Task Name</th>
@@ -113,8 +166,10 @@
                             data-taskid="<?= $t->taskID ?>" 
                             data-deadlinedate="<?= $t->deadlineDate ?>" 
                             data-deadlinetime="<?= $t->deadlineTime ?>" 
-                            data-status="<?= $t->status ?>">
+                            data-status="<?= $t->status ?>"
+                            data-original-status="<?= $t->status ?>">
                         </td>
+
                         <td>
                             <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $t->taskID ?>" class="edit-btn" onclick="event.stopPropagation()"><i class="fas fa-edit"></i></a> <!-- Edit Link -->
                             <a href="javascript:void(0);" class="delete-btn" onclick="event.stopPropagation(); confirmDelete(<?= $t->taskID; ?>)"><i class="fas fa-trash"></i></a> <!-- Delete Link -->
@@ -123,10 +178,133 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <div id="no-results" class="no-results">
+                No tasks found matching your search criteria.
+            </div>
         </div>
     </div>
 
     <script>
+        document.getElementById("total-counter").addEventListener("click", () => {
+            document.getElementById("task-table").scrollIntoView({ behavior: "smooth" });
+        });
+
+        document.getElementById("total-counter").addEventListener("click", () => {
+            const rows = document.querySelectorAll(".task-table tbody tr");
+            rows.forEach(row => {
+                row.style.display = ""; // Show all rows
+            });
+            document.getElementById("no-results").style.display = "none";
+        });
+
+        document.getElementById("active-counter").addEventListener("click", () => {
+            const rows = document.querySelectorAll(".task-table tbody tr");
+            let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const statusCell = row.querySelector(".status");
+                const status = statusCell.dataset.originalStatus.toLowerCase();
+
+                if (status === "pending") {
+                    row.style.display = ""; // show
+                    visibleCount++;
+                } else {
+                    row.style.display = "none"; // hide
+                }
+            });
+
+            // Show no results message if needed
+            document.getElementById("no-results").style.display = visibleCount === 0 ? "block" : "none";
+            
+            // Optionally scroll to the table
+            document.getElementById("task-table").scrollIntoView({ behavior: "smooth" });
+        });
+
+        document.getElementById("completed-counter").addEventListener("click", () => {
+            const rows = document.querySelectorAll(".task-table tbody tr");
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const statusCell = row.querySelector(".status");
+                if (statusCell && statusCell.dataset.status === "completed") {
+                    row.style.display = "";
+                    visibleCount++;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+            
+            document.getElementById("no-results").style.display = visibleCount === 0 ? "block" : "none";
+            document.getElementById("task-table").scrollIntoView({ behavior: "smooth" });
+        });
+
+        document.getElementById("incomplete-counter").addEventListener("click", () => {
+            const rows = document.querySelectorAll(".task-table tbody tr");
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const statusCell = row.querySelector(".status");
+                if (statusCell && statusCell.textContent.trim().toLowerCase() === "overdue") {
+                    row.style.display = "";
+                    visibleCount++;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+            
+            document.getElementById("no-results").style.display = visibleCount === 0 ? "block" : "none";
+            document.getElementById("task-table").scrollIntoView({ behavior: "smooth" });
+        });
+
+        // Search functionality
+        function searchTasks() {
+            const searchTerm = document.getElementById("task-search").value.toLowerCase();
+            const rows = document.querySelectorAll(".task-table tbody tr");
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const taskName = row.cells[0].textContent.toLowerCase();
+                const assignee = row.cells[1].textContent.toLowerCase();
+                const deadline = row.cells[2].textContent.toLowerCase();
+                const priority = row.cells[3].textContent.toLowerCase();
+                const status = row.querySelector(".status").textContent.toLowerCase();
+
+                if (
+                    taskName.includes(searchTerm) ||
+                    assignee.includes(searchTerm) ||
+                    deadline.includes(searchTerm) ||
+                    priority.includes(searchTerm) ||
+                    status.includes(searchTerm)
+                ) {
+                    row.style.display = "";
+                    visibleCount++;
+                } else {
+                    row.style.display = "none";
+                }
+            });
+
+            // Show no results message if needed
+            document.getElementById("no-results").style.display = visibleCount === 0 ? "block" : "none";
+        }
+
+        // Add event listener for Enter key on search input
+        document.getElementById("task-search").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                searchTasks();
+            }
+        });
+
+        // Clear search when input is cleared
+        document.getElementById("task-search").addEventListener("input", function() {
+            if (this.value === "") {
+                const rows = document.querySelectorAll(".task-table tbody tr");
+                rows.forEach(row => {
+                    row.style.display = "";
+                });
+                document.getElementById("no-results").style.display = "none";
+            }
+        });
+
         function viewTaskDetails(taskId) {
             // Redirect to the task details page
             window.location.href = "<?= ROOT ?>/tasklawyer/details/" + taskId;
@@ -189,41 +367,40 @@
         });
 
         function sortTasks() {
-        const sortValue = document.getElementById("sort-tasks").value;
-        const table = document.querySelector(".task-table tbody");
-        const rows = Array.from(table.querySelectorAll("tr"));
+            const sortValue = document.getElementById("sort-tasks").value;
+            const table = document.querySelector(".task-table tbody");
+            const rows = Array.from(table.querySelectorAll("tr"));
 
-        rows.sort((a, b) => {
-            const getText = (el, index) => el.cells[index].textContent.trim().toLowerCase();
-            const getDate = (el, index) => new Date(el.cells[index].textContent.trim());
-            const getPriorityValue = (priority) => {
-                // Adjust depending on your priority naming
-                if (priority === "high") return 3;
-                if (priority === "medium") return 2;
-                if (priority === "low") return 1;
-                return 0;
-            };
+            rows.sort((a, b) => {
+                const getText = (el, index) => el.cells[index].textContent.trim().toLowerCase();
+                const getDate = (el, index) => new Date(el.cells[index].textContent.trim());
+                const getPriorityValue = (priority) => {
+                    // Adjust depending on your priority naming
+                    if (priority === "high") return 3;
+                    if (priority === "medium") return 2;
+                    if (priority === "low") return 1;
+                    return 0;
+                };
 
-            switch (sortValue) {
-                case "deadline-desc":
-                    return getDate(b, 2) - getDate(a, 2);
-                case "deadline-asc":
-                    return getDate(a, 2) - getDate(b, 2);
-                case "priority-asc":
-                    return getPriorityValue(getText(a, 3)) - getPriorityValue(getText(b, 3));
-                case "priority-desc":
-                    return getPriorityValue(getText(b, 3)) - getPriorityValue(getText(a, 3));
-                case "name-asc":
-                    return getText(a, 0).localeCompare(getText(b, 0));
-                case "name-desc":
-                    return getText(b, 0).localeCompare(getText(a, 0));
-            }
-        });
+                switch (sortValue) {
+                    case "deadline-desc":
+                        return getDate(b, 2) - getDate(a, 2);
+                    case "deadline-asc":
+                        return getDate(a, 2) - getDate(b, 2);
+                    case "priority-asc":
+                        return getPriorityValue(getText(a, 3)) - getPriorityValue(getText(b, 3));
+                    case "priority-desc":
+                        return getPriorityValue(getText(b, 3)) - getPriorityValue(getText(a, 3));
+                    case "name-asc":
+                        return getText(a, 0).localeCompare(getText(b, 0));
+                    case "name-desc":
+                        return getText(b, 0).localeCompare(getText(a, 0));
+                }
+            });
 
-        table.innerHTML = '';
-        rows.forEach(row => table.appendChild(row));
-    }
-
+            table.innerHTML = '';
+            rows.forEach(row => table.appendChild(row));
+        }
     </script>
 </body>
 </html>
