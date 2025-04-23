@@ -38,7 +38,7 @@
         <main class="home-section">
             <div class="home-body">
                 <header class="header">
-                    <h1>Welcome, <span class="user-name">Nishagi </span>!</h1>
+                    <h1>Welcome, <span class="user-name"><?= htmlspecialchars($username) ?></span>!</h1>
                     <p>Your case updates and notifications are here.</p>
                 </header>
 
