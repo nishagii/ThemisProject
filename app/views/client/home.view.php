@@ -73,70 +73,47 @@
                     <?php endif; ?>
             </section>
 
-
-                <!-- Upcoming Hearings Section -->
-                <section id="hearings" class="upcoming-hearings">
-                    <h2><i class="fas fa-calendar-alt"></i> Upcoming Hearings</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th><i class="fas fa-file-alt"></i> Case Number</th>
-                                <th><i class="fas fa-calendar-day"></i> Date</th>
-                                <th><i class="fas fa-clock"></i> Time</th>
-                                <th><i class="fas fa-map-marker-alt"></i> Location</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>2212/54</td>
-                                <td>2024-12-15</td>
-                                <td>10:00 AM</td>
-                                <td>Supreme Court, Room 5</td>
-                            </tr>
-                            <tr>
-                                <td>2195/28</td>
-                                <td>2024-12-20</td>
-                                <td>2:30 PM</td>
-                                <td>District Court, Room 2</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
-
-                <!-- Notifications Section -->
-                <section id="notifications" class="notifications">
-                    <h2><i class="fas fa-bell"></i> Notifications</h2>
-                    <ul>
-                        <li><i class="fas fa-file-upload"></i> Case 2212/54: Document submission completed on 2024-11-20.</li>
-                        <li><i class="fas fa-calendar-check"></i> Case 2195/28: Hearing scheduled on 2024-12-20.</li>
-                    </ul>
-                </section>
-
-                <!-- Payments Section -->
-                <section id="payments" class="payments">
-                    <h2><i class="fas fa-wallet"></i> Payment History</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th><i class="fas fa-calendar"></i> Date</th>
-                                <th><i class="fas fa-dollar-sign"></i> Amount</th>
-                                <th><i class="fas fa-check-circle"></i> Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>2024-11-15</td>
-                                <td>$500</td>
-                                <td class="paid">Paid</td>
-                            </tr>
-                            <tr>
-                                <td>2024-10-30</td>
-                                <td>$200</td>
-                                <td class="pending">Pending</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+            <!-- Invoices Section -->
+            <section id="invoices" class="invoices">
+                <h2><i class="fas fa-file-invoice-dollar"></i> Recent Invoices</h2>
+                
+                <?php if (!empty($invoices) && is_array($invoices)): ?>
+                    <?php foreach ($invoices as $invoice): ?>
+                        <div class="invoice-card">
+                            <h3>Invoice: #<?= htmlspecialchars($invoice['invoice_number']) ?></h3>
+                            <p>Amount: $<?= htmlspecialchars(number_format($invoice['amount'], 2)) ?></p>
+                            <p>Status: 
+                                <span class="status <?= strtolower(str_replace(' ', '-', $invoice['status'])) ?>">
+                                    <?= htmlspecialchars($invoice['status']) ?>
+                                </span>
+                            </p>
+                            <p>
+                                <i class="fas fa-calendar-alt"></i> Due Date: <?= htmlspecialchars($invoice['due_date']) ?>
+                            </p>
+                            <div class="invoice-actions">
+                                <a href="<?= ROOT ?>/client/viewInvoice/<?= $invoice['id'] ?>" class="view-btn">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                                <?php if ($invoice['status'] !== 'Paid'): ?>
+                                    <a href="<?= ROOT ?>/client/payInvoice/<?= $invoice['id'] ?>" class="pay-btn">
+                                        <i class="fas fa-credit-card"></i> Pay Now
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="no-invoices-message">
+                        <div class="no-invoices-icon">
+                            <i class="fas fa-file-invoice"></i>
+                        </div>
+                        <div class="no-invoices-content">
+                            <h4>No Invoices Found</h4>
+                            <p>You don't have any recent invoices.</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </section>
 
             </div>
             

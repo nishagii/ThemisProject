@@ -15,7 +15,11 @@ class HomeClient
 
         // Load case model and fetch cases
         $caseModel = $this->loadModel('CaseModel');
-        $data['cases'] = $caseModel->getCasesByClientId($_SESSION['user_id']); // fixed: added assignment and semicolon
+        $data['cases'] = $caseModel->getCasesByClientId($_SESSION['user_id']); 
+
+        //invoice model 
+        $invoiceModel = $this->loadModel('invoiceModel');
+        $data['invoices'] = $invoiceModel->getSentInvoicesByClient($_SESSION['user_id']);
 
         $this->view('/client/home', $data);
     }
