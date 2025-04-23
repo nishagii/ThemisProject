@@ -41,7 +41,7 @@ class CaseModel
         return $this->query($query, $params);
     }
 
-   
+
     // Get all non-deleted cases
     public function getAllCases()
     {
@@ -51,7 +51,8 @@ class CaseModel
               FROM {$this->table} c
               LEFT JOIN users a ON c.attorney_id = a.id
               LEFT JOIN users j ON c.junior_id = j.id
-              WHERE c.deleted = 0";
+              WHERE c.deleted = 0
+              ORDER BY c.created_at DESC";
         return $this->query($query);
     }
 
@@ -224,5 +225,26 @@ class CaseModel
         ];
 
         return $this->query($query, $params);
+    }
+
+    // Search cases
+    public function searchCases($query, $field = 'all')
+    {
+        // Base query
+        $sql = "SELECT * FROM {$this->table} WHERE deleted = 0 AND ";
+
+        // Add search conditions based on field
+        if ($field === 'all') {
+            $sql .= "(case_number LIKE :query OR 
+                 client_name LIKE :query OR 
+                 court LIKE :query OR 
+                 notes LIKE :query)";
+            $params = ['query' => "%{$query}%"];
+        } else {
+            $sql .= "{$field} LIKE :query";
+            $params = ['query' => "%{$query}%"];
+        }
+
+        return $this->query($sql, $params);
     }
 }

@@ -161,13 +161,7 @@
                                 <label for="court">Court</label>
                                 <input id="court" name="court" type="text" placeholder="Enter the court" />
                             </div>
-                            <div class="form-group">
-                                <label for="case_status">Case Status</label>
-                                <select id="case_status" name="case_status" class="form-select">
-                                    <option value="ongoing">Ongoing</option>
-                                    <option value="closed">Closed</option>
-                                </select>
-                            </div>
+                            <input type="hidden" name="case_status" value="ongoing">
                             <div class="form-group">
                                 <label for="notes">Notes</label>
                                 <textarea
