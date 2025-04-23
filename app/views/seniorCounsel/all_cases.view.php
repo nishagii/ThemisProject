@@ -58,7 +58,7 @@
         }
 
         .update-status-btn {
-            background-color: #fa9800;
+            background-color: #93a8e3;
             color: white;
             border: none;
             border-radius: 4px;
@@ -70,7 +70,7 @@
         }
 
         .update-status-btn:hover {
-            background-color: #e08800;
+            background-color: rgb(143, 173, 255);
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
@@ -185,6 +185,43 @@
             </a>
         </div>
 
+        <div class="search-container">
+            <form id="search-form" class="search-form">
+                <div class="search-input-group">
+                    <input type="text" id="search-query" placeholder="Search cases " class="search-input">
+                    <select id="search-field" class="search-select">
+                        <option value="all">All Fields</option>
+                        <option value="case_number">Case Number</option>
+                        <option value="client_name">Client Name</option>
+                        <option value="court">Court</option>
+                        <option value="notes">Notes</option>
+                    </select>
+                    <button type="submit" class="search-button">
+                        <i class="bx bx-search"></i> Search
+                    </button>
+                </div>
+            </form>
+            <div id="search-results-count" class="search-results-count"></div>
+        </div>
+
+        <!-- Sort Functionality -->
+        <div class="sort-container">
+            <label for="sort-select">Sort by:</label>
+            <select id="sort-select" class="sort-select">
+                <option value="default">Default</option>
+                <option value="client_asc">Client Name (A-Z)</option>
+                <option value="client_desc">Client Name (Z-A)</option>
+                <option value="case_asc">Case Number (A-Z)</option>
+                <option value="case_desc">Case Number (Z-A)</option>
+                <option value="court_asc">Court Name (A-Z)</option>
+                <option value="court_desc">Court Name (Z-A)</option>
+                <option value="date_asc">Date (Oldest First)</option>
+                <option value="date_desc">Date (Newest First)</option>
+            </select>
+        </div>
+
+
+
         <!-- Case Status Tabs -->
         <div class="cases-tabs">
             <button class="tab-button active" data-tab="all-cases">All Cases</button>
@@ -197,7 +234,7 @@
             <div class="cases-container">
                 <?php if (!empty($cases)) : ?>
                     <?php foreach ($cases as $case) : ?>
-                        <div class="case-card">
+                        <div class="case-card" data-id="<?= $case->id ?>" data-date="<?= $case->created_at ?? date('Y-m-d') ?>">
                             <h3>Case Number: <?= htmlspecialchars($case->case_number) ?></h3>
                             <p><strong>Client Name:</strong> <?= htmlspecialchars($case->client_name) ?></p>
                             <p><strong>Court:</strong> <?= htmlspecialchars($case->court) ?></p>
@@ -255,7 +292,7 @@
                 ?>
                     <?php foreach ($ongoingCases as $case) : ?>
                         <!-- Inside each case card in all three sections (all, ongoing, closed) -->
-                        <div class="case-card">
+                        <div class="case-card" data-id="<?= $case->id ?>" data-date="<?= $case->created_at ?? date('Y-m-d') ?>">
                             <h3 title="<?= htmlspecialchars($case->case_number) ?>">Case Number: <?= htmlspecialchars($case->case_number) ?></h3>
                             <p><strong>Client Name:</strong> <?= htmlspecialchars($case->client_name) ?></p>
                             <p><strong>Court:</strong> <?= htmlspecialchars($case->court) ?></p>
@@ -315,7 +352,7 @@
                 if (!empty($closedCases)) :
                 ?>
                     <?php foreach ($closedCases as $case) : ?>
-                        <div class="case-card">
+                        <div class="case-card" data-id="<?= $case->id ?>" data-date="<?= $case->created_at ?? date('Y-m-d') ?>">
                             <h3>Case Number: <?= htmlspecialchars($case->case_number) ?></h3>
                             <p><strong>Client Name:</strong> <?= htmlspecialchars($case->client_name) ?></p>
                             <p><strong>Court:</strong> <?= htmlspecialchars($case->court) ?></p>
@@ -462,6 +499,345 @@
                 }
             });
         }
+
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('search-form');
+            const searchInput = document.getElementById('search-query');
+            const searchField = document.getElementById('search-field');
+            const resetButton = document.getElementById('reset-search');
+            const allCaseCards = document.querySelectorAll('.case-card');
+
+            // Store original case card HTML for reset
+            const originalCards = {};
+            allCaseCards.forEach(card => {
+                const cardTitle = card.querySelector('h3')?.textContent || '';
+                if (cardTitle) {
+                    originalCards[cardTitle] = card.innerHTML;
+                }
+            });
+
+            // Function to perform search
+            function performSearch() {
+                const query = searchInput.value.trim().toLowerCase();
+
+                // If search is empty, reset the view
+                if (query === '') {
+                    resetSearch();
+                    return;
+                }
+
+                const field = searchField.value;
+                let resultsFound = 0;
+
+                // Add search-active class to body
+                document.body.classList.add('search-active');
+
+                // Show all sections for searching
+                document.querySelectorAll('.cases-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('all-cases').classList.add('active');
+
+                // Update active tab
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector('[data-tab="all-cases"]').classList.add('active');
+
+                allCaseCards.forEach(card => {
+                    let match = false;
+
+                    // Reset card content to original
+                    const cardTitle = card.querySelector('h3')?.textContent || '';
+                    if (cardTitle && originalCards[cardTitle]) {
+                        card.innerHTML = originalCards[cardTitle];
+                    }
+
+                    if (field === 'all') {
+                        // Create a temporary div to extract only visible text content
+                        const tempDiv = document.createElement('div');
+
+                        // Only copy the text content from specific elements we want to search
+                        const caseNumber = card.querySelector('h3')?.textContent || '';
+                        const clientName = card.querySelector('p:nth-of-type(1)')?.textContent || '';
+                        const court = card.querySelector('p:nth-of-type(2)')?.textContent || '';
+                        const notes = card.querySelector('p:nth-of-type(3)')?.textContent ||
+                            card.querySelector('.notes-container p')?.textContent || '';
+
+                        tempDiv.textContent = caseNumber + ' ' + clientName + ' ' + court + ' ' + notes;
+
+                        // Search in the extracted text content
+                        const cardText = tempDiv.textContent.toLowerCase();
+                        match = cardText.includes(query);
+
+                        if (match) {
+                            // Highlight matches in specific elements only
+                            highlightMatches(card.querySelector('h3'), query);
+                            highlightMatches(card.querySelector('p:nth-of-type(1)'), query);
+                            highlightMatches(card.querySelector('p:nth-of-type(2)'), query);
+                            highlightMatches(card.querySelector('p:nth-of-type(3)') ||
+                                card.querySelector('.notes-container p'), query);
+                        }
+                    } else {
+                        // Search in specific field
+                        let fieldElement;
+
+                        switch (field) {
+                            case 'case_number':
+                                fieldElement = card.querySelector('h3');
+                                break;
+                            case 'client_name':
+                                fieldElement = card.querySelector('p:nth-of-type(1)');
+                                break;
+                            case 'court':
+                                fieldElement = card.querySelector('p:nth-of-type(2)');
+                                break;
+                            case 'notes':
+                                fieldElement = card.querySelector('p:nth-of-type(3)') ||
+                                    card.querySelector('.notes-container p');
+                                break;
+                        }
+
+                        if (fieldElement && fieldElement.textContent.toLowerCase().includes(query)) {
+                            match = true;
+                            highlightMatches(fieldElement, query);
+                        }
+                    }
+
+                    // Show or hide card based on match
+                    card.style.display = match ? 'block' : 'none';
+
+                    if (match) resultsFound++;
+                });
+
+                // Update search results count
+                const resultsCountEl = document.getElementById('search-results-count');
+                if (resultsCountEl) {
+                    if (resultsFound > 0) {
+                        resultsCountEl.textContent = `Found ${resultsFound} case${resultsFound !== 1 ? 's' : ''} matching "${query}"`;
+                    } else {
+                        resultsCountEl.textContent = '';
+                    }
+                }
+
+                // Show no results message if needed
+                const noResultsMsg = document.querySelector('.no-results');
+                if (noResultsMsg) noResultsMsg.remove();
+
+                if (resultsFound === 0) {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'no-results';
+                    noResults.textContent = `No cases found matching "${query}" in ${field === 'all' ? 'any field' : field.replace('_', ' ')}.`;
+                    document.querySelector('.cases-container').appendChild(noResults);
+                }
+
+                // After search is complete, re-apply current sorting if any
+                const currentSort = document.getElementById('sort-select').value;
+                if (currentSort !== 'default') {
+                    // Trigger the change event to re-sort visible cards
+                    const event = new Event('change');
+                    document.getElementById('sort-select').dispatchEvent(event);
+                }
+            }
+
+            // Function to reset search
+            function resetSearch() {
+                // Remove search-active class from body
+                document.body.classList.remove('search-active');
+
+                // Clear search results count
+                const resultsCountEl = document.getElementById('search-results-count');
+                if (resultsCountEl) {
+                    resultsCountEl.textContent = '';
+                }
+
+                // Restore all cards to original state
+                allCaseCards.forEach(card => {
+                    const cardTitle = card.querySelector('h3')?.textContent || '';
+                    if (cardTitle && originalCards[cardTitle]) {
+                        card.innerHTML = originalCards[cardTitle];
+                        card.style.display = 'block';
+                    }
+                });
+
+                // Remove no results message if present
+                const noResultsMsg = document.querySelector('.no-results');
+                if (noResultsMsg) noResultsMsg.remove();
+
+                // Reset to default tab view
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector('[data-tab="all-cases"]').classList.add('active');
+
+                document.querySelectorAll('.cases-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById('all-cases').classList.add('active');
+
+                // Re-apply current sorting if any
+                const currentSort = document.getElementById('sort-select').value;
+                if (currentSort !== 'default') {
+                    // Trigger the change event to re-sort
+                    const event = new Event('change');
+                    document.getElementById('sort-select').dispatchEvent(event);
+                }
+            }
+
+            // Event listeners
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                performSearch();
+            });
+
+            // Auto-reset when search input is cleared
+            searchInput.addEventListener('input', function() {
+                if (this.value.trim() === '') {
+                    resetSearch();
+                }
+            });
+
+            // Reset button click
+            resetButton.addEventListener('click', function() {
+                searchInput.value = '';
+                resetSearch();
+            });
+
+            // Function to highlight matching text
+            function highlightMatches(element, query) {
+                if (!element) return;
+
+                const innerHTML = element.innerHTML;
+                const index = element.textContent.toLowerCase().indexOf(query.toLowerCase());
+
+                if (index >= 0) {
+                    const length = query.length;
+                    const textContent = element.textContent;
+                    const beforeMatch = textContent.substring(0, index);
+                    const match = textContent.substring(index, index + length);
+                    const afterMatch = textContent.substring(index + length);
+
+                    // If the element has child nodes, we need a more complex approach
+                    if (element.childNodes.length > 1) {
+                        // This is a simplified approach - for complex nested elements
+                        // a more sophisticated text node traversal would be needed
+                        const escapedMatch = escapeRegExp(match);
+                        const regex = new RegExp(escapedMatch, 'gi');
+                        element.innerHTML = innerHTML.replace(regex,
+                            match => `<span class="highlight">${match}</span>`);
+                    } else {
+                        element.innerHTML = beforeMatch +
+                            '<span class="highlight">' + match + '</span>' +
+                            afterMatch;
+                    }
+                }
+            }
+
+            // Helper function to escape special characters in regex
+            function escapeRegExp(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+        });
+
+
+        // Sorting functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const sortSelect = document.getElementById('sort-select');
+
+            if (sortSelect) {
+                sortSelect.addEventListener('change', function() {
+                    const sortValue = this.value;
+
+                    // Get all case sections
+                    const caseSections = document.querySelectorAll('.cases-section');
+
+                    // Apply sorting to each section
+                    caseSections.forEach(section => {
+                        const caseCards = Array.from(section.querySelectorAll('.case-card'));
+
+                        // Sort the case cards based on the selected option
+                        caseCards.sort((a, b) => {
+                            switch (sortValue) {
+                                case 'client_asc':
+                                    return compareText(a, b, 'p:nth-of-type(1)', true);
+                                case 'client_desc':
+                                    return compareText(a, b, 'p:nth-of-type(1)', false);
+                                case 'case_asc':
+                                    return compareText(a, b, 'h3', true);
+                                case 'case_desc':
+                                    return compareText(a, b, 'h3', false);
+                                case 'court_asc':
+                                    return compareText(a, b, 'p:nth-of-type(2)', true);
+                                case 'court_desc':
+                                    return compareText(a, b, 'p:nth-of-type(2)', false);
+                                case 'date_asc':
+                                    return compareDates(a, b, true);
+                                case 'date_desc':
+                                    return compareDates(a, b, false);
+                                default:
+                                    return 0; // Default order (no sorting)
+                            }
+                        });
+
+                        // Re-append the sorted cards to the container
+                        const container = section.querySelector('.cases-container');
+                        if (container) {
+                            caseCards.forEach(card => {
+                                container.appendChild(card);
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Helper function to compare text content of elements
+            function compareText(cardA, cardB, selector, ascending) {
+                const textA = (cardA.querySelector(selector)?.textContent || '').trim().toLowerCase();
+                const textB = (cardB.querySelector(selector)?.textContent || '').trim().toLowerCase();
+
+                // Extract actual text from elements that might contain labels
+                const valueA = textA.includes(':') ? textA.split(':')[1].trim() : textA;
+                const valueB = textB.includes(':') ? textB.split(':')[1].trim() : textB;
+
+                if (ascending) {
+                    return valueA.localeCompare(valueB);
+                } else {
+                    return valueB.localeCompare(valueA);
+                }
+            }
+
+            // Helper function to compare dates
+            // Note: This assumes there's a date attribute or we extract it from the case number
+            function compareDates(cardA, cardB, ascending) {
+                // Try to find date attributes first
+                let dateA = cardA.getAttribute('data-date');
+                let dateB = cardB.getAttribute('data-date');
+
+                // If no date attributes, try to extract from case number or use ID as fallback
+                if (!dateA || !dateB) {
+                    // Use case ID as a proxy for date (assuming newer cases have higher IDs)
+                    const idA = cardA.getAttribute('data-id') || '0';
+                    const idB = cardB.getAttribute('data-id') || '0';
+
+                    if (ascending) {
+                        return parseInt(idA) - parseInt(idB);
+                    } else {
+                        return parseInt(idB) - parseInt(idA);
+                    }
+                }
+
+                // Compare actual dates if available
+                const timeA = new Date(dateA).getTime();
+                const timeB = new Date(dateB).getTime();
+
+                if (ascending) {
+                    return timeA - timeB;
+                } else {
+                    return timeB - timeA;
+                }
+            }
+        });
     </script>
 
 

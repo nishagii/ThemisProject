@@ -96,9 +96,7 @@ button i {
   font-size: 20px; /* Adjust icon size */
 }
 
-button:hover {
-  background-color: #9392a3; /* Darker green on hover */
-}
+
 
 
 
@@ -118,18 +116,24 @@ a {
 }
 
 .more {
-  background-color: #fa9800;
+  background-color:white;
+  font-weight: bold;
+  color:#fa9800;
   font-size: 13px;
+  text-transform: uppercase;
 }
 
 .delete {
-  background-color: #555555;
+  background-color:#fff;
+  color: #555555;
+  border: #555555 2px solid;
 }
-.delete:hover {
-  background-color: #d33;
-}
+
 .edit {
-  background-color: #93a8e3;
+  background-color: white;
+  color: #93a8e3;
+  font-weight: bold;
+  border: #93a8e3 2px solid;
 }
 
 .template-table {
@@ -254,4 +258,199 @@ a {
 /* Ensure the status container doesn't overflow */
 .status-container {
   margin-bottom: 10px;
+}
+/* Search form styles */
+.search-container {
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+}
+
+.search-input-group {
+    display: flex;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    align-items: stretch; /* Ensure all elements stretch to the same height */
+}
+@media (max-width: 768px) {
+    .search-input-group {
+        flex-direction: column;
+    }
+    
+    .search-select, .search-button, .reset-button {
+        border-left: none !important;
+        border-top: 1px solid #eee;
+    }
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    min-width: 200px;
+    height: 48px; /* Fixed height to match buttons */
+    box-sizing: border-box;
+}
+.search-select {
+    padding: 0 15px;
+    border: none;
+    border-left: 1px solid #eee;
+    background-color: white;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    min-width: 120px;
+    height: 48px; /* Fixed height to match buttons */
+    box-sizing: border-box;
+    align-self: center;
+}
+.search-button, .reset-button {
+    padding: 0 20px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    height: 48px; /* Fixed height */
+    min-width: 100px;
+    box-sizing: border-box;
+    margin: 0; /* Remove any margin */
+}
+.reset-button {
+    background-color: #1d1b31;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reset-button:hover {
+    background-color: #2d2b41;
+}
+
+.search-button i, .reset-button i {
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+/* No results message */
+.no-results {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+    font-style: italic;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Highlight search matches */
+.highlight {
+    background-color: rgba(250, 152, 0, 0.3);
+    padding: 2px 0;
+    border-radius: 2px;
+    font-weight: bold;
+}
+
+/* Active search state */
+.search-active .cases-tabs {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.search-active .tab-button.active:after {
+    background-color: #ccc;
+}
+
+/* Search results count */
+.search-results-count {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Make sure the search container fits well with other elements */
+.search-container + .cases-tabs {
+    margin-top: 10px;
+}
+
+.button + .search-container {
+    margin-top: 30px;
+}
+
+.search-button {
+    background-color: #ffffff;
+    color: #93a8e3;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reset-button {
+    background-color: #1d1b31;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-button:hover {
+    background-color: #93a8e3;
+    color: #ffffff;
+}
+
+.reset-button:hover {
+    background-color: #2d2b41;
+}
+
+.search-button i, .reset-button i {
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+/* Sort functionality styles */
+.sort-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 auto 15px;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.sort-container label {
+    margin-right: 10px;
+    font-weight: 500;
+    color: #1d1b31;
+}
+
+.sort-select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+.sort-select:hover, .sort-select:focus {
+    border-color: #fa9800;
+}
+
+@media (max-width: 768px) {
+    .sort-container {
+        justify-content: center;
+        margin-top: 15px;
+    }
 }

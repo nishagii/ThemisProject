@@ -25,6 +25,7 @@ class Cases
 
     // Add a new case
     // In app/controllers/Cases.php
+    // Add a new case
     public function addCase()
     {
         // Collect POST data
@@ -36,7 +37,7 @@ class Cases
             'case_number' => $_POST['case_number'] ?? '',
             'court' => $_POST['court'] ?? '',
             'notes' => $_POST['notes'] ?? '',
-            'case_status' => $_POST['case_status'] ?? 'ongoing'
+            'case_status' => 'ongoing' // Always set to 'ongoing' by default
         ];
 
         // Handle client selection/registration
@@ -73,7 +74,7 @@ class Cases
 
         // Redirect to the home page or success page
         $_SESSION['success'] = 'Case added successfully!';
-        redirect('cases/all_cases');
+        redirect('cases/retrieveAllCases');
     }
 
     // Rest of the code remains the same...
@@ -155,7 +156,7 @@ class Cases
         // Redirect to the deleted cases list
         redirect('cases/viewDeletedCases');
     }
-    
+
     //display only one case by id
     public function retrieveCase($caseId)
     {
@@ -348,5 +349,24 @@ class Cases
         } else {
             echo json_encode(['success' => false, 'message' => 'Failed to update case status']);
         }
+    }
+
+    // Search cases
+    public function searchCases()
+    {
+        // Get search parameters from POST
+        $query = $_POST['query'] ?? '';
+        $field = $_POST['field'] ?? 'all';
+
+        // Load the CaseModel
+        $caseModel = $this->loadModel('CaseModel');
+
+        // Get search results
+        $cases = $caseModel->searchCases($query, $field);
+
+        // Return JSON response
+        header('Content-Type: application/json');
+        echo json_encode(['success' => true, 'cases' => $cases]);
+        exit;
     }
 }
