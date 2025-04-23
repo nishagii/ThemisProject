@@ -248,8 +248,7 @@ i:hover{
 }
 
 .login-container {
-    max-width: 600px;
-    width: 450px;
+    flex: 1;
     background: white;
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
@@ -333,5 +332,55 @@ i:hover{
     font-size: 14px;
     margin-top: 4px;
   }
+
+.flex{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.meetings {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    flex: 2;
+}
+
+.meeting-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.no-meetings-message {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+
+.no-meetings-icon i {
+    font-size: 2.5rem;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+}
+
+.request-meeting-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: #2e86de;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.request-meeting-btn:hover {
+    background-color: #1b4f72;
+}
+
   
   

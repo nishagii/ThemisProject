@@ -113,6 +113,8 @@
                         </div>
                     <?php endif; ?>
                 </section>
+                
+                <div class="flex">
 
                 <div class="login-container">
                     <div class="header">
@@ -149,6 +151,43 @@
                     </div>
 
                 </div>
+
+                                    <!-- Meetings Section -->
+                    <section id="meetings" class="meetings">
+                        <h2><i class="fas fa-handshake"></i> Recent Meeting Requests</h2>
+
+                        <?php if (!empty($meetings) && is_array($meetings)): ?>
+                            <?php foreach ($meetings as $meeting): ?>
+                                <div class="meeting-card">
+                                    <h3>Meeting with: <?= htmlspecialchars($meeting['lawyer_name']) ?></h3>
+                                    <p>Date: <i class="fas fa-calendar"></i> <?= htmlspecialchars($meeting['meeting_date']) ?></p>
+                                    <p>Time: <i class="fas fa-clock"></i> <?= htmlspecialchars($meeting['meeting_time']) ?></p>
+                                    <p>Status: 
+                                        <span class="status <?= strtolower(str_replace(' ', '-', $meeting['status'])) ?>">
+                                            <?= htmlspecialchars($meeting['status']) ?>
+                                        </span>
+                                    </p>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="no-meetings-message">
+                                <div class="no-meetings-icon">
+                                    <i class="fas fa-calendar-times"></i>
+                                </div>
+                                <div class="no-meetings-content">
+                                    <h4>No Meeting Requests Found</h4>
+                                    <p>You haven't requested any meetings yet.</p>
+                                    <a href="<?= ROOT ?>/client/requestMeeting" class="request-meeting-btn">
+                                        <i class="fas fa-plus-circle"></i> Request a Meeting
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </section>
+
+                </div>
+                
+
 
             </div>
             

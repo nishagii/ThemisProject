@@ -24,6 +24,9 @@ class HomeClient
         $loginModel = $this->loadModel('LoginModel');
         $data['logins'] = $loginModel->getLoginDetailsByUserId($_SESSION['user_id']);
 
+        $meetingModel = $this->loadModel('meetingModel');
+        $data['meetings'] = $meetingModel->getMeetingsByClientId($_SESSION['user_id']);
+
         $this->view('/client/home', $data);
     }
 }
