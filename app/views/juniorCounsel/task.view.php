@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -8,9 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THEMIS</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/juniorCounsel/task.css">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">  <!-- this is imported to use icons -->
-   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">  <!-- this is imported to use icons -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        /* Add style for clickable rows */
+        table tbody tr {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        table tbody tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* Ensure "Done" button doesn't trigger the row click */
+        .done, .done-overdue {
+            position: relative;
+            z-index: 2;
+        }
+    </style>   
 </head>
 
 <body>
@@ -56,7 +71,7 @@
                                     $remaining = $today->diff($deadline)->format('%r%a');
                                     $isOverdue = ($remaining < 0);
                                 ?>
-                                <tr>
+                                <tr onclick="viewTaskDetails(<?= $task->taskID ?>)">
                                     <td><?= htmlspecialchars($task->name) ?></td>
                                     <td><?= htmlspecialchars($task->assignedDate) ?></td>
                                     <td><?= htmlspecialchars($task->deadlineDate) ?></td>
@@ -64,7 +79,7 @@
                                         <?= $isOverdue ? $remaining . ' day(s)' : $days . ' day(s)' ?>
                                     </td>
                                     <td>
-                                        <a href="<?= ROOT ?>/task/complete/<?= $task->taskID ?>" class="<?= $isOverdue ? 'done-overdue' : 'done' ?>">
+                                        <a href="<?= ROOT ?>/task/complete/<?= $task->taskID ?>" class="<?= $isOverdue ? 'done-overdue' : 'done' ?>" onclick="event.stopPropagation()">
                                             <i class="fas fa-check"></i>
                                         </a>
                                     </td>
@@ -88,30 +103,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Task 1</td>
-                                <td>2024-11-15</td>
-                                <td>5 days</td>
-                                <td class="completed">Completed</td>
-                            </tr>
-                            <tr>
-                                <td>Task 1</td>
-                                <td>2024-11-15</td>
-                                <td>5 days</td>
-                                <td class="completed">Completed</td>
-                            </tr>
-                            <tr>
-                                <td>Task 1</td>
-                                <td>2024-11-15</td>
-                                <td>5 days</td>
-                                <td class="completed">Completed</td>
-                            </tr>
-                            <tr>
-                                <td>Task 1</td>
-                                <td>2024-11-15</td>
-                                <td>5 days</td>
-                                <td class="incomplete">Incomplete</td>
-                            </tr>
+                            <?php foreach ($completedTasks as $task): ?>
+                                <?php
+                                    // Calculate time taken
+                                    $assigned = new DateTime($task->assignedDate);
+                                    $completed = new DateTime($task->completedDate ?? $task->deadlineDate);
+                                    $interval = $assigned->diff($completed);
+                                    $days = $interval->days;
+                                ?>
+                                <tr onclick="viewTaskDetails(<?= $task->taskID ?>)">
+                                    <td><?= htmlspecialchars($task->name) ?></td>
+                                    <td><?= htmlspecialchars($task->assignedDate) ?></td>
+                                    <td><?= $days . ' day(s)' ?></td>
+                                    <td class="<?= $task->status === 'completed' ? 'completed' : 'incomplete' ?>">
+                                        <?= ucfirst($task->status) ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -121,5 +129,11 @@
     </div>
 </div>
     <script src="<?= ROOT ?>/assets/js/juniorCounsel/task.js"></script>
+    <script>
+        function viewTaskDetails(taskId) {
+            // Redirect to the task details page
+            window.location.href = "<?= ROOT ?>/task/details/" + taskId;
+        }
+    </script>
 </body>
 </html>

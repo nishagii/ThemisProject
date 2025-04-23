@@ -145,6 +145,13 @@ a:hover{
 .search-bar:hover {
     box-shadow: 1px 1px 8px 1px #dcdcdc;
 }
+
+.icon-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+}
+
 .sort-icon,
 .filter-icon {
     font-size: 23px; 
@@ -152,43 +159,53 @@ a:hover{
     cursor: pointer; 
     transition: color 0.3s;
     margin-left: 10px;
-    margin-top: 5px;
+    margin-top: 0px;
 }
 
 .sort-icon:hover,
 .filter-icon:hover {
     color: #b57c30; 
 }
-.sort-dropdown {
+.sort-dropdown, .filter-dropdown, .year-dropdown {
     display: none;
     position: absolute;
-    top: 10px; 
-    right: 150px; 
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 8px;
     z-index: 1;
     border-radius: 4px;
-  }
-    
-  .sort-dropdown .dropdown-item {
+    right: auto;
+    top: 0px;
+    left: 30px;
+    min-width: 140px;
+}
+
+.year-dropdown{
+    left: 120px;
+}
+
+.sort-dropdown .dropdown-item , 
+.filter-dropdown .dropdown-item, 
+.year-dropdown .dropdown-item {
     display: block;
-      padding: 8px 12px;
-      cursor: pointer;
-      text-align: left;
-      background: none;
-      border: none;
-      width: 100%;
-      min-width: 100px;
-      color: #1d1b31;
-      transition: background-color 0.2s ease;
-  }
+    padding: 8px 12px;
+    cursor: pointer;
+    text-align: left;
+    background: none;
+    border: none;
+    width: 100%;
+    min-width: 100px;
+    color: #1d1b31;
+    transition: background-color 0.2s ease;
+}
     
-  .sort-dropdown .dropdown-item:hover {
+.sort-dropdown .dropdown-item:hover,
+.filter-dropdown .dropdown-item:hover, 
+.year-dropdown .dropdown-item:hover {
     background-color: #f0f0f0;
-  }
-  
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .table-container {
@@ -212,10 +229,12 @@ a:hover{
     .filter-icon,.sort-icon {
         margin-left: 5px;
         font-size: 20px;
-        margin-top: 25px;
     }
     .sort-dropdown{
         right: 0px;
+    }
+    .year-dropdown{
+        left: 100px;
     }
 }
 @media (max-width: 480px) {
@@ -232,14 +251,13 @@ a:hover{
     .sort-icon {
         margin-left: 5px;
         font-size: 20px;
-        margin-top: 0;
     }
 
-    .sort-dropdown{
-        padding: 5px;
+    .sort-dropdown, .filter-dropdown, .year-dropdown{
+        padding: 2px;
         top: 40px;
-        right: 0px;
-        min-width: 120px;
+        left: 20px;
+        max-width: 100px;
     }
     .sort-dropdown .dropdown-item {
         padding: 6px 10px; 
