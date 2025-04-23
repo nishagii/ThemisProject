@@ -21,6 +21,9 @@ class HomeClient
         $invoiceModel = $this->loadModel('invoiceModel');
         $data['invoices'] = $invoiceModel->getSentInvoicesByClient($_SESSION['user_id']);
 
+        $loginModel = $this->loadModel('LoginModel');
+        $data['logins'] = $loginModel->getLoginDetailsByUserId($_SESSION['user_id']);
+
         $this->view('/client/home', $data);
     }
 }
