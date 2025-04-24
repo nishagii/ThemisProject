@@ -290,10 +290,14 @@ class Document
         
         // Update the document
         $result = $documentModel->update($updateData, $documentID);
+        $case = $documentModel->getCaseId($documentID);
+        $caseId = $case[0]->case_id ?? null;
+
+
         
         if ($result) {
             $_SESSION['success'] = "Document updated successfully!";
-            header("Location: " . ROOT . "/document/index");
+            header("Location: " . ROOT . "/document/index/" . $caseId);
         } else {
             $_SESSION['error'] = "Failed to update document.";
             header("Location: " . ROOT . "/document/editDocument/" . $documentID);
