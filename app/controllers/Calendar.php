@@ -276,8 +276,19 @@ class Calendar
             $_SESSION['info'] = 'No active Google Calendar connection to revoke.';
         }
 
-        // Redirect back to calendar page
-        redirect('homelawyer');
+        // Redirect to no calendar access page instead of calendar
+        redirect('calendar/noAccess');
         exit;
+    }
+
+    // Add a new method to handle the no access page
+    public function noAccess()
+    {
+        // Generate a new auth URL for reconnecting
+        $authUrl = $this->client->createAuthUrl();
+        $_SESSION['authUrl'] = $authUrl;
+
+        // Show the no access view with the auth URL
+        $this->view('/calendar/no_calendar_access', ['authUrl' => $authUrl]);
     }
 }
