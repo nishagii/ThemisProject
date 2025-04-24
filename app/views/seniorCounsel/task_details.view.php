@@ -16,7 +16,7 @@
     <div class="home-section">
         <div class="task-section">
             <a href="<?= ROOT ?>/tasklawyer" class="back-link">
-                <i class="fas fa-arrow-left"></i> Back to Tasks
+                <i class="fas fa-arrow-left"></i>
             </a>
         
         <div class="details-container">
@@ -98,21 +98,30 @@
             <div class="task-description">
                 <h3>Description</h3>
                 <p><?= nl2br(htmlspecialchars($task->description ?? 'No description provided.')) ?></p>
+
+                <?php if (!empty($task->comment)): ?>
+                <div class="task-comment">
+                    <h3>Comments from the assignee</h3>
+                    <p><?= nl2br(htmlspecialchars($task->comment)) ?></p>
+                </div>
+                <?php endif; ?>
+
             </div>
             
             <div class="actions-container">
-                <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $task->taskID ?>" class="btn btn-primary">
-                    <i class="fas fa-edit"></i> Edit Task
-                </a>
                 <?php if($task->status !== 'completed'): ?>
-                <button class="btn btn-secondary" onclick="markAsCompleted(<?= $task->taskID ?>)">
-                    <i class="fas fa-check"></i> Mark as Completed
-                </button>
+                    <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $task->taskID ?>" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Edit Task
+                    </a>
+                    <button class="btn btn-secondary" onclick="markAsCompleted(<?= $task->taskID ?>)">
+                        <i class="fas fa-check"></i> Mark as Completed
+                    </button>
+                    <button class="btn btn-danger" onclick="confirmDelete(<?= $task->taskID ?>)">
+                        <i class="fas fa-trash"></i> Delete Task
+                    </button>
                 <?php endif; ?>
-                <button class="btn btn-danger" onclick="confirmDelete(<?= $task->taskID ?>)">
-                    <i class="fas fa-trash"></i> Delete Task
-                </button>
             </div>
+
         </div>
         
         <?php if(!empty($taskHistory)): ?>
