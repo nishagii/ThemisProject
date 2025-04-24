@@ -15,14 +15,15 @@ class TaskModel
     {
         // Prepare the query to insert data into the "tasks" table
         $query = "INSERT INTO {$this->table} 
-                  (name, description, assigneeID,assignedDate, deadlineDate, deadlineTime,status, priority)
-                  VALUES 
-                  (:name, :description, :assigneeID, NOW(), :deadlineDate, :deadlineTime,'pending', :priority)";
+                (name, description, task_doc, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority)
+                VALUES 
+                (:name, :description, :task_doc, :assigneeID, NOW(), :deadlineDate, :deadlineTime, 'pending', :priority)";
 
-        // Bind parameters to prevent SQL injection
+        // Add the optional task document (if present)
         $params = [
             'name' => $data['name'],
             'description' => $data['description'],
+            'task_doc' => isset($data['pdf']) ? $data['pdf'] : null, // Add task_doc if a file was uploaded
             'assigneeID' => $data['assigneeID'],
             'deadlineDate' => $data['deadlineDate'],
             'deadlineTime' => $data['deadlineTime'],
@@ -107,22 +108,29 @@ class TaskModel
         return $this->query($query, $params);
     }
 
-    public function completeTask($taskID)
+    public function completeTask($taskID, $comment = null)
     {
-        // Update the task's status to 'completed'
         $query = "UPDATE {$this->table} 
-                  SET status = 'completed' 
+                  SET status = 'completed',
+                      comment = :comment,
+                      completionDate = NOW()
                   WHERE taskID = :taskID";
-
-        $params = ['taskID' => $taskID];
+    
+        $params = [
+            'taskID' => $taskID,
+            'comment' => $comment
+        ];
+    
         return $this->query($query, $params);
     }
+    
 
-    public function getTaskCount() 
+    public function getTaskCountByStatus($status) 
     {
-        $query = "SELECT COUNT(taskID) AS count FROM {$this->table}";
-        return $this->query($query);
+        $query = "SELECT COUNT(taskID) AS count FROM {$this->table} WHERE status = :status";
+        return $this->query($query, ['status' => $status]);
     }
+    
 
     public function updateTaskStatus($taskID, $status)
     {

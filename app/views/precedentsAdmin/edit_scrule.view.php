@@ -204,41 +204,45 @@
 </style>
 
 <body>
-    <form id="precedentEditForm"
-    action="<?= ROOT ?>/PrecedentsController/updatePrecedent" method="POST" 
+    <?php include('components/bigNav.view.php'); ?>
+    <form id="scruleEditForm"
+    action="<?= ROOT ?>/SCrules/updateRule" method="POST" 
     enctype="multipart/form-data"
     novalidate>
-        <input type="hidden" name="id" value="<?= $case->id ?>">
+        <input type="hidden" name="id" value="<?= $rule->id ?>">
 
         <div class="form-section">
-            <h2>Edit Precedent</h2>
-                <div class="form-group">
-                    <label for="judgment_date">Date:</label>
-                    <input id="judgment_date" type="date"  name="judgment_date" value="<?= htmlspecialchars($case->judgment_date) ?>" required>
-                    <div class="error" id="dateError"></div>
-                </div>
-                <div class="form-group">
-                    <label for="case_number">Case Number:</label>
-                    <input id="case_number" type="text" name="case_number" value="<?= htmlspecialchars($case->case_number) ?>" required>
-                    <div class="error" id="caseNumberError"></div>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea id="description" type="text" name="description" value="<?= htmlspecialchars($case->description) ?>" required><?= htmlspecialchars($case->description) ?></textarea>
-                    <div class="error" id="descriptionError"></div>
-                </div>
-                <div class="form-group">
-                    <label for="judgment_by">Judgment by:</label>
-                    <input id="judgment_by" type="text" name="judgment_by" value="<?= htmlspecialchars($case->judgment_by) ?>" required>
-                    <div class="error" id="judgmentByError"></div>
-                </div>
+            <h2>Edit SC Rule</h2>
             <div class="form-group">
-            <label for="document_link">Current Document:</label>
-                    <a href="<?= htmlspecialchars($case->document_link) ?>" target="_blank">View Document</a>
-                    <input type="hidden" name="current_document_link" value="<?= htmlspecialchars($case->document_link) ?>">
-                    <p><b>Or upload a new document (optional):</b></p>
-                    <input id="document_upload" type="file" name="document_upload">
-                    <div class="error" id="documentLinkError"></div>
+                <label for="rule_number">Rule Number:</label>
+                <input type="text" id="rule_number" name="rule_number" value="<?= htmlspecialchars($rule->rule_number) ?>" required>
+                <div class="error" id="ruleNumberError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Published Date:</label>
+                <input type="date" id="date" name="published_date" value="<?= htmlspecialchars($rule->published_date) ?>" max="" required>
+                <div class="error" id="dateError"></div>
+            </div>
+            <div class="form-group">
+                <label for="sinhala_link">Sinhala Document:</label>
+                <a href="<?= htmlspecialchars($rule->sinhala_link) ?>" target="_blank">View current</a>
+                <input type="hidden" name="current_sinhala_link" value="<?= htmlspecialchars($rule->sinhala_link) ?>">
+                <input type="file" name="sinhala_link" id="sinhala_link">
+            </div>
+
+            <div class="form-group">
+                <label for="tamil_link">Tamil Document:</label>
+                <a href="<?= htmlspecialchars($rule->tamil_link) ?>" target="_blank">View current</a>
+                <input type="hidden" name="current_tamil_link" value="<?= htmlspecialchars($rule->tamil_link) ?>">
+                <input type="file" name="tamil_link" id="tamil_link">
+            </div>
+
+            <div class="form-group">
+                <label for="english_link">English Document:</label>
+                <a href="<?= htmlspecialchars($rule->english_link) ?>" target="_blank">View current</a>
+                <input type="hidden" name="current_english_link" value="<?= htmlspecialchars($rule->english_link) ?>">
+                <input type="file" name="english_link" id="english_link">
             </div>
 
             <div class="form-group">
@@ -247,56 +251,36 @@
         </div>
     </form>
     <script>
-        // Form Validation
-        document.getElementById('precedentEditForm').addEventListener('submit', function(event) {
-        window.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', () => {
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('date').setAttribute('max', today);
         });
-            // Get form fields
-            const date = document.getElementById('judgment_date').value;
-            const caseNumber = document.getElementById('case_number').value.trim();
-            const description = document.getElementById('description').value.trim();
-            const judgmentBy = document.getElementById('judgment_by').value.trim();
+            // Form Validation
+        document.getElementById('scruleEditForm').addEventListener('submit', function(event) {
+        const ruleNumber = document.getElementById('rule_number').value.trim();
+        const date = document.getElementById('date').value;
+
+        const ruleNumberError = document.getElementById('ruleNumberError');
+        const dateError = document.getElementById('dateError');
         
-            // Error elements
-            const dateError = document.getElementById('dateError');
-            const caseNumberError = document.getElementById('caseNumberError');
-            const descriptionError = document.getElementById('descriptionError');
-            const judgmentByError = document.getElementById('judgmentByError');
-            
-            // Reset error messages
-            dateError.textContent = '';
-            caseNumberError.textContent = '';
-            descriptionError.textContent = '';
-            judgmentByError.textContent = '';
+        ruleNumberError.textContent = '';
+        dateError.textContent = '';
 
-            // Flag to check if form is valid
-            let isValid = true;
+        let isValid = true;
 
-            // Validation checks
-            if (!date) {
-                dateError.textContent = 'Date is required.';
-                isValid = false;
-            }
-            if (!caseNumber) {
-                caseNumberError.textContent = 'Case number is required.';
-                isValid = false;
-            }
-            if (!parties) {
-                descriptionError.textContent = 'Name of parties is required.';
-                isValid = false;
-            }
-            if (!judgmentBy) {
-                judgmentByError.textContent = 'Judgment by is required.';
-                isValid = false;
-            }
-    
-            // If form is not valid, prevent submission
-            if (!isValid) {
-                event.preventDefault();
-            }
-        });
+        if (!ruleNumber) {
+            ruleNumberError.textContent = 'Rule number is required.';
+            isValid = false;
+        }
+        if (!date) {
+            dateError.textContent = 'Published Date is required.';
+            isValid = false;
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
     </script>
 </body>
 </html>

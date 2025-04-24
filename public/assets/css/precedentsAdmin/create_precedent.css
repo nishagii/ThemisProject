@@ -89,7 +89,7 @@ textarea {
     gap: 15px;
 }
 
-button, .btn-cancel {
+button, .btn-cancel, .btn-goback {
     display: inline-block;
     padding: 10px 20px;
     text-align: center;
@@ -132,6 +132,16 @@ a{
 
 .btn-submit:hover {
     background-color: #b67d2f;
+}
+
+/* View go back button */
+.btn-goback {
+    background-color: #3f51b5;
+    color: white;
+}
+
+.btn-goback:hover {
+    background-color: #5c6bc0;
 }
 
 /* Cancel Button */

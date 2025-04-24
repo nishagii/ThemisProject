@@ -4,6 +4,141 @@ class CaseModel
 {
     use Model;
     protected $table = 'cases'; // Name of the database table
+    private $encryptionKey; // Encryption key
+    private $encryptionMethod = 'AES-256-CBC'; // Encryption method
+
+    public function __construct()
+    {
+        // Initialize encryption key from environment variable
+        $this->encryptionKey = getenv('ENCRYPTION_KEY');
+
+        // If not found in environment, use a fallback (for development only)
+        if (!$this->encryptionKey) {
+            $this->encryptionKey = 'ladiesandgentelements@themis2025@ucscweareencryptednow'; // Fallback key
+            error_log("Warning: Using fallback encryption key. Set ENCRYPTION_KEY in environment for security.");
+        }
+    }
+
+    /**
+     * Encrypt data
+     * 
+     * @param string $data Data to encrypt
+     * @return string Encrypted data
+     */
+    private function encrypt($data)
+    {
+        if (empty($data)) return $data;
+
+        $ivLength = openssl_cipher_iv_length($this->encryptionMethod);
+        $iv = openssl_random_pseudo_bytes($ivLength);
+
+        $encrypted = openssl_encrypt(
+            $data,
+            $this->encryptionMethod,
+            $this->encryptionKey,
+            0,
+            $iv
+        );
+
+        // Return IV + encrypted data, both base64 encoded
+        return base64_encode($iv . base64_decode($encrypted));
+    }
+
+    /**
+     * Decrypt data
+     * 
+     * @param string $data Data to decrypt
+     * @return string Decrypted data
+     */
+    private function decrypt($data)
+    {
+        if (empty($data)) return $data;
+
+        try {
+            $data = base64_decode($data);
+            $ivLength = openssl_cipher_iv_length($this->encryptionMethod);
+
+            // Extract IV and encrypted data
+            $iv = substr($data, 0, $ivLength);
+            $encrypted = base64_encode(substr($data, $ivLength));
+
+            return openssl_decrypt(
+                $encrypted,
+                $this->encryptionMethod,
+                $this->encryptionKey,
+                0,
+                $iv
+            );
+        } catch (Exception $e) {
+            // Log error but return original data to prevent application failure
+            error_log("Decryption error: " . $e->getMessage());
+            return "Error: Could not decrypt data";
+        }
+    }
+
+    /**
+     * Encrypt sensitive fields in the data array
+     * 
+     * @param array $data Data array with fields to encrypt
+     * @return array Data with encrypted fields
+     */
+    private function encryptSensitiveData($data)
+    {
+        // Define which fields should be encrypted
+        $sensitiveFields = [
+            'client_name',
+            'client_number',
+            'client_email',
+            'client_address',
+            'notes',
+            'case_number'
+        ];
+
+        foreach ($sensitiveFields as $field) {
+            if (isset($data[$field]) && !empty($data[$field])) {
+                $data[$field] = $this->encrypt($data[$field]);
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * Decrypt sensitive fields in the data object or array
+     * 
+     * @param object|array $data Data with fields to decrypt
+     * @return object|array Data with decrypted fields
+     */
+    private function decryptSensitiveData($data)
+    {
+        // Define which fields should be decrypted
+        $sensitiveFields = [
+            'client_name',
+            'client_number',
+            'client_email',
+            'client_address',
+            'notes',
+            'case_number'
+            
+        ];
+
+        // Handle both objects and arrays
+        if (is_object($data)) {
+            foreach ($sensitiveFields as $field) {
+                if (isset($data->$field) && !empty($data->$field)) {
+                    $data->$field = $this->decrypt($data->$field);
+                }
+            }
+        } elseif (is_array($data)) {
+            foreach ($sensitiveFields as $field) {
+                if (isset($data[$field]) && !empty($data[$field])) {
+                    $data[$field] = $this->decrypt($data[$field]);
+                }
+            }
+        }
+
+        return $data;
+    }
 
     /**
      * Save a new case to the database.
@@ -13,6 +148,9 @@ class CaseModel
      */
     public function save($data)
     {
+        // Encrypt sensitive data before saving
+        $encryptedData = $this->encryptSensitiveData($data);
+
         // Prepare the query to insert data into the "cases" table
         $query = "INSERT INTO {$this->table} 
                   (client_id, client_registered, client_name, client_number, client_email, client_address, 
@@ -23,25 +161,25 @@ class CaseModel
 
         // Bind parameters to prevent SQL injection
         $params = [
-            'client_id' => $data['client_id'] ?? null,
-            'client_registered' => $data['client_registered'] ?? 0,
-            'client_name' => $data['client_name'],
-            'client_number' => $data['client_number'],
-            'client_email' => $data['client_email'],
-            'client_address' => $data['client_address'],
-            'case_number' => $data['case_number'],
-            'court' => $data['court'],
-            'notes' => $data['notes'],
-            'attorney_id' => $data['attorney_id'] ?? null,
-            'junior_id' => $data['junior_id'] ?? null,
-            'case_status' => $data['case_status'] ?? 'Active'
+            'client_id' => $encryptedData['client_id'] ?? null,
+            'client_registered' => $encryptedData['client_registered'] ?? 0,
+            'client_name' => $encryptedData['client_name'],
+            'client_number' => $encryptedData['client_number'],
+            'client_email' => $encryptedData['client_email'],
+            'client_address' => $encryptedData['client_address'],
+            'case_number' => $encryptedData['case_number'],
+            'court' => $encryptedData['court'],
+            'notes' => $encryptedData['notes'],
+            'attorney_id' => $encryptedData['attorney_id'] ?? null,
+            'junior_id' => $encryptedData['junior_id'] ?? null,
+            'case_status' => $encryptedData['case_status'] ?? 'Active'
         ];
 
         // Execute the query using the parent Model class's query method
         return $this->query($query, $params);
     }
 
-   
+
     // Get all non-deleted cases
     public function getAllCases()
     {
@@ -51,8 +189,19 @@ class CaseModel
               FROM {$this->table} c
               LEFT JOIN users a ON c.attorney_id = a.id
               LEFT JOIN users j ON c.junior_id = j.id
-              WHERE c.deleted = 0";
-        return $this->query($query);
+              WHERE c.deleted = 0
+              ORDER BY c.created_at DESC";
+
+        $cases = $this->query($query);
+
+        // Decrypt sensitive data in each case
+        if (is_array($cases)) {
+            foreach ($cases as &$case) {
+                $case = $this->decryptSensitiveData($case);
+            }
+        }
+
+        return $cases;
     }
 
     // Get a specific non-deleted case by ID
@@ -74,7 +223,10 @@ class CaseModel
             return null; // Return null if no case is found
         }
 
-        return $result[0]; // Return the first (and expected only) result
+        // Decrypt sensitive data
+        $case = $this->decryptSensitiveData($result[0]);
+
+        return $case; // Return the first (and expected only) result
     }
 
     // Soft delete a case (mark as deleted instead of removing from database)
@@ -96,7 +248,17 @@ class CaseModel
               LEFT JOIN users a ON c.attorney_id = a.id
               LEFT JOIN users j ON c.junior_id = j.id
               WHERE c.deleted = 1";
-        return $this->query($query);
+
+        $cases = $this->query($query);
+
+        // Decrypt sensitive data in each case
+        if (is_array($cases)) {
+            foreach ($cases as &$case) {
+                $case = $this->decryptSensitiveData($case);
+            }
+        }
+
+        return $cases;
     }
 
     // Optional: Restore a deleted case
@@ -110,6 +272,9 @@ class CaseModel
     // Update an existing case
     public function updateCase($data)
     {
+        // Encrypt sensitive data before updating
+        $encryptedData = $this->encryptSensitiveData($data);
+
         $query = "UPDATE {$this->table} 
               SET 
                   client_id = :client_id,
@@ -128,19 +293,19 @@ class CaseModel
               WHERE id = :id";
 
         $params = [
-            'id' => $data['id'],
-            'client_id' => $data['client_id'] ?? null,
-            'client_registered' => $data['client_registered'] ?? 0,
-            'client_name' => $data['client_name'],
-            'client_number' => $data['client_number'],
-            'client_email' => $data['client_email'],
-            'client_address' => $data['client_address'],
-            'case_number' => $data['case_number'],
-            'court' => $data['court'],
-            'notes' => $data['notes'],
-            'attorney_id' => $data['attorney_id'] ?? null,
-            'junior_id' => $data['junior_id'] ?? null,
-            'case_status' => $data['case_status'] ?? 'Active'
+            'id' => $encryptedData['id'],
+            'client_id' => $encryptedData['client_id'] ?? null,
+            'client_registered' => $encryptedData['client_registered'] ?? 0,
+            'client_name' => $encryptedData['client_name'],
+            'client_number' => $encryptedData['client_number'],
+            'client_email' => $encryptedData['client_email'],
+            'client_address' => $encryptedData['client_address'],
+            'case_number' => $encryptedData['case_number'],
+            'court' => $encryptedData['court'],
+            'notes' => $encryptedData['notes'],
+            'attorney_id' => $encryptedData['attorney_id'] ?? null,
+            'junior_id' => $encryptedData['junior_id'] ?? null,
+            'case_status' => $encryptedData['case_status'] ?? 'Active'
         ];
 
         return $this->query($query, $params);
@@ -149,32 +314,32 @@ class CaseModel
     // Get case number by email
     public function getCaseNumberByEmail($email)
     {
-        $query = "SELECT case_number FROM {$this->table} WHERE client_email = :email";
-        $params = ['email' => $email];
+        // Since email is encrypted, we need to get all cases and filter
+        $allCases = $this->getAllCases();
 
-        $result = $this->query($query, $params);
-
-        // Check if result is empty
-        if (empty($result)) {
-            return null; // Return null if no case is found for the given email
+        foreach ($allCases as $case) {
+            if ($case->client_email === $email) {
+                return $case->case_number;
+            }
         }
 
-        return $result[0]['case_number']; // Return the case number
+        return null;
     }
 
     // Get cases by client email
     public function getCasesByClientEmail($email)
     {
-        $query = "SELECT c.*, 
-                  a.first_name as attorney_first_name, a.last_name as attorney_last_name,
-                  j.first_name as junior_first_name, j.last_name as junior_last_name
-                  FROM {$this->table} c
-                  LEFT JOIN users a ON c.attorney_id = a.id
-                  LEFT JOIN users j ON c.junior_id = j.id
-                  WHERE c.client_email = :email";
-        $params = ['email' => $email];
+        // Since email is encrypted, we need to get all cases and filter
+        $allCases = $this->getAllCases();
+        $matchingCases = [];
 
-        return $this->query($query, $params);
+        foreach ($allCases as $case) {
+            if ($case->client_email === $email) {
+                $matchingCases[] = $case;
+            }
+        }
+
+        return $matchingCases;
     }
 
     // Get cases by client ID
@@ -189,25 +354,53 @@ class CaseModel
                   WHERE c.client_id = :client_id";
         $params = ['client_id' => $clientId];
 
-        return $this->query($query, $params);
+        $cases = $this->query($query, $params);
+
+        // Decrypt sensitive data in each case
+        if (is_array($cases)) {
+            foreach ($cases as &$case) {
+                $case = $this->decryptSensitiveData($case);
+            }
+        }
+
+        return $cases;
     }
 
     // Get cases by attorney ID
     public function getCasesByAttorneyId($attorneyId)
     {
-        $query = "SELECT * FROM {$this->table} WHERE attorney_id = :attorney_id";
+        $query = "SELECT * FROM {$this->table} WHERE attorney_id = :attorney_id AND deleted = 0";
         $params = ['attorney_id' => $attorneyId];
 
-        return $this->query($query, $params);
+        $cases = $this->query($query, $params);
+
+        // Decrypt sensitive data in each case
+        if (is_array($cases)) {
+            foreach ($cases as &$case) {
+                $case = $this->decryptSensitiveData($case);
+            }
+        }
+
+        return $cases;
     }
 
     // Get cases by junior ID
     public function getCasesByJuniorId($juniorId)
     {
-        $query = "SELECT * FROM {$this->table} WHERE junior_id = :junior_id";
+        #get only not deleted cases
+        $query = "SELECT * FROM {$this->table} WHERE junior_id = :junior_id AND deleted = 0";
         $params = ['junior_id' => $juniorId];
 
-        return $this->query($query, $params);
+        $cases = $this->query($query, $params);
+
+        
+        if (is_array($cases)) {
+            foreach ($cases as &$case) {
+                $case = $this->decryptSensitiveData($case);
+            }
+        }
+
+        return $cases;
     }
 
     // Update only the case status
@@ -225,4 +418,58 @@ class CaseModel
 
         return $this->query($query, $params);
     }
+
+    // Search cases
+    public function searchCases($searchQuery, $field = 'all')
+    {
+        // Since we're using encryption, we need to handle search differently
+        // First, get all non-deleted cases
+        $query = "SELECT c.*, 
+              a.first_name as attorney_first_name, a.last_name as attorney_last_name,
+              j.first_name as junior_first_name, j.last_name as junior_last_name
+              FROM {$this->table} c
+              LEFT JOIN users a ON c.attorney_id = a.id
+              LEFT JOIN users j ON c.junior_id = j.id
+              WHERE c.deleted = 0";
+
+        $allCases = $this->query($query);
+
+        // Decrypt all cases
+        if (is_array($allCases)) {
+            foreach ($allCases as &$case) {
+                $case = $this->decryptSensitiveData($case);
+            }
+        } else {
+            return []; // No cases found
+        }
+
+        // Now filter the decrypted cases based on search criteria
+        $searchQuery = strtolower($searchQuery); // Case-insensitive search
+        $results = [];
+
+        foreach ($allCases as $case) {
+            // Search in specific field or all fields
+            if ($field === 'all') {
+                // Search in all relevant fields
+                if (
+                    (isset($case->case_number) && stripos($case->case_number, $searchQuery) !== false) ||
+                    (isset($case->client_name) && stripos($case->client_name, $searchQuery) !== false) ||
+                    (isset($case->client_email) && stripos($case->client_email, $searchQuery) !== false) ||
+                    (isset($case->client_number) && stripos($case->client_number, $searchQuery) !== false) ||
+                    (isset($case->court) && stripos($case->court, $searchQuery) !== false) ||
+                    (isset($case->notes) && stripos($case->notes, $searchQuery) !== false)
+                ) {
+                    $results[] = $case;
+                }
+            } else {
+                // Search in specific field
+                if (isset($case->$field) && stripos($case->$field, $searchQuery) !== false) {
+                    $results[] = $case;
+                }
+            }
+        }
+
+        return $results;
+    }
+
 }

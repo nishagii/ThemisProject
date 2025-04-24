@@ -25,47 +25,79 @@
         <!-- Recent Cases -->
         <div class="card recent-cases">
             <h3>Recent Cases</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Case ID</th>
-                        <th>Client</th>
-                        <th>Status</th>
-                        <th>Next Hearing</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>001</td>
-                        <td>John Doe</td>
-                        <td>In Progress</td>
-                        <td>2024-12-05</td>
-                    </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>Jane Smith</td>
-                        <td>Delayed</td>
-                        <td>2024-12-10</td>
-                    </tr>
-                </tbody>
-            </table>
-            <a href="#" class="btn">View All Cases</a>
+
+            <?php if (!empty($cases)): ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Case ID</th>
+                            <th>Client</th>
+                            <th>Status</th>
+                            <th>Next Hearing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach (array_slice($cases, 0, 2) as $case): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($case['case_id']) ?></td>
+                                <td><?= htmlspecialchars($case['client_name']) ?></td>
+                                <td><?= htmlspecialchars($case['status']) ?></td>
+                                <td><?= htmlspecialchars($case['next_hearing_date']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <a href="<?= ROOT ?>/juniorCases" class="btn">View All Cases</a>
+                <?php else: ?>
+                    <div class="no-cases-message">
+                        <div class="icon-container">
+                            <i class="fas fa-folder-open"></i>
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <h4>No Cases Assigned</h4>
+                        <p>You haven't been assigned to any case yet.</p>
+                        <p class="help-text">New assignments will appear here when available.</p>
+                    </div>
+                <?php endif; ?>
         </div>
+
 
         <div class="cards-container">
             <div class="card cards">
                 <i class="fas fa-balance-scale"></i>
-                <p>you have</p>
-                <p>15</p>
+                <p>You have</p>
+                <p>
+                    <?php
+                        $openCount = 0;
+                        if (!empty($cases)) {
+                            foreach ($cases as $case) {
+                                if (strtolower($case['case_status']) === 'ongoing') {
+                                    $openCount++;
+                                }
+                            }
+                        }
+                        echo $openCount;
+                    ?>
+                </p>
                 <h3>Open Cases</h3>
-
             </div>
+
 
             <div class="card cards delayed">
                 <i class="fas fa-hourglass-half"></i>
                 <p>you have</p>
-                <p>5</p>
-                <h3>Delayed Cases</h3>
+                <?php
+                        $openCount = 0;
+                        if (!empty($cases)) {
+                            foreach ($cases as $case) {
+                                if (strtolower($case['case_status']) === 'closed') {
+                                    $openCount++;
+                                }
+                            }
+                        }
+                        echo $openCount;
+                    ?>
+                <h3>Closed Cases</h3>
 
             </div>
         </div>

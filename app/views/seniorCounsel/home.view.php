@@ -20,8 +20,9 @@
     <?php include('component/sidebar.view.php'); ?>
 
     <h1 class="home-heading">
-        Welcome Back Michael !
+        Welcome Back <?= $_SESSION['username'] ?>!
     </h1>
+
     <div class="home-section">
         <!-- Recent Cases -->
         <div class="card recent-cases">

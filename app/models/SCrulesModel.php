@@ -1,22 +1,22 @@
 <?php
 
-class PrecedentModel {
+class SCrulesModel {
     use Database;
 
-    protected $table = 'judgmentsyearwise';
+    protected $table = 'sc_rules';
 
     public function insert($data) {
         $query = "INSERT INTO {$this->table} 
-              (judgment_date, case_number, description, judgment_by, document_link)
+              (rule_number,published_date,sinhala_link,tamil_link,english_link)
               VALUES 
-              (:judgment_date, :case_number, :description, :judgment_by, :document_link)";
+              (:rule_number, :published_date,:sinhala_link,:tamil_link,:english_link)";
 
         $params = [
-            'judgment_date' => $_POST['judgment_date'],
-            'case_number' => $_POST['case_number'],
-            'description' => $_POST['description'],
-            'judgment_by' => $_POST['judgment_by'],
-            'document_link' => $data['document_link']
+            'rule_number' => $_POST['rule_number'],
+            'published_date' => $_POST['published_date'],
+            'sinhala_link' => $data['sinhala_link'],
+            'tamil_link' => $data['tamil_link'],
+            'english_link' => $data['english_link']
         ];
         $this->query($query, $params);
     }
@@ -31,7 +31,7 @@ class PrecedentModel {
         return $this->query($query);
     }
 
-    public function getByCaseId($id)
+    public function getRuleByRuleId($id)
     {
         $query = "SELECT * FROM {$this->table} WHERE id = :id";
         $params = ['id' => $id];
@@ -44,36 +44,36 @@ class PrecedentModel {
         }
         return $result[0];
     }
-
-    public function getRecentCases(){
+    public function getRecentRules(){
         $query = "SELECT * FROM $this->table ORDER BY id DESC LIMIT 3";
         return $this->query($query); 
     }
     
-    public function countPrecedents(){
+    public function countRules(){
         $query = "SELECT COUNT(*) as total FROM $this->table";
         $result = $this->query($query);
         return $result ? $result[0]->total : 0;
     }
-
     //update precedents
     public function update($data) {
         $query = "UPDATE {$this->table}
-                SET 
-                    judgment_date = :judgment_date,
-                    case_number = :case_number,
-                    description = :description,
-                    judgment_by = :judgment_by,
-                    document_link = :document_link
-                    WHERE id = :id";
+                  SET 
+                      rule_number = :rule_number,
+                      published_date = :published_date,
+                      sinhala_link = :sinhala_link,
+                      tamil_link = :tamil_link,
+                      english_link = :english_link
+                  WHERE id = :id";
+    
         $params = [
-            'judgment_date' => $data['judgment_date'],
-            'case_number' => $data['case_number'],
-            'description' => $data['description'],
-            'judgment_by' => $data['judgment_by'],
-            'document_link' => $data['document_link'],
-            ':id' => $data['id'],
+            ':rule_number' => $data['rule_number'],
+            ':published_date' => $data['published_date'],
+            ':sinhala_link' => $data['sinhala_link'],
+            ':tamil_link' => $data['tamil_link'],
+            ':english_link' => $data['english_link'],
+            ':id' => $data['id']
         ];
+    
         return $this->query($query, $params);
     }
 
