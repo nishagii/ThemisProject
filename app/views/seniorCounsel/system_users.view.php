@@ -87,9 +87,27 @@
                         <h3><?= htmlspecialchars($attorney->first_name . ' ' . $attorney->last_name); ?></h3>
                         <p><?= htmlspecialchars($attorney->email); ?></p>
                         <p><?= htmlspecialchars($attorney->phone); ?></p>
+
+                        <div class="cases-section">
+                            <h4>Assigned Cases</h4>
+                            <?php if (!empty($attorney->cases)): ?>
+                                <div class="cases-list">
+                                    <?php foreach ($attorney->cases as $case): ?>
+                                        <div class="case-item">
+                                            <span class="case-number"><?= htmlspecialchars($case->case_number); ?></span>
+                                            <span class="case-court"><?= isset($case->court) ? htmlspecialchars($case->court) : ''; ?></span>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <button class="view-all-cases" data-userid="<?= $attorney->id ?>" data-usertype="attorney">View All Cases</button>
+                            <?php else: ?>
+                                <p class="no-cases">No cases assigned</p>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
+
 
             <!-- Juniors -->
             <div class="user-container" id="juniors" style="display: none;">
@@ -99,9 +117,27 @@
                         <h3><?= htmlspecialchars($junior->first_name . ' ' . $junior->last_name); ?></h3>
                         <p><?= htmlspecialchars($junior->email); ?></p>
                         <p><?= htmlspecialchars($junior->phone); ?></p>
+
+                        <div class="cases-section">
+                            <h4>Assigned Cases</h4>
+                            <?php if (!empty($junior->cases)): ?>
+                                <div class="cases-list">
+                                    <?php foreach ($junior->cases as $case): ?>
+                                        <div class="case-item">
+                                            <span class="case-number"><?= htmlspecialchars($case->case_number); ?></span>
+                                            <span class="case-court"><?= isset($case->court) ? htmlspecialchars($case->court) : ''; ?></span>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <button class="view-all-cases" data-userid="<?= $junior->id ?>" data-usertype="junior">View All Cases</button>
+                            <?php else: ?>
+                                <p class="no-cases">No cases assigned</p>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
+
         </div>
     </div>
 
@@ -109,7 +145,7 @@
     <div id="casesModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h2>Client Cases</h2>
+            <h2 id="modalTitle">User Cases</h2>
             <div id="casesContent">
                 <div id="cases-content">
                     <div class="loading">Loading...</div>
@@ -117,6 +153,7 @@
             </div>
         </div>
     </div>
+
 
     <script>
         // Tab switch
@@ -310,23 +347,82 @@
             filterCriteria.addEventListener('change', performSearch);
 
             // Add event listener to tab buttons to reset search when changing tabs
-            document.querySelectorAll('.tab_btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Clear search input and reset filter when changing tabs
-                    searchInput.value = '';
-                    filterCriteria.value = 'all';
+            document.querySelectorAll('.view-all-cases').forEach(button => {
+                button.addEventListener('click', function() {
+                    const userId = this.getAttribute('data-userid');
+                    const userType = this.getAttribute('data-usertype') || 'client';
 
-                    // Remove any "no results" messages
-                    document.querySelectorAll('.no-results').forEach(msg => msg.remove());
+                    // Set appropriate modal title
+                    if (userType === 'attorney') {
+                        modalTitle.textContent = 'Attorney Assigned Cases';
+                    } else if (userType === 'junior') {
+                        modalTitle.textContent = 'Junior Counsel Assigned Cases';
+                    } else {
+                        modalTitle.textContent = 'Client Cases';
+                    }
 
-                    // Show all cards in the newly selected tab
-                    setTimeout(() => {
-                        const activeTab = this.textContent.toLowerCase();
-                        const userCards = document.querySelectorAll(`#${activeTab} .user-card`);
-                        userCards.forEach(card => {
-                            card.style.display = 'block';
+                    casesModal.style.display = 'block';
+                    casesContent.innerHTML = '<div class="loading">Loading...</div>';
+
+                    let endpoint = '';
+                    if (userType === 'attorney') {
+                        endpoint = `<?= ROOT ?>/users/getAttorneyCases/${userId}`;
+                    } else if (userType === 'junior') {
+                        endpoint = `<?= ROOT ?>/users/getJuniorCases/${userId}`;
+                    } else {
+                        endpoint = `<?= ROOT ?>/users/getClientCases/${userId}`;
+                    }
+
+                    fetch(endpoint)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success && data.cases.length > 0) {
+                                let html = '<table class="cases-table">';
+                                html += '<thead><tr><th>Case Number</th><th>Court</th><th>Client</th>';
+
+                                // Add different columns based on user type
+                                if (userType === 'client') {
+                                    html += '<th>Attorney</th><th>Junior Counsel</th>';
+                                } else if (userType === 'attorney') {
+                                    html += '<th>Junior Counsel</th><th>Status</th>';
+                                } else if (userType === 'junior') {
+                                    html += '<th>Attorney</th><th>Status</th>';
+                                }
+
+                                html += '</tr></thead>';
+                                html += '<tbody>';
+
+                                data.cases.forEach(caseItem => {
+                                    html += `<tr>
+                            <td>${caseItem.case_number}</td>
+                            <td>${caseItem.court || 'N/A'}</td>
+                            <td>${caseItem.client_name || 'N/A'}</td>`;
+
+                                    // Add different columns based on user type
+                                    if (userType === 'client') {
+                                        html += `<td>${caseItem.attorney_name || 'N/A'}</td>
+                                    <td>${caseItem.junior_counsel_name || 'N/A'}</td>`;
+                                    } else if (userType === 'attorney') {
+                                        html += `<td>${caseItem.junior_counsel_name || 'N/A'}</td>
+                                    <td>${caseItem.case_status || 'Active'}</td>`;
+                                    } else if (userType === 'junior') {
+                                        html += `<td>${caseItem.attorney_name || 'N/A'}</td>
+                                    <td>${caseItem.case_status || 'Active'}</td>`;
+                                    }
+
+                                    html += `</tr>`;
+                                });
+
+                                html += '</tbody></table>';
+                                casesContent.innerHTML = html;
+                            } else {
+                                casesContent.innerHTML = '<p>No cases found for this user.</p>';
+                            }
+                        })
+                        .catch(error => {
+                            casesContent.innerHTML = '<p>Error: Could not load case details.</p>';
+                            console.error('Error:', error);
                         });
-                    }, 100); // Small delay to ensure tab switch completes first
                 });
             });
         });
