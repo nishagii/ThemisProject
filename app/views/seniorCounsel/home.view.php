@@ -71,8 +71,9 @@
             <div class="card cards">
                 <i class="fas fa-balance-scale"></i>
                 <p>you have</p>
-                <p>15</p>
-                <h3>Open Cases</h3>
+                <!-- cases count passed from the controller as $casesCount -->
+                 <p><? $ongoingCasesCount ?></p>
+                <h3>Ongoing Cases</h3>
 
             </div>
 
