@@ -158,6 +158,38 @@
             color: #777;
             font-style: italic;
         }
+
+        /* Disabled button styles */
+        .button .disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #ccc;
+        }
+
+        .button .disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Alert message styles */
+        .alert {
+            padding: 15px;
+            margin: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .alert-error {
+            background-color: #ffebee;
+            color: #d32f2f;
+            border: 1px solid #ffcdd2;
+        }
+
+        .alert-success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
     </style>
 </head>
 
@@ -167,6 +199,20 @@
     <?php include('component/smallNav1.view.php'); ?>
     <?php include('component/sidebar.view.php'); ?>
     <div class="home-section">
+        <!-- Alert messages -->
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="alert alert-error">
+                <i class="fas fa-exclamation-circle"></i> <?= $_SESSION['error']; ?>
+                <?php unset($_SESSION['error']); ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['success'])): ?>
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i> <?= $_SESSION['success']; ?>
+                <?php unset($_SESSION['success']); ?>
+            </div>
+        <?php endif; ?>
         <div class="allcases-section">
             <h1>List of All Cases</h1>
         </div>
@@ -260,17 +306,27 @@
                                     <button class="more">Open Case</button>
                                 </a>
 
-                                <a href="<?= ROOT ?>/cases/editCase/<?= $case->id; ?>">
-                                    <button class="edit">
-                                        <i class="bx bx-edit"></i> <!-- Boxicon for Edit -->
-                                    </button>
-                                </a>
+                                <?php if ($case->case_status != 'closed'): ?>
+                                    <a href="<?= ROOT ?>/cases/editCase/<?= $case->id; ?>">
+                                        <button class="edit">
+                                            <i class="bx bx-edit"></i> <!-- Boxicon for Edit -->
+                                        </button>
+                                    </a>
 
-                                <a href="javascript:void(0);" onclick="confirmDelete(<?= $case->id; ?>)">
-                                    <button class="delete">
-                                        <i class="bx bx-trash"></i> <!-- Boxicon for Delete -->
+                                    <a href="javascript:void(0);" onclick="confirmDelete(<?= $case->id; ?>)">
+                                        <button class="delete">
+                                            <i class="bx bx-trash"></i> <!-- Boxicon for Delete -->
+                                        </button>
+                                    </a>
+                                <?php else: ?>
+                                    <!-- Show disabled buttons or info message for closed cases -->
+                                    <button class="edit disabled" title="Closed cases cannot be edited" disabled>
+                                        <i class="bx bx-edit"></i>
                                     </button>
-                                </a>
+                                    <button class="delete disabled" title="Closed cases cannot be deleted" disabled>
+                                        <i class="bx bx-trash"></i>
+                                    </button>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -378,17 +434,13 @@
                                     <button class="more">Open Case</button>
                                 </a>
 
-                                <a href="<?= ROOT ?>/cases/editCase/<?= $case->id; ?>">
-                                    <button class="edit">
-                                        <i class="bx bx-edit"></i> <!-- Boxicon for Edit -->
-                                    </button>
-                                </a>
-
-                                <a href="javascript:void(0);" onclick="confirmDelete(<?= $case->id; ?>)">
-                                    <button class="delete">
-                                        <i class="bx bx-trash"></i> <!-- Boxicon for Delete -->
-                                    </button>
-                                </a>
+                                <!-- Show disabled buttons with tooltips for closed cases -->
+                                <button class="edit disabled" title="Closed cases cannot be edited" disabled>
+                                    <i class="bx bx-edit"></i>
+                                </button>
+                                <button class="delete disabled" title="Closed cases cannot be deleted" disabled>
+                                    <i class="bx bx-trash"></i>
+                                </button>
                             </div>
                         </div>
                     <?php endforeach; ?>
