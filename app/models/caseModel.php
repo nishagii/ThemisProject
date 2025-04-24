@@ -395,7 +395,11 @@ class CaseModel
         return $cases;
     }
 
-    // Get cases by attorney ID
+    /**
+     * Get all cases for a specific attorney.
+     * @param int $attorneyId Attorney ID.
+     * @return array Array of case objects for the attorney.
+     */
     public function getCasesByAttorneyId($attorneyId)
     {
         $query = "SELECT * FROM {$this->table} WHERE attorney_id = :attorney_id AND deleted = 0";
