@@ -15,14 +15,15 @@ class TaskModel
     {
         // Prepare the query to insert data into the "tasks" table
         $query = "INSERT INTO {$this->table} 
-                  (name, description, assigneeID,assignedDate, deadlineDate, deadlineTime,status, priority)
-                  VALUES 
-                  (:name, :description, :assigneeID, NOW(), :deadlineDate, :deadlineTime,'pending', :priority)";
+                (name, description, task_doc, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority)
+                VALUES 
+                (:name, :description, :task_doc, :assigneeID, NOW(), :deadlineDate, :deadlineTime, 'pending', :priority)";
 
-        // Bind parameters to prevent SQL injection
+        // Add the optional task document (if present)
         $params = [
             'name' => $data['name'],
             'description' => $data['description'],
+            'task_doc' => isset($data['pdf']) ? $data['pdf'] : null, // Add task_doc if a file was uploaded
             'assigneeID' => $data['assigneeID'],
             'deadlineDate' => $data['deadlineDate'],
             'deadlineTime' => $data['deadlineTime'],

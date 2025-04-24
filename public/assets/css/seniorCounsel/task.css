@@ -166,6 +166,43 @@ form {
   width: 400px;
 }
 
+.custom-file-input {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 350px;
+  padding: 10px 14px;
+  font-size: 16px;
+  color: #444;
+  background-color: #f9f9f9;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-file-input:hover {
+  background-color: #f1f1f1;
+  border-color: #888;
+}
+
+.custom-file-input::file-selector-button {
+  font-weight: 600;
+  background-color: #7881c4;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-file-input::file-selector-button:hover {
+  background-color: #5961a1;
+}
+
+
 .form-group label {
   display: block;
   font-weight: bold;
