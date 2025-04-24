@@ -12,21 +12,22 @@ class Calendar
         // Initialize Google API client
         require_once __DIR__ . '/../../vendor/autoload.php';
 
+        // Get the base path of the application
+        $basePath = realpath(__DIR__ . '/../../');
+
+        // Define paths relative to the base path
+        $credentialsPath = $basePath . '/credentials.json';
+        $tokenPath = $basePath . '/token.json';
+
         $this->client = new Google_Client();
         $this->client->setApplicationName('Themis Calendar Integration');
         $this->client->setScopes(\Google\Service\Calendar::CALENDAR);
-        // $this->client->setAuthConfig('/Applications/XAMPP/xamppfiles/htdocs/themisrepo/credentials.json'); // Use absolute path
-
-        //for windows 
-        $this->client->setAuthConfig('C:/xampp/htdocs/themisrepo/credentials.json');
+        $this->client->setAuthConfig($credentialsPath);
         $this->client->setAccessType('offline');
         $this->client->setPrompt('select_account consent');
         $this->client->setRedirectUri('http://localhost/themisrepo/public/calendar/auth'); // Explicitly set redirect URI
 
-      
-
         // Load previously authorized token from a file, if it exists
-        $tokenPath = '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/token.json'; // Use absolute path
         if (file_exists($tokenPath)) {
             $accessToken = json_decode(file_get_contents($tokenPath), true);
             $this->client->setAccessToken($accessToken);
@@ -102,10 +103,9 @@ class Calendar
                 }
 
                 // Store the access token
-                // $tokenPath = '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/token.json'; // Use absolute path
+                $basePath = realpath(__DIR__ . '/../../');
+                $tokenPath = $basePath . '/token.json';
 
-                //for windows 
-                $tokenPath = 'C:/xampp/htdocs/themisrepo/token.json';
                 if (!file_put_contents($tokenPath, json_encode($accessToken))) {
                     // Log the error if we couldn't save the token
                     error_log('Failed to save token to: ' . $tokenPath);
@@ -246,7 +246,8 @@ class Calendar
     public function revokeAccess()
     {
         // Path to the token file
-        $tokenPath = '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/token.json';
+        $basePath = realpath(__DIR__ . '/../../');
+        $tokenPath = $basePath . '/token.json';
 
         // Check if we have a valid client and access token
         if ($this->client && $this->client->getAccessToken()) {
@@ -276,7 +277,7 @@ class Calendar
         }
 
         // Redirect back to calendar page
-        redirect('calendar');
+        redirect('homelawyer');
         exit;
     }
 }
