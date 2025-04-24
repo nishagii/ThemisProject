@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/SCRules.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/spanbs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>

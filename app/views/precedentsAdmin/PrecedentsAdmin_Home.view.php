@@ -1,4 +1,3 @@
-<?php var_dump ($cases);?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -51,8 +50,6 @@
             <a href="<?= ROOT ?>/PrecedentsController/retrieveAll" class="btn">View All Precedents</a>
         </div>
 
-        
-        <!-- Add Case Section -->
         <div class="card add-cases">
             <h3>Add New Precedent</h3>
             <p>Start adding a new precedent by clicking the button below.</p>
@@ -63,6 +60,38 @@
                 <p>Database have</p>
                 <p><?= $precedentCount;?></p>
                 <h3>Precedents</h3>
+        </div>
+        
+        <div class="card recent-cases">
+            <h3>SC Rules</h3>
+            <table>
+                <?php if (!empty($rules)): ?>
+                    <?php foreach ($rules as $rule): ?>
+                        <tr>
+                            <td><?= $rule->rule_number; ?></td>
+                            <td><?= $rule->published_date; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <li>
+                        No rules found in the database.
+                    </li>
+                <?php endif; ?> 
+            </table> 
+            <a href="<?= ROOT ?>/SCrules/retrieve" class="btn">View All SC Rules</a>   
+        </div>
+        
+        
+        <div class="card add-cases">
+            <h3>Add New SC Rule</h3>
+            <p>Start adding a new SC Rule by clicking the button below.</p>
+            <a href="<?= ROOT ?>/SCrules/create" class="btn">Add SC Rule</a>
+        </div>
+        <div class="card cards">
+                <i class="fas fa-balance-scale"></i>
+                <p>Database have</p>
+                <p><?= $rulesCount;?></p>
+                <h3>SC Rules</h3>
         </div>
     </div>
 
