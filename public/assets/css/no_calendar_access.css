@@ -1,0 +1,139 @@
+/* Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #f4f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-container {
+    margin-bottom: 20px;
+}
+
+.icon-container i {
+    font-size: 80px;
+    color: #ff9800;
+    opacity: 0.8;
+}
+
+h1 {
+    color: #1d1b31;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    gap: 10px;
+}
+
+.btn i {
+    font-size: 18px;
+}
+
+.primary {
+    background-color: #ff9800;
+    color: white;
+}
+
+.primary:hover {
+    background-color: #e68a00;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.secondary {
+    background-color: #f1f1f1;
+    color: #1d1b31;
+}
+
+.secondary:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+}
+
+.alert i {
+    font-size: 20px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    .actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
