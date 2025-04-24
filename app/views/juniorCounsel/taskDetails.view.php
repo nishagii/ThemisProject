@@ -5,278 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THEMIS - Task Details</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/juniorCounsel/task.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/juniorCounsel/taskDetails.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <style>
-        .task-details-container {
-            padding: 30px;
-            overflow: hidden;
-        }
 
-        .task-header {
-            color: black;
-            padding: 20px;
-            position: relative;
-        }
-
-        .task-header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-
-        .task-header .status-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .status-pending {
-            background: #ffa500;
-        }
-
-        .status-completed {
-            background: #28a745;
-        }
-
-        .status-overdue {
-            background: #dc3545;
-        }
-
-        /* Priority Badge Styles */
-        .priority-badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 14px;
-            font-weight: 600;
-            text-align: center;
-            min-width: 80px;
-        }
-
-        .priority-high {
-            background-color: #ffecec;
-            color: #dc3545;
-            border: 1px solid #ffc9c9;
-        }
-
-        .priority-medium {
-            background-color: #fff8ec;
-            color: #fd7e14;
-            border: 1px solid #ffe5c0;
-        }
-
-        .priority-low {
-            background-color: #ecf5ff;
-            color: #007bff;
-            border: 1px solid #c9e0ff;
-        }
-
-        .task-body {
-            padding: 30px;
-        }
-
-        .info-section {
-            margin-bottom: 30px;
-        }
-
-        .info-section h2 {
-            margin-top: 0;
-            font-size: 18px;
-            color: #1d1b31;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .info-item {
-            margin-bottom: 15px;
-        }
-
-        .info-label {
-            font-weight: 600;
-            color: #666;
-            display: block;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-
-        .info-value {
-            color: #333;
-            font-size: 16px;
-        }
-
-        .description-box {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 5px;
-            border-left: 4px solid #1d1b31;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .action-button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .action-button i {
-            font-size: 16px;
-        }
-
-        .complete-button {
-            background-color: #28a745;
-            color: white;
-        }
-
-        .complete-button:hover {
-            background-color: #218838;
-        }
-
-        .back-button {
-            background-color: #6c757d;
-            color: white;
-        }
-
-        .back-button:hover {
-            background-color: #5a6268;
-        }
-
-        .completed-button {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .completed-button:hover {
-            background-color: #0069d9;
-        }
-
-        .task-notes {
-            margin-top: 30px;
-        }
-
-        .notes-form textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            min-height: 100px;
-            margin-bottom: 15px;
-            font-family: inherit;
-            resize: vertical;
-        }
-
-        .deadline-warning {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            color: #856404;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .deadline-warning i {
-            font-size: 20px;
-        }
-
-        .overdue-warning {
-            background-color: #f8d7da;
-            border-left: 4px solid #dc3545;
-            color: #721c24;
-        }
-        
-        /* Completion Comments Form Styles */
-        .completion-comments {
-            display: none;
-            margin-top: 20px;
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        
-        .completion-comments h3 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 16px;
-            color: #333;
-        }
-        
-        .completion-comments textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            min-height: 100px;
-            margin-bottom: 15px;
-            font-family: inherit;
-            resize: vertical;
-        }
-        
-        .completion-comments-buttons {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .submit-button {
-            background-color: #28a745;
-            color: white;
-        }
-        
-        .submit-button:hover {
-            background-color: #218838;
-        }
-        
-        .cancel-button {
-            background-color: #dc3545;
-            color: white;
-        }
-        
-        .cancel-button:hover {
-            background-color: #c82333;
-        }
-
-        @media (max-width: 768px) {
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .action-button {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .completion-comments-buttons {
-                flex-direction: column;
-            }
-        }
-    </style>
 </head>
 <body>
     <?php include('component/bigNav.view.php'); ?>
@@ -285,7 +17,12 @@
 
     <div class="home-section">
         <div class="task-details-container">
+            
             <div class="task-header">
+
+                    <button class="action-button back-button" onclick="window.location.href='<?= ROOT ?>/task'">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
                 <h1><?= htmlspecialchars($task->name) ?></h1>
                 
                 <?php
@@ -394,9 +131,7 @@
                 <?php endif; ?>
                 
                 <div class="action-buttons">
-                    <button class="action-button back-button" onclick="window.location.href='<?= ROOT ?>/task'">
-                        <i class="fas fa-arrow-left"></i> Back to Tasks
-                    </button>
+                    
                     
                     <?php if ($task->status !== 'completed'): ?>
                     <button class="action-button complete-button" id="completeButton">
