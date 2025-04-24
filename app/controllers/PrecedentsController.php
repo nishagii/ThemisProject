@@ -180,6 +180,18 @@ public function create() {
         // Load the view and pass the case data
         $this->view('one_precedent_viewOnly', ['case' => $case]);
     }
+
+    public function homePrecedents(){
+        
+        $precedentModel = $this->loadModel('PrecedentModel');
+        $cases = $precedentModel->getRecentCases();
+        $count = $precedentModel->countPrecedents();
+
+        $this->view('/precedentsAdmin/PrecedentsAdmin_Home', [
+            'cases' => $cases,
+            'precedentCount' => $count
+        ]);
+    }
 /*-------------------Update---------------------------------- */
    
     public function edit($id) {

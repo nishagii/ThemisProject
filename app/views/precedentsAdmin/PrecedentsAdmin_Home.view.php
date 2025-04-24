@@ -1,3 +1,4 @@
+<?php var_dump ($cases);?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -10,7 +11,7 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href='<?= ROOT ?>/assets/css/precedentsAdmin/home.css'/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    
 </head>
 <body>
     <?php include('components/bigNav.view.php'); ?>
@@ -26,23 +27,25 @@
                     <tr>
                         <th>Date</th>
                         <th>Case Number</th>
-                        <th>Name of Parties</th>
+                        <th>Description</th>
                         <th>Judgment By</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>2024-03-01</td>
-                        <td>SC/APPEAL/225/2014</td>
-                        <td>Ankumbura Plaintiff-Respondent Ummu Kaldun Daughter of Mohomed Illas...</td>
-                        <td>HON. P. PADMAN SURASENA, J</td>
-                    </tr>
-                    <tr>
-                        <td>2024-03-01</td>
-                        <td>SC/APPEAL/172/2017</td>
-                        <td>Madara Mahaliyanage Bandusena, C/O Mr. M.K. Swarnapala Yakdehiwatte, Nivitigala. Petitioner-Petitioner-Appellant Vs. 1. Don Alfred Weerasekera...</td>
-                        <td>Hon. K. Priyantha Fernando, J</td>
-                    </tr>
+                    <?php if (!empty($cases)): ?>
+                        <?php foreach ($cases as $case): ?>
+                            <tr>
+                                <td><?= $case->judgment_date; ?></td>
+                                <td><?= $case->case_number; ?></td>
+                                <td><?= $case->description; ?></td>
+                                <td><?= $case->judgment_by; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6">No precedents found in the database.</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
             <a href="<?= ROOT ?>/PrecedentsController/retrieveAll" class="btn">View All Precedents</a>
@@ -58,7 +61,7 @@
         <div class="card cards">
                 <i class="fas fa-balance-scale"></i>
                 <p>Database have</p>
-                <p>15</p>
+                <p><?= $precedentCount;?></p>
                 <h3>Precedents</h3>
         </div>
     </div>
