@@ -10,16 +10,28 @@ class Task
             redirect('login');
             return;
         }
-
+    
         $data['username'] = $_SESSION['username'] ?? 'User';
-
+    
         $taskModel = $this->loadModel('TaskModel');
-
-        // Get tasks assigned to the logged-in user
+    
+        // Get all tasks assigned to the logged-in user
         $userId = $_SESSION['user_id'];
-        $data['tasks'] = $taskModel->getTaskByUserId($userId);
+        $allTasks = $taskModel->getTaskByUserId($userId);
         
-
+        // Filter tasks into current (pending/overdue) and completed/incomplete
+        $data['tasks'] = [];
+        $data['completedTasks'] = [];
+        
+        foreach ($allTasks as $task) {
+            if ($task->status === 'pending' || $task->status === 'overdue') {
+                $data['tasks'][] = $task;
+            } else {
+                // Add completed and incomplete tasks to completedTasks
+                $data['completedTasks'][] = $task;
+            }
+        }
+    
         // Load the view and pass the data
         $this->view('/juniorCounsel/task', $data);
     }
