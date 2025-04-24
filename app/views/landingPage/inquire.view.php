@@ -41,6 +41,9 @@
                 <p class="error"><?= $errors['message'] ?></p>
             <?php endif; ?>
 
+       
+
+
             <!-- Submit button -->
             <button type="submit">Send Message</button>
         </form>
@@ -58,7 +61,7 @@
         <p>No. 47, C.W.W. Kannangara Mawatha,<br>
         Alexandra Place,<br>
         Colombo 00700</p>
-                <button type="submit">Send Message</button>
+                
             </form>
         </div>
     </div>
