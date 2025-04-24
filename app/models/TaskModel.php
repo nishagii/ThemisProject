@@ -118,11 +118,12 @@ class TaskModel
         return $this->query($query, $params);
     }
 
-    public function getTaskCount() 
+    public function getTaskCountByStatus($status) 
     {
-        $query = "SELECT COUNT(taskID) AS count FROM {$this->table}";
-        return $this->query($query);
+        $query = "SELECT COUNT(taskID) AS count FROM {$this->table} WHERE status = :status";
+        return $this->query($query, ['status' => $status]);
     }
+    
 
     public function updateTaskStatus($taskID, $status)
     {

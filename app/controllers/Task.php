@@ -13,7 +13,6 @@ class Task
 
         $data['username'] = $_SESSION['username'] ?? 'User';
 
-        // Load the model
         $taskModel = $this->loadModel('TaskModel');
 
         // Get tasks assigned to the logged-in user
