@@ -156,11 +156,11 @@
                     <?php endif; ?>
                 </div>
                 
-                <!-- Completion Comments Form -->
+                
                 <div class="completion-comments" id="completionComments">
                     <h3>Completion Comments (Optional)</h3>
                     <form id="completeTaskForm" action="<?= ROOT ?>/task/complete/<?= $task->taskID ?>" method="post">
-                        <textarea name="comments" placeholder="Add any comments about your task completion (optional)"></textarea>
+                        <textarea name="comment" placeholder="Add any comments about your task completion (optional)"></textarea>
                         <div class="completion-comments-buttons">
                             <button type="submit" class="action-button submit-button">
                                 <i class="fas fa-check"></i> Submit

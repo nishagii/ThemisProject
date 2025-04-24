@@ -44,20 +44,18 @@ class Task
         }
     
         $taskModel = $this->loadModel('TaskModel');
+    
         
-        // Mark the task as completed
-        if ($taskModel->completeTask($taskID)) {
-            // Load models using the controller's model loading mechanism
+        $comments = $_POST['comment'] ?? null;
+    
+        // Mark the task as completed with comments
+        if ($taskModel->completeTask($taskID, $comments)) {
             $notificationModel = $this->loadModel('NotificationModel');
             $userModel = $this->loadModel('UserModel');
-            
-            // Get task details
+    
             $task = $taskModel->getTaskById($taskID);
-            
-            // Get lawyers
             $lawyers = $userModel->getUsersByRole('lawyer');
-            
-            // Create notifications
+    
             foreach ($lawyers as $lawyer) {
                 $notification = [
                     'user_id' => $lawyer->id,
@@ -69,9 +67,9 @@ class Task
             }
         }
     
-        // Redirect back to the task page
         redirect('task');
     }
+    
 
     public function details($taskID)
     {

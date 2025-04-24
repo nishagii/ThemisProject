@@ -108,16 +108,22 @@ class TaskModel
         return $this->query($query, $params);
     }
 
-    public function completeTask($taskID)
+    public function completeTask($taskID, $comment = null)
     {
-        // Update the task's status to 'completed'
         $query = "UPDATE {$this->table} 
-                  SET status = 'completed' 
+                  SET status = 'completed',
+                      comment = :comment,
+                      completionDate = NOW()
                   WHERE taskID = :taskID";
-
-        $params = ['taskID' => $taskID];
+    
+        $params = [
+            'taskID' => $taskID,
+            'comment' => $comment
+        ];
+    
         return $this->query($query, $params);
     }
+    
 
     public function getTaskCountByStatus($status) 
     {
