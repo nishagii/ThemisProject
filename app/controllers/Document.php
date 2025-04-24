@@ -54,10 +54,19 @@ class Document
         $documentModel = $this->loadModel('documentModel');
     
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $caseID = filter_input(INPUT_POST, 'case_id', FILTER_SANITIZE_NUMBER_INT); 
+
+            $maxFileSize = 10 * 1024 * 1024; // 10 MB
+            if ($_FILES['document_file']['size'] > $maxFileSize) {
+                $_SESSION['error'] = "File too large. Max size is 10MB.";
+                header("Location: " . ROOT . "/document/add_Document/" . $caseID);
+                exit;
+            }
             $docName = filter_input(INPUT_POST, 'doc_name', FILTER_SANITIZE_STRING);
             $docDescription = filter_input(INPUT_POST, 'doc_description', FILTER_SANITIZE_STRING);
     
-            $caseID = filter_input(INPUT_POST, 'case_id', FILTER_SANITIZE_NUMBER_INT); 
+            
             $uploadedBy = $_SESSION['user_id'] ?? null;
     
             if (isset($_FILES['document_file']) && $_FILES['document_file']['error'] === UPLOAD_ERR_OK) {
