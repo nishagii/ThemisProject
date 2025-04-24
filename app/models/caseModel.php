@@ -393,7 +393,7 @@ class CaseModel
 
         $cases = $this->query($query, $params);
 
-        // Decrypt sensitive data in each case
+        
         if (is_array($cases)) {
             foreach ($cases as &$case) {
                 $case = $this->decryptSensitiveData($case);

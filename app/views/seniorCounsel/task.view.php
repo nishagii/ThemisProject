@@ -8,71 +8,6 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- this is imported to use icons -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style>
-        /* Add style for clickable rows */
-        .task-table tbody tr {
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .task-table tbody tr:hover {
-            background-color: #f5f5f5;
-        }
-        
-        /* Ensure action buttons don't trigger the row click */
-        .edit-btn, .delete-btn {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Search bar styling */
-        .search-container {
-            margin: 20px 0;
-            display: flex;
-            align-items: center;
-            max-width: 600px;
-        }
-
-        .search-container input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .search-container input:focus {
-            border-color: #93a8e3;
-        }
-
-        .search-container button {
-            margin-left: 8px;
-            padding: 10px 15px;
-            background-color: #93a8e3;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .search-container button:hover {
-            background-color: #7088cc;
-        }
-
-        /* No results message */
-        .no-results {
-            display: none;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            text-align: center;
-            margin-top: 15px;
-            color: #6c757d;
-        }
-    </style>
 </head>
 <body>
 
@@ -96,32 +31,35 @@
         <div class="counters-container">
             <div class="counter total" id="total-counter">
                 <div class="counter-icon">
-                    <i class="fas fa-tasks"></i> <!-- Updated icon -->
+                    <i class="fas fa-tasks"></i>
                 </div>
                 <strong>Total No of Tasks Assigned:</strong>
-                <span class="total-users"><?= $count[0]->count ?></span>
+                <span class="total-users"><?= $totalCount ?? 0 ?></span>
             </div>
+
             <div class="individual">
                 <div class="counter active" id="active-counter">
                     <div class="counter-icon">
-                        <i class="fas fa-spinner"></i> <!-- Icon for active tasks -->
+                        <i class="fas fa-spinner"></i>
                     </div>
                     <h3>Active Tasks</h3>
-                    <span>50</span>
+                    <span><?= $pendingCount[0]->count ?? 0 ?></span>
                 </div>
+
                 <div class="counter completed" id="completed-counter">
                     <div class="counter-icon">
-                        <i class="fas fa-check-circle"></i> <!-- Icon for completed tasks -->
+                        <i class="fas fa-check-circle"></i>
                     </div>
                     <h3>Completed Tasks</h3>
-                    <span>25</span>
+                    <span><?= $completedCount[0]->count ?? 0 ?></span>
                 </div>
+
                 <div class="counter incomplete" id="incomplete-counter">
                     <div class="counter-icon">
-                        <i class="fas fa-times-circle"></i> <!-- Icon for incomplete tasks -->
+                        <i class="fas fa-times-circle"></i>
                     </div>
                     <h3>Overdue Tasks</h3>
-                    <span>25</span>
+                    <span><?= $overdueCount[0]->count ?? 0 ?></span>
                 </div>
             </div>
         </div>
