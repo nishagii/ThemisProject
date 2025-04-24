@@ -20,7 +20,7 @@
             </a>
         
         <div class="details-container">
-            <div class="task-header">
+            <div class="task-header section">
                 <h1>Task Name: <?= htmlspecialchars($task->name) ?></h1>
                 <?php
                     $statusClass = '';
@@ -38,7 +38,7 @@
                 <span class="task-status <?= $statusClass ?>"><?= ucfirst(htmlspecialchars($task->status)) ?></span>
             </div>
             
-            <div class="task-info">
+            <div class="task-info section">
                 <div class="left-info">
                     <div class="info-group">
                         <div class="info-label">Assigned To</div>
@@ -95,7 +95,7 @@
                 </div>
             </div>
             
-            <div class="task-description">
+            <div class="task-description section">
                 <h3>Description</h3>
                 <p><?= nl2br(htmlspecialchars($task->description ?? 'No description provided.')) ?></p>
 
@@ -108,7 +108,7 @@
 
             </div>
             
-            <div class="actions-container">
+            <div class="actions-container section">
                 <?php if($task->status !== 'completed'): ?>
                     <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $task->taskID ?>" class="btn btn-primary">
                         <i class="fas fa-edit"></i> Edit Task
@@ -124,31 +124,7 @@
 
         </div>
         
-        <?php if(!empty($taskHistory)): ?>
-        <div class="task-history">
-            <h2>Task History</h2>
-            <table class="history-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Action</th>
-                        <th>User</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($taskHistory as $history): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($history->actionDate) ?></td>
-                        <td><?= htmlspecialchars($history->actionType) ?></td>
-                        <td><?= htmlspecialchars($history->userName) ?></td>
-                        <td><?= htmlspecialchars($history->details) ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-        <?php endif; ?>
+        
         </div>
     </div>
     
