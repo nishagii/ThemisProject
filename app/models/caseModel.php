@@ -328,7 +328,11 @@ class CaseModel
         return $this->query($query, $params);
     }
 
-    // Get case number by email
+    /**
+     * get case number by client email(used in payments page)
+     * @param string $email Client email.
+     * @return string|null Case number or null if not found.
+     */
     public function getCaseNumberByEmail($email)
     {
         // Since email is encrypted, we need to get all cases and filter
@@ -343,7 +347,11 @@ class CaseModel
         return null;
     }
 
-    // Get cases by client email
+    /**
+     * get case number by client email(used in payments page)
+     * @param string $email Client email.
+     * @return array Array of cases matching the email.
+     */
     public function getCasesByClientEmail($email)
     {
         // Since email is encrypted, we need to get all cases and filter
@@ -359,7 +367,11 @@ class CaseModel
         return $matchingCases;
     }
 
-    // Get cases by client ID
+    /**
+     * Get all cases for a specific client.
+     * @param int $clientId Client ID.
+     * @return array Array of case objects for the client.
+     */
     public function getCasesByClientId($clientId)
     {
         $query = "SELECT c.*, 
