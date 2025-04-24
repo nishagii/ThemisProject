@@ -13,9 +13,10 @@
 </head>
 
 <body>
-    <?php include('/Applications/XAMPP/xamppfiles/htdocs/themisrepo/app/views/seniorCounsel/component/bigNav.view.php'); ?>
-    <?php include('/Applications/XAMPP/xamppfiles/htdocs/themisrepo/app/views/seniorCounsel/component/smallNav1.view.php'); ?>
-    <?php include('/Applications/XAMPP/xamppfiles/htdocs/themisrepo/app/views/seniorCounsel/component/sidebar.view.php'); ?>
+    <?php include(__DIR__ . '/../seniorCounsel/component/bigNav.view.php'); ?>
+    <?php include(__DIR__ . '/../seniorCounsel/component/smallNav1.view.php'); ?>
+    <?php include(__DIR__ . '/../seniorCounsel/component/sidebar.view.php'); ?>
+
     <div class="home-section">
 
         <div class="calendar-container">
