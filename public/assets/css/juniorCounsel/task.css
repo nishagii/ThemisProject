@@ -67,35 +67,108 @@
     border-radius: 10px;
 }
 
-/* Style for the table */
+/* Enhanced table styling */
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-/* Style for table headers */
+/* Table header styling */
 th {
-    border: 1px solid #ddd;
-    padding: 10px;
+    border: none;
+    padding: 15px;
     text-align: left;
     background: #1d1b31;
     color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
-/* Style for table data cells */
+/* Table cell styling */
 td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 15px;
+    color: #555;
 }
 
+/* Alternating row colors for better readability */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
 
-/* Style for the table rows when hovered */
+/* Row hover effect */
 tr:hover {
-    background-color: #f1f1f1;
+    background-color: #f0f7ff;
+    transition: background-color 0.2s ease;
 }
 
+/* Last row should not have bottom border */
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Style for deadline dates */
+td.deadline-date, .overdue {
+    color: #e53935;
+    font-weight: 500;
+}
+
+/* Style for completion buttons with boxicons */
+.done, .done-overdue {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+/* Normal completion button */
+.done {
+    color: #00b894;
+    font-size: 1.6rem;
+}
+
+.done:hover {
+    color: #00d1a6;
+    transform: scale(1.2);
+}
+
+/* Overdue completion button */
+.done-overdue {
+    color: #ff7675;
+    font-size: 1.6rem;
+}
+
+.done-overdue:hover {
+    color: #ff5252;
+    transform: scale(1.2);
+}
+
+/* Status indicators */
+.completed {
+    color: #00b894;
+    font-weight: 500;
+}
+
+.incomplete {
+    color: #ff7675;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+}
 
 /* Style for the 'done' button */
 button.done {

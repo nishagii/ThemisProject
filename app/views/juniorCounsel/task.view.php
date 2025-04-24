@@ -74,13 +74,17 @@
                                 <tr onclick="viewTaskDetails(<?= $task->taskID ?>)">
                                     <td><?= htmlspecialchars($task->name) ?></td>
                                     <td><?= htmlspecialchars($task->assignedDate) ?></td>
-                                    <td><?= htmlspecialchars($task->deadlineDate) ?></td>
+                                    <td class="<?= $isOverdue ? 'overdue' : 'deadline-date' ?>">
+                                        <?= htmlspecialchars($task->deadlineDate) ?>
+                                    </td>
                                     <td class="<?= $isOverdue ? 'overdue' : '' ?>">
                                         <?= $isOverdue ? $remaining . ' day(s)' : $days . ' day(s)' ?>
                                     </td>
                                     <td>
-                                        <a href="<?= ROOT ?>/task/complete/<?= $task->taskID ?>" class="<?= $isOverdue ? 'done-overdue' : 'done' ?>" onclick="event.stopPropagation()">
-                                            <i class="fas fa-check"></i>
+                                        <a href="<?= ROOT ?>/task/complete/<?= $task->taskID ?>" 
+                                        class="<?= $isOverdue ? 'done-overdue' : 'done' ?>" 
+                                        onclick="event.stopPropagation()">
+                                            <i class='bx bx-check-circle'></i>
                                         </a>
                                     </td>
                                 </tr>
