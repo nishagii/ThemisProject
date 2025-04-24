@@ -275,7 +275,7 @@
 }
 
 .submit-button {
-    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    background: #27ae60;
     color: white;
 }
 
@@ -284,7 +284,7 @@
 }
 
 .cancel-button {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    background: rgb(252, 51, 51);
     color: white;
 }
 
