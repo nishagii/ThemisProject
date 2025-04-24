@@ -163,6 +163,10 @@ class Document
     // Delete a document
     public function deleteDocument($documentID)
     {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
         // Load the document model
         $documentModel = $this->loadModel('documentModel');
         
@@ -220,6 +224,10 @@ class Document
     
     public function editDocument($id)
     {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
         $documentModel = $this->loadModel('documentModel');
         
         $document = $documentModel->getDocumentById($id); // Fetch by ID
@@ -237,6 +245,10 @@ class Document
     // Handle update
     public function updateDocument()
     {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
         // Check if form is submitted
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header("Location: " . ROOT . "/document/index");
