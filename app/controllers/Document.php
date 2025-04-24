@@ -159,6 +159,8 @@ class Document
         
         // Get document info before deleting (to delete the file as well)
         $document = $documentModel->getDocumentById($documentID)[0] ?? null;
+        $case = $documentModel->getCaseId($documentID);
+        $caseId = $case[0]->case_id ?? null;
         
         if (!$document) {
             $_SESSION['error'] = "Document not found.";
@@ -182,7 +184,9 @@ class Document
         }
         
         // Redirect back to documents list
-        header("Location: " . ROOT . "/document/index");
+
+        
+        header("Location: " . ROOT . "/document/index/" . $caseId);
         exit;
     }
 
