@@ -417,7 +417,11 @@ class CaseModel
         return $cases;
     }
 
-    // Get cases by junior ID
+    /**
+     * Get all cases for a specific junior.
+     * @param int $juniorId Junior ID.
+     * @return array Array of case objects for the junior.
+     */
     public function getCasesByJuniorId($juniorId)
     {
         #get only not deleted cases
@@ -436,7 +440,11 @@ class CaseModel
         return $cases;
     }
 
-    // Update only the case status
+    /**
+     * Update the status of a case.
+     * @param array $data Associative array containing case ID and new status.
+     * @return bool True if the operation was successful, false otherwise.
+     */
     public function updateCaseStatus($data)
     {
         $query = "UPDATE {$this->table} 
@@ -452,7 +460,12 @@ class CaseModel
         return $this->query($query, $params);
     }
 
-    // Search cases
+    /**
+     * Search for cases based on a search query and field.
+     * @param string $searchQuery Search query.
+     * @param string $field Field to search in (default: 'all').
+     * @return array Array of matching case objects.
+     */
     public function searchCases($searchQuery, $field = 'all')
     {
         // Since we're using encryption, we need to handle search differently
@@ -505,8 +518,13 @@ class CaseModel
         return $results;
     }
 
-    //get a count of ongoing cases
+    /**
+     * Get the count of ongoing cases.
+     * @return int Count of ongoing cases.
+     */
     public function getOngoingCasesCount(){
         $query="SELECT COUNT(id) FROM {$this->table} WHERE deleted=0 AND case_status='ongoing'";
+
+        $result=$this->query($query);
     }
 }
