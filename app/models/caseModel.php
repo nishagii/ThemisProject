@@ -281,7 +281,12 @@ class CaseModel
         return $this->query($query, $params);
     }
 
-    // Update an existing case
+    /**
+     * Update an existing case in the database.
+     *
+     * @param array $data Associative array containing case details.
+     * @return bool True if the operation was successful, false otherwise.
+     */
     public function updateCase($data)
     {
         // Encrypt sensitive data before updating
