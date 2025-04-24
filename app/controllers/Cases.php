@@ -106,8 +106,19 @@ class Cases
         // Load the CaseModel
         $caseModel = $this->loadModel('CaseModel');
 
+        // Get the case to check its status
+        $case = $caseModel->getCaseById($caseId);
+
+        // Check if case is closed
+        if ($case && $case->case_status == 'closed') {
+            $_SESSION['error'] = 'Closed cases cannot be deleted.';
+            redirect('cases/retrieveAllCases');
+            return;
+        }
+
         // Soft delete the case
         $caseModel->softDeleteCase($caseId);
+        
 
         // Set success message
         $_SESSION['success'] = 'Case deleted successfully!';
@@ -213,6 +224,14 @@ class Cases
         $userModel = $this->loadModel('UserModel');
 
         $case = $caseModel->getCaseById($caseId);
+
+        // Check if case is closed
+        if ($case && $case->case_status == 'closed') {
+            $_SESSION['error'] = 'Closed cases cannot be edited.';
+            redirect('cases/retrieveAllCases');
+            return;
+        }
+
         $attorneys = $userModel->getUsersByRole('attorney');
         $juniors = $userModel->getUsersByRole('junior');
         $clients = $userModel->getUsersByRole('client');
@@ -313,7 +332,7 @@ class Cases
 
         // Redirect to a success page or the list of cases
         $_SESSION['success'] = 'Case updated successfully!';
-        redirect('cases/extendRetrieveAllCases');
+        redirect('cases/RetrieveAllCases');
     }
 
     // Update case status via AJAX
