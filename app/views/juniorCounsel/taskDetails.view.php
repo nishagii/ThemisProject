@@ -116,6 +116,18 @@
                     <div class="description-box">
                         <?= nl2br(htmlspecialchars($task->description ?? 'No description provided.')) ?>
                     </div>
+
+                    <?php if (!empty($task->task_doc)): ?>
+                        <div class="info-section">
+                            <h2>Task Document for reference</h2>
+                            <div class="document-box">
+                                <a class="document-link" href="<?= ROOT ?>/uploads/task_docs/<?= htmlspecialchars($task->task_doc) ?>" target="_blank">
+                                    <i class="fas fa-file-alt"></i> Download
+                                </a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
                 
                 <?php if ($task->status !== 'completed' && $isOverdue): ?>

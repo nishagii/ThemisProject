@@ -335,3 +335,20 @@
         flex-direction: column;
     }
 }
+
+.document-box {
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.document-link {
+    font-weight: 500;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.document-link:hover {
+    text-decoration: underline;
+}
