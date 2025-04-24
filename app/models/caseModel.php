@@ -180,7 +180,11 @@ class CaseModel
     }
 
 
-    // Get all non-deleted cases
+    /**
+     * Retrieve all non-deleted cases from the database.
+     * @return array Array of case objects.
+     * 
+     */
     public function getAllCases()
     {
         $query = "SELECT c.*, 
@@ -204,7 +208,11 @@ class CaseModel
         return $cases;
     }
 
-    // Get a specific non-deleted case by ID
+    /**
+     * Retrieve a specific case by its ID.
+     * @param int $id Case ID.
+     * @return object|null Case object or null if not found.
+     */
     public function getCaseById($id)
     {
         $query = "SELECT c.*, 
@@ -229,7 +237,11 @@ class CaseModel
         return $case; // Return the first (and expected only) result
     }
 
-    // Soft delete a case (mark as deleted instead of removing from database)
+    /**
+     * Soft delete a case (mark as deleted instead of removing from database)
+     * @param int $caseId Case ID.
+     * @return bool True if the operation was successful, false otherwise.
+     */
     public function softDeleteCase($caseId)
     {
         $query = "UPDATE {$this->table} SET deleted = 1, updated_at = NOW() WHERE id = :id";
@@ -474,6 +486,6 @@ class CaseModel
 
     //get a count of ongoing cases
     public function getOngoingCasesCount(){
-        $query="SELECT COUNT"
+        $query="SELECT COUNT(id) FROM {$this->table} WHERE deleted=0 AND case_status='ongoing'";
     }
 }
