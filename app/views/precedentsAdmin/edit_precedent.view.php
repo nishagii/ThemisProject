@@ -249,6 +249,10 @@
     <script>
         // Form Validation
         document.getElementById('precedentEditForm').addEventListener('submit', function(event) {
+        window.addEventListener('DOMContentLoaded', function () {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('max', today);
+        });
             // Get form fields
             const date = document.getElementById('judgment_date').value;
             const caseNumber = document.getElementById('case_number').value.trim();

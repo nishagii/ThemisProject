@@ -44,6 +44,18 @@ class PrecedentModel {
         }
         return $result[0];
     }
+
+    public function getRecentCases(){
+        $query = "SELECT * FROM $this->table ORDER BY id DESC LIMIT 3";
+        return $this->query($query); 
+    }
+    
+    public function countPrecedents(){
+        $query = "SELECT COUNT(*) as total FROM $this->table";
+        $result = $this->query($query);
+        return $result ? $result[0]->total : 0;
+    }
+
     //update precedents
     public function update($data) {
         $query = "UPDATE {$this->table}
