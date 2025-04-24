@@ -369,7 +369,7 @@ class CaseModel
     // Get cases by attorney ID
     public function getCasesByAttorneyId($attorneyId)
     {
-        $query = "SELECT * FROM {$this->table} WHERE attorney_id = :attorney_id";
+        $query = "SELECT * FROM {$this->table} WHERE attorney_id = :attorney_id AND deleted = 0";
         $params = ['attorney_id' => $attorneyId];
 
         $cases = $this->query($query, $params);
@@ -387,7 +387,8 @@ class CaseModel
     // Get cases by junior ID
     public function getCasesByJuniorId($juniorId)
     {
-        $query = "SELECT * FROM {$this->table} WHERE junior_id = :junior_id";
+        #get only not deleted cases
+        $query = "SELECT * FROM {$this->table} WHERE junior_id = :junior_id AND deleted = 0";
         $params = ['junior_id' => $juniorId];
 
         $cases = $this->query($query, $params);
@@ -470,4 +471,5 @@ class CaseModel
 
         return $results;
     }
+
 }
