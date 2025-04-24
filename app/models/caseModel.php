@@ -472,4 +472,8 @@ class CaseModel
         return $results;
     }
 
+    //get a count of ongoing cases
+    public function getOngoingCasesCount(){
+        $query="SELECT COUNT"
+    }
 }
