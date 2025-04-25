@@ -321,7 +321,7 @@ class Document
 
         
         if ($result) {
-            $_SESSION['success'] = "Document updated successfully!";
+            
             header("Location: " . ROOT . "/document/index/" . $caseId);
         } else {
             $_SESSION['error'] = "Failed to update document.";

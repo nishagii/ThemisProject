@@ -35,6 +35,7 @@ class Inquire
                     'name' => $name,
                     'email' => $email,
                     'message' => $message,
+                    'created_at' => date('Y-m-d H:i:s'),
                 ];
 
                 $inquireModel = $this->loadModel('inquireModel');
@@ -43,8 +44,8 @@ class Inquire
                 // $query = "INSERT INTO inquiries (name, email, message, created_at) VALUES (:name, :email, :message, NOW())";
                 // $this->query($query, $data); // Use the `query` method from the Database trait
 
-                // $_SESSION['success'] = 'Your message has been sent successfully!';
-                // header('Location: ' . ROOT . '/Inquire');
+                 //$_SESSION['success'] = 'Your message has been sent successfully!';
+                 header('Location: ' . ROOT . '/Inquire');
                 // exit;
             }
         }
