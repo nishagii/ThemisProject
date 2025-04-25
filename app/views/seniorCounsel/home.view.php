@@ -1,5 +1,3 @@
-<?php
- var_dump($ongoingCasesCount);?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -74,7 +72,7 @@
                 <i class="fas fa-balance-scale"></i>
                 <p>you have</p>
                 <!-- cases count passed from the controller as $casesCount -->
-                <p><?=$ongoingCasesCount ?></p>
+                <p><?= $ongoingCasesCount ?></p>
                 <h3>Ongoing Cases</h3>
 
             </div>
@@ -82,8 +80,8 @@
             <div class="card cards">
                 <i class="fas fa-dollar-sign"></i>
                 <p>you have</p>
-                <p>$12,000</p>
-                <h3>Payments Pending</h3>
+                <p> $<?= $totalAmount ?></p>
+                <h3>Payments Recived</h3>
 
             </div>
 
