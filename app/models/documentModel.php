@@ -145,4 +145,18 @@ class DocumentModel {
             return false;
         }
     }
+
+    public function getCaseId($document_id) {
+        try {
+            $query = "SELECT case_id from {$this->table} WHERE document_id = :document_id";
+            $params = ['document_id' => $document_id];
+            $result = $this->query($query, $params);
+            return $result;
+
+        }  catch (Exception $e) {
+            // Log the error for debugging
+            error_log("Database Error: " . $e->getMessage());
+            return false;
+        }
+    }
 }
