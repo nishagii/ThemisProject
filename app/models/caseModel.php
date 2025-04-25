@@ -119,7 +119,7 @@ class CaseModel
             'client_address',
             'notes',
             'case_number'
-            
+
         ];
 
         // Handle both objects and arrays
@@ -430,7 +430,7 @@ class CaseModel
 
         $cases = $this->query($query, $params);
 
-        
+
         if (is_array($cases)) {
             foreach ($cases as &$case) {
                 $case = $this->decryptSensitiveData($case);
@@ -518,13 +518,24 @@ class CaseModel
         return $results;
     }
 
+
     /**
      * Get the count of ongoing cases.
      * @return int Count of ongoing cases.
      */
-    public function getOngoingCasesCount(){
-        $query="SELECT COUNT(id) FROM {$this->table} WHERE deleted=0 AND case_status='ongoing'";
+    public function getOngoingCasesCount()
+    {
+        $query = "SELECT COUNT(*) as count FROM {$this->table} WHERE case_status = 'ongoing'
+                  AND deleted = 0";
 
-        $result=$this->query($query);
+        $result = $this->query($query);
+
+        // Check if result exists and return the count
+        if (!empty($result)) {
+            // Access as object property instead of array index
+            return $result[0]->count;
+        }
+
+        return 0; // Return 0 if no results found
     }
 }

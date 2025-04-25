@@ -1,3 +1,5 @@
+<?php
+ var_dump($ongoingCasesCount);?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -72,7 +74,7 @@
                 <i class="fas fa-balance-scale"></i>
                 <p>you have</p>
                 <!-- cases count passed from the controller as $casesCount -->
-                 <p><? $ongoingCasesCount ?></p>
+                <p><?=$ongoingCasesCount ?></p>
                 <h3>Ongoing Cases</h3>
 
             </div>
