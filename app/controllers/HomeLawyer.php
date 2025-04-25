@@ -16,11 +16,13 @@ class HomeLawyer
 
         $ongoingCasesCount = $caseModel->getOngoingCasesCount();
         $totalAmount = $paymentModel->getTotalAmountReceivedInMonth();
+        $delayedCases = $caseModel->getDelayedCases();
 
         // Load the view with data
         $this->view('/seniorCounsel/home',[
-            'ongoingCasesCount' => $ongoingCasesCount
-            , 'totalAmount' => $totalAmount
+            'ongoingCasesCount' => $ongoingCasesCount,
+            'totalAmount' => $totalAmount,
+            'delayedCases' => $delayedCases,
 
         ] 
     );

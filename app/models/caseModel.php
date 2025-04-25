@@ -538,4 +538,21 @@ class CaseModel
 
         return 0; // Return 0 if no results found
     }
+
+    /**
+     * Get cases delayed more than 2 months
+     * @return array Array of delayed cases
+     */
+    public function getDelayedCases()
+    {
+        // Calculate date 2 months ago
+        $twoMonthsAgo = date('Y-m-d', strtotime('-2 months'));
+
+        $query = "SELECT * FROM {$this->table} 
+              WHERE updated_at < :two_months_ago";
+
+        $params = ['two_months_ago' => $twoMonthsAgo];
+
+        return $this->query($query, $params);
+    }
 }
