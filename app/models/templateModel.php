@@ -5,6 +5,17 @@
 
         protected $table = 'templates';
 
+        public function searchCases($query){
+            $query = "%$query%";
+            $sql = "SELECT * FROM $this->table
+                    WHERE name LIKE :query
+                    OR description LIKE :query 
+                    OR uploaded_by LIKE :query 
+                    OR uploaded_date LIKE :query";
+    
+            return $this->query($sql, ['query' => $query]);
+        }
+
         public function insert($data) {
             $query = "INSERT INTO {$this->table} 
                   (name,description, document_link)
