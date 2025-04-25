@@ -28,7 +28,7 @@ class Cases
 
     // Add a new case
     // In app/controllers/Cases.php
-    // Add a new case
+   
     public function addCase()
     {
         // Collect POST data
@@ -74,6 +74,16 @@ class Cases
         // Save data to the database
         $caseModel = $this->loadModel('CaseModel');
         $caseModel->save($data);
+
+        $notificationModel = $this->loadModel('NotificationModel');
+        $notification = [
+            'user_id' => $clientId,
+            'message' => "You have been added to a new case. View the case page for more details.",
+            'timestamp' => date('Y-m-d H:i:s'),
+            'status' => 'unread'
+        ];
+
+        $notificationModel->createNotification($notification);
 
         // Redirect to the home page or success page
         $_SESSION['success'] = 'Case added successfully!';
