@@ -18,8 +18,8 @@
             </label>
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="Logo" class="navbar-logo" />
             <ul class="big-navbar">
-                <li><a href="homeclient">Home</a></li>
-                <li><a href="PaymentController">Payments</a></li>
+                <li><a href="<?= ROOT ?>/homeclient">Home</a></li>
+                <li><a href="<?= ROOT ?>/PaymentController">Payments</a></li>
                 <li><a href="<?= ROOT ?>/precedentsController/retrieveAllViewOnly">Precedents</a></li>
             </ul>
         </nav>
