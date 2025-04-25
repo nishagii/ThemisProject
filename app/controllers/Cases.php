@@ -8,7 +8,7 @@ class Cases
     {
         // Load the UserModel to get attorneys and juniors
         $userModel = $this->loadModel('UserModel');
-        $caseModel = $this->loadModel('CaseModel');
+       
 
 
         // Get attorneys and juniors from the database
@@ -16,7 +16,6 @@ class Cases
         $juniors = $userModel->getUsersByRole('junior');
         $clients = $userModel->getUsersByRole('client');
 
-        $ongoingCasesCount=$caseModel->getOngoingCasesCount();
 
         // Render the "add new case" view with users data
         $this->view('/seniorCounsel/add_new_case', [
@@ -24,7 +23,6 @@ class Cases
             'juniors' => $juniors,
             'clients' => $clients,
             'errors' => [],
-            'ongoingCasesCount' => $ongoingCasesCount
         ]);
     }
 
