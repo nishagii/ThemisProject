@@ -114,5 +114,32 @@ class Blog
         }
     }
 
+    public function delete($id)
+    {
+        $blogModel = $this->loadModel('BlogModel');
+
+        
+        $blog = $blogModel->getBlogById($id);
+
+        if (!$blog) {
+            $_SESSION['error'] = "Blog post not found.";
+            header("Location: " . ROOT . "/blog/viewBlog");
+            exit;
+        }
+
+        
+        $deleted = $blogModel->deleteBlogById($id);
+
+        if ($deleted) {
+            $_SESSION['success'] = "Blog post deleted successfully.";
+        } else {
+            $_SESSION['error'] = "Failed to delete blog post.";
+        }
+
+        header("Location: " . ROOT . "/blog/viewBlog");
+        exit;
+    }
+
+
 
 }

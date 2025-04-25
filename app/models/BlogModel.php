@@ -53,5 +53,17 @@ class BlogModel {
         }
     }
 
+    public function deleteBlogById($id)
+    {
+        try {
+            $query = "DELETE FROM {$this->table} WHERE blog_id = :id";
+            $params = ['id' => $id];
+            return $this->query($query, $params);
+        } catch (Exception $e) {
+            error_log("Database Error [BlogModel:deleteBlogById]: " . $e->getMessage());
+            return false;
+        }
+    }
+
 
 }
