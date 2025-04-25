@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
-</head>
 <style>
     .feedback-container {
     width: 80%;
@@ -316,8 +315,6 @@
 }
 
 
-
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .feedback-container {
         width: 95%;
@@ -350,13 +347,15 @@
     .submit-btn, .cancel-btn {
         width: 100%;
     }
+}
 
 </style>
+</head>
 <body>
 
 <?php include('component/bigNav.view.php'); ?>
 <?php include('component/smallNav1.view.php'); ?>
-<?php include(__DIR__ . '/../seniorCounsel/component/sidebar.view.php'); ?>
+<?php include('component/sidebar.view.php'); ?>
 
 
 
