@@ -10,6 +10,7 @@
         .blog-content {
             position: relative;
             overflow: hidden;
+            transition: max-height 0.3s ease;
         }
         .blog-content.collapsed {
             max-height: 100px; /* Adjust height as needed */
@@ -20,9 +21,20 @@
             font-weight: bold;
             margin-top: 5px;
             display: inline-block;
+            user-select: none;
         }
         .read-more-btn:hover {
             text-decoration: underline;
+        }
+        /* Add a fade effect at the bottom of collapsed content */
+        .blog-content.collapsed::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(transparent, rgba(255, 255, 255, 0.9));
         }
     </style>
 </head>
@@ -41,7 +53,7 @@
                 <?php if (!empty($blogs)): ?>
                     <div class="blogs">
                         <?php foreach ($blogs as $blog): ?>
-                            <div>
+                            <div class="blog-item">
                                 <?php if ($blog->image_url): ?>
                                     <div class="blog-image">
                                         <img src="<?= ROOT ?>/assets/blog_images/<?php echo htmlspecialchars($blog->image_url); ?>" alt="Blog Image">
@@ -56,12 +68,12 @@
                                 $needsReadMore = $contentLength > 300; // Adjust character limit as needed
                                 ?>
                                 
-                                <div class="blog-content <?= $needsReadMore ? 'collapsed' : '' ?>" id="content-<?= $blog->id ?>">
+                                <div class="blog-content <?= $needsReadMore ? 'collapsed' : '' ?>" data-blog-id="<?= $blog->id ?>">
                                     <p><?= $content ?></p>
                                 </div>
                                 
                                 <?php if ($needsReadMore): ?>
-                                    <div class="read-more-btn" onclick="toggleContent(<?= $blog->id ?>)" id="btn-<?= $blog->id ?>">
+                                    <div class="read-more-btn" data-blog-id="<?= $blog->id ?>">
                                         Read More
                                     </div>
                                 <?php endif; ?>
@@ -81,18 +93,26 @@
     </div>
 
     <script>
-        function toggleContent(id) {
-            const content = document.getElementById('content-' + id);
-            const btn = document.getElementById('btn-' + id);
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click event listeners to all read more buttons
+            const readMoreButtons = document.querySelectorAll('.read-more-btn');
             
-            if (content.classList.contains('collapsed')) {
-                content.classList.remove('collapsed');
-                btn.textContent = 'Show Less';
-            } else {
-                content.classList.add('collapsed');
-                btn.textContent = 'Read More';
-            }
-        }
+            readMoreButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const blogId = this.getAttribute('data-blog-id');
+                    const contentDiv = document.querySelector(`.blog-content[data-blog-id="${blogId}"]`);
+                    
+                    if (contentDiv.classList.contains('collapsed')) {
+                        contentDiv.classList.remove('collapsed');
+                        this.textContent = 'Show Less';
+                    } else {
+                        contentDiv.classList.add('collapsed');
+                        this.textContent = 'Read More';
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

@@ -317,3 +317,21 @@ header {
 .read-more-btn {
     margin-left: 5px;
 }
+
+.blog-content {
+    position: relative;
+    overflow: hidden;
+}
+.blog-content.collapsed {
+    max-height: 100px; /* Adjust height as needed */
+}
+.read-more-btn {
+    color: #4070f4;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 5px;
+    display: inline-block;
+}
+.read-more-btn:hover {
+    text-decoration: underline;
+}
