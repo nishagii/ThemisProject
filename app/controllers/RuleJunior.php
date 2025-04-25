@@ -13,7 +13,6 @@ class RuleJunior
         $rulesModel = $this->loadModel('SCrulesModel');
         $rules = $rulesModel->getAll();
 
-        // Load the view with data
         $this->view('/juniorcounsel/rule',['rules' => $rules]);
     }
 }
