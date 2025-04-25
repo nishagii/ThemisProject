@@ -90,8 +90,7 @@ class CaseModel
             'client_number',
             'client_email',
             'client_address',
-            'notes',
-            'case_number'
+            'notes'
         ];
 
         foreach ($sensitiveFields as $field) {
@@ -109,7 +108,7 @@ class CaseModel
      * @param object|array $data Data with fields to decrypt
      * @return object|array Data with decrypted fields
      */
-    private function decryptSensitiveData($data)
+    public function decryptSensitiveData($data)
     {
         // Define which fields should be decrypted
         $sensitiveFields = [
@@ -117,8 +116,7 @@ class CaseModel
             'client_number',
             'client_email',
             'client_address',
-            'notes',
-            'case_number'
+            'notes'
 
         ];
 
