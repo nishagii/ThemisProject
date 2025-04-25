@@ -48,7 +48,7 @@ section h2 {
 .case-progress {
     margin-top: 20px;
     padding: 15px;
-    background-color: #E4E9F7;
+    background-color: #f4f6fc;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
@@ -81,11 +81,9 @@ section h2 {
 }
 
 i{
-    color: #4d71b3;
+    color: #f39c12;
 }
-i:hover{
-    color: #396eff;
-}
+
 
 /* Enhanced styling for the "no cases" message */
 .no-cases-message {
