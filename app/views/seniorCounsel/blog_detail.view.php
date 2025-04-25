@@ -6,6 +6,8 @@
     <title><?= htmlspecialchars($blog->title) ?> - Blog Details</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/blog.css">
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </head>
 <body>
@@ -34,15 +36,39 @@
 
         <div class="blog-detail-actions">
             <a href="<?= ROOT ?>/blog/edit/<?= $blog->id ?>" class="edit-btn"><i class="bx bx-edit"></i> Edit</a>
-            <a href="<?= ROOT ?>/blog/delete/<?= $blog->id ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this blog post?');">
+            <a href="#" class="delete-btn" data-id="<?= $blog->blog_id ?>">
                 <i class="bx bx-trash"></i> Delete
             </a>
+
         </div>
 
         
         </div>
     </div>
 </div>
+
+<script>
+    document.querySelector('.delete-btn').addEventListener('click', function(e) {
+        e.preventDefault(); // Prevent default anchor click
+        const blogId = this.getAttribute('data-id');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This action cannot be undone.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect to the delete URL
+                window.location.href = `<?= ROOT ?>/blog/delete/${blogId}`;
+            }
+        });
+    });
+</script>
+
 
 </body>
 </html>
