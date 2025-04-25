@@ -87,7 +87,7 @@ class AddTask
         $taskModel = $this->loadModel('TaskModel');
         $taskModel->save($data);
 
-        // After the task is created, send notification to the assignee
+       
         $notificationModel = $this->loadModel('NotificationModel');
         $task = $data['id'];
         $name = $data['name'];
