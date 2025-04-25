@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Precedents</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/precedentsAdmin/all_precedents.css">
 </head>
 <body>
-    <?php include('component/bigNav.view.php'); ?>
-    <?php include('component/smallNav1.view.php'); ?>
-    <?php include('component/sidebar.view.php'); ?>
-    <div class="home-section">
-        <div class="header">
-            <h1>All Precedents</h1>
-        </div>
+<?php include('component/bigNav.view.php'); ?>
+<?php include('component/smallNav1.view.php'); ?>
+<?php include('component/sidebar.view.php'); ?>
+    <div class="header">
+        <h1>All Precedents</h1>
+    </div>
 
-        <div class="search-bar-container">
+    <div class="search-bar-container">
         <input type="text" 
         id="searchBar" 
         class="search-bar" 
@@ -86,6 +87,7 @@
                     </div>   
             </div>
         </div>    
+    </div>
     <div class="table-container">
         <table>
             <thead>
@@ -135,19 +137,6 @@
             }
         }
 
-        // Sort function - Sends an AJAX request
-        function sortBy(criteria) {
-            fetch(`<?= ROOT ?>/PrecedentsController/sort/${criteria}`)
-                .then(response => response.text())  // Get HTML response
-                .then(data => {
-                    document.getElementById("precedentsTable").innerHTML = data; // Update table
-                })
-                .catch(error => console.error("Error:", error));
-
-            // Hide the menu after selection
-            toggleSortMenu();
-        }
-
         function toggleYearDropdown(event) {
             event.stopPropagation();
 
@@ -192,9 +181,22 @@
             const dropdowns = document.querySelectorAll(".year-dropdown");
             dropdowns.forEach(drop => drop.style.display = "none");
         }
+        
+        function sortBy(criteria) {
+            fetch(`<?= ROOT ?>/PrecedentsController/sortViewOnly/${criteria}`)
+                .then(response => response.text())  // Get HTML response
+                .then(data => {
+                    document.getElementById("precedentsTable").innerHTML = data; // Update table
+                })
+                .catch(error => console.error("Error:", error));
+
+            // Hide the menu after selection
+            toggleSortMenu();
+        }
+
 
         function filterByYear(year) {
-            fetch(`<?= ROOT ?>/PrecedentsController/filterByYear/${year}`)
+            fetch(`<?= ROOT ?>/PrecedentsController/filterViewOnly/${year}`)
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById("precedentsTable").innerHTML = data;
@@ -203,7 +205,17 @@
 
             closeAllMenus();
         }
-        
+        function searchPrecedents() {
+            const query = document.getElementById("searchBar").value.trim();
+
+            fetch(`<?= ROOT ?>/PrecedentsController/searchViewOnly?query=${encodeURIComponent(query)}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("precedentsTable").innerHTML = data;
+                })
+                .catch(error => console.error("Error:", error));
+        }
+       
     </script>
 </body>
 </html>
