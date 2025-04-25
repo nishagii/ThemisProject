@@ -95,4 +95,24 @@ class Blog
         }
     }
 
+    public function details($id)
+    {
+        // Load the BlogModel
+        $blogModel = $this->loadModel('BlogModel');
+
+        // Fetch the blog by ID
+        $blog = $blogModel->getBlogById($id);
+
+        if ($blog) {
+            
+            $this->view('/seniorCounsel/blog_detail', ['blog' => $blog]);
+        } else {
+            
+            $_SESSION['error'] = "Blog not found.";
+            header("Location: " . ROOT . "/blog/viewBlog");
+            exit;
+        }
+    }
+
+
 }

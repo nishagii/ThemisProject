@@ -38,4 +38,20 @@ class BlogModel {
         }
     }
 
+    public function getBlogById($id)
+    {
+        try {
+            $query = "SELECT * FROM {$this->table} WHERE blog_id = :id LIMIT 1";
+            $params = ['id' => $id];
+
+            $result = $this->query($query, $params);
+
+            return $result ? $result[0] : false;
+        } catch (Exception $e) {
+            error_log("Database Error [BlogModel:getBlogById]: " . $e->getMessage());
+            return false;
+        }
+    }
+
+
 }

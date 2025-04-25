@@ -73,10 +73,11 @@
                                 </div>
                                 
                                 <?php if ($needsReadMore): ?>
-                                    <div class="read-more-btn" data-blog-id="<?= $blog->id ?>">
+                                    <a class="read-more-btn" href="<?= ROOT ?>/blog/details/<?= $blog->blog_id ?>">
                                         Read More
-                                    </div>
+                                    </a>
                                 <?php endif; ?>
+
                                 
                                 <div class="blog-footer">
                                     <p>By <?php echo htmlspecialchars($blog->author); ?></p>
@@ -92,27 +93,6 @@
         </div>
     </div>
 
-    <script>
-        // Wait for DOM to be fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add click event listeners to all read more buttons
-            const readMoreButtons = document.querySelectorAll('.read-more-btn');
-            
-            readMoreButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    const blogId = this.getAttribute('data-blog-id');
-                    const contentDiv = document.querySelector(`.blog-content[data-blog-id="${blogId}"]`);
-                    
-                    if (contentDiv.classList.contains('collapsed')) {
-                        contentDiv.classList.remove('collapsed');
-                        this.textContent = 'Show Less';
-                    } else {
-                        contentDiv.classList.add('collapsed');
-                        this.textContent = 'Read More';
-                    }
-                });
-            });
-        });
-    </script>
+  
 </body>
 </html>
