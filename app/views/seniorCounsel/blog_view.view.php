@@ -72,11 +72,11 @@
                                     <p><?= $content ?></p>
                                 </div>
                                 
-                                <?php if ($needsReadMore): ?>
+                                
                                     <a class="read-more-btn" href="<?= ROOT ?>/blog/details/<?= $blog->blog_id ?>">
                                         Read More
                                     </a>
-                                <?php endif; ?>
+                               
 
                                 
                                 <div class="blog-footer">
