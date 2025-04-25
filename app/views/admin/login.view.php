@@ -1,4 +1,4 @@
-<!-- /views/admin/login.php -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> 
 </head>
 <body>
-    <div class="login-container">
+    <?php include('component/navBar.view.php'); ?>
+    <?php include('component/sideBar.view.php'); ?>
+    <div class="home-section login-container">
 
 
         <section class="login-history">
