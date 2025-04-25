@@ -67,7 +67,7 @@ class Blog
 
             if ($result) {
                 $_SESSION['success'] = "Blog post added successfully!";
-                header("Location: " . ROOT . "/blog/index");
+                header("Location: " . ROOT . "/blog/viewBlog");
             } else {
                 $_SESSION['error'] = "Failed to save blog post.";
                 header("Location: " . ROOT . "/blog/addBlog");
