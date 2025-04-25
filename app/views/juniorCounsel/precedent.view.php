@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/precedentsAdmin/all_precedents.css">
 </head>
 <body>
-<?php include('components/bigNav.view.php'); ?>
-<?php include('components/smallNav.view.php'); ?>
-<?php include('components/sidebar.view.php'); ?>
+<?php include('component/bigNav.view.php'); ?>
+<?php include('component/smallNav1.view.php'); ?>
+<?php include('component/sidebar.view.php'); ?>
     <div class="header">
         <h1>All Precedents</h1>
     </div>
