@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="fileUpload">Upload Document</label>
+                    <label for="fileUpload">Upload Document</label> <small style="color: #777;">Max size: 10MB</small>
                     <input type="file" id="fileUpload" name="document_file" required>
                 </div>
 
@@ -50,26 +50,28 @@
 
     <!-- -------------------------------------JavaScript------------------------------------- -->
     <script>
-        function confirmDelete(caseId) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you really want to delete this case? This action cannot be undone!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#93a8e3',
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'Cancel',
-                background: '#fafafa',
-                color: '#1d1b31',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Redirect to the delete action
-                   
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            const fileInput = document.getElementById("fileUpload");
+
+            form.addEventListener("submit", function (e) {
+                const maxSize = 10 * 1024 * 1024; // 5MB
+                const file = fileInput.files[0];
+
+                if (file && file.size > maxSize) {
+                    e.preventDefault(); // Stop form submission
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'File too large!',
+                        text: 'Please upload a file smaller than 10MB.',
+                        background: '#fafafa',
+                        color: '#1d1b31',
+                    });
                 }
             });
-        }
+        });
     </script>
+
 
 
 </body>
