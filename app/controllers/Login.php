@@ -62,12 +62,14 @@ class Login
                 exit();
             } else {
                 // Log failed login attempt
-                $loginData = [
-                    'user_id'    => null,  // No valid user ID for failed login
-                    'ip_address' => $ipAddress,
-                    'status'     => 'Failure',  // Login failed
-                ];
-                $loginModel->save($loginData);  // Save the failed login attempt into the database
+                // if($user->id) {
+                //     $loginData = [
+                //         'user_id'    => $user->id,  // No valid user ID for failed login
+                //         'ip_address' => $ipAddress,
+                //         'status'     => 'Failure',  // Login failed
+                //     ];
+                //     $loginModel->save($loginData);  // Save the failed login attempt into the database
+                // }
 
                 $data['errors'] = ['Invalid username/email or password'];
                 // var_dump($data['errors']); // Debug here

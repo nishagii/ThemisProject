@@ -14,8 +14,9 @@
     <?php include('component/smallNav1.view.php'); ?>
     <?php include('component/sidebar.view.php'); ?>
 
-    <div class="form-body">
+    <div class="home-section">
 
+    <div class="form-body">
 
         <div class="modal" id="modal">
                         <?php if (!empty($errors)): ?>
@@ -31,7 +32,7 @@
                 <div class="title">Assign a Task</div>
             </div>
             <div class="modal-body">
-                <form method="POST" action="<?= ROOT ?>/addTask/add">
+                <form method="POST" action="<?= ROOT ?>/addTask/add" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="name">Task Name:</label>
                         <input type="text" id="name" name="name">
@@ -41,22 +42,27 @@
                         <label for="description">Description:</label>
                         <textarea id="description" name="description" rows="3"></textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label for="pdf">Upload Task PDF (optional):</label>
+                        <input type="file" id="pdf" name="pdf" accept="application/pdf" class="custom-file-input">
+                    </div>
                     
                     <div class="form-group">
-            <label for="assigneeID">Assign To:</label>
-            <select id="assigneeID" name="assigneeID">
-                <option value="" disabled selected>Select a user</option>
-                <?php if ($users): ?>
-                    <?php foreach ($users as $user): ?>
-                                                <option value="<?php echo htmlspecialchars($user->id); ?>">
-                            <?php echo htmlspecialchars($user->first_name . ' ' . $user->last_name); ?> (<?php echo htmlspecialchars($user->role); ?>)
-                        </option>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <option value="" disabled>No users available</option>
-                <?php endif; ?>
-            </select>
-        </div>
+                        <label for="assigneeID">Assign To:</label>
+                        <select id="assigneeID" name="assigneeID">
+                            <option value="" disabled selected>Select a user</option>
+                            <?php if ($users): ?>
+                                <?php foreach ($users as $user): ?>
+                                                            <option value="<?php echo htmlspecialchars($user->id); ?>">
+                                        <?php echo htmlspecialchars($user->first_name . ' ' . $user->last_name); ?> (<?php echo htmlspecialchars($user->role); ?>)
+                                    </option>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <option value="" disabled>No users available</option>
+                            <?php endif; ?>
+                        </select>
+                    </div>
                     
                     <div class="form-group">
                         <label for="deadlineDate">Deadline Date:</label>
@@ -85,12 +91,13 @@
             </div>
         </div>
     </div>
-                </div>
+    </div>
+    </div>
     
 
                 <script>
    // Function to validate the selected date and time
-function validateDateAndTime() {
+    function validateDateAndTime() {
     const today = new Date();
     const dateInput = document.getElementById("deadlineDate");
     const timeInput = document.getElementById("deadlineTime");

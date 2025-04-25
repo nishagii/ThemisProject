@@ -35,7 +35,8 @@ class PaymentModel
      */
     public function getAllPayments()
     {
-        $query = "SELECT * FROM {$this->table}";
+        $query = "SELECT * FROM {$this->table}
+        ORDER BY created_at ASC";
         return $this->query($query);
     }
 
@@ -66,5 +67,44 @@ class PaymentModel
         $params = ['id' => $id];
 
         return $this->query($query, $params);
+    }
+
+
+    /**
+     * Retrieve all payments with associated case details.
+     *
+     * @return array List of all payments with case details.
+     */
+    public function getAllPaymentsWithCaseDetails()
+    {
+        $query = "SELECT p.*, c.case_number, c.client_name , c.court, c.client_number
+                  FROM {$this->table}  p
+                  LEFT JOIN cases c ON p.case_number = c.case_number
+                  ORDER BY p.created_at DESC";
+
+                  return $this->query($query);
+    }
+
+    /**
+     * Retrieve total amount received from payments this month.
+     * @return int Total amount received in the current month.
+     * 
+     */
+    public function getTotalAmountReceivedInMonth()
+    {
+        // Get the first and last day of the current month
+        $firstDayOfMonth = date('Y-m-01');
+        $lastDayOfMonth = date('Y-m-t');
+
+        $query = "SELECT SUM(amount) as total_amount FROM {$this->table} 
+              WHERE created_at BETWEEN :start_date AND :end_date";
+
+        $params = [
+            'start_date' => $firstDayOfMonth,
+            'end_date' => $lastDayOfMonth . ' 23:59:59'
+        ];
+
+        $result = $this->query($query, $params);
+        return $result[0]->total_amount ?? 0;
     }
 }

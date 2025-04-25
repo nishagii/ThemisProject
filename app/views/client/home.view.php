@@ -29,107 +29,179 @@
 
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
+    <?php include(__DIR__ . '/../seniorCounsel/component/sidebar.view.php'); ?>
 
     <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2><i class="fas fa-gavel"></i> Client Dashboard</h2>
-            <nav>
-                <ul>
-                    <li><a href="#case-progress"><i class="fas fa-briefcase"></i> Case Progress</a></li>
-                    <li><a href="#hearings"><i class="fas fa-calendar-alt"></i> Upcoming Hearings</a></li>
-                    <li><a href="#payments"><i class="fas fa-wallet"></i> Payments</a></li>
-                    <li><a href="#notifications"><i class="fas fa-bell"></i> Notifications</a></li>
-                    <li><a href="#profile"><i class="fas fa-user"></i> Profile</a></li>
-                </ul>
-            </nav>
-        </aside>
+
 
         <!-- Main Content -->
-        <main class="main-content">
-            <header class="header">
-                <h1>Welcome, <span class="user-name">Nishagi </span>!</h1>
-                <p>Your case updates and notifications are here.</p>
-            </header>
+        <main class="home-section">
+            <div class="home-body">
+                <header class="header">
+                    <h1>Welcome, <span class="user-name"><?= htmlspecialchars($username) ?></span>!</h1>
+                </header>
 
-            <!-- Case Progress Section -->
-            <section id="case-progress" class="case-progress">
-                <h2><i class="fas fa-tasks"></i> Case Progress</h2>
-                <div class="case-card">
-                    <h3>Case: 2212/54</h3>
-                    <p>Status: <span class="status in-progress">In Progress</span></p>
-                    <p><i class="fas fa-clock"></i> Last Updated: 2024-11-25</p>
+                    <!-- Case Progress Section -->
+                <section id="case-progress" class="case-progress">
+                    <h2><i class="fas fa-tasks"></i> Case Progress</h2>
+
+                    <?php if (!empty($cases) && is_array($cases)): ?>
+                        <?php foreach ($cases as $case): ?>
+                            <div class="case-card">
+                                <h3>Case: <?= htmlspecialchars($case['case_number']) ?></h3>
+                                <p>Status: 
+                                    <span class="status <?= strtolower(str_replace(' ', '-', $case['status'])) ?>">
+                                        <?= htmlspecialchars($case['status']) ?>
+                                    </span>
+                                </p>
+                                <p>
+                                    <i class="fas fa-clock"></i> Last Updated: <?= htmlspecialchars($case['last_updated']) ?>
+                                </p>
+                            </div>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="no-cases-message">
+                                <div class="no-cases-icon">
+                                    <i class="fas fa-folder-open"></i>
+                                </div>
+                                <div class="no-cases-content">
+                                    <h4>No Cases Found</h4>
+                                    <p>You are not currently assigned to any legal cases.</p>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                </section>
+
+                <!-- Invoices Section -->
+                <section id="invoices" class="invoices">
+                    <h2><i class="fas fa-file-invoice-dollar"></i> Recent Invoices</h2>
+                    
+                    <?php if (!empty($invoices) && is_array($invoices)): ?>
+                        <?php foreach ($invoices as $invoice): ?>
+                            <div class="invoice-card">
+                                <h3>Invoice: #<?= htmlspecialchars($invoice['invoice_number']) ?></h3>
+                                <p>Amount: $<?= htmlspecialchars(number_format($invoice['amount'], 2)) ?></p>
+                                <p>Status: 
+                                    <span class="status <?= strtolower(str_replace(' ', '-', $invoice['status'])) ?>">
+                                        <?= htmlspecialchars($invoice['status']) ?>
+                                    </span>
+                                </p>
+                                <p>
+                                    <i class="fas fa-calendar-alt"></i> Due Date: <?= htmlspecialchars($invoice['due_date']) ?>
+                                </p>
+                                <div class="invoice-actions">
+                                    <a href="<?= ROOT ?>/client/viewInvoice/<?= $invoice['id'] ?>" class="view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <?php if ($invoice['status'] !== 'Paid'): ?>
+                                        <a href="<?= ROOT ?>/client/payInvoice/<?= $invoice['id'] ?>" class="pay-btn">
+                                            <i class="fas fa-credit-card"></i> Pay Now
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="no-invoices-message">
+                            <div class="no-invoices-icon">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                            <div class="no-invoices-content">
+                                <h4>No Invoices Found</h4>
+                                <p>You don't have any recent invoices.</p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </section>
+                
+                <div class="flex">
+
+                <div class="login-container">
+                    <div class="header">
+                        <h2>Recent Login Activity</h2>
+                    </div>
+
+                    <div class="login-list">
+                        <?php if (!empty($logins)): ?>
+                            <?php 
+                            // Display only the first 3 logins
+                            $loginCount = count($logins);
+                            $displayLogins = array_slice($logins, 0, 3);
+                            
+                            foreach ($displayLogins as $login): 
+                            ?>
+                                <div class="login">
+                                    <div class="login-info">
+                                        <div class="login-icon"><i class="fas fa-key"></i></div>
+                                        <div class="text-info">
+                                            <div class="date">
+                                                <?php echo date('F j, Y', strtotime($login->login_time)); ?>
+                                            </div>
+                                            <div class="time">
+                                                <?php echo date('g:i a', strtotime($login->login_time)); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="ip"><?php echo htmlspecialchars($login->ip_address); ?></div>
+                                        <div class="status"><?php echo htmlspecialchars($login->status); ?></div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                            
+                            <?php if ($loginCount > 3): ?>
+                                <div class="view-more-container">
+                                    <a href="<?= ROOT ?>/client/loginHistory" class="view-more-btn">
+                                        <i class="fas fa-history"></i> View All Login History
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                            
+                        <?php else: ?>
+                            <p>No login history available.</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
-                <div class="case-card">
-                    <h3>Case: 2195/28</h3>
-                    <p>Status: <span class="status closed">Closed</span></p>
-                    <p><i class="fas fa-calendar-check"></i> Last Updated: 2024-10-15</p>
+
+                                    <!-- Meetings Section -->
+                    <section id="meetings" class="meetings">
+                        <h2><i class="fas fa-handshake"></i> Recent Meeting Requests</h2>
+
+                        <?php if (!empty($meetings) && is_array($meetings)): ?>
+                            <?php foreach ($meetings as $meeting): ?>
+                                <div class="meeting-card">
+                                    <h3>Meeting with: <?= htmlspecialchars($meeting['lawyer_name']) ?></h3>
+                                    <p>Date: <i class="fas fa-calendar"></i> <?= htmlspecialchars($meeting['meeting_date']) ?></p>
+                                    <p>Time: <i class="fas fa-clock"></i> <?= htmlspecialchars($meeting['meeting_time']) ?></p>
+                                    <p>Status: 
+                                        <span class="status <?= strtolower(str_replace(' ', '-', $meeting['status'])) ?>">
+                                            <?= htmlspecialchars($meeting['status']) ?>
+                                        </span>
+                                    </p>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="no-meetings-message">
+                                <div class="no-meetings-icon">
+                                    <i class="fas fa-calendar-times"></i>
+                                </div>
+                                <div class="no-meetings-content">
+                                    <h4>No Meeting Requests Found</h4>
+                                    <p>You haven't requested any meetings yet.</p>
+                                    <a href="<?= ROOT ?>/client/requestMeeting" class="request-meeting-btn">
+                                        <i class="fas fa-plus-circle"></i> Request a Meeting
+                                    </a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </section>
+
                 </div>
-            </section>
+                
 
-            <!-- Upcoming Hearings Section -->
-            <section id="hearings" class="upcoming-hearings">
-                <h2><i class="fas fa-calendar-alt"></i> Upcoming Hearings</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-file-alt"></i> Case Number</th>
-                            <th><i class="fas fa-calendar-day"></i> Date</th>
-                            <th><i class="fas fa-clock"></i> Time</th>
-                            <th><i class="fas fa-map-marker-alt"></i> Location</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>2212/54</td>
-                            <td>2024-12-15</td>
-                            <td>10:00 AM</td>
-                            <td>Supreme Court, Room 5</td>
-                        </tr>
-                        <tr>
-                            <td>2195/28</td>
-                            <td>2024-12-20</td>
-                            <td>2:30 PM</td>
-                            <td>District Court, Room 2</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
 
-            <!-- Notifications Section -->
-            <section id="notifications" class="notifications">
-                <h2><i class="fas fa-bell"></i> Notifications</h2>
-                <ul>
-                    <li><i class="fas fa-file-upload"></i> Case 2212/54: Document submission completed on 2024-11-20.</li>
-                    <li><i class="fas fa-calendar-check"></i> Case 2195/28: Hearing scheduled on 2024-12-20.</li>
-                </ul>
-            </section>
-
-            <!-- Payments Section -->
-            <section id="payments" class="payments">
-                <h2><i class="fas fa-wallet"></i> Payment History</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-calendar"></i> Date</th>
-                            <th><i class="fas fa-dollar-sign"></i> Amount</th>
-                            <th><i class="fas fa-check-circle"></i> Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>2024-11-15</td>
-                            <td>$500</td>
-                            <td class="paid">Paid</td>
-                        </tr>
-                        <tr>
-                            <td>2024-10-30</td>
-                            <td>$200</td>
-                            <td class="pending">Pending</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+            </div>
+            
         </main>
     </div>
 </body>
