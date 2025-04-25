@@ -15,6 +15,7 @@
         <div class="blog-container">
             <header>
                 <h1>All Blogs</h1>
+                <a href="<?= ROOT ?>/seniorCounsel/addBlog" class="add-blog-button">Add Blog</a>
             </header>
             
             <main>
