@@ -119,7 +119,7 @@ class CaseModel
             'client_address',
             'notes',
             'case_number'
-            
+
         ];
 
         // Handle both objects and arrays
@@ -180,7 +180,11 @@ class CaseModel
     }
 
 
-    // Get all non-deleted cases
+    /**
+     * Retrieve all non-deleted cases from the database.
+     * @return array Array of case objects.
+     * 
+     */
     public function getAllCases()
     {
         $query = "SELECT c.*, 
@@ -204,7 +208,11 @@ class CaseModel
         return $cases;
     }
 
-    // Get a specific non-deleted case by ID
+    /**
+     * Retrieve a specific case by its ID.
+     * @param int $id Case ID.
+     * @return object|null Case object or null if not found.
+     */
     public function getCaseById($id)
     {
         $query = "SELECT c.*, 
@@ -229,7 +237,11 @@ class CaseModel
         return $case; // Return the first (and expected only) result
     }
 
-    // Soft delete a case (mark as deleted instead of removing from database)
+    /**
+     * Soft delete a case (mark as deleted instead of removing from database)
+     * @param int $caseId Case ID.
+     * @return bool True if the operation was successful, false otherwise.
+     */
     public function softDeleteCase($caseId)
     {
         $query = "UPDATE {$this->table} SET deleted = 1, updated_at = NOW() WHERE id = :id";
@@ -269,7 +281,12 @@ class CaseModel
         return $this->query($query, $params);
     }
 
-    // Update an existing case
+    /**
+     * Update an existing case in the database.
+     *
+     * @param array $data Associative array containing case details.
+     * @return bool True if the operation was successful, false otherwise.
+     */
     public function updateCase($data)
     {
         // Encrypt sensitive data before updating
@@ -311,7 +328,11 @@ class CaseModel
         return $this->query($query, $params);
     }
 
-    // Get case number by email
+    /**
+     * get case number by client email(used in payments page)
+     * @param string $email Client email.
+     * @return string|null Case number or null if not found.
+     */
     public function getCaseNumberByEmail($email)
     {
         // Since email is encrypted, we need to get all cases and filter
@@ -326,7 +347,11 @@ class CaseModel
         return null;
     }
 
-    // Get cases by client email
+    /**
+     * get case number by client email(used in payments page)
+     * @param string $email Client email.
+     * @return array Array of cases matching the email.
+     */
     public function getCasesByClientEmail($email)
     {
         // Since email is encrypted, we need to get all cases and filter
@@ -342,7 +367,11 @@ class CaseModel
         return $matchingCases;
     }
 
-    // Get cases by client ID
+    /**
+     * Get all cases for a specific client.
+     * @param int $clientId Client ID.
+     * @return array Array of case objects for the client.
+     */
     public function getCasesByClientId($clientId)
     {
         $query = "SELECT c.*, 
@@ -366,7 +395,11 @@ class CaseModel
         return $cases;
     }
 
-    // Get cases by attorney ID
+    /**
+     * Get all cases for a specific attorney.
+     * @param int $attorneyId Attorney ID.
+     * @return array Array of case objects for the attorney.
+     */
     public function getCasesByAttorneyId($attorneyId)
     {
         $query = "SELECT * FROM {$this->table} WHERE attorney_id = :attorney_id AND deleted = 0";
@@ -384,7 +417,11 @@ class CaseModel
         return $cases;
     }
 
-    // Get cases by junior ID
+    /**
+     * Get all cases for a specific junior.
+     * @param int $juniorId Junior ID.
+     * @return array Array of case objects for the junior.
+     */
     public function getCasesByJuniorId($juniorId)
     {
         #get only not deleted cases
@@ -393,7 +430,7 @@ class CaseModel
 
         $cases = $this->query($query, $params);
 
-        
+
         if (is_array($cases)) {
             foreach ($cases as &$case) {
                 $case = $this->decryptSensitiveData($case);
@@ -403,7 +440,11 @@ class CaseModel
         return $cases;
     }
 
-    // Update only the case status
+    /**
+     * Update the status of a case.
+     * @param array $data Associative array containing case ID and new status.
+     * @return bool True if the operation was successful, false otherwise.
+     */
     public function updateCaseStatus($data)
     {
         $query = "UPDATE {$this->table} 
@@ -419,7 +460,12 @@ class CaseModel
         return $this->query($query, $params);
     }
 
-    // Search cases
+    /**
+     * Search for cases based on a search query and field.
+     * @param string $searchQuery Search query.
+     * @param string $field Field to search in (default: 'all').
+     * @return array Array of matching case objects.
+     */
     public function searchCases($searchQuery, $field = 'all')
     {
         // Since we're using encryption, we need to handle search differently
@@ -472,4 +518,41 @@ class CaseModel
         return $results;
     }
 
+
+    /**
+     * Get the count of ongoing cases.
+     * @return int Count of ongoing cases.
+     */
+    public function getOngoingCasesCount()
+    {
+        $query = "SELECT COUNT(*) as count FROM {$this->table} WHERE case_status = 'ongoing'
+                  AND deleted = 0";
+
+        $result = $this->query($query);
+
+        // Check if result exists and return the count
+        if (!empty($result)) {
+            // Access as object property instead of array index
+            return $result[0]->count;
+        }
+
+        return 0; // Return 0 if no results found
+    }
+
+    /**
+     * Get cases delayed more than 2 months
+     * @return array Array of delayed cases
+     */
+    public function getDelayedCases()
+    {
+        // Calculate date 2 months ago
+        $twoMonthsAgo = date('Y-m-d', strtotime('-2 months'));
+
+        $query = "SELECT * FROM {$this->table} 
+              WHERE updated_at < :two_months_ago";
+
+        $params = ['two_months_ago' => $twoMonthsAgo];
+
+        return $this->query($query, $params);
+    }
 }

@@ -84,4 +84,27 @@ class PaymentModel
 
                   return $this->query($query);
     }
+
+    /**
+     * Retrieve total amount received from payments this month.
+     * @return int Total amount received in the current month.
+     * 
+     */
+    public function getTotalAmountReceivedInMonth()
+    {
+        // Get the first and last day of the current month
+        $firstDayOfMonth = date('Y-m-01');
+        $lastDayOfMonth = date('Y-m-t');
+
+        $query = "SELECT SUM(amount) as total_amount FROM {$this->table} 
+              WHERE created_at BETWEEN :start_date AND :end_date";
+
+        $params = [
+            'start_date' => $firstDayOfMonth,
+            'end_date' => $lastDayOfMonth . ' 23:59:59'
+        ];
+
+        $result = $this->query($query, $params);
+        return $result[0]->total_amount ?? 0;
+    }
 }
