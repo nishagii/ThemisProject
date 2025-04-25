@@ -19,6 +19,11 @@ class PaymentGate
         $paymentModel = $this->loadModel('PaymentModel');
         $payments = $paymentModel->getAllPaymentsWithCaseDetails();
 
+        if (!empty($payments)) {
+            //Uncomment to debug
+            //  echo "<pre>"; print_r($payments[0]); echo "</pre>"; exit;
+        }
+
         $this->view('seniorCounsel/paidReciepts', [
             'payments' => $payments
         ]);
