@@ -162,14 +162,19 @@ class Blog
     {
         // Load the BlogModel
         $blogModel = $this->loadModel('BlogModel');
-
+        
+        // Get the existing blog post
+        $existingBlog = $blogModel->getBlogById($id);
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Sanitize inputs
             $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
             $content = filter_input(INPUT_POST, 'content', FILTER_SANITIZE_STRING);
 
+            // Default to the existing image
+            $imageFileName = $existingBlog->image_url;
+            
             // Optional: Handle a cover image upload
-            $imageFileName = null;
             if (isset($_FILES['cover_image']) && $_FILES['cover_image']['error'] === UPLOAD_ERR_OK) {
                 $imageFileName = uniqid() . '_' . basename($_FILES['cover_image']['name']);
                 $targetDir = "../public/assets/blog_images/";
@@ -198,7 +203,7 @@ class Blog
             $blogData = [
                 'title' => $title,
                 'content' => $content,
-                'image_url' => $imageFileName ?? null
+                'image_url' => $imageFileName // This will either be the new image or the existing one
             ];
 
             // Update the blog post
