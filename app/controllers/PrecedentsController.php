@@ -27,6 +27,21 @@ class PrecedentsController {
         ]);
     }
 
+    public function search(){
+        $query = $_GET['query'] ?? '';
+        $precedentsModel = $this->loadModel('PrecedentModel');
+
+        if (!empty($query)) {
+            $cases = $precedentsModel->searchCases($query);
+        } else {
+            $cases = $precedentsModel->getAll();
+        }
+
+        // Return only the table rows (for AJAX)
+        $this->view('precedentsAdmin/searchResults', ['cases' => $cases]);
+    }
+
+
     public function sort($criteria) {
         // Fetch sorted cases based on the criteria
         $cases = $this->precedentModel->getSorted($criteria);

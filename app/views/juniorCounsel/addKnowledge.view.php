@@ -38,6 +38,9 @@
                     <label for="note">Note:</label>
                     <textarea name="note" id="note" required></textarea>
                     <button type="submit" name="add" id="addBtn">Add</button>
+                    <label for="image">Image:</label>
+    <input type="file" name="image" id="image" accept="image/*">
+    <button type="submit" name="add" id="addBtn">Add</button>
                 </form>
 
                 </div>

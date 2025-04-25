@@ -45,6 +45,15 @@ class Knowledge
         'topic' => $_POST['topic'] ?? '',
         'note' => $_POST['note'] ?? '',
     ];
+    if (!empty($_FILES['image']['name'])) {
+        $targetDir = "uploads/knowledge/";
+        $fileName = basename($_FILES['image']['name']);
+        $targetFilePath = $targetDir . $fileName;
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
+            $data['image'] = $targetFilePath;
+        }
+    }
+
 
     // Load the Task model
     $knowledgeModel = $this->loadModel('knowledgeModel');
