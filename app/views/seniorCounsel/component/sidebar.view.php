@@ -62,6 +62,14 @@
                 </a>
                 <span class="tooltip">Blog</span>
             </li>
+            <li>
+    <a href="<?= ROOT ?>/feedback/viewAll">
+        <i class='bx bx-star'></i>
+        <span class="links_name">View Feedback</span>
+    </a>
+    <span class="tooltip">View Feedback</span>
+</li>
+
 
             <li class="profile">
                 <div class="profile-details">

@@ -21,6 +21,7 @@
                 <li><a href="homeclient">Home</a></li>
                 <li><a href="PaymentController">Payments</a></li>
                 <li><a href="<?= ROOT ?>/precedentsController/retrieveAllViewOnly">Precedents</a></li>
+                
             </ul>
         </nav>
         
