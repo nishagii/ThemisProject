@@ -65,5 +65,27 @@ class BlogModel {
         }
     }
 
+    public function updateBlogById($id, $data)
+    {
+        try {
+            $query = "UPDATE {$this->table}
+                    SET title = :title, content = :content, image_url = :image_url
+                    WHERE blog_id = :id";
+
+            $params = [
+                'title' => $data['title'],
+                'content' => $data['content'],
+                'image_url' => $data['image_url'],
+                'id' => $id
+            ];
+
+            return $this->query($query, $params);
+        } catch (Exception $e) {
+            error_log("Database Error [BlogModel:updateBlogById]: " . $e->getMessage());
+            return false;
+        }
+    }
+
+
 
 }

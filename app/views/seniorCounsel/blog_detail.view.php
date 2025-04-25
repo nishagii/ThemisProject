@@ -35,7 +35,7 @@
         </div>
 
         <div class="blog-detail-actions">
-            <a href="<?= ROOT ?>/blog/edit/<?= $blog->id ?>" class="edit-btn"><i class="bx bx-edit"></i> Edit</a>
+            <a href="<?= ROOT ?>/blog/editBlog/<?= $blog->blog_id ?>" class="edit-btn"><i class="bx bx-edit"></i> Edit</a>
             <a href="#" class="delete-btn" data-id="<?= $blog->blog_id ?>">
                 <i class="bx bx-trash"></i> Delete
             </a>
