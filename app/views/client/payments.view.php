@@ -58,9 +58,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="IDNumber">ID Number</label>
-                        <input id="IDNumber" class="form-control" type="text" placeholder="Enter ID Number" required />
+                        <label for="remarks">Remarks</label>
+                        <input id="remarks" class="form-control" type="text" placeholder="Enter payment remarks" required />
                     </div>
+
 
                     <div class="form-group">
                         <label for="PaymentAmount">Payment Amount</label>
@@ -79,7 +80,6 @@
             </div>
         </div>
     </div>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const stripe = Stripe("<?= STRIPE_PUBLIC ?>"); // Load Stripe public key
@@ -90,10 +90,10 @@
                 event.preventDefault();
 
                 const caseNumber = document.getElementById("CaseNumber").value.trim();
-                const idNumber = document.getElementById("IDNumber").value.trim();
+                const remarks = document.getElementById("remarks").value.trim(); // Changed from IDNumber to remarks
                 const amount = document.getElementById("PaymentAmount").value.trim();
 
-                if (!caseNumber || !idNumber || !amount) {
+                if (!caseNumber || !amount) { // Removed remarks from required fields check
                     alert("Please fill all required fields.");
                     return;
                 }
@@ -105,7 +105,7 @@
                         },
                         body: JSON.stringify({
                             case_number: caseNumber,
-                            id_number: idNumber,
+                            remarks: remarks, // Changed from id_number to remarks
                             amount: amount
                         })
                     })
@@ -123,6 +123,7 @@
             });
         });
     </script>
+
 </body>
 
 </html>

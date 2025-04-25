@@ -21,6 +21,7 @@
                 <span class="tooltip">Search</span>
             </li> -->
             <!-- <li>
+            
                 <a href="<?= ROOT ?>/homelawyer">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
@@ -56,7 +57,7 @@
                 <span class="tooltip">Messages</span>
             </li>
             <li>
-                <a href="<?= ROOT ?>/blog">
+                <a href="<?= ROOT ?>/blog/viewBlog">
                     <i class='bx bx-news'></i>
                     <span class="links_name">Blog</span>
                 </a>
