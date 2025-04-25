@@ -313,3 +313,7 @@ header {
 .add-blog-button:hover {
     background-color: #40468b;
 }
+
+.read-more-btn {
+    margin-left: 5px;
+}

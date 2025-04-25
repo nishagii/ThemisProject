@@ -6,6 +6,25 @@
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/blog.css">
     <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .blog-content {
+            position: relative;
+            overflow: hidden;
+        }
+        .blog-content.collapsed {
+            max-height: 100px; /* Adjust height as needed */
+        }
+        .read-more-btn {
+            color: #4070f4;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 5px;
+            display: inline-block;
+        }
+        .read-more-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <?php include('component/bigNav.view.php'); ?>
@@ -29,7 +48,24 @@
                                     </div>
                                 <?php endif; ?>
                                 <h2><?php echo htmlspecialchars($blog->title); ?></h2>
-                                <p><?php echo nl2br(htmlspecialchars($blog->content)); ?></p>
+                                
+                                <?php
+                                // Check if content is long enough to need a "Read More" button
+                                $content = nl2br(htmlspecialchars($blog->content));
+                                $contentLength = strlen(strip_tags($blog->content));
+                                $needsReadMore = $contentLength > 300; // Adjust character limit as needed
+                                ?>
+                                
+                                <div class="blog-content <?= $needsReadMore ? 'collapsed' : '' ?>" id="content-<?= $blog->id ?>">
+                                    <p><?= $content ?></p>
+                                </div>
+                                
+                                <?php if ($needsReadMore): ?>
+                                    <div class="read-more-btn" onclick="toggleContent(<?= $blog->id ?>)" id="btn-<?= $blog->id ?>">
+                                        Read More
+                                    </div>
+                                <?php endif; ?>
+                                
                                 <div class="blog-footer">
                                     <p>By <?php echo htmlspecialchars($blog->author); ?></p>
                                     <p><?php echo date('M j, Y', strtotime($blog->created_at)); ?></p>
@@ -43,5 +79,20 @@
             </main>
         </div>
     </div>
+
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById('content-' + id);
+            const btn = document.getElementById('btn-' + id);
+            
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                btn.textContent = 'Show Less';
+            } else {
+                content.classList.add('collapsed');
+                btn.textContent = 'Read More';
+            }
+        }
+    </script>
 </body>
 </html>
