@@ -23,7 +23,7 @@
                 <li><a href="homejunior">Home</a></li>
                 <li><a href="caseJunior">Cases</a></li>
                 <li><a href="salary">Salary</a></li>
-                <li><a href="precedentJunior">Precedents</a></li>
+                <li><a href="<?= ROOT ?>/precedentsController/retrieveAllViewOnly">Precedents</a></li>
             </ul>
         </nav>
 

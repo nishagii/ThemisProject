@@ -12,8 +12,6 @@
 </head>
 
 <body>
-
-
     <div class="body-container">
         <h4>Profile</h4>
 
@@ -27,37 +25,38 @@
                 </div>
             </div>
             <div class="profile-info">
-                <h2>Nadhiya Nashath</h2>
-                <p>Admin</p>
+                <h2>Welcome, <?php echo $data['user']->email ?? 'User'; ?>!</h2>
+                <p><?php echo isset($data['user']->role) ? ucfirst($data['user']->role) : 'Junior Counsel'; ?></p>
             </div>
             <button class="edit-button">
                 <i class='bx bxs-pencil edit-icon'></i>
             </button>
         </div>
         
-
         <div class="personal-info-section">
             <div>
                 <h3>Personal Info</h3>
                 <div class="info-item">
                     <i class="bx bxs-user"></i>
-                    <p>First Name: Nadhiya</p>
+                    <p>First Name: <?php echo  $_SESSION['username']?? 'Not set'; ?></p>
+
+                    <p>First Name: <?php echo  $_SESSION['username']?? 'Not set'; ?></p>
                 </div>
                 <div class="info-item">
                     <i class="bx bxs-user"></i>
-                    <p>Last Name: Nashath</p>
+                    <p>Last Name: <?php echo $data['profile']->last_name ?? 'Not set'; ?></p>
                 </div>
                 <div class="info-item">
                     <i class="bx bxs-envelope"></i>
-                    <p>Email: nashathnadhiya@gmail.com</p>
+                    <p>Email: <?php echo $data['user']->email ?? 'Not set'; ?></p>
                 </div>
                 <div class="info-item">
                     <i class="bx bxs-phone"></i>
-                    <p>Phone: 076-8811077</p>
+                    <p>Phone: <?php echo $data['profile']->phone ?? 'Not set'; ?></p>
                 </div>
                 <div class="info-item">
                     <i class="bx bxs-map"></i>
-                    <p>Location: Sri Lanka</p>
+                    <p>Location: <?php echo $data['profile']->location ?? 'Not set'; ?></p>
                 </div>
                 <div class="password">
                     <button class="password-button">
@@ -65,15 +64,14 @@
                     </button>
                 </div>
             </div>
-            <button class="edit-button">
+            <button class="edit-button" id="edit-personal-info">
                 <i class="bx bxs-pencil edit-icon"></i>
             </button>
         </div>
 
         <div class="activity-section">
             <h3>Login Activity</h3>
-            <div class="login-container" ></div>
-                
+            <div class="login-container">
                 <table class="login-table">
                     <thead>
                         <tr>
@@ -92,7 +90,6 @@
                         </tr>
                         <!-- Add more rows as needed -->
                     </tbody>
-                    
                 </table>
             </div>
         </div>
@@ -104,15 +101,20 @@
     let closeBtn = document.querySelector("#side-btn");
     let searchBtn = document.querySelector(".bx-search");
   
-    closeBtn.addEventListener("click", ()=>{
-      sidebar.classList.toggle("open");
-      menuBtnChange();//calling the function(optional)
-    });
+    // Only run if elements exist (prevents JS errors)
+    if(closeBtn) {
+        closeBtn.addEventListener("click", ()=>{
+          sidebar.classList.toggle("open");
+          menuBtnChange();//calling the function(optional)
+        });
+    }
   
-    searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
-      sidebar.classList.toggle("open");
-      menuBtnChange(); //calling the function(optional)
-    });
+    if(searchBtn) {
+        searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+          sidebar.classList.toggle("open");
+          menuBtnChange(); //calling the function(optional)
+        });
+    }
   
     // following are the code to change sidebar button(optional)
     function menuBtnChange() {
@@ -123,14 +125,15 @@
      }
     }
 
-    
     function toggleProfile() {
-            const sortMenu = document.getElementById("popup");
-            popup.style.display = popup.style.display === "block" ? "none" : "block";
-            }
+        const popup = document.getElementById("popup");
+        popup.style.display = popup.style.display === "block" ? "none" : "block";
+    }
 
+    // Close popup when close button is clicked
+    document.getElementById("close").addEventListener("click", function() {
+        document.getElementById("popup").style.display = "none";
+    });
+</script>
 
-
-    </script>
-
-</html>
+</html>*/
