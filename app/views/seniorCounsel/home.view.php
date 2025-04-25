@@ -71,28 +71,40 @@
             <div class="card cards">
                 <i class="fas fa-balance-scale"></i>
                 <p>you have</p>
-                <!-- cases count passed from the controller as $casesCount -->
-                <p><?= $ongoingCasesCount ?></p>
-                <h3>Ongoing Cases</h3>
-
+                <?php if (isset($ongoingCasesCount) && $ongoingCasesCount > 0): ?>
+                    <p><?= $ongoingCasesCount ?></p>
+                    <h3>Ongoing Cases</h3>
+                <?php else: ?>
+                    <p>0</p>
+                    <h3>No Ongoing Cases</h3>
+                <?php endif; ?>
             </div>
 
             <div class="card cards">
                 <i class="fas fa-dollar-sign"></i>
                 <p>you have</p>
-                <p> $<?= $totalAmount ?></p>
-                <h3>Payments Recived</h3>
-
+                <?php if (isset($totalAmount) && $totalAmount > 0): ?>
+                    <p>$<?= number_format($totalAmount, 2) ?></p>
+                    <h3>Payments Received</h3>
+                <?php else: ?>
+                    <p>$0.00</p>
+                    <h3>No Payments This Month</h3>
+                <?php endif; ?>
             </div>
 
             <div class="card cards delayed">
                 <i class="fas fa-hourglass-half"></i>
                 <p>you have</p>
-                <p>5</p>
-                <h3>Delayed Cases</h3>
-
+                <?php if (isset($delayedCases) && $delayedCases > 0): ?>
+                    <p><?= $delayedCases ?></p>
+                    <h3>Delayed Cases</h3>
+                <?php else: ?>
+                    <p>0</p>
+                    <h3>No Delayed Cases</h3>
+                <?php endif; ?>
             </div>
         </div>
+
 
         <!-- Chart Section -->
         <div class="chart-container">
