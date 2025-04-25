@@ -19,7 +19,7 @@
             <li><a href="<?= ROOT ?>/meetingslawyer">Meeting</a></li>
             <li><a href="<?= ROOT ?>/template">Document templates</a></li>
             <li><a href="<?= ROOT ?>/users">Users</a></li>
-            <li><a href="<?= ROOT ?>/rulelawyer">S.C Rules</a></li>
+            <li><a href="<?= ROOT ?>/SCrules/retrieveForView">S.C Rules</a></li>
         </ul>
     </div>
 </body>

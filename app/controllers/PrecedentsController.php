@@ -11,7 +11,20 @@ class PrecedentsController {
 
     public function index()
     {
-        $this->view('/precedentsAdmin/PrecedentsAdmin_Home');
+        $precedentModel = $this->loadModel('PrecedentModel');
+        $SCrulesModel = $this -> loadModel('SCrulesModel');
+        $cases = $precedentModel->getRecentCases();
+        $count = $precedentModel->countPrecedents();
+
+        $rules = $SCrulesModel->getRecentrules();
+        $rulesCount = $SCrulesModel->countRules();
+
+        $this->view('/precedentsAdmin/PrecedentsAdmin_Home', [
+            'cases' => $cases,
+            'precedentCount' => $count,
+            'rules' => $rules,
+            'rulesCount' => $rulesCount
+        ]);
     }
 
     public function sort($criteria) {
@@ -180,6 +193,7 @@ public function create() {
         // Load the view and pass the case data
         $this->view('one_precedent_viewOnly', ['case' => $case]);
     }
+
 /*-------------------Update---------------------------------- */
    
     public function edit($id) {
