@@ -30,7 +30,7 @@ class BlogModel {
     public function getAllBlogs()
     {
         try {
-            $query = "SELECT * FROM {$this->table}";
+            $query = "SELECT * FROM {$this->table} ORDER BY blog_id DESC";
             return $this->query($query);
         } catch (Exception $e) {
             error_log("Database Error [BlogModel:getAllBlogs]: " . $e->getMessage());
