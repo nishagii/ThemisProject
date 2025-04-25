@@ -15,6 +15,14 @@
     <?php include('component/sidebar.view.php'); ?>
     
     <div class="home-section">
+        <div class="back-button-container">
+            <a href="<?= ROOT ?>/cases/retrieveCase/<?php echo htmlspecialchars($case_id); ?> ">
+            <button class="back-button">
+                <i class='bx bx-arrow-back'></i>
+            </button>
+            </a>
+        </div>
+
         <h1 class="card-section">Case ID: <?php echo htmlspecialchars($case_id); ?> Documents</h1>
         
         <!-- Sort Button Section -->
