@@ -36,13 +36,12 @@
         </label>
 
         <label>Case Number:
-            <select name="caseID" required>
-                <option value="Case 001">Case 001</option>
-                <option value="Case 002">Case 002</option>
-                <option value="Case 003">Case 003</option>
+            <select name="caseID" id="caseID" required>
+                <option value="">-- Select a case --</option>
             </select>
             <div id="case-error" class="error-message"></div>
         </label>
+
 
         <!-- Comments section -->
         <label>Comments:
@@ -130,6 +129,36 @@
                 event.preventDefault();
             }
         });
+
+
+        const caseData = <?= json_encode($case) ?>;
+
+        const clientSelect = document.querySelector('[name="clientID"]');
+        const caseSelect = document.getElementById('caseID');
+
+        // Function to populate case dropdown
+        function updateCaseOptions(clientId) {
+            caseSelect.innerHTML = '<option value="">-- Select a case --</option>'; // Clear old options
+            caseData.forEach(c => {
+                if (c.client_id == clientId) {
+                    const option = document.createElement('option');
+                    option.value = c.id;
+                    option.textContent = c.case_number;
+                    caseSelect.appendChild(option);
+                }
+            });
+        }
+
+        // On page load - optional
+        updateCaseOptions(clientSelect.value);
+
+        // On client selection change
+        clientSelect.addEventListener('change', function () {
+            updateCaseOptions(this.value);
+        });
+
+
+
 
     </script>
 
