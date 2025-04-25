@@ -32,6 +32,13 @@
             <?= nl2br(htmlspecialchars($blog->content)) ?>
         </div>
 
+        <div class="blog-detail-actions">
+            <a href="<?= ROOT ?>/blog/edit/<?= $blog->id ?>" class="edit-btn"><i class="bx bx-edit"></i> Edit</a>
+            <a href="<?= ROOT ?>/blog/delete/<?= $blog->id ?>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this blog post?');">
+                <i class="bx bx-trash"></i> Delete
+            </a>
+        </div>
+
         
         </div>
     </div>

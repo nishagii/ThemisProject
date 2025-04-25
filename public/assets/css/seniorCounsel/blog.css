@@ -393,3 +393,30 @@ header {
     background-color:rgb(45, 51, 112);
 }
 
+.blog-detail-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.edit-btn, .delete-btn {
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.edit-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+
