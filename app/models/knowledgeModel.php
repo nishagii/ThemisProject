@@ -14,12 +14,13 @@ class knowledgeModel
      * @return bool True if the operation was successful, false otherwise.
      */
     public function save($data) {
-        $query = "INSERT INTO {$this->table} (topic, note) VALUES (:topic, :note)";
+        $query = "INSERT INTO {$this->table} (topic, note, image ) VALUES (:topic, :note, :image)";
         
         // Prepare the parameters
         $params = [
             'topic' => $data['topic'],
             'note' => $data['note'],
+            'image' => $data['image'] ?? null,
         ];
         
         // Execute the query and check for success
@@ -41,7 +42,7 @@ class knowledgeModel
                 $params = ['id' => $id];
         
                 $result = $this->query($query, $params);
-        
+                return empty($result) ? null : $result[0];
                 // Check if result is empty
                 if (empty($result)) {
                     return null; // Return null if no case is found
@@ -55,12 +56,14 @@ class knowledgeModel
     $query = "UPDATE {$this->table} 
               SET 
                   topic = :topic,
-                  note = :note
+                  note = :note,
+                  image = :image
               WHERE id = :id"; // Removed the trailing comma in the SET clause
     
     $params = [
         'topic' => $data['topic'],
         'note' => $data['note'],
+        'image' => $data['image'] ?? null,
         'id' => $data['id'], // Ensure the correct key matches the form data
     ];
     

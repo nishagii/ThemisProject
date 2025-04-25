@@ -17,7 +17,9 @@ class AddKnowledge
             $data = [
                 'topic' => $_POST['topic'] ?? '',
                 'note' => $_POST['note'] ?? '',
+                'image' => $_POST['image'] ?? '',
             ];
+            
 
                 // Validate the data (you can add more validation here as needed)
     $errors = [];
@@ -26,6 +28,16 @@ class AddKnowledge
     }
     if (empty($data['note'])) {
         $errors['note'] = 'note is required';
+    }
+    if (!empty($_FILES['image']['name'])) {
+        $targetDir = "uploads/knowledge/";
+        $fileName = basename($_FILES['image']['name']);
+        $targetFilePath = $targetDir . $fileName;
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
+            $data['image'] = $targetFilePath;
+        } else {
+            $errors['image'] = 'Failed to upload the image.';
+        }
     }
 
     // If there are errors, render the form again with error messages

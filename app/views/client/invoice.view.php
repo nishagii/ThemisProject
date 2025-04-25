@@ -42,7 +42,7 @@
                                 <a href="<?= ROOT ?>/assets/documents/<?= htmlspecialchars($invoice->invoiceID) ?>.pdf"
                                 download class="download-button">Download</a>
                             </div>
-                            <button class="pay-button"><i class='bx bx-right-arrow-circle'></i></button>
+                            <a href="<?= ROOT ?>/PaymentController"><button class="pay-button"><i class='bx bx-right-arrow-circle'></i></button></a>
                             </div>
                             <?php endforeach; ?>
                             <?php else : ?>
