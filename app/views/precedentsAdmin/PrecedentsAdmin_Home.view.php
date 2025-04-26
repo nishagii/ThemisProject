@@ -16,9 +16,23 @@
     <?php include('components/bigNav.view.php'); ?>
 
     <div class="home-section">
-        <!-- Analytics Cards -->
+        
+        <div class="cards-container">
+            <div class="card">
+            <i class="fas fa-balance-scale"></i>
+                <p>Database have</p>
+                <p><?= $precedentCount;?></p>
+                <h3>Precedents</h3>
 
-        <!-- Recent Cases -->
+            </div>
+            <div class="card">
+                <i class="fas fa-balance-scale"></i>
+                <p>Database have</p>
+                <p><?= $rulesCount;?></p>
+                <h3>SC Rules</h3>
+            </div>    
+        </div>
+        
         <div class="card recent-cases">
             <h3>Recent Precedents</h3>
             <table>
@@ -55,12 +69,6 @@
             <p>Start adding a new precedent by clicking the button below.</p>
             <a href="<?= ROOT ?>/PrecedentsController/create" class="btn">Add Precedent</a>
         </div>
-        <div class="card cards">
-                <i class="fas fa-balance-scale"></i>
-                <p>Database have</p>
-                <p><?= $precedentCount;?></p>
-                <h3>Precedents</h3>
-        </div>
         
         <div class="card recent-cases">
             <h3>SC Rules</h3>
@@ -87,12 +95,7 @@
             <p>Start adding a new SC Rule by clicking the button below.</p>
             <a href="<?= ROOT ?>/SCrules/create" class="btn">Add SC Rule</a>
         </div>
-        <div class="card cards">
-                <i class="fas fa-balance-scale"></i>
-                <p>Database have</p>
-                <p><?= $rulesCount;?></p>
-                <h3>SC Rules</h3>
-        </div>
+        
     </div>
 
     <script>

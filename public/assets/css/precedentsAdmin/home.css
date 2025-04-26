@@ -24,11 +24,10 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  flex: 1 1 calc(33.333% - 40px);
+  flex: 1 1 45%; 
   min-width: 250px;
-  margin-bottom: 20px;
+  margin: 10px; 
 }
-
 .card h3 {
   margin: 0;
   font-size: 18px;
@@ -44,17 +43,7 @@ body {
   color: #4a76a8;
   margin-right: 10px;
 }
-/* 
-.chart-container {
-    flex: 1 1 100%;
-    min-height: 300px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    display: flex;
-    flex-direction:row;
-} */
+
 
 .recent-cases table {
   width: 100%;
