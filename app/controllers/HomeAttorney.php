@@ -5,6 +5,12 @@ class HomeAttorney
 {
     use Controller;
 
+    public function __construct()
+    {
+        $this->requireLogin();
+        $this->requireRole(['attorney']);
+    }
+
     public function index()
     {
 

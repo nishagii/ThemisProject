@@ -5,6 +5,12 @@ class HomeAdmin
 {
     use Controller;
 
+    public function __construct()
+    {
+        $this->requireLogin();
+        $this->requireRole(['admin']);
+    }
+
     public function index()
     {
         if (empty($_SESSION['user_id'])) {
