@@ -11,7 +11,9 @@ class TemplateClient
         // Set username from session, or default to 'User'
         $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        // Load the view with data
-        $this->view('/client/template', $data);
+        $templateModel = $this->loadModel('templateModel'); 
+        $templates = $templateModel->getAll();
+
+        $this->view('/client/template', ['templates' => $templates]);
     }
 }

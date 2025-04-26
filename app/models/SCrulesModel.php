@@ -27,7 +27,7 @@ class SCrulesModel {
     }
 
     public function getAll() {
-        $query = "SELECT * FROM $this->table ORDER BY id DESC";
+        $query = "SELECT * FROM $this->table ORDER BY published_date DESC";
         return $this->query($query);
     }
 

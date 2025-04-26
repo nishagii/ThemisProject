@@ -17,7 +17,7 @@
             <li><a href="<?= ROOT ?>/Calendar">Calendar</a></li>
             <li><a href="<?= ROOT ?>/templateclient">Document templates</a></li>
             <li><a href="<?= ROOT ?>/meetingClient">Meeting</a></li>
-            <li><a href="<?= ROOT ?>/SCrules/retrieveForView">S.C Rules</a></li>
+            <li><a href="<?= ROOT ?>/Ruleclient/index">S.C Rules</a></li>
         </ul>
     </div>
 </body>
