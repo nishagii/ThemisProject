@@ -4,6 +4,12 @@ class HomeClient
 {
     use Controller;
 
+    public function __construct()
+    {
+        $this->requireLogin();
+        $this->requireRole(['client']);
+    }
+
     public function index()
     {
         if (empty($_SESSION['user_id'])) {

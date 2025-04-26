@@ -50,18 +50,11 @@
                 <span class="tooltip">Junior Councel</span>
             </li> -->
             <li>
-                <a href="<?= ROOT ?>/chat">
+                <a href="#">
                     <i class='bx bx-chat'></i>
                     <span class="links_name">Messages</span>
                 </a>
                 <span class="tooltip">Messages</span>
-            </li>
-            <li>
-                <a href="<?= ROOT ?>/blog/viewBlog">
-                    <i class='bx bx-news'></i>
-                    <span class="links_name">Blog</span>
-                </a>
-                <span class="tooltip">Blog</span>
             </li>
             <li>
     <a href="<?= ROOT ?>/feedback/viewAll">
