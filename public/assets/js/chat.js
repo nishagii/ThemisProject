@@ -711,5 +711,5 @@ function send_message(e, receiverId) {
     // Instead of reloading all messages, just fetch new messages after a short delay
     setTimeout(() => {
         fetchNewMessages(receiverId);
-    }, 500);
+    }, 5000);
 }
