@@ -23,6 +23,7 @@
                 <li><a href="<?= ROOT ?>/homeclient">Home</a></li>
                 <li><a href="<?= ROOT ?>/PaymentController">Payments</a></li>
                 <li><a href="<?= ROOT ?>/precedentsController/retrieveAllViewOnly">Precedents</a></li>
+                
             </ul>
         </nav>
 
