@@ -1,6 +1,6 @@
 <?php
 
-// HomeAdmin class
+// HomeLawyer class
 class HomeLawyer
 {
     use Controller;
