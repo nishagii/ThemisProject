@@ -6,7 +6,7 @@ class HomeJunior
     public function __construct()
     {
         $this->requireLogin();
-        $this->requireRole(['junior']);
+        $this->requireRole(['attorney', 'junior']);
     }
 
     public function index()
