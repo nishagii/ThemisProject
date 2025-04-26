@@ -4,6 +4,13 @@ class Task
 {
     use Controller;
 
+    public function __construct()
+    {
+       
+        $this->requireLogin();
+        $this->requireRole(['junior']);
+    }
+
     public function index()
     {
         if (empty($_SESSION['user_id'])) {

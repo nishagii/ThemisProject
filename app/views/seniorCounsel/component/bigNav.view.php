@@ -54,7 +54,7 @@
                     <li><a href="<?= ROOT ?>/logout">Logout</a></li>
                 </ul>
             </div>
-            <a href="<?= ROOT ?>/profile">
+            <a href="<?= ROOT ?>/seniorCounselProfile">
                 <i class="fas fa-user-circle" id="profile-icon"></i>
             </a>
         </div>
@@ -105,3 +105,5 @@
 </body>
 
 </html>
+
+
