@@ -2,6 +2,87 @@
 let currentUserId = userId;
 let isTyping = false;
 let refreshInterval;
+let lastMessageTimestamp = null; // Track the last message timestamp
+
+// Add loading spinner and refresh indicator CSS
+const styleElement = document.createElement('style');
+styleElement.textContent = `
+  .spinner {
+    width: 40px;
+    height: 40px;
+    margin: 20px auto;
+    border: 3px solid rgba(0, 123, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #007bff;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .mini-spinner {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-left: 5px;
+    border: 2px solid rgba(0, 123, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #007bff;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  .refresh-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(0, 123, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #007bff;
+    animation: spin 1s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .refresh-active {
+    opacity: 1;
+  }
+  
+  .new-messages-indicator {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+    text-align: center;
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 5px;
+    animation: fadeOut 3s forwards;
+  }
+  
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  .message-status {
+    font-size: 0.8em;
+    color: #888;
+    display: block;
+    margin-top: 5px;
+  }
+  
+  .chat-bubble {
+    transition: opacity 0.3s ease-out;
+  }
+  
+  @keyframes highlight {
+    0% { background-color: rgba(0, 123, 255, 0.1); }
+    100% { background-color: transparent; }
+  }
+`;
+document.head.appendChild(styleElement);
 
 // Initialize auto-refresh
 setupAutoRefresh();
@@ -127,6 +208,20 @@ function start_chat(event, userName, receiverId) {
     const msgId = `${currentUserId}and${receiverId}`;
     const receivedmsgId = `${receiverId}and${currentUserId}`;
     
+    // Reset the lastMessageTimestamp when starting a new chat
+    lastMessageTimestamp = null;
+    
+    // Show loading spinner immediately
+    innerRightPanel.innerHTML = `
+        <h2>Chat with ${userName}</h2>
+        <div class="chat-messages">
+            <div style="text-align: center; padding: 20px;">
+                <div class="spinner"></div>
+                <p>Loading conversation...</p>
+            </div>
+        </div>
+    `;
+    
     loadChatMessages(msgId, userName, receiverId);
 
     if (messageInputArea) {
@@ -201,16 +296,23 @@ function start_chat(event, userName, receiverId) {
             userItem.addEventListener("click", () => {
                 const receiverId = userItem.dataset.receiverid;
                 console.log("User clicked:", userName, "Receiver ID:", receiverId);
+                
+                // Reset the lastMessageTimestamp when switching users
+                lastMessageTimestamp = null;
+                
+                // Show loading spinner immediately when switching chats
                 innerRightPanel.innerHTML = `
                     <h2>Chat with ${userName}</h2>
-                    <div class="chat-bubble received">Hello ${userName}, how can I help you?</div>
-                    <div class="chat-bubble">Hi ${userName}, let's start our conversation!</div>
+                    <div class="chat-messages">
+                        <div style="text-align: center; padding: 20px;">
+                            <div class="spinner"></div>
+                            <p>Loading conversation...</p>
+                        </div>
+                    </div>
                 `;
-
-                if (messageInputArea) {
-                    messageInputArea.style.display = "flex";
-                }
-
+                
+                loadChatMessages(`${currentUserId}and${receiverId}`, userName, receiverId);
+                
                 window.receiverId = receiverId;
             });
         }
@@ -224,26 +326,210 @@ function start_chat(event, userName, receiverId) {
     }
 }
 
+// Updated setupAutoRefresh function with visible indicator
 function setupAutoRefresh() {
     refreshInterval = setInterval(() => {
         if (window.receiverId && currentUserId && !isTyping) {
-            const chatHeader = document.querySelector("h2");
-            const userName = chatHeader ? chatHeader.textContent.replace("Chat with ", "") : "Chat";
-            loadChatMessages(`${currentUserId}and${window.receiverId}`, userName, window.receiverId);
+            // Get or create refresh indicator
+            let refreshIndicator = document.querySelector('.refresh-indicator');
+            const innerRightPanel = document.getElementById('inner_right_panel');
+            
+            if (!refreshIndicator && innerRightPanel) {
+                innerRightPanel.style.position = 'relative';
+                refreshIndicator = document.createElement('div');
+                refreshIndicator.className = 'refresh-indicator';
+                innerRightPanel.appendChild(refreshIndicator);
+            }
+            
+            // Show the loading indicator when refreshing
+            if (refreshIndicator) {
+                refreshIndicator.classList.add('refresh-active');
+            }
+            
+            // Fetch new messages
+            fetchNewMessages(window.receiverId)
+                .finally(() => {
+                    // Hide the indicator when done
+                    if (refreshIndicator) {
+                        setTimeout(() => {
+                            refreshIndicator.classList.remove('refresh-active');
+                        }, 500);
+                    }
+                });
         }
-    }, 10000);
+    }, 5000); // Refresh every 5 seconds
 }
 
+// Modified fetchNewMessages to return a Promise
+function fetchNewMessages(receiverId) {
+    const msgId = `${currentUserId}and${receiverId}`;
+    const receivedmsgId = `${receiverId}and${currentUserId}`;
+    
+    // Create promises for getting new sent and received messages
+    const getNewSentMessages = new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        resolve(response.data.messages || []);
+                    } catch (e) {
+                        console.error("Error parsing sent messages:", e);
+                        resolve([]);
+                    }
+                }
+            }
+        };
+        xhr.onerror = () => reject("Error loading sent messages");
+        
+        // Add a timestamp parameter to get only new messages
+        let url = `http://localhost/themisrepo/public/chat?msgid=${msgId}`;
+        if (lastMessageTimestamp) {
+            url += `&after=${lastMessageTimestamp}`;
+        }
+        
+        xhr.open("GET", url, true);
+        xhr.send();
+    });
+
+    const getNewReceivedMessages = new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        resolve(response.data.messages || []);
+                    } catch (e) {
+                        console.error("Error parsing received messages:", e);
+                        resolve([]);
+                    }
+                }
+            }
+        };
+        xhr.onerror = () => reject("Error loading received messages");
+        
+        // Add a timestamp parameter to get only new messages
+        let url = `http://localhost/themisrepo/public/chat?msgid=${receivedmsgId}`;
+        if (lastMessageTimestamp) {
+            url += `&after=${lastMessageTimestamp}`;
+        }
+        
+        xhr.open("GET", url, true);
+        xhr.send();
+    });
+
+    return new Promise((resolve, reject) => {
+        Promise.all([getNewSentMessages, getNewReceivedMessages])
+            .then(([newSentMessages, newReceivedMessages]) => {
+                const newMessages = [...newSentMessages, ...newReceivedMessages].sort((a, b) => 
+                    new Date(a.date) - new Date(b.date)
+                );
+                
+                if (newMessages.length > 0) {
+                    // Update lastMessageTimestamp to the most recent message
+                    const mostRecentMessage = newMessages[newMessages.length - 1];
+                    lastMessageTimestamp = new Date(mostRecentMessage.date).toISOString();
+                    
+                    // Show new messages notification if messages were received (not sent by current user)
+                    const receivedMessages = newMessages.filter(msg => msg.sender !== currentUserId);
+                    if (receivedMessages.length > 0) {
+                        showNewMessagesNotification(receivedMessages.length);
+                    }
+                    
+                    // Append only the new messages to the chat
+                    appendNewMessages(newMessages);
+                }
+                
+                resolve(newMessages);
+            })
+            .catch(error => {
+                console.error("Error fetching new messages:", error);
+                reject(error);
+            });
+    });
+}
+
+// New function to show notification when new messages arrive
+function showNewMessagesNotification(count) {
+    const chatMessages = document.querySelector('.chat-messages');
+    if (!chatMessages) return;
+    
+    const notification = document.createElement('div');
+    notification.className = 'new-messages-indicator';
+    notification.textContent = `${count} new message${count > 1 ? 's' : ''}`;
+    
+    chatMessages.appendChild(notification);
+    
+    // Auto-remove notification after animation completes
+    setTimeout(() => {
+        if (notification && notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 3000);
+}
+
+// Updated appendNewMessages function with indicators for new messages
+function appendNewMessages(newMessages) {
+    const chatMessages = document.querySelector('.chat-messages');
+    if (!chatMessages) return;
+    
+    // Update any "sending" messages to "sent" if they exist
+    const pendingMessages = chatMessages.querySelectorAll('.chat-bubble[data-status="sending"]');
+    pendingMessages.forEach(msg => {
+        msg.dataset.status = "sent";
+        const statusElement = msg.querySelector('.message-status');
+        if (statusElement) {
+            statusElement.innerHTML = `${new Date().toLocaleTimeString()} (Sent)`;
+        }
+        msg.style.opacity = '1';
+    });
+    
+    newMessages.forEach(msg => {
+        const isSender = msg.sender === currentUserId;
+        const messageElement = document.createElement('div');
+        messageElement.className = `chat-bubble ${isSender ? '' : 'received'}`;
+        messageElement.style.marginLeft = isSender ? 'auto' : '0';
+        messageElement.style.marginRight = isSender ? '0' : 'auto';
+        
+        // Add a highlight effect for new received messages
+        if (!isSender) {
+            messageElement.style.animation = 'highlight 2s ease-out';
+        }
+        
+        messageElement.innerHTML = `
+            ${msg.message}
+            <span class="message-status">
+                ${new Date(msg.date).toLocaleTimeString()}
+                ${isSender ? '(Sent)' : '(Received)'}
+            </span>
+        `;
+        
+        // Add a subtle fade-in animation
+        messageElement.style.opacity = '0';
+        messageElement.style.transition = 'opacity 0.3s ease-in-out';
+        
+        chatMessages.appendChild(messageElement);
+        
+        // Trigger reflow and apply the animation
+        setTimeout(() => {
+            messageElement.style.opacity = '1';
+        }, 50);
+    });
+    
+    // Scroll to the bottom of the chat only if there are new received messages
+    if (newMessages.some(msg => msg.sender !== currentUserId)) {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+}
+
+// Modified loadChatMessages to set the initial lastMessageTimestamp
 function loadChatMessages(msgId, userName, receiverId) {
     const innerRightPanel = document.getElementById("inner_right_panel");
     const receivedmsgId = `${receiverId}and${currentUserId}`;
     
-    innerRightPanel.innerHTML = `
-        <h2>Chat with ${userName}</h2>
-        <div class="chat-messages">
-            <div style="text-align: center; padding: 20px;">Loading messages...</div>
-        </div>
-    `;
+    // Loading spinner already displayed in start_chat
 
     const getSentMessages = new Promise((resolve, reject) => {
         var xml = new XMLHttpRequest();
@@ -290,14 +576,29 @@ function loadChatMessages(msgId, userName, receiverId) {
             const allMessages = [...sentMessages, ...receivedMessages].sort((a, b) => 
                 new Date(a.date) - new Date(b.date)
             );
+            
+            // Set the lastMessageTimestamp to the most recent message
+            if (allMessages.length > 0) {
+                const mostRecentMessage = allMessages[allMessages.length - 1];
+                lastMessageTimestamp = new Date(mostRecentMessage.date).toISOString();
+            }
+            
             displayChatMessages(allMessages, userName, receiverId);
+            
+            // Create refresh indicator after loading messages
+            const refreshIndicator = document.createElement('div');
+            refreshIndicator.className = 'refresh-indicator';
+            innerRightPanel.appendChild(refreshIndicator);
         })
         .catch(error => {
             console.error("Error loading messages:", error);
             innerRightPanel.innerHTML = `
                 <h2>Chat with ${userName}</h2>
                 <div class="chat-messages">
-                    <div>Error loading messages. Please try again.</div>
+                    <div style="text-align: center; padding: 20px;">
+                        <i class='bx bx-error-circle' style="font-size: 40px; color: #dc3545;"></i>
+                        <p>Error loading messages. Please try again.</p>
+                    </div>
                 </div>
                 ${getMessageInputHTML(receiverId)}
             `;
@@ -328,10 +629,10 @@ function displayChatMessages(messages, userName, receiverId) {
                 <div class="chat-bubble ${isSender ? '' : 'received'}" 
                      style="margin-${isSender ? 'left' : 'right'}: auto">
                     ${msg.message}
-                    <small style="font-size: 0.8em; color: #888; display: block; margin-top: 5px;">
+                    <span class="message-status">
                         ${new Date(msg.date).toLocaleTimeString()}
                         ${isSender ? '(Sent)' : '(Received)'}
-                    </small>
+                    </span>
                 </div>
             `;
         });
@@ -366,6 +667,7 @@ function displayChatMessages(messages, userName, receiverId) {
     }
 }
 
+// Modified send_message to update without reloading all messages
 function send_message(e, receiverId) {
     var message_text = _("message_text");
     if (message_text.value.trim() == "") {
@@ -373,10 +675,32 @@ function send_message(e, receiverId) {
         return;
     }
 
-    const msgId = `${currentUserId}and${receiverId}`;
+    const messageContent = message_text.value.trim();
     
+    // Create a temporary message element immediately
+    const chatMessages = document.querySelector('.chat-messages');
+    if (chatMessages) {
+        const tempMessage = document.createElement('div');
+        tempMessage.className = 'chat-bubble';
+        tempMessage.dataset.status = "sending";
+        tempMessage.style.marginLeft = 'auto';
+        tempMessage.style.opacity = '0.7'; // Slightly transparent to indicate pending
+        
+        tempMessage.innerHTML = `
+            ${messageContent}
+            <span class="message-status">
+                ${new Date().toLocaleTimeString()}
+                (Sending<span class="mini-spinner"></span>)
+            </span>
+        `;
+        
+        chatMessages.appendChild(tempMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Send the message to the server
     get_data({
-        message: message_text.value.trim(),
+        message: messageContent,
         userid: currentUserId,
         receiverid: receiverId
     }, "send_message");
@@ -384,65 +708,8 @@ function send_message(e, receiverId) {
     message_text.value = "";
     isTyping = false;
 
+    // Instead of reloading all messages, just fetch new messages after a short delay
     setTimeout(() => {
-        loadChatMessages(msgId, document.querySelector("h2").textContent.replace("Chat with ", ""), receiverId);
-    }, 100);
+        fetchNewMessages(receiverId);
+    }, 500);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Automatically load data into inner_left_panel on page load
-// window.addEventListener("DOMContentLoaded", function () {
-//     console.log("Page loaded. Attempting to fetch data for inner_left_panel.");
-
-//     // Reference to the inner panel
-//     var inner_panel = _("inner_left_panel");
-
-//     // Create an XMLHttpRequest object
-//     var ajax = new XMLHttpRequest();
-    
-
-//     // Set up the AJAX request
-//     ajax.onload = function () {
-//         console.log("AJAX onload triggered.");
-//         if (ajax.status == 200 && ajax.readyState == 4) {
-//             console.log("AJAX success. Response received:");
-//             console.log(ajax.responseText); // Log the response for debugging
-//             inner_panel.innerHTML = ajax.responseText; // Update the inner panel
-//         } else {
-//             console.error("AJAX failed. Status:", ajax.status, "State:", ajax.readyState);
-//         }
-//     };
-
-//     ajax.onerror = function () {
-//         console.error("AJAX error occurred.");
-//     };
-
-//     ajax.onprogress = function () {
-//         console.log("AJAX in progress...");
-//     };
-
-//     ajax.open("GET", ROOT + "/assets/js/js.php", true);
-//     console.log("AJAX request sent for js.txt.");
-//     ajax.send();
-// });
