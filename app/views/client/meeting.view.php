@@ -20,6 +20,28 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/client/meeting.css">
 </head>
+<style>
+    .delete-btn {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9em;
+        transition: background-color 0.3s;
+    }
+
+    .delete-btn:hover {
+        background-color: #c0392b;
+    }
+
+    .delete-btn.disabled {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+    }
+</style>
+
 
 <body>
 
@@ -32,11 +54,12 @@
         <div class="body-container">
 
             <!-- Request Meeting Form Section -->
+            <!-- In the request meeting form section -->
             <div id="request-meeting-section" class="request-meeting-section">
                 <h2>Request a Meeting</h2>
                 <form action="<?= ROOT ?>/meetingclient/requestMeeting" method="post" class="request-meeting-form">
                     <label for="meeting-date">Meeting Date:</label>
-                    <input type="date" id="meeting-date" name="meeting_date" required>
+                    <input type="date" id="meeting-date" name="meeting_date" min="<?= date('Y-m-d') ?>" required>
 
                     <label for="meeting-time">Meeting Time:</label>
                     <input type="time" id="meeting-time" name="meeting_time" required>
@@ -51,6 +74,7 @@
                 </form>
             </div>
 
+
             <!-- Meeting History Section -->
             <div id="meeting-history-section" class="meeting-history-section">
                 <h2>Meeting History</h2>
@@ -63,6 +87,7 @@
                             <th>Purpose</th>
                             <th>Comments</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,12 +115,22 @@
                                     <td><?= htmlspecialchars($meeting->meeting_purpose) ?></td>
                                     <td><?= htmlspecialchars($meeting->meeting_comments) ?></td>
                                     <td class="<?= $statusClass ?>"><?= htmlspecialchars($meeting->meeting_status) ?></td>
+                                    <td>
+                                        <?php if ($meeting->meeting_status == 'Pending') : ?>
+                                            <button class="delete-btn" data-id="<?= $meeting->id ?>" onclick="confirmDelete(<?= $meeting->id ?>)">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                        <?php else : ?>
+                                            <button class="delete-btn disabled" disabled title="Cannot delete accepted or rejected meetings">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                        <?php endif; ?>
+                                    </td>
                                 </tr>
-
                             <?php endforeach; ?>
                         <?php else : ?>
                             <tr>
-                                <td colspan="6">No meeting history available.</td>
+                                <td colspan="7">No meeting history available.</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
@@ -104,6 +139,49 @@
 
         </div>
     </div>
+
+    <!-- Add SweetAlert script for success message and delete confirmation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php if (isset($_SESSION['success'])) : ?>
+                Swal.fire({
+                    title: 'Success!',
+                    text: '<?= $_SESSION['success'] ?>',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                <?php unset($_SESSION['success']); ?>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['error'])) : ?>
+                Swal.fire({
+                    title: 'Error!',
+                    text: '<?= $_SESSION['error'] ?>',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                <?php unset($_SESSION['error']); ?>
+            <?php endif; ?>
+        });
+
+        function confirmDelete(meetingId) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to delete endpoint
+                    window.location.href = '<?= ROOT ?>/meetingclient/deleteMeeting/' + meetingId;
+                }
+            });
+        }
+    </script>
+
 </body>
 
 </html>

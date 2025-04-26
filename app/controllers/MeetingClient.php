@@ -40,4 +40,33 @@ class MeetingClient
             exit;
         }
     }
+
+    public function deleteMeeting($meetingId)
+    {
+        // Check if the meeting exists and belongs to the current user
+        $meetingModel = $this->loadModel('MeetingModel');
+        $meeting = $meetingModel->getMeetingById($meetingId);
+
+        if (!$meeting || $meeting->client_id != $_SESSION['user_id']) {
+            $_SESSION['error'] = "Meeting not found or you don't have permission to delete it.";
+            redirect('meetingclient');
+            return;
+        }
+
+        // Check if the meeting is in 'Pending' status
+        if ($meeting->meeting_status !== 'Pending') {
+            $_SESSION['error'] = "Only pending meetings can be deleted.";
+            redirect('meetingclient');
+            return;
+        }
+
+        // Delete the meeting
+        if ($meetingModel->deleteMeeting($meetingId)) {
+            $_SESSION['success'] = "Meeting request deleted successfully!";
+        } else {
+            $_SESSION['error'] = "Failed to delete meeting request. Please try again.";
+        }
+
+        redirect('meetingclient');
+    }
 }
