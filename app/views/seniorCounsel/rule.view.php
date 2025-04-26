@@ -17,6 +17,7 @@
 <?php include('component/bigNav.view.php'); ?>
 <?php include('component/smallNav1.view.php'); ?>
 <?php include('component/sidebar.view.php'); ?>
+<div class="home-section">
     <div class="rules-header">
         <h1>Supreme Court Rules</h1>
     </div>
@@ -41,6 +42,7 @@
             </li>
         <?php endif; ?>
     </div>
+</div>
     <script>
         function confirmDelete(ruleId) {
             Swal.fire({
