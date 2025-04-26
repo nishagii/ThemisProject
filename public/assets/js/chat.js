@@ -1,3 +1,11 @@
+// Global variables
+let currentUserId = userId;
+let isTyping = false;
+let refreshInterval;
+
+// Initialize auto-refresh
+setupAutoRefresh();
+
 document.getElementById("addButton").addEventListener("click", function () {
     const innerLeftPanel = document.getElementById("inner_left_panel");
 
@@ -11,28 +19,24 @@ document.getElementById("addButton").addEventListener("click", function () {
         </div>`
     ).join("");
     
-    
-
-    newContent.innerHTML = `
-        <i class='bx bx-x-circle' id="closeButton" style="cursor: pointer;"></i>
+    newContent.innerHTML = 
+        `<i class='bx bx-x-circle' id="closeButton" style="cursor: pointer;"></i>
         <div class="message">
             <h4>Contacts</h4>
         </div>
         <div id="scrollableContent" style="overflow-y: auto; max-height: calc(100vh - 50px); padding: 10px;">
             ${userListHTML}
-        </div>
-    `;
+        </div>`;
     newContent.id = "newComponent";
 
-    // Style the newContent to overlap the panel
+    // Style the newContent
     newContent.style.position = "absolute";
     newContent.style.top = "0";
     newContent.style.left = "0";
-    newContent.style.width = `${innerLeftPanel.offsetWidth}px`; // Dynamically set the width
-    // newContent.style.height = "100%";
+    newContent.style.width = `${innerLeftPanel.offsetWidth}px`;
     newContent.style.zIndex = "10";
     newContent.style.borderRight = "0.5px solid rgb(214, 214, 214)";
-    newContent.style.background = "#fff"; // Ensure it has a background
+    newContent.style.background = "#fff";
     newContent.style.display = "flex";
     newContent.style.flexDirection = "column";
 
@@ -44,7 +48,7 @@ document.getElementById("addButton").addEventListener("click", function () {
     closeButton.style.fontSize = "20px";
     closeButton.style.color = "#a8a8a9";
 
-    // Append new content/component
+    // Append new content
     innerLeftPanel.appendChild(newContent);
 
     // Add close functionality
@@ -53,17 +57,12 @@ document.getElementById("addButton").addEventListener("click", function () {
     });
 });
 
-
-
-
-
 // Function to get an element by its ID
 function _(element) {
     return document.getElementById(element);
 }
 
 function get_data(find, type) {
-    // Log the initial data being sent
     console.log("Sending data:", {
         message: find.message,
         sender: find.userid,
@@ -78,13 +77,11 @@ function get_data(find, type) {
             if (xml.status === 200) {
                 try {
                     var response = JSON.parse(xml.responseText);
-                    // Log the server's response
                     console.log("Server received:", {
                         data: response,
                         requestType: type,
                         timestamp: new Date().toISOString()
                     });
-                    // handle_result(response, type);
                 } catch (e) {
                     console.error("Error parsing JSON response:", e);
                     console.error("Raw response:", xml.responseText);
@@ -95,7 +92,6 @@ function get_data(find, type) {
         }
     };
     
-    // Log any network errors
     xml.onerror = function () {
         console.error("Network Error:", {
             url: "http://localhost/themisrepo/public/chat",
@@ -109,15 +105,12 @@ function get_data(find, type) {
         data_type: type 
     });
 
-    // Log the actual JSON being sent
     console.log("JSON being sent to server:", data);
     
     xml.open("POST", "http://localhost/themisrepo/public/chat", true);
     xml.setRequestHeader("Content-Type", "application/json");
     xml.send(data);
 }
-
-// get_data({}, "user_info");
 
 function start_chat(event, userName, receiverId) {
     console.log("start_chat function called with userName:", userName, "Receiver ID:", receiverId);
@@ -131,11 +124,9 @@ function start_chat(event, userName, receiverId) {
         return;
     }
 
-    // Create msgId using sender and receiver IDs
     const msgId = `${currentUserId}and${receiverId}`;
-    const receivedmsgId = `${receiverId }and${currentUserId}`;
+    const receivedmsgId = `${receiverId}and${currentUserId}`;
     
-    // Load messages for this chat
     loadChatMessages(msgId, userName, receiverId);
 
     if (messageInputArea) {
@@ -145,22 +136,20 @@ function start_chat(event, userName, receiverId) {
     if (messageDiv) {
         let userList = document.getElementById("selectedUsersList");
 
-        // Create the list container if it doesn't exist
         if (!userList) {
             userList = document.createElement("ul");
             userList.id = "selectedUsersList";
             userList.style.listStyle = "none";
             userList.style.padding = "10px 0";
-            userList.style.textAlign = "center"; // Center the list items
+            userList.style.textAlign = "center";
             messageDiv.appendChild(userList);
         }
 
-        // Check if the username is already in the list
         const existingUser = [...userList.children].find(li => li.dataset.username === userName);
         if (!existingUser) {
             const userItem = document.createElement("li");
             userItem.dataset.username = userName;
-            userItem.dataset.receiverid = receiverId; // Store the receiver's user ID
+            userItem.dataset.receiverid = receiverId;
             userItem.style.padding = "10px 0";
             userItem.style.color = "#007bff";
             userItem.style.cursor = "pointer";
@@ -169,12 +158,11 @@ function start_chat(event, userName, receiverId) {
             userItem.style.fontSize = "15px";
             userItem.style.position = "relative";
             userItem.style.display = "flex";
-            userItem.style.flexDirection = "column"; // Ensure line appears below text
-            userItem.style.alignItems = "center"; // Center the content
+            userItem.style.flexDirection = "column";
+            userItem.style.alignItems = "center";
 
-            // Add hover effect
             userItem.addEventListener("mouseenter", () => {
-                userItem.style.backgroundColor = "#f0f0f0"; // Light gray hover effect
+                userItem.style.backgroundColor = "#f0f0f0";
                 userItem.style.borderRadius = "5px";
             });
 
@@ -182,91 +170,81 @@ function start_chat(event, userName, receiverId) {
                 userItem.style.backgroundColor = "transparent";
             });
 
-            // Container for icon and username
             const userContent = document.createElement("div");
             userContent.style.display = "flex";
             userContent.style.alignItems = "center";
-            userContent.style.gap = "10px"; // Space between icon and text
+            userContent.style.gap = "10px";
 
-            // Create the user icon
             const userIcon = document.createElement("i");
             userIcon.className = "bx bx-user";
             userIcon.style.fontSize = "35px";
             userIcon.style.color = "#a8a8a9";
 
-            // Create the username text
             const userNameSpan = document.createElement("span");
             userNameSpan.textContent = userName;
 
-            // Append icon and username to the container
             userContent.appendChild(userIcon);
             userContent.appendChild(userNameSpan);
 
-            // Create a short horizontal line
             const hr = document.createElement("div");
-            hr.style.width = "80%"; // Shorter width (not full width)
+            hr.style.width = "80%";
             hr.style.height = "0.5px";
-            hr.style.backgroundColor = "#ccc"; // Light gray color
+            hr.style.backgroundColor = "#ccc";
             hr.style.marginTop = "8px";
             hr.style.borderRadius = "2px";
 
-            // Append the content and horizontal line
             userItem.appendChild(userContent);
             userItem.appendChild(hr);
 
-            // Append the new user to the list
             userList.appendChild(userItem);
 
-            // **When user is clicked, update the right panel**
             userItem.addEventListener("click", () => {
-                const receiverId = userItem.dataset.receiverid; // Get the receiver's user ID
-                console.log("User clicked:", userName, "Receiver ID:", receiverId); // Debugging log
-                innerRightPanel.innerHTML = `    
-    <h2>Chat with ${userName}</h2>
-    <div class="chat-bubble received">Hello ${userName}, how can I help you?</div>
-    <div class="chat-bubble">Hi ${userName}, let's start our conversation!</div>
-`;
+                const receiverId = userItem.dataset.receiverid;
+                console.log("User clicked:", userName, "Receiver ID:", receiverId);
+                innerRightPanel.innerHTML = `
+                    <h2>Chat with ${userName}</h2>
+                    <div class="chat-bubble received">Hello ${userName}, how can I help you?</div>
+                    <div class="chat-bubble">Hi ${userName}, let's start our conversation!</div>
+                `;
 
-                // Ensure the message input area is displayed when a user is clicked
                 if (messageInputArea) {
-                    messageInputArea.style.display = "flex"; // Show message input
+                    messageInputArea.style.display = "flex";
                 }
 
-                // Store the receiverId globally to be used in send_message
                 window.receiverId = receiverId;
             });
         }
     }
 
-    // Store the receiverId globally to be used in send_message
     window.receiverId = receiverId;
 
-    // Close the newContent panel if it exists
     const newContent = document.getElementById("newComponent");
     if (newContent) {
         newContent.remove();
     }
 }
 
-
-let currentUserId = userId;
-
-
-
+function setupAutoRefresh() {
+    refreshInterval = setInterval(() => {
+        if (window.receiverId && currentUserId && !isTyping) {
+            const chatHeader = document.querySelector("h2");
+            const userName = chatHeader ? chatHeader.textContent.replace("Chat with ", "") : "Chat";
+            loadChatMessages(`${currentUserId}and${window.receiverId}`, userName, window.receiverId);
+        }
+    }, 10000);
+}
 
 function loadChatMessages(msgId, userName, receiverId) {
     const innerRightPanel = document.getElementById("inner_right_panel");
     const receivedmsgId = `${receiverId}and${currentUserId}`;
     
-    // Show loading state
-    innerRightPanel.innerHTML = `    
+    innerRightPanel.innerHTML = `
         <h2>Chat with ${userName}</h2>
         <div class="chat-messages">
             <div style="text-align: center; padding: 20px;">Loading messages...</div>
         </div>
     `;
 
-    // Create promises for both sent and received messages
     const getSentMessages = new Promise((resolve, reject) => {
         var xml = new XMLHttpRequest();
         xml.onload = function () {
@@ -307,10 +285,8 @@ function loadChatMessages(msgId, userName, receiverId) {
         xml.send();
     });
 
-    // Combine and display both sent and received messages
     Promise.all([getSentMessages, getReceivedMessages])
         .then(([sentMessages, receivedMessages]) => {
-            // Combine messages and sort by date
             const allMessages = [...sentMessages, ...receivedMessages].sort((a, b) => 
                 new Date(a.date) - new Date(b.date)
             );
@@ -366,18 +342,24 @@ function displayChatMessages(messages, userName, receiverId) {
     chatHTML += `</div>${getMessageInputHTML(receiverId)}`;
     innerRightPanel.innerHTML = chatHTML;
 
-    // Scroll to bottom of messages
     const chatMessages = innerRightPanel.querySelector('.chat-messages');
     if (chatMessages) {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // Add event listener for Enter key on the message input
     const messageInput = document.getElementById('message_text');
     if (messageInput) {
+        messageInput.addEventListener('input', function() {
+            isTyping = this.value.length > 0;
+        });
+        
+        messageInput.addEventListener('blur', function() {
+            isTyping = false;
+        });
+
         messageInput.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
-                event.preventDefault(); // Prevent default form submission
+                event.preventDefault();
                 send_message(event, receiverId);
             }
         });
@@ -399,27 +381,13 @@ function send_message(e, receiverId) {
         receiverid: receiverId
     }, "send_message");
 
-    // Clear the input field after sending
     message_text.value = "";
+    isTyping = false;
 
-    // Reload messages after sending
     setTimeout(() => {
         loadChatMessages(msgId, document.querySelector("h2").textContent.replace("Chat with ", ""), receiverId);
     }, 100);
 }
-
-
-setInterval(() => {
-    if (window.receiverId && currentUserId) {
-        // Get the current username from the header
-        const chatHeader = document.querySelector("h2");
-        const userName = chatHeader ? chatHeader.textContent.replace("Chat with ", "") : "Chat";
-        
-        // Now call with all three correct parameters
-        loadChatMessages(`${currentUserId}and${window.receiverId}`, userName, window.receiverId);
-    }
-}, 10000);
-
 
 
 
