@@ -2,8 +2,9 @@
     
     margin: 40px;
     border-radius: 8px;
-   
     padding: 20px;
+    margin-top: 0;
+    padding-top: -20px;
 }
 
 .request-meeting-section {
