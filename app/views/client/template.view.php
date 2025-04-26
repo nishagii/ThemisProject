@@ -38,7 +38,6 @@
                 </div>
     
             </div>
-
             <div class="template">
                 <div class="header">
                     <div class="template-header">
