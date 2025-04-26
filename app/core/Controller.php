@@ -3,6 +3,23 @@
 
 Trait Controller
 {
+	public function requireLogin()
+	{
+		if (!isset($_SESSION['role'])) {
+			redirect('/login');
+			exit();
+		}
+	}
+
+	protected function requireRole($roles = [])
+	{
+		if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], $roles)) {
+			redirect('_403');
+			exit();
+		}
+
+	}
+
 
 	public function view($name, $data = [])
 	{
@@ -32,4 +49,5 @@ Trait Controller
 			die("The model file {$modelPath} does not exist.");
 		}
 	}
+
 }
