@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -25,7 +26,7 @@
                 <a href="javascript:void(0);" class="btn btn-add" onclick="openAddEventModal()">
                     <i class="fas fa-plus"></i>Event
                 </a>
-                <a href="<?= ROOT ?>/calendar/revokeAccess" class="btn btn-revoke" onclick="return confirm('Are you sure you want to revoke Google Calendar access? You will need to authorize again to use calendar features.');">
+                <a href="javascript:void(0);" class="btn btn-revoke" onclick="confirmRevokeAccess()">
                     <i class="fas fa-unlink"></i> Revoke Calendar Access
                 </a>
             </div>
@@ -335,17 +336,54 @@
             }
         });
 
+        // SweetAlert2 implementation for confirmations
         function confirmDelete(eventId) {
-            if (confirm('Are you sure you want to delete this event?')) {
-                window.location.href = '<?= ROOT ?>/calendar/deleteEvent/' + eventId;
-            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '<?= ROOT ?>/calendar/deleteEvent/' + eventId;
+                }
+            });
         }
 
         function confirmDeleteFromModal() {
             const eventId = document.getElementById('edit-event-id').value;
-            if (confirm('Are you sure you want to delete this event?')) {
-                window.location.href = '<?= ROOT ?>/calendar/deleteEvent/' + eventId;
-            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '<?= ROOT ?>/calendar/deleteEvent/' + eventId;
+                }
+            });
+        }
+
+        function confirmRevokeAccess() {
+            Swal.fire({
+                title: 'Revoke Calendar Access?',
+                text: "Are you sure you want to revoke Google Calendar access? You will need to authorize again to use calendar features.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, revoke access'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '<?= ROOT ?>/calendar/revokeAccess';
+                }
+            });
         }
 
         function openAddEventModal() {
@@ -384,8 +422,6 @@
             openEditModal(tempEvent);
         }
     </script>
-
-
 
 </body>
 

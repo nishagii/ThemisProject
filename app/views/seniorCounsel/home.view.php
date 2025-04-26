@@ -85,7 +85,7 @@
                 <p>you have</p>
                 <?php if (isset($totalAmount) && $totalAmount > 0): ?>
                     <p>$<?= number_format($totalAmount, 2) ?></p>
-                    <h3>Payments Received</h3>
+                    <h3>Monthly Payments</h3>
                 <?php else: ?>
                     <p>$0.00</p>
                     <h3>No Payments This Month</h3>
@@ -99,7 +99,6 @@
                     <p><?= $delayedCases ?></p>
                     <h3>Delayed Cases</h3>
                 <?php else: ?>
-                    <p>0</p>
                     <h3>No Delayed Cases</h3>
                 <?php endif; ?>
             </div>

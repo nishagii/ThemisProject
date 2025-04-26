@@ -14,12 +14,12 @@ class PaymentModel
     public function savePayment($data)
     {
         $query = "INSERT INTO {$this->table} 
-                  (case_number, id_number, amount, payment_status, transaction_id, created_at) 
-                  VALUES (:case_number, :id_number, :amount, :payment_status, :transaction_id, NOW())";
+                  (case_number,remarks, amount, payment_status, transaction_id, created_at) 
+                  VALUES (:case_number, :remarks, :amount, :payment_status, :transaction_id, NOW())";
 
         $params = [
             'case_number' => $data['case_number'],
-            'id_number' => $data['id_number'],
+            'remarks' => $data['remarks'],
             'amount' => $data['amount'],
             'payment_status' => $data['payment_status'],
             'transaction_id' => $data['transaction_id'],
@@ -28,6 +28,9 @@ class PaymentModel
         return $this->query($query, $params);
     }
 
+
+    // ALTER TABLE payments CHANGE id_number remarks VARCHAR(255);
+    // ALTER TABLE payments ADD COLUMN remarks VARCHAR(255) AFTER id_number;
     /**
      * Retrieve all payments from the database.
      *
@@ -82,7 +85,20 @@ class PaymentModel
                   LEFT JOIN cases c ON p.case_number = c.case_number
                   ORDER BY p.created_at DESC";
 
-                  return $this->query($query);
+        $payments = $this->query($query);
+
+        //decrypt sensitive data
+        if (!empty($payments)) {
+            //load the caseModel to use its decryptSensitiveData method
+            $caseModel = new CaseModel();
+
+            foreach ($payments as &$payment){
+                // Decrypt the sensitive data
+                $payment = $caseModel -> decryptSensitiveData($payment);
+            }
+
+            return $payments;
+        }
     }
 
     /**
