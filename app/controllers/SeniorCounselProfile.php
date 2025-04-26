@@ -1,6 +1,6 @@
 <?php
 
-class ProfileJunior
+class SeniorCounselProfile
 {
     use Controller;
 
@@ -11,8 +11,8 @@ class ProfileJunior
         $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
         // Load the view with data
-        $this->view('/juniorCounsel/component/bigNav', $data);
-        $this->view('/juniorCounsel/component/smallNav1', $data);
+        $this->view('/seniorCounsel/component/bigNav', $data);
+        $this->view('/seniorCounsel/component/smallNav1', $data);
         
         $this->view('profileComponent', $data);
     }
