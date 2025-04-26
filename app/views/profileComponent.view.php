@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lawyer Profile</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/profile.css">
+    <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/sidebar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <style>
@@ -100,7 +101,7 @@
 </head>
 
 <body>
-    <div class="body-container">
+    <div class="body-container home-section">
         <h4>Profile<?php
 
 echo "<script>console.log(" . json_encode($_SESSION) . ");</script>";
