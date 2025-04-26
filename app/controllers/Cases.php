@@ -4,6 +4,13 @@ class Cases
 {
     use Controller;
 
+    public function __construct()
+    {
+        $this->requireLogin();
+        $this->requireRole(['lawyer']);
+    }
+
+
     public function index()
     {
         // Load the UserModel to get attorneys and juniors
