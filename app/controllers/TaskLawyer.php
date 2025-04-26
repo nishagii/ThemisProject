@@ -4,6 +4,13 @@ class TaskLawyer
 {
     use Controller;
 
+    public function __construct()
+    {
+       
+        $this->requireLogin();
+        $this->requireRole(['lawyer']);
+    }
+
     public function index()
     {
         $TaskModel = $this->loadModel('TaskModel'); 

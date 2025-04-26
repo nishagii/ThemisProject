@@ -90,7 +90,7 @@
                         <th>Deadline Date</th>
                         <th>Priority</th>
                         <th>Status</th>
-                        <th>Actions</th> <!-- Added Actions Column -->
+                        <th> </th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -109,9 +109,25 @@
                         </td>
 
                         <td>
-                            <a href="<?= ROOT ?>/tasklawyer/editTask/<?= $t->taskID ?>" class="edit-btn" onclick="event.stopPropagation()"><i class="fas fa-edit"></i></a> <!-- Edit Link -->
-                            <a href="javascript:void(0);" class="delete-btn" onclick="event.stopPropagation(); confirmDelete(<?= $t->taskID; ?>)"><i class="fas fa-trash"></i></a> <!-- Delete Link -->
+                            <?php $disabled = (strtolower($t->status) === 'completed' || strtolower($t->status) === 'overdue'); ?>
+                            
+                            <a 
+                                href="<?= $disabled ? 'javascript:void(0);' : ROOT . '/tasklawyer/editTask/' . $t->taskID ?>" 
+                                class="edit-btn <?= $disabled ? 'disabled' : '' ?>" 
+                                onclick="<?= $disabled ? 'event.preventDefault();' : 'event.stopPropagation();' ?>"
+                            >
+                                <i class="fas fa-edit"></i>
+                            </a>
+
+                            <a 
+                                href="javascript:void(0);" 
+                                class="delete-btn <?= $disabled ? 'disabled' : '' ?>" 
+                                onclick="<?= $disabled ? 'event.preventDefault();' : 'event.stopPropagation(); confirmDelete(' . $t->taskID . ');' ?>"
+                            >
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </td>
+
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
