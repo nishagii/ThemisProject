@@ -16,7 +16,7 @@
             <li><a href="task">Task Board</a></li>
             <li><a href="templateJunior">Document templates</a></li>
             <li><a href="knowledge">Knowledge Panel</a></li>
-            <li><a href="<?= ROOT ?>/SCrules/retrieveForView">S.C Rules</a></li>
+            <li><a href="<?= ROOT ?>/RuleJunior/index">S.C Rules</a></li>
         </ul>
 </div>
 </body>
