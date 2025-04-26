@@ -39,13 +39,6 @@
     
             </div>
 
-            <div class="add">
-                <a href="<?= ROOT ?>/template/create">
-                    <button class="add-button">
-                        <i class="bx bx-plus"></i> Upload New Template
-                    </button>
-                </a>
-            </div>
 
             <div class="template">
                 <div class="header">
