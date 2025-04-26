@@ -4,6 +4,13 @@ class AddTask
 {
     use Controller;
 
+    public function __construct()
+    {
+       
+        $this->requireLogin();
+        $this->requireRole(['lawyer']);
+    }
+
     public function index()
     {
         $userModel = $this->loadModel('UserModel');
