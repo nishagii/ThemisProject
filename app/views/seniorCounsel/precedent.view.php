@@ -12,6 +12,7 @@
 <?php include('component/bigNav.view.php'); ?>
 <?php include('component/smallNav1.view.php'); ?>
 <?php include('component/sidebar.view.php'); ?>
+<div class="home-section">
     <div class="header">
         <h1>All Precedents</h1>
     </div>
@@ -87,7 +88,7 @@
                     </div>   
             </div>
         </div>    
-    </div>
+   
     <div class="table-container">
         <table>
             <thead>
@@ -124,6 +125,7 @@
             </tbody>
         </table>
     </div>
+                </div>
     <script>
         function toggleSortMenu() {
             event.stopPropagation()
