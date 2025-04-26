@@ -15,6 +15,6 @@ class TemplateJunior
         $templates = $templateModel->getAll();
 
         // Load the view with data
-        $this->view('/juniorCounsel/template', $['templates' => $templates]);
+        $this->view('/juniorCounsel/template', ['templates' => $templates]);
     }
 }
