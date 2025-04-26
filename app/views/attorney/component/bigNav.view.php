@@ -33,8 +33,8 @@
             <a href="setting.php">
                 <i class="fas fa-cog"></i>
             </a>
-
-            <a href="profile.php">
+            <a href="attorneyprofile">
+            <!--<a href="profile.php">-->
             <i class="fas fa-user-circle" id="profile-icon"></i>
             </a>
             </div>

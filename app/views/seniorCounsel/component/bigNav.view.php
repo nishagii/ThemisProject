@@ -49,10 +49,10 @@
             </a>
             <div id="settings-menu" class="settings-menu hidden">
                 <ul>
-                    <li><a href="logout">Logout</a></li>
+                    <li><a href="<?= ROOT ?>/logout">Logout</a></li>
                 </ul>
             </div>
-            <a href="<?= ROOT ?>/profile">
+            <a href="<?= ROOT ?>/seniorCounselProfile">
                 <i class="fas fa-user-circle" id="profile-icon"></i>
             </a>
         </div>
@@ -103,3 +103,5 @@
     <script src="<?= ROOT ?>/assets/js/notifications.js"></script>
 </body>
 </html>
+
+
