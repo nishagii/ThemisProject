@@ -26,13 +26,32 @@
                     <p><strong>Name:</strong> <span><?= htmlspecialchars($user->username) ?></span></p>
                     <p><strong>Email:</strong> <span><?= htmlspecialchars($user->email) ?></span></p>
                     <p><strong>Role:</strong> <span><?= htmlspecialchars($user->role) ?></span></p>
-                    <p ><strong>Status:</strong> <span><?= ($user->active ?? true) ? 'Active' : 'Inactive' ?></span></p>
-                    <p ><strong>Verified:</strong> <span><?= ($user->verified ?? false) ? 'Yes' : 'No' ?></span></p>
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="view-badge <?= ($user->active ?? true) ? 'view-active' : 'view-inactive' ?>">
+                            <?= ($user->active ?? true) ? 'Active' : 'Inactive' ?>
+                        </span>
+                    </p>
+                    
                 </div>
 
                 <a href="<?= ROOT ?>/UsersAdmin" class="back-btn">
                     <i class="fas fa-arrow-left"></i> Back to Users
                 </a>
+
+                <p>
+                    <strong>Actions:</strong>
+                    <?php if (($user->active ?? true)): ?>
+                        <button class="block-btn" onclick="blockUser(<?= $user->id ?>)">
+                            <i class="fas fa-user-slash"></i> Block User
+                        </button>
+                    <?php else: ?>
+                        <button class="unblock-btn" onclick="unblockUser(<?= $user->id ?>)">
+                            <i class="fas fa-user-check"></i> Unblock User
+                        </button>
+                    <?php endif; ?>
+                </p>
+
             </div>
         </div>
     </div>

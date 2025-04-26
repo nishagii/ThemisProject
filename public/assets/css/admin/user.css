@@ -529,4 +529,60 @@
   text-decoration: none;
 }
 
+/* Badge styling for status */
+.view-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  background-color: #999; /* default fallback */
+  text-transform: uppercase;
+}
+
+/* Green for Active */
+.view-active {
+  background-color: #4fc66b;
+}
+
+/* Red for Inactive */
+.view-inactive {
+  background-color: #dc3545;
+}
+
+.block-btn, .unblock-btn {
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.block-btn {
+  background-color: white;
+  color: rgb(255, 42, 42);
+  border: solid 1px rgb(255, 42, 42);
+}
+
+.block-btn:hover {
+  background-color: rgb(224, 224, 224);
+}
+
+.unblock-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.unblock-btn:hover {
+  background-color: #218838;
+}
+
+
   
