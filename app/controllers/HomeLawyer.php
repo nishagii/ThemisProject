@@ -7,19 +7,24 @@ class HomeLawyer
 
     public function index()
     {
-        // Ensure session is started
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
 
-        // Pass user session data
-        $data['user'] = isset($_SESSION['user_id']) ? [
-            'id' => $_SESSION['user_id'],
-            'username' => $_SESSION['username'] ?? 'User',
-            'role' => $_SESSION['role'] ?? 'lawyer'
-        ] : null;
+        // Set username from session, or default to 'User'
+        $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        // Load the view with user data
-        $this->view('/seniorCounsel/home', $data);
+        $caseModel = $this->loadModel('CaseModel');
+        $paymentModel = $this->loadModel('PaymentModel');
+
+        $ongoingCasesCount = $caseModel->getOngoingCasesCount();
+        $totalAmount = $paymentModel->getTotalAmountReceivedInMonth();
+        $delayedCases = $caseModel->getDelayedCases();
+
+        // Load the view with data
+        $this->view('/seniorCounsel/home',[
+            'ongoingCasesCount' => $ongoingCasesCount,
+            'totalAmount' => $totalAmount,
+            'delayedCases' => $delayedCases,
+
+        ] 
+    );
     }
 }

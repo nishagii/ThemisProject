@@ -50,7 +50,7 @@ class DocumentModel {
      */
     public function getDocumentsByCase($case_id)
     {
-        $query = "SELECT * FROM {$this->table} WHERE case_id = :case_id";
+        $query = "SELECT d.*, users.first_name AS first_name FROM {$this->table} d INNER JOIN users ON d.uploaded_by = users.id WHERE case_id = :case_id ORDER BY document_id DESC";
         $params = ['case_id' => $case_id];
         
         // Execute the query and return the result
@@ -140,6 +140,20 @@ class DocumentModel {
             $result = $this->query($query, $params);
             return $result;
         } catch (Exception $e) {
+            // Log the error for debugging
+            error_log("Database Error: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function getCaseId($document_id) {
+        try {
+            $query = "SELECT case_id from {$this->table} WHERE document_id = :document_id";
+            $params = ['document_id' => $document_id];
+            $result = $this->query($query, $params);
+            return $result;
+
+        }  catch (Exception $e) {
             // Log the error for debugging
             error_log("Database Error: " . $e->getMessage());
             return false;

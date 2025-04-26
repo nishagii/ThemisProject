@@ -3,10 +3,15 @@
 error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
 
 require_once '../vendor/autoload.php';
+
 // require_once '/Applications/XAMPP/xamppfiles/htdocs/themisrepo/app/core/config.php'; //for MAC
+
 //for windows 
 
-require_once 'C:\xampp\htdocs\themisrepo\app\core\config.php';
+// require_once 'C:\xampp\htdocs\themisrepo\app\core\config.php';
+
+// Use a relative path from the current file (fixed this to avoid hardcoding the path for different environments) 
+require_once dirname(__DIR__) . '/core/config.php';
 
 
 class PaymentController
@@ -21,8 +26,25 @@ class PaymentController
             return;
         }
 
-        $data['username'] = $_SESSION['username'] ?? 'User';
-        $this->view('/client/payments', $data);
+        // Get username and email from session
+        $username = $_SESSION['username'] ?? 'User';
+        $email = $_SESSION['email'] ?? NULL;
+
+        // Prepare data array
+        $data = [
+            'username' => $username,
+            'user_email' => $email,
+            'cases' => []
+        ];
+
+        // If email is available, fetch the user's cases
+        if ($email) {
+            $caseModel = $this->loadModel('CaseModel');
+            $data['cases'] = $caseModel->getCasesByClientEmail($email);
+        }
+
+        // Load the payments view with data
+        $this->view('client/payments', $data);
     }
 
     // Create a new payment session using Stripe
@@ -37,10 +59,10 @@ class PaymentController
 
         // Validate input
         $case_number = $data['case_number'] ?? null;
-        $id_number = $data['id_number'] ?? null;
+        $remarks = $data['remarks'] ?? null; // Changed from id_number to remarks
         $amount = isset($data['amount']) ? $data['amount'] * 100 : null; // Convert to cents
 
-        if (!$case_number || !$id_number || !$amount) {
+        if (!$case_number || !$amount) { // Removed remarks from required check
             http_response_code(400);
             echo json_encode(['error' => 'Missing required fields']);
             exit;
@@ -64,7 +86,7 @@ class PaymentController
                 'cancel_url' => ROOT . '/payments/paymentCancel',
                 'metadata' => [
                     'case_number' => $case_number,
-                    'id_number' => $id_number,
+                    'remarks' => $remarks, // Changed from id_number to remarks
                 ]
             ]);
 
@@ -88,7 +110,7 @@ class PaymentController
 
         $paymentData = [
             'case_number' => $session->metadata->case_number,
-            'id_number' => $session->metadata->id_number,
+            'remarks' => $session->metadata->remarks, // Changed from id_number to remarks
             'amount' => $session->amount_total / 100,
             'payment_status' => $session->payment_status,
             'transaction_id' => $session->id,

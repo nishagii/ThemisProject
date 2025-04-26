@@ -21,8 +21,10 @@
             <img src="<?= ROOT ?>/assets/images/themis_logo.png" alt="Logo" class="navbar-logo" />
             <ul class="big-navbar">
                 <li><a href="<?= ROOT ?>/PrecedentsController/index">Home</a></li>
-                <li><a href="<?= ROOT ?>/PrecedentsController/create">Add New Precedent</a></li>
                 <li><a href="<?= ROOT ?>/PrecedentsController/retrieveAll">Precedents</a></li>
+                <li><a href="<?= ROOT ?>/PrecedentsController/create">Add New Precedent</a></li>
+                <li><a href="<?= ROOT ?>/SCrules/retrieve">SC Rules</a></li>
+                <li><a href="<?= ROOT ?>/SCrules/create">Add New SC Rule</a></li>
             </ul>
         </nav>
 

@@ -12,6 +12,9 @@ class Login
             $userModel = $this->loadModel('UserModel');
             $loginModel = $this->loadModel('LoginModel');  // Load the LoginModel to log the login attempt
 
+
+           
+
             // Attempt to login
             $user = $userModel->login($_POST);
 
@@ -23,6 +26,12 @@ class Login
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['username'] = $user->username;
                 $_SESSION['role'] = $user->role;
+                $_SESSION['first_name'] = $user->first_name;
+                $_SESSION['last_name'] = $user->last_name;
+                $_SESSION['email'] = $user->email;
+                $_SESSION['phone'] = $user->phone;
+                $_SESSION['last_name'] = $user->last_name;
+
 
                 // Log successful login attempt
                 $loginData = [
@@ -53,12 +62,14 @@ class Login
                 exit();
             } else {
                 // Log failed login attempt
-                $loginData = [
-                    'user_id'    => null,  // No valid user ID for failed login
-                    'ip_address' => $ipAddress,
-                    'status'     => 'Failure',  // Login failed
-                ];
-                $loginModel->save($loginData);  // Save the failed login attempt into the database
+                // if($user->id) {
+                //     $loginData = [
+                //         'user_id'    => $user->id,  // No valid user ID for failed login
+                //         'ip_address' => $ipAddress,
+                //         'status'     => 'Failure',  // Login failed
+                //     ];
+                //     $loginModel->save($loginData);  // Save the failed login attempt into the database
+                // }
 
                 $data['errors'] = ['Invalid username/email or password'];
                 // var_dump($data['errors']); // Debug here

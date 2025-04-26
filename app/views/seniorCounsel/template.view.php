@@ -25,7 +25,7 @@
                 <input type="text"
                 class="search-bar"  
                 placeholder="Search here for templates" 
-                oninput="searchTemplates()"
+                oninput="searchTemplates(this.value)"
                 onfocus="this.placeholder = ''" 
                 onblur="this.placeholder = 'Search here for templates'" />
                 <div class="sort-wrapper">
@@ -37,15 +37,6 @@
                     </div>
                 </div>
     
-                <!-- Filter Icon with Dropdown -->
-                <div class="filter-wrapper">
-                    <i class="bx bx-filter filter-icon" title="Filter" onclick="toggleFilterMenu(event)"></i>
-                    <div class="sort-dropdown" id="filterMenu">
-                        <button class="dropdown-item" onclick="filterBy('all')">Show All</button>
-                        <button class="dropdown-item" onclick="filterBy('recent')">Recent Uploads</button>
-                        <button class="dropdown-item" onclick="filterBy('user')">Uploaded by Me</button>
-                    </div>
-                </div>
             </div>
 
             <div class="add">
@@ -203,6 +194,23 @@
         document.addEventListener("DOMContentLoaded", function () {
             attachDropdownListeners();
         });
+        
+        function searchTemplates(query) {
+            fetch("<?= ROOT ?>/Template/search", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: `query=${encodeURIComponent(query)}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("templatesTable").innerHTML = data;
+                attachDropdownListeners(); // re-attach action menu
+            })
+            .catch(error => console.error("Search error:", error));
+
+        }
     </script>
 </body>
 </html>

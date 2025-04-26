@@ -1,4 +1,4 @@
-/* General Styles */
+
 body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
@@ -8,46 +8,11 @@ body {
 
 .dashboard-container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
 }
 
-/* Sidebar */
-.sidebar {
-    width: 200px;
-    background-color: #e4e9f7;
-    color: #1d1b31;
-    padding: 20px;
-}
-
-.sidebar h2 {
-    font-size: 24px;
-    margin-bottom: 30px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.sidebar nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar nav ul li {
-    margin: 15px 0;
-}
-
-.sidebar nav ul li a {
-    color: #1d1b31;
-    text-decoration: none;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: color 0.3s ease;
-}
-
-.sidebar nav ul li a:hover {
-    color: #396eff;
+.home-body {
+    padding: 30px;
 }
 
 /* Main Content */
@@ -79,6 +44,14 @@ section h2 {
     gap: 10px;
 }
 
+
+.case-progress {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f4f6fc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
 /* Case Progress Section */
 .case-card {
     border: 1px solid #ddd;
@@ -87,6 +60,7 @@ section h2 {
     border-radius: 8px;
     background: #ffffff;
     transition: transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .case-card:hover {
@@ -106,50 +80,348 @@ section h2 {
     color: #27ae60;
 }
 
-/* Payments Section */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: #ffffff;
-}
-
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-}
-
-table th {
-    background-color: #e4e9f7;
-}
-
-table .paid {
-    color: #27ae60;
-    font-weight: bold;
-}
-
-table .pending {
-    color: #e74c3c;
-    font-weight: bold;
-}
-
-/* Notifications Section */
-.notifications ul {
-    list-style: none;
-    padding: 0;
-}
-
-.notifications ul li {
-    background: #ffffff;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
 i{
-    color: #f89000;
+    color: #f39c12;
 }
-i:hover{
-    color: #396eff;
+
+
+/* Enhanced styling for the "no cases" message */
+.no-cases-message {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 30px 25px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #f39c12;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .no-cases-message:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  .no-cases-icon i {
+    font-size: 36px;
+    color: #f39c12;
+    margin-right: 25px;
+  }
+  
+  .no-cases-content {
+    flex: 1;
+  }
+  
+  .no-cases-content h4 {
+    margin: 0 0 12px 0;
+    color: #343a40;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  
+  .no-cases-content p {
+    margin-top: 12px;
+    color: #495057;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+/* Invoice Section Styling */
+.invoices {
+    background-color: #E4E9F7;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+
+.invoices h2 {
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.invoice-card {
+    background-color: #f9f9f9;
+    border-left: 4px solid #4e73df;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+
+.invoice-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.invoice-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.invoice-card p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.invoice-card .status {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.invoice-card .status.paid {
+    background-color: #1cc88a;
+    color: white;
+}
+
+.invoice-card .status.pending {
+    background-color: #f6c23e;
+    color: white;
+}
+
+.invoice-card .status.overdue {
+    background-color: #e74a3b;
+    color: white;
+}
+
+.invoice-actions {
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.invoice-actions a {
+    display: inline-block;
+    padding: 5px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.invoice-actions .view-btn {
+    background-color: #4e73df;
+    color: white;
+}
+
+.invoice-actions .view-btn:hover {
+    background-color: #2e59d9;
+}
+
+.invoice-actions .pay-btn {
+    background-color: #1cc88a;
+    color: white;
+}
+
+.invoice-actions .pay-btn:hover {
+    background-color: #169b6b;
+}
+
+/* No Invoices Message */
+.no-invoices-message {
+    background-color: #f8f9fa;
+    border-left: 4px solid #6c757d;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.no-invoices-icon i {
+    font-size: 24px;
+    color: #f39c12;
+    margin-right: 15px;
+}
+
+.no-invoices-content {
+    flex: 1;
+}
+
+.no-invoices-content h4 {
+    margin: 0 0 5px 0;
+    color: #495057;
+    font-size: 18px;
+}
+
+.no-invoices-content p {
+    margin: 0;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.login-container {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    padding: 30px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header h2 {
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  .subtext {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 4px;
+  }
+  
+  
+  
+  .login-list {
+    margin-top: 30px;
+  }
+  
+  .login {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .login-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .login-icon {
+    background-color: #b2e8e0;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .text-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .date {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  
+  .time {
+    font-size: 12px;
+    color: #999;
+  }
+  
+  .ip {
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  .status {
+    color: #a264f8;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+
+.flex{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.meetings {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    flex: 2;
+}
+
+.meeting-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.no-meetings-message {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+
+.no-meetings-icon i {
+    font-size: 2.5rem;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+}
+
+.request-meeting-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: #69a6e2;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.request-meeting-btn:hover {
+    background-color: #4f95c4;
+}
+
+.view-more-container {
+    text-align: center;
+    padding: 15px 0 5px;
+    margin-top: 10px;
+    border-top: 1px solid #eaeaea;
+}
+
+.view-more-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #f8f9fa;
+    color: #495057;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid #dee2e6;
+}
+
+.view-more-btn:hover {
+    background-color: #e9ecef;
+    color: #212529;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.view-more-btn i {
+    margin-right: 5px;
+}
+
+  
+  

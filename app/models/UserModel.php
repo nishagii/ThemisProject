@@ -381,4 +381,11 @@ class UserModel
         }
     }
 
+    public function getAllUsers()
+    {
+        $query = "SELECT * FROM {$this->table}";
+
+        return $this->query($query);
+    }
+
 }

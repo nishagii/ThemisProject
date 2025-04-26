@@ -7,15 +7,27 @@ class TaskLawyer
     public function index()
     {
         $TaskModel = $this->loadModel('TaskModel'); 
-        $task = $TaskModel->getAllTasks(); // Fetch cases data
-        $count = $TaskModel->getTaskCount();
+
+        $task = $TaskModel->getAllTasks();
+        $pendingCount = $TaskModel->getTaskCountByStatus('pending');
+        $completedCount = $TaskModel->getTaskCountByStatus('completed');
+        $overdueCount = $TaskModel->getTaskCountByStatus('overdue');
+
         
+        $totalCount = ($pendingCount[0]->count ?? 0) + 
+                    ($completedCount[0]->count ?? 0) + 
+                    ($overdueCount[0]->count ?? 0);
+
         $this->view('/seniorCounsel/task', [
             'task' => $task,
-            'count' => $count
+            'totalCount' => $totalCount,
+            'pendingCount' => $pendingCount,
+            'completedCount' => $completedCount,
+            'overdueCount' => $overdueCount
         ]);
-        
     }
+
+
 
     //get the case details by id and pass it to the view
     public function editTask($taskID)

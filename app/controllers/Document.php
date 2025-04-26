@@ -4,101 +4,126 @@ class Document
 {
     use Controller;
 
-    public function index()
+    public function index($caseID)
     {
-        //change this later 
-        $caseID = 11; 
-        
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
+    
+        $user_id = $_SESSION['user_id'];
+        $username = $_SESSION['username'] ?? 'User';
+    
         $documentModel = $this->loadModel('documentModel');
         $documents = $documentModel->getDocumentsByCase($caseID);
-        $this->view('/seniorCounsel/case_documents', ['documents' => $documents]);
+    
+        // Pass both documents and user data to the view
+        $this->view('/seniorCounsel/case_documents', [
+            'documents' => $documents,
+            'user_id' => $user_id,
+            'username' => $username,
+            'case_id' => $caseID
+        ]);
+    }
+    
+
+    public function add_Document($caseID)
+    {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
+
+        $user_id = $_SESSION['user_id'];
+        $username = $_SESSION['username'] ?? 'User';
+
+        $this->view('/seniorCounsel/document_upload', [
+            'user_id' => $user_id,
+            'username' => $username,
+            'case_id' =>  $caseID
+        ]);
     }
 
-    public function add_Document()
-    {
-        $this->view('/seniorCounsel/document_upload');
-    }
 
     public function save_Document() {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
+    
         $documentModel = $this->loadModel('documentModel');
-        // Check if the form is submitted
+    
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Collect and sanitize form data
+
+            $caseID = filter_input(INPUT_POST, 'case_id', FILTER_SANITIZE_NUMBER_INT); 
+
+            $maxFileSize = 10 * 1024 * 1024; // 10 MB
+            if ($_FILES['document_file']['size'] > $maxFileSize) {
+                $_SESSION['error'] = "File too large. Max size is 10MB.";
+                header("Location: " . ROOT . "/document/add_Document/" . $caseID);
+                exit;
+            }
             $docName = filter_input(INPUT_POST, 'doc_name', FILTER_SANITIZE_STRING);
             $docDescription = filter_input(INPUT_POST, 'doc_description', FILTER_SANITIZE_STRING);
+    
             
-            // Set default values for case_id and uploaded_by
-            $caseID = 11; // Default case_id, replace with actual case ID or from session
-            $uploadedBy = 1; // Default uploaded_by, should be from session
-            
-            // Check if a file was uploaded
+            $uploadedBy = $_SESSION['user_id'] ?? null;
+    
             if (isset($_FILES['document_file']) && $_FILES['document_file']['error'] === UPLOAD_ERR_OK) {
-                // Create a unique filename to avoid overwriting
                 $fileName = uniqid() . '_' . basename($_FILES['document_file']['name']);
-                
-                // Define your upload folder with proper path
                 $targetDir = "../public/assets/documents/";
-                
-                // Create directory if it doesn't exist
+    
                 if (!file_exists($targetDir)) {
                     mkdir($targetDir, 0777, true);
                 }
-                
+    
                 $targetFile = $targetDir . $fileName;
                 $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-                
-                // Check file type
+    
                 $allowedTypes = ['pdf', 'docx', 'txt'];
                 if (!in_array($fileType, $allowedTypes)) {
                     $_SESSION['error'] = "Only PDF, DOCX, and TXT files are allowed.";
                     header("Location: " . ROOT . "/document/add_Document");
                     exit;
                 }
-                
-                // Move the uploaded file
+    
                 if (move_uploaded_file($_FILES['document_file']['tmp_name'], $targetFile)) {
-                    // Prepare data for database
                     $documentData = [
                         'case_id' => $caseID,
                         'doc_name' => $docName,
                         'doc_description' => $docDescription,
-                        'file_path' => $fileName, // Just store the filename, not the full path
+                        'file_path' => $fileName,
                         'uploaded_by' => $uploadedBy,
                     ];
-                    
-                    // Debug: Print the data to see what's being sent
-                    // echo "<pre>"; print_r($documentData); echo "</pre>"; exit;
-                    
-                    // Use the DocumentModel to save
-                    $documentModel = new DocumentModel();
+    
                     $result = $documentModel->save($documentData);
-                    
+    
                     if ($result) {
                         $_SESSION['success'] = "Document uploaded successfully!";
-                        header("Location: " . ROOT . "/document/index");
+                        header("Location: " . ROOT . "/document/index/$caseID");
                         exit;
                     } else {
                         $_SESSION['error'] = "Database error. Could not save document information.";
-                        header("Location: " . ROOT . "/document/add_Document");
+                        header("Location: " . ROOT . "/document/add_Document/$caseID");
                         exit;
                     }
                 } else {
                     $_SESSION['error'] = "Error moving uploaded file.";
-                    header("Location: " . ROOT . "/document/add_Document");
+                    header("Location: " . ROOT . "/document/add_Document/$caseID");
                     exit;
                 }
             } else {
-                // Get the specific error
                 $uploadError = $_FILES['document_file']['error'];
                 $_SESSION['error'] = "File upload error: " . $this->getFileUploadErrorMessage($uploadError);
-                header("Location: " . ROOT . "/document/add_Document");
+                header("Location: " . ROOT . "/document/add_Document/$caseID");
                 exit;
             }
         } else {
-            header("Location: " . ROOT . "/document/add_Document");
+            header("Location: " . ROOT . "/Cases");
             exit;
         }
     }
+    
     
     // Helper function to translate file upload error codes
     private function getFileUploadErrorMessage($errorCode) {
@@ -138,11 +163,17 @@ class Document
     // Delete a document
     public function deleteDocument($documentID)
     {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
         // Load the document model
         $documentModel = $this->loadModel('documentModel');
         
         // Get document info before deleting (to delete the file as well)
         $document = $documentModel->getDocumentById($documentID)[0] ?? null;
+        $case = $documentModel->getCaseId($documentID);
+        $caseId = $case[0]->case_id ?? null;
         
         if (!$document) {
             $_SESSION['error'] = "Document not found.";
@@ -166,7 +197,9 @@ class Document
         }
         
         // Redirect back to documents list
-        header("Location: " . ROOT . "/document/index");
+
+        
+        header("Location: " . ROOT . "/document/index/" . $caseId);
         exit;
     }
 
@@ -191,6 +224,10 @@ class Document
     
     public function editDocument($id)
     {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
         $documentModel = $this->loadModel('documentModel');
         
         $document = $documentModel->getDocumentById($id); // Fetch by ID
@@ -208,6 +245,10 @@ class Document
     // Handle update
     public function updateDocument()
     {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
         // Check if form is submitted
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header("Location: " . ROOT . "/document/index");
@@ -274,10 +315,14 @@ class Document
         
         // Update the document
         $result = $documentModel->update($updateData, $documentID);
+        $case = $documentModel->getCaseId($documentID);
+        $caseId = $case[0]->case_id ?? null;
+
+
         
         if ($result) {
-            $_SESSION['success'] = "Document updated successfully!";
-            header("Location: " . ROOT . "/document/index");
+            
+            header("Location: " . ROOT . "/document/index/" . $caseId);
         } else {
             $_SESSION['error'] = "Failed to update document.";
             header("Location: " . ROOT . "/document/editDocument/" . $documentID);
