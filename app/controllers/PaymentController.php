@@ -14,12 +14,23 @@ require_once '../vendor/autoload.php';
 require_once dirname(__DIR__) . '/core/config.php';
 
 
+   
+
 class PaymentController
 {
     use Controller;
 
+    public function __construct()
+    {
+       $this->requireLogin();
+     
+    }
+
     public function index()
     {
+
+        $this->requireRole(['client']);
+
         // Redirect if not logged in
         if (empty($_SESSION['user_id'])) {
             redirect('login');
@@ -83,7 +94,7 @@ class PaymentController
                 ]],
                 'mode' => 'payment',
                 'success_url' => ROOT . '/PaymentController/paymentSuccess?session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => ROOT . '/payments/paymentCancel',
+                'cancel_url' => ROOT . '/PaymentController/paymentCancel',
                 'metadata' => [
                     'case_number' => $case_number,
                     'remarks' => $remarks, // Changed from id_number to remarks
@@ -150,12 +161,4 @@ class PaymentController
         $this->view('/payments/payment_details', ['payment' => $payment]);
     }
 
-    // Delete a payment record
-    public function deletePayment($paymentId)
-    {
-        $paymentModel = $this->loadModel('PaymentModel');
-        $paymentModel->deletePayment($paymentId);
-
-        redirect('payments/retrieveAllPayments');
-    }
 }

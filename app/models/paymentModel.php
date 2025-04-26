@@ -58,20 +58,6 @@ class PaymentModel
         return empty($result) ? null : $result[0];
     }
 
-    /**
-     * Delete a payment record by ID.
-     *
-     * @param int $id The ID of the payment to delete.
-     * @return bool True if deletion was successful, false otherwise.
-     */
-    public function deletePayment($id)
-    {
-        $query = "DELETE FROM {$this->table} WHERE id = :id";
-        $params = ['id' => $id];
-
-        return $this->query($query, $params);
-    }
-
 
     /**
      * Retrieve all payments with associated case details.
