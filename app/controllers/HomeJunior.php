@@ -3,6 +3,12 @@ class HomeJunior
 {
     use Controller;
 
+    public function __construct()
+    {
+        $this->requireLogin();
+        $this->requireRole(['attorney', 'junior']);
+    }
+
     public function index()
     {
         

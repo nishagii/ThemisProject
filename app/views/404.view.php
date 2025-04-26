@@ -27,7 +27,7 @@
 
                             <p>the page you are looking for not avaible!</p>
 
-                            <a href="<?= ROOT ?>" class="link_404">Go to Home</a>
+                            <a href="<?= ROOT ?>/landingpage" class="link_404">Go to Home</a>
                         </div>
                     </div>
                 </div>

@@ -5,8 +5,16 @@ class HomeLawyer
 {
     use Controller;
 
+    public function __construct()
+    {
+        // Require login for all methods in this controller
+        $this->requireLogin();
+        $this->requireRole(['lawyer']);
+    }
+
     public function index()
     {
+
 
         // Set username from session, or default to 'User'
         $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;

@@ -30,7 +30,6 @@ class Login
                 $_SESSION['last_name'] = $user->last_name;
                 $_SESSION['email'] = $user->email;
                 $_SESSION['phone'] = $user->phone;
-                $_SESSION['last_name'] = $user->last_name;
 
 
                 // Log successful login attempt
