@@ -409,19 +409,18 @@ function send_message(e, receiverId) {
 }
 
 
-// if (receiverId) {
-//     setInterval(function () {
-//         loadChatMessages(receiverId);
-//     }, 10000);
-// }
+setInterval(() => {
+    if (window.receiverId && currentUserId) {
+        // Get the current username from the header
+        const chatHeader = document.querySelector("h2");
+        const userName = chatHeader ? chatHeader.textContent.replace("Chat with ", "") : "Chat";
+        
+        // Now call with all three correct parameters
+        loadChatMessages(`${currentUserId}and${window.receiverId}`, userName, window.receiverId);
+    }
+}, 10000);
 
-// Auto-refresh chat every 10 seconds
-// setInterval(() => {
-//     if (window.receiverId && currentUserId) {
-//         // alert("hey");
-//         loadChatMessages(`${currentUserId}and${window.receiverId}`, "Chat", window.receiverId);
-//     }
-// }, 10000);
+
 
 
 
