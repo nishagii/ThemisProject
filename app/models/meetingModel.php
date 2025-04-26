@@ -58,6 +58,21 @@ class MeetingModel
         return $this->query($query,$params);
     }
 
+    public function getMeetingById($meetingId)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
+        $params = ['id' => $meetingId];
+        $result = $this->query($query, $params);
 
+        return !empty($result) ? $result[0] : null;
+    }
+
+    public function deleteMeeting($meetingId)
+    {
+        $query = "DELETE FROM {$this->table} WHERE id = :id";
+        $params = ['id' => $meetingId];
+
+        return $this->query($query, $params);
+    }
 }
 

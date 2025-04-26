@@ -1,6 +1,5 @@
 <?php
 
-
 class ProfileJunior
 {
     use Controller;
@@ -12,6 +11,9 @@ class ProfileJunior
         $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
         // Load the view with data
-        $this->view('/juniorCounsel/profile', $data);
+        $this->view('/juniorCounsel/component/bigNav', $data);
+        $this->view('/juniorCounsel/component/smallNav1', $data);
+        
+        $this->view('profileComponent', $data);
     }
 }

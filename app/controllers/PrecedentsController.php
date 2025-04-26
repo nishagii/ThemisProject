@@ -27,6 +27,65 @@ class PrecedentsController {
         ]);
     }
 
+    public function search(){
+        $query = $_GET['query'] ?? '';
+        $precedentsModel = $this->loadModel('PrecedentModel');
+
+        if (!empty($query)) {
+            $cases = $precedentsModel->searchCases($query);
+        } else {
+            $cases = $precedentsModel->getAll();
+        }
+        $html = '';
+        if (!empty($cases)) {
+            foreach ($cases as $case) {
+                $html .= '<tr>';
+                $html .= '<td>' . $case->judgment_date . '</td>';
+                $html .= '<td>' . $case->case_number . '</td>';
+                $html .= '<td>' . $case->description . '</td>';
+                $html .= '<td>' . $case->judgment_by . '</td>';
+                $html .= '<td><a href="' . $case->document_link . '" target="_blank">View Document</a></td>';
+                $html .= '<td><a href="' . ROOT . '/PrecedentsController/retrieveOne/' . $case->id . '"><button class="more">View more</button></a></td>';
+                $html .= '</tr>';
+            }
+        } else {
+            $html .= '<tr><td colspan="6">No precedents found in the database.</td></tr>';
+        }
+
+        // Return the HTML
+        echo $html;
+        
+    }
+    public function searchViewOnly(){
+        $query = $_GET['query'] ?? '';
+        $precedentsModel = $this->loadModel('PrecedentModel');
+
+        if (!empty($query)) {
+            $cases = $precedentsModel->searchCases($query);
+        } else {
+            $cases = $precedentsModel->getAll();
+        }
+        $html = '';
+        if (!empty($cases)) {
+            foreach ($cases as $case) {
+                $html .= '<tr>';
+                $html .= '<td>' . $case->judgment_date . '</td>';
+                $html .= '<td>' . $case->case_number . '</td>';
+                $html .= '<td>' . $case->description . '</td>';
+                $html .= '<td>' . $case->judgment_by . '</td>';
+                $html .= '<td><a href="' . $case->document_link . '" target="_blank">View Document</a></td>';
+                $html .= '<td><a href="' . ROOT . '/PrecedentsController/retrieveOneViewOnly/' . $case->id . '"><button class="more">View more</button></a></td>';
+                $html .= '</tr>';
+            }
+        } else {
+            $html .= '<tr><td colspan="6">No precedents found in the database.</td></tr>';
+        }
+
+        // Return the HTML
+        echo $html;
+        
+    }
+
     public function sort($criteria) {
         // Fetch sorted cases based on the criteria
         $cases = $this->precedentModel->getSorted($criteria);
@@ -51,8 +110,32 @@ class PrecedentsController {
         // Return the HTML
         echo $html;
     }
+    public function sortViewOnly($criteria) {
+        // Fetch sorted cases based on the criteria
+        $cases = $this->precedentModel->getSorted($criteria);
+
+        // Generate HTML for the sorted table rows
+        $html = '';
+        if (!empty($cases)) {
+            foreach ($cases as $case) {
+                $html .= '<tr>';
+                $html .= '<td>' . $case->judgment_date . '</td>';
+                $html .= '<td>' . $case->case_number . '</td>';
+                $html .= '<td>' . $case->description . '</td>';
+                $html .= '<td>' . $case->judgment_by . '</td>';
+                $html .= '<td><a href="' . $case->document_link . '" target="_blank">View Document</a></td>';
+                $html .= '<td><a href="' . ROOT . '/PrecedentsController/retrieveOneViewOnly/' . $case->id . '"><button class="more">View more</button></a></td>';
+                $html .= '</tr>';
+            }
+        } else {
+            $html .= '<tr><td colspan="6">No precedents found in the database.</td></tr>';
+        }
+
+        // Return the HTML
+        echo $html;
+    }
     
-    public function filterByYear($year) {
+    public function filter($year) {
         $cases = $this->precedentModel->getAll();
         $filteredCases = [];
     
@@ -75,6 +158,37 @@ class PrecedentsController {
                 $html .= '<td>' . $case->judgment_by . '</td>';
                 $html .= '<td><a href="' . $case->document_link . '" target="_blank">View Document</a></td>';
                 $html .= '<td><a href="' . ROOT . '/PrecedentsController/retrieveOne/' . $case->id . '"><button class="more">View more</button></a></td>';
+                $html .= '</tr>';
+            }
+        } else {
+            $html .= '<tr><td colspan="6">No precedents found for the selected year.</td></tr>';
+        }
+    
+        echo $html;
+    }
+    public function filterViewOnly($year) {
+        $cases = $this->precedentModel->getAll();
+        $filteredCases = [];
+    
+        foreach ($cases as $case) {
+            // Extract year from the case number
+            preg_match('/\d{4}$/', $case->case_number, $matches);
+            if (!empty($matches) && $matches[0] == $year) {
+                $filteredCases[] = $case;
+            }
+        }
+    
+        // Generate HTML for the filtered table rows
+        $html = '';
+        if (!empty($filteredCases)) {
+            foreach ($filteredCases as $case) {
+                $html .= '<tr>';
+                $html .= '<td>' . $case->judgment_date . '</td>';
+                $html .= '<td>' . $case->case_number . '</td>';
+                $html .= '<td>' . $case->description . '</td>';
+                $html .= '<td>' . $case->judgment_by . '</td>';
+                $html .= '<td><a href="' . $case->document_link . '" target="_blank">View Document</a></td>';
+                $html .= '<td><a href="' . ROOT . '/PrecedentsController/retrieveOneViewOnly/' . $case->id . '"><button class="more">View more</button></a></td>';
                 $html .= '</tr>';
             }
         } else {

@@ -4,28 +4,38 @@ class Cases
 {
     use Controller;
 
+    public function __construct()
+    {
+        $this->requireLogin();
+        $this->requireRole(['lawyer']);
+    }
+
+
     public function index()
     {
         // Load the UserModel to get attorneys and juniors
         $userModel = $this->loadModel('UserModel');
+       
+
 
         // Get attorneys and juniors from the database
         $attorneys = $userModel->getUsersByRole('attorney');
         $juniors = $userModel->getUsersByRole('junior');
         $clients = $userModel->getUsersByRole('client');
 
+
         // Render the "add new case" view with users data
         $this->view('/seniorCounsel/add_new_case', [
             'attorneys' => $attorneys,
             'juniors' => $juniors,
             'clients' => $clients,
-            'errors' => []
+            'errors' => [],
         ]);
     }
 
     // Add a new case
     // In app/controllers/Cases.php
-    // Add a new case
+   
     public function addCase()
     {
         // Collect POST data
@@ -71,6 +81,16 @@ class Cases
         // Save data to the database
         $caseModel = $this->loadModel('CaseModel');
         $caseModel->save($data);
+
+        $notificationModel = $this->loadModel('NotificationModel');
+        $notification = [
+            'user_id' => $clientId,
+            'message' => "You have been added to a new case. View the case page for more details.",
+            'timestamp' => date('Y-m-d H:i:s'),
+            'status' => 'unread'
+        ];
+
+        $notificationModel->createNotification($notification);
 
         // Redirect to the home page or success page
         $_SESSION['success'] = 'Case added successfully!';

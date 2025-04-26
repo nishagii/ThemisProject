@@ -7,9 +7,21 @@ class Invoice
 
     public function index()
     {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
+        
         $UserModel = $this->loadModel('UserModel');
         $client = $UserModel->getAllClients();
-        $this->view('seniorCounsel/invoice', ['client' => $client]);
+
+        $CaseModel = $this->loadModel('caseModel');
+        $case = $CaseModel->getAllCases();
+
+        $this->view('seniorCounsel/invoice', [
+            'client' => $client,
+            'case' => $case
+        ]);
     }
 
     public function getCaseNumberByClient()

@@ -1,3 +1,4 @@
+<!-- real register page -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,12 +53,6 @@
                     <!-- Confirm Password -->
                     <input type="password" name="confirm_password" placeholder="Confirm password" required>
                     <p class="conf_password-error"><?= $errors['confirm_password'] ?? '' ?></p>
-
-                    <!-- Terms and Conditions -->
-                    <label>
-                        <input type="checkbox" name="terms" required> I agree to the terms and conditions
-                    </label>
-                    <p class="terms-error"><?= $errors['terms'] ?? '' ?></p>
 
                     <!-- Submit -->
                     <input type="submit" value="Create account" class="register"> <br />

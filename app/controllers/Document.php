@@ -54,10 +54,19 @@ class Document
         $documentModel = $this->loadModel('documentModel');
     
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $caseID = filter_input(INPUT_POST, 'case_id', FILTER_SANITIZE_NUMBER_INT); 
+
+            $maxFileSize = 10 * 1024 * 1024; // 10 MB
+            if ($_FILES['document_file']['size'] > $maxFileSize) {
+                $_SESSION['error'] = "File too large. Max size is 10MB.";
+                header("Location: " . ROOT . "/document/add_Document/" . $caseID);
+                exit;
+            }
             $docName = filter_input(INPUT_POST, 'doc_name', FILTER_SANITIZE_STRING);
             $docDescription = filter_input(INPUT_POST, 'doc_description', FILTER_SANITIZE_STRING);
     
-            $caseID = filter_input(INPUT_POST, 'case_id', FILTER_SANITIZE_NUMBER_INT); 
+            
             $uploadedBy = $_SESSION['user_id'] ?? null;
     
             if (isset($_FILES['document_file']) && $_FILES['document_file']['error'] === UPLOAD_ERR_OK) {
@@ -154,11 +163,17 @@ class Document
     // Delete a document
     public function deleteDocument($documentID)
     {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
         // Load the document model
         $documentModel = $this->loadModel('documentModel');
         
         // Get document info before deleting (to delete the file as well)
         $document = $documentModel->getDocumentById($documentID)[0] ?? null;
+        $case = $documentModel->getCaseId($documentID);
+        $caseId = $case[0]->case_id ?? null;
         
         if (!$document) {
             $_SESSION['error'] = "Document not found.";
@@ -182,7 +197,9 @@ class Document
         }
         
         // Redirect back to documents list
-        header("Location: " . ROOT . "/document/index");
+
+        
+        header("Location: " . ROOT . "/document/index/" . $caseId);
         exit;
     }
 
@@ -207,6 +224,10 @@ class Document
     
     public function editDocument($id)
     {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
         $documentModel = $this->loadModel('documentModel');
         
         $document = $documentModel->getDocumentById($id); // Fetch by ID
@@ -224,6 +245,10 @@ class Document
     // Handle update
     public function updateDocument()
     {
+        if (empty($_SESSION['user_id'])) {
+            redirect('login');
+            return;
+        }
         // Check if form is submitted
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header("Location: " . ROOT . "/document/index");
@@ -290,10 +315,14 @@ class Document
         
         // Update the document
         $result = $documentModel->update($updateData, $documentID);
+        $case = $documentModel->getCaseId($documentID);
+        $caseId = $case[0]->case_id ?? null;
+
+
         
         if ($result) {
-            $_SESSION['success'] = "Document updated successfully!";
-            header("Location: " . ROOT . "/document/index");
+            
+            header("Location: " . ROOT . "/document/index/" . $caseId);
         } else {
             $_SESSION['error'] = "Failed to update document.";
             header("Location: " . ROOT . "/document/editDocument/" . $documentID);

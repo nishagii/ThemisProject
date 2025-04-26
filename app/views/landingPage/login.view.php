@@ -82,10 +82,6 @@
                 </div>
 
                 <br />
-                <div class="remember-me">
-                    <input type="checkbox" id="remember-me" name="remember-me">
-                    <label for="remember-me">Remember me</label>
-                </div>
                 <input type="submit" value="Log In" class="login"> <br />
             </form>
             <a href="<?= ROOT ?>/forgotpassword">Forgot password ?</a> <br>

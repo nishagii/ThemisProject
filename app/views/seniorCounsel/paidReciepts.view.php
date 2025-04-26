@@ -194,7 +194,6 @@
                     <tr>
                         <th>Case Number</th>
                         <th>Client Name</th>
-                        <th>ID Number</th>
                         <th>Client Number</th>
                         <th>Court</th>
                         <th>Amount</th>
@@ -208,7 +207,6 @@
                             <tr data-amount="<?= $payment->amount ?>">
                                 <td data-title="Case Number"><?= $payment->case_number ?></td>
                                 <td data-title="Client Name"><?= $payment->client_name ?? 'N/A' ?></td>
-                                <td data-title="ID Number"><?= $payment->id_number ?></td>
                                 <td data-title="Client Number"><?= $payment->client_number ?? 'N/A' ?></td>
                                 <td data-title="Court"><?= $payment->court ?? 'N/A' ?></td>
                                 <td data-title="Amount"><?= number_format($payment->amount, 2) ?></td>

@@ -34,6 +34,11 @@
         <tbody>
             <?php foreach ($knowledge as $knowledge): ?>
             <tr>
+            <td>
+            <?php if (!empty($knowledge->image)): ?>
+            <img src="<?= ROOT ?>/<?= $knowledge->image ?>" alt="Knowledge Image" style="width: 100px; height: auto;">
+            <?php endif; ?>
+        </td>
                 <td><?= htmlspecialchars($knowledge->topic) ?></td>
                 <td><?= htmlspecialchars($knowledge->note) ?></td>
                                 <td>

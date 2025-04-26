@@ -41,6 +41,28 @@
 
 }
 
+.back-button-container {
+    margin-bottom: 1rem;
+}
+
+.back-button {
+    background-color: #817cba;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.back-button:hover {
+    background-color: #2f2b50;
+}
+
+
 /* Responsive styling */
 @media (max-width: 768px) {
     

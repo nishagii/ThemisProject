@@ -5,6 +5,17 @@ class PrecedentModel {
 
     protected $table = 'judgmentsyearwise';
 
+    public function searchCases($query){
+        $query = "%$query%";
+        $sql = "SELECT * FROM $this->table
+                WHERE case_number LIKE :query
+                OR judgment_date LIKE :query 
+                OR description LIKE :query 
+                OR judgment_by LIKE :query";
+
+        return $this->query($sql, ['query' => $query]);
+    }
+
     public function insert($data) {
         $query = "INSERT INTO {$this->table} 
               (judgment_date, case_number, description, judgment_by, document_link)

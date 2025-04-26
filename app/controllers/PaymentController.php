@@ -14,12 +14,23 @@ require_once '../vendor/autoload.php';
 require_once dirname(__DIR__) . '/core/config.php';
 
 
+   
+
 class PaymentController
 {
     use Controller;
 
+    public function __construct()
+    {
+       $this->requireLogin();
+     
+    }
+
     public function index()
     {
+
+        $this->requireRole(['client']);
+
         // Redirect if not logged in
         if (empty($_SESSION['user_id'])) {
             redirect('login');
@@ -59,10 +70,10 @@ class PaymentController
 
         // Validate input
         $case_number = $data['case_number'] ?? null;
-        $id_number = $data['id_number'] ?? null;
+        $remarks = $data['remarks'] ?? null; // Changed from id_number to remarks
         $amount = isset($data['amount']) ? $data['amount'] * 100 : null; // Convert to cents
 
-        if (!$case_number || !$id_number || !$amount) {
+        if (!$case_number || !$amount) { // Removed remarks from required check
             http_response_code(400);
             echo json_encode(['error' => 'Missing required fields']);
             exit;
@@ -83,10 +94,10 @@ class PaymentController
                 ]],
                 'mode' => 'payment',
                 'success_url' => ROOT . '/PaymentController/paymentSuccess?session_id={CHECKOUT_SESSION_ID}',
-                'cancel_url' => ROOT . '/payments/paymentCancel',
+                'cancel_url' => ROOT . '/PaymentController/paymentCancel',
                 'metadata' => [
                     'case_number' => $case_number,
-                    'id_number' => $id_number,
+                    'remarks' => $remarks, // Changed from id_number to remarks
                 ]
             ]);
 
@@ -110,7 +121,7 @@ class PaymentController
 
         $paymentData = [
             'case_number' => $session->metadata->case_number,
-            'id_number' => $session->metadata->id_number,
+            'remarks' => $session->metadata->remarks, // Changed from id_number to remarks
             'amount' => $session->amount_total / 100,
             'payment_status' => $session->payment_status,
             'transaction_id' => $session->id,
@@ -150,12 +161,4 @@ class PaymentController
         $this->view('/payments/payment_details', ['payment' => $payment]);
     }
 
-    // Delete a payment record
-    public function deletePayment($paymentId)
-    {
-        $paymentModel = $this->loadModel('PaymentModel');
-        $paymentModel->deletePayment($paymentId);
-
-        redirect('payments/retrieveAllPayments');
-    }
 }

@@ -36,7 +36,7 @@
             </a>
             <div id="settings-menu" class="settings-menu hidden">
                 <ul>
-                    <li><a href="logout">Logout</a></li>
+                    <li><a href="<?= ROOT ?>/logout">Logout</a></li>
                 </ul>
             </div>
 

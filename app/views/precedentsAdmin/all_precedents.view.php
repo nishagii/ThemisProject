@@ -194,7 +194,7 @@
         }
 
         function filterByYear(year) {
-            fetch(`<?= ROOT ?>/PrecedentsController/filterByYear/${year}`)
+            fetch(`<?= ROOT ?>/PrecedentsController/filter/${year}`)
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById("precedentsTable").innerHTML = data;
@@ -203,7 +203,17 @@
 
             closeAllMenus();
         }
-        
+        function searchPrecedents() {
+            const query = document.getElementById("searchBar").value.trim();
+
+            fetch(`<?= ROOT ?>/PrecedentsController/search?query=${encodeURIComponent(query)}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("precedentsTable").innerHTML = data;
+                })
+                .catch(error => console.error("Error:", error));
+        }
+       
     </script>
 </body>
 </html>

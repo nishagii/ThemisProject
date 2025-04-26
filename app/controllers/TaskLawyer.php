@@ -4,6 +4,13 @@ class TaskLawyer
 {
     use Controller;
 
+    public function __construct()
+    {
+       
+        $this->requireLogin();
+        $this->requireRole(['lawyer']);
+    }
+
     public function index()
     {
         $TaskModel = $this->loadModel('TaskModel'); 
@@ -13,7 +20,7 @@ class TaskLawyer
         $completedCount = $TaskModel->getTaskCountByStatus('completed');
         $overdueCount = $TaskModel->getTaskCountByStatus('overdue');
 
-        // Manually calculate total count
+        
         $totalCount = ($pendingCount[0]->count ?? 0) + 
                     ($completedCount[0]->count ?? 0) + 
                     ($overdueCount[0]->count ?? 0);

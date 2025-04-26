@@ -21,6 +21,7 @@
                 <span class="tooltip">Search</span>
             </li> -->
             <!-- <li>
+            
                 <a href="<?= ROOT ?>/homelawyer">
                     <i class='bx bx-grid-alt'></i>
                     <span class="links_name">Dashboard</span>
@@ -49,19 +50,27 @@
                 <span class="tooltip">Junior Councel</span>
             </li> -->
             <li>
-                <a href="#">
+                <a href="<?= ROOT ?>/chat">
                     <i class='bx bx-chat'></i>
                     <span class="links_name">Messages</span>
                 </a>
                 <span class="tooltip">Messages</span>
             </li>
             <li>
-                <a href="<?= ROOT ?>/blog">
+                <a href="<?= ROOT ?>/blog/viewBlog">
                     <i class='bx bx-news'></i>
                     <span class="links_name">Blog</span>
                 </a>
                 <span class="tooltip">Blog</span>
             </li>
+            <li>
+    <a href="<?= ROOT ?>/feedback/viewAll">
+        <i class='bx bx-star'></i>
+        <span class="links_name">View Feedback</span>
+    </a>
+    <span class="tooltip">View Feedback</span>
+</li>
+
 
             <li class="profile">
                 <div class="profile-details">
