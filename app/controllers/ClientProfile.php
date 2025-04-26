@@ -13,6 +13,7 @@ class ClientProfile
         // Load the view with data
         $this->view('/client/component/bigNav', $data);
         $this->view('/client/component/smallNav1', $data);
+        $this->view('/client/component/sidebar', $data);
         $this->view('profileComponent', $data);
     }
 }
