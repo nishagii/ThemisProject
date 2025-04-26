@@ -4,9 +4,9 @@
         echo '</pre>';
         ?> -->
 <!-- <?php
-// Debug the meeting variable
-var_dump(isset($meetings) ? $meetings : 'Cases variable not set');
-?> -->
+        // Debug the meeting variable
+        var_dump(isset($meetings) ? $meetings : 'Cases variable not set');
+        ?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,82 +25,85 @@ var_dump(isset($meetings) ? $meetings : 'Cases variable not set');
 
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
+    <?php include('component/sidebar.view.php'); ?>
 
-    <div class="body-container">
+    <div class="home-section">
 
-        <!-- Request Meeting Form Section -->
-        <div id="request-meeting-section" class="request-meeting-section">
-            <h2>Request a Meeting</h2>
-            <form action="<?= ROOT ?>/meetingclient/requestMeeting" method="post" class="request-meeting-form">
-                <label for="meeting-date">Meeting Date:</label>
-                <input type="date" id="meeting-date" name="meeting_date" required>
+        <div class="body-container">
 
-                <label for="meeting-time">Meeting Time:</label>
-                <input type="time" id="meeting-time" name="meeting_time" required>
+            <!-- Request Meeting Form Section -->
+            <div id="request-meeting-section" class="request-meeting-section">
+                <h2>Request a Meeting</h2>
+                <form action="<?= ROOT ?>/meetingclient/requestMeeting" method="post" class="request-meeting-form">
+                    <label for="meeting-date">Meeting Date:</label>
+                    <input type="date" id="meeting-date" name="meeting_date" required>
 
-                <label for="meeting-purpose">Purpose:</label>
-                <textarea id="meeting-purpose" name="meeting_purpose" required></textarea>
+                    <label for="meeting-time">Meeting Time:</label>
+                    <input type="time" id="meeting-time" name="meeting_time" required>
 
-                <label for="meeting-comments">Comments:</label>
-                <textarea id="meeting-comments" name="meeting_comments" required></textarea>
+                    <label for="meeting-purpose">Purpose:</label>
+                    <textarea id="meeting-purpose" name="meeting_purpose" required></textarea>
 
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+                    <label for="meeting-comments">Comments:</label>
+                    <textarea id="meeting-comments" name="meeting_comments" required></textarea>
 
-        <!-- Meeting History Section -->
-        <div id="meeting-history-section" class="meeting-history-section">
-            <h2>Meeting History</h2>
-            <table class="body-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Purpose</th>
-                        <th>Comments</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (!empty($meetings)) : ?>
-                        <?php foreach ($meetings as $index => $meeting) : ?>
-                            <?php
-                            // Determine status class dynamically
-                            $statusClass = '';
-                            switch ($meeting->meeting_status) {
-                                case 'Accepted':
-                                    $statusClass = 'accepted';
-                                    break;
-                                case 'Pending':
-                                    $statusClass = 'pending';
-                                    break;
-                                case 'Rejected':
-                                    $statusClass = 'rejected';
-                                    break;
-                            }
-                            ?>
-                            <tr>
-                                <td><?= $index + 1 ?></td>
-                                <td><?= htmlspecialchars($meeting->meeting_date) ?></td>
-                                <td><?= htmlspecialchars($meeting->meeting_time) ?></td>
-                                <td><?= htmlspecialchars($meeting->meeting_purpose) ?></td>
-                                <td><?= htmlspecialchars($meeting->meeting_comments) ?></td>
-                                <td class="<?= $statusClass ?>"><?= htmlspecialchars($meeting->meeting_status) ?></td>
-                            </tr>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
 
-                        <?php endforeach; ?>
-                    <?php else : ?>
+            <!-- Meeting History Section -->
+            <div id="meeting-history-section" class="meeting-history-section">
+                <h2>Meeting History</h2>
+                <table class="body-table">
+                    <thead>
                         <tr>
-                            <td colspan="6">No meeting history available.</td>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Purpose</th>
+                            <th>Comments</th>
+                            <th>Status</th>
                         </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($meetings)) : ?>
+                            <?php foreach ($meetings as $index => $meeting) : ?>
+                                <?php
+                                // Determine status class dynamically
+                                $statusClass = '';
+                                switch ($meeting->meeting_status) {
+                                    case 'Accepted':
+                                        $statusClass = 'accepted';
+                                        break;
+                                    case 'Pending':
+                                        $statusClass = 'pending';
+                                        break;
+                                    case 'Rejected':
+                                        $statusClass = 'rejected';
+                                        break;
+                                }
+                                ?>
+                                <tr>
+                                    <td><?= $index + 1 ?></td>
+                                    <td><?= htmlspecialchars($meeting->meeting_date) ?></td>
+                                    <td><?= htmlspecialchars($meeting->meeting_time) ?></td>
+                                    <td><?= htmlspecialchars($meeting->meeting_purpose) ?></td>
+                                    <td><?= htmlspecialchars($meeting->meeting_comments) ?></td>
+                                    <td class="<?= $statusClass ?>"><?= htmlspecialchars($meeting->meeting_status) ?></td>
+                                </tr>
+
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="6">No meeting history available.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
-
     </div>
-
 </body>
 
 </html>
