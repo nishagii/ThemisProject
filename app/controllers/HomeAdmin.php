@@ -13,7 +13,7 @@ class HomeAdmin
 
     public function index()
     {
-        if (empty($_SESSION['user_id'])) {
+        if (empty($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
             redirect('login');
             return;
         }

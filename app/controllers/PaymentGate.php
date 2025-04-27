@@ -4,6 +4,13 @@ class PaymentGate
 {
     use Controller;
 
+    public function __construct()
+    {
+       
+        $this->requireLogin();
+        $this->requireRole(['lawyer']);
+    }
+
     public function index()
     {
         $InvoiceModel = $this->loadModel('InvoiceModel'); 

@@ -7,11 +7,12 @@ class RuleLawyer
 
     public function index()
     {
-
         // Set username from session, or default to 'User'
         $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
 
-        // Load the view with data
-        $this->view('/seniorCounsel/rule', $data);
+        $rulesModel = $this->loadModel('SCrulesModel'); 
+        $rules = $rulesModel->getAll();
+
+        $this->view('/seniorCounsel/rule', ['rules' => $rules]);
     }
 }

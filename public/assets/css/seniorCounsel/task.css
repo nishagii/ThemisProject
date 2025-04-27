@@ -484,3 +484,9 @@ input.valid {
   color: #6c757d;
 }
 
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+

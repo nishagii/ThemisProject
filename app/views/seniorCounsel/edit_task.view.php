@@ -11,8 +11,9 @@
 <body>
     <?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
+    <?php include('component/sidebar.view.php'); ?>
 
-    <div class="parent-container">
+    <div class="home-section parent-container">
         <div class="form-body">
             <div class="modal" id="modal">
                 <?php if (!empty($errors)): ?>
@@ -24,7 +25,7 @@
                 <?php endif; ?>
 
                 <div class="modal-header">
-                    <div class="title">Assign a Task</div>
+                    <div class="title">Edit Task</div>
                 </div>
                 <div class="modal-body">
                 

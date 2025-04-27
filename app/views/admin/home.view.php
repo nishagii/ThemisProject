@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THEMIS Admin Panel</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/admin/home.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- this is imported to use icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> 
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -54,7 +54,7 @@
 
                 <div class="login-list">
                     <?php if (!empty($login_details)): ?>
-                        <?php foreach ($login_details as $login): ?>
+                        <?php foreach (array_slice($login_details, 0, 3) as $login): ?>
                             <div class="login">
                                 <div class="login-info">
                                     <div class="login-icon"><i class="fas fa-key"></i></div>
@@ -73,10 +73,14 @@
                                 </div>
                             </div>
                         <?php endforeach; ?>
+                        <div class="view-all-button">
+                            <a href="<?= ROOT ?>/AdminLogin" class="btn">View All</a>
+                        </div>
                     <?php else: ?>
                         <p>No login history available.</p>
                     <?php endif; ?>
                 </div>
+
 
             </div>
 
@@ -88,7 +92,7 @@
                 </div>
                 <div class="categories">
                 <div class="left-card yellow">
-                <i class="fas fa-cogs"></i> <!-- Multiple gears -->
+                <i class="fas fa-cogs"></i> 
                     <div>System Status</div>
                 </div>
                 <div class="left-card right-purple">

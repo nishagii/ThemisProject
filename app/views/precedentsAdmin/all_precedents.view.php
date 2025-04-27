@@ -194,7 +194,7 @@
         }
 
         function filterByYear(year) {
-            fetch(`<?= ROOT ?>/PrecedentsController/filterByYear/${year}`)
+            fetch(`<?= ROOT ?>/PrecedentsController/filter/${year}`)
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById("precedentsTable").innerHTML = data;
