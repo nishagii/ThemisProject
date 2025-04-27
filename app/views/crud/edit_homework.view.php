@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+
     <div class="form-container">
         <form method="POST" action="<?= ROOT?>/Homework/updateHomework/<?= htmlspecialchars($homework[0]->homeworkID)?>">
             <label for="subject">Subject Name:</label>
@@ -106,6 +107,10 @@
             dateInput.addEventListener('input', () => {
                 errorElement.style.display = "none";
             });
+
+            if (performance.getEntriesByType("navigation")[0].type === "reload") {
+                window.location.href = "<?= ROOT ?>/Homework/editHomework/<?= htmlspecialchars($homework[0]->homeworkID) ?>";
+            }
         });
     </script>
 </body>
