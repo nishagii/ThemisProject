@@ -10,13 +10,14 @@ class LoginModel
     {
        
         $query = "INSERT INTO {$this->table} 
-                  (user_id, login_time, ip_address, status)
+                  (user_id, attempted_username, login_time, ip_address, status)
                   VALUES 
-                  (:user_id, NOW(), :ip_address, :status)";
+                  (:user_id, :attempted_username, NOW(), :ip_address, :status)";
 
         
         $params = [
             'user_id'    => $data['user_id'],
+            'attempted_username'    => $data['attempted_username'],
             'ip_address' => $data['ip_address'],
             'status'     => $data['status'],
         ];
