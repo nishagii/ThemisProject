@@ -42,7 +42,11 @@ class LoginModel
     }
 
     public function getAllLoginDetails() {
-        $query = "SELECT * FROM {$this->table} ORDER BY login_time DESC";
+        $query = "SELECT l.*, u.username, u.role 
+                  FROM {$this->table} l
+                  LEFT JOIN users u ON l.user_id = u.id
+                  ORDER BY l.login_time DESC";
+        
         return $this->query($query);
     }
 }
