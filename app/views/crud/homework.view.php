@@ -9,6 +9,8 @@
     <div class="homework-container">
         <h1>Homeworks List</h1>
 
+        <a href="<?= ROOT?>/Homework/homeworkForm"><button>Add Homework</button></a>
+
         
             <div class="homework">
                 <?php if (!empty($homework)) : ?>

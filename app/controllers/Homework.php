@@ -12,6 +12,14 @@ class Homework {
 
     }
 
+    public function homeworkForm() {
+
+        
+
+        $this->view('crud/addHomework');
+
+    }
+
     public function addHomework() {
 
         $data = [
