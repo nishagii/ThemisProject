@@ -24,4 +24,10 @@
 
             return $this->query($query, $params);
         }
+
+        public function getAll() {
+
+            $query = "SELECT * FROM {$this->table} ORDER BY homeworkID DESC";
+            return $this->query($query);
+        }
     }

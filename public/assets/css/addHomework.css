@@ -23,6 +23,53 @@ body {
     justify-content: center;
 }
 
+.homework-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.homework-container h1 {
+    margin-bottom: 10px;
+}
+
+.homework-card {
+    background-color: beige;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.homework {
+
+    padding: 20px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.label {
+    color: rgb(27, 27, 103);
+    font-weight: 600;
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.due {
+    color: red;
+    font-size: 13px;
+}
+
 form {
 
     padding: 20px;

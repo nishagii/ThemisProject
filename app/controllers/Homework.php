@@ -5,7 +5,10 @@ class Homework {
 
     public function index() {
 
-        $this->view('crud/addHomework');
+        $homeworkModel = $this->loadModel('HomeworkModel');
+        $homework = $homeworkModel->getAll();
+
+        $this->view('crud/homework',['homework' => $homework]);
 
     }
 
