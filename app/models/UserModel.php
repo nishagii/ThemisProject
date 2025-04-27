@@ -373,4 +373,22 @@ class UserModel
         return $this->query($query);
     }
 
+    public function findUserByUsernameOrEmail($usernameOrEmail) {
+        if(empty($usernameOrEmail)) {
+            return false;
+        }
+        
+        $query = "SELECT * FROM users WHERE username = :usernameOrEmail OR email = :usernameOrEmail LIMIT 1";
+        $data = [
+            'usernameOrEmail' => $usernameOrEmail
+        ];
+        
+        $result = $this->query($query, $data);
+        if($result) {
+            return $result[0];
+        }
+        
+        return false;
+    }
+
 }
