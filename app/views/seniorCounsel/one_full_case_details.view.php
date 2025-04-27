@@ -77,6 +77,12 @@
                 </div>
                 <div class="info-row">
                     <div class="info-item">
+                        <strong>Case priority:</strong>
+                        <p><?= htmlspecialchars($case->priority ?? 'medium') ?></p>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-item">
                         <strong>Notes:</strong>
                         <p><?= htmlspecialchars($case->notes) ?></p>
                     </div>

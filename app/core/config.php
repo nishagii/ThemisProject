@@ -37,7 +37,7 @@ loadEnv(__DIR__ . '/.env');
 
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	/** database config **/
-	define('DBNAME', 'themis');
+	define('DBNAME', 'crud');
 	define('DBHOST', 'localhost');
 	define('DBUSER', 'root');
 	define('DBPASS', '');

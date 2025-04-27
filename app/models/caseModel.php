@@ -90,7 +90,8 @@ class CaseModel
             'client_number',
             'client_email',
             'client_address',
-            'notes'
+            'notes',
+            'priority'
         ];
 
         foreach ($sensitiveFields as $field) {
@@ -116,7 +117,8 @@ class CaseModel
             'client_number',
             'client_email',
             'client_address',
-            'notes'
+            'notes',
+            'priority'
 
         ];
 
@@ -152,10 +154,10 @@ class CaseModel
         // Prepare the query to insert data into the "cases" table
         $query = "INSERT INTO {$this->table} 
                   (client_id, client_registered, client_name, client_number, client_email, client_address, 
-                   case_number, court, notes, attorney_id, junior_id, case_status)
+                   case_number, court, notes, attorney_id, junior_id, case_status,priority)
                   VALUES 
                   (:client_id, :client_registered, :client_name, :client_number, :client_email, :client_address, 
-                   :case_number, :court, :notes, :attorney_id, :junior_id, :case_status)";
+                   :case_number, :court, :notes, :attorney_id, :junior_id, :case_status, :priority)";
 
         // Bind parameters to prevent SQL injection
         $params = [
@@ -170,7 +172,8 @@ class CaseModel
             'notes' => $encryptedData['notes'],
             'attorney_id' => $encryptedData['attorney_id'] ?? null,
             'junior_id' => $encryptedData['junior_id'] ?? null,
-            'case_status' => $encryptedData['case_status'] ?? 'Active'
+            'case_status' => $encryptedData['case_status'] ?? 'Active',
+            'priority' => $encryptedData['priority'] ?? 'medium'
         ];
 
         // Execute the query using the parent Model class's query method
@@ -304,6 +307,7 @@ class CaseModel
                   attorney_id = :attorney_id,
                   junior_id = :junior_id,
                   case_status = :case_status,
+                  priority = :priority
                   updated_at = NOW()
               WHERE id = :id";
 
@@ -320,7 +324,8 @@ class CaseModel
             'notes' => $encryptedData['notes'],
             'attorney_id' => $encryptedData['attorney_id'] ?? null,
             'junior_id' => $encryptedData['junior_id'] ?? null,
-            'case_status' => $encryptedData['case_status'] ?? 'Active'
+            'case_status' => $encryptedData['case_status'] ?? 'Active',
+            'priority' => $encryptedData['priority'] ?? 'medium' 
         ];
 
         return $this->query($query, $params);
@@ -501,7 +506,8 @@ class CaseModel
                     (isset($case->client_email) && stripos($case->client_email, $searchQuery) !== false) ||
                     (isset($case->client_number) && stripos($case->client_number, $searchQuery) !== false) ||
                     (isset($case->court) && stripos($case->court, $searchQuery) !== false) ||
-                    (isset($case->notes) && stripos($case->notes, $searchQuery) !== false)
+                    (isset($case->notes) && stripos($case->notes, $searchQuery) !== false) ||
+                    (isset($case->priority) && stripos($case->priority, $searchQuery) !== false)
                 ) {
                     $results[] = $case;
                 }

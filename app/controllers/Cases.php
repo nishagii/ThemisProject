@@ -47,7 +47,8 @@ class Cases
             'case_number' => $_POST['case_number'] ?? '',
             'court' => $_POST['court'] ?? '',
             'notes' => $_POST['notes'] ?? '',
-            'case_status' => 'ongoing' // Always set to 'ongoing' by default
+            'case_status' => 'ongoing', // Always set to 'ongoing' by default
+            'priority' => $_POST['priority'] ?? 'medium'
         ];
 
         // Handle client selection/registration
@@ -315,7 +316,8 @@ class Cases
             'case_number' => $_POST['case_number'] ?? '',
             'court' => $_POST['court'] ?? '',
             'notes' => $_POST['notes'] ?? '',
-            'case_status' => $_POST['case_status'] ?? 'ongoing'
+            'case_status' => $_POST['case_status'] ?? 'ongoing',
+            'priority' => $_POST['priority'] ?? 'medium'
         ];
 
         // Handle client selection/registration

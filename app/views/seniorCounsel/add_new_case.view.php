@@ -154,6 +154,15 @@
                         <div class="form-container">
                             <h2>Case Details</h2>
                             <div class="form-group">
+                                <label for="priority">Priority</label>
+                                <select id="priority" name="priority" class="form-select">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                    <option value="urgent">Urgent</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="case_number">Case Number</label>
                                 <input id="case_number" name="case_number" type="text" placeholder="Enter case number" />
                             </div>
