@@ -27,6 +27,11 @@
                                     Delete
                                 </button>
                             </a>
+                            <a href="<?= ROOT?>/Homework/editHomework/<?= htmlspecialchars($hw->homeworkID)?>">
+                                <button>
+                                    Edit
+                                </button>
+                            </a>
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>

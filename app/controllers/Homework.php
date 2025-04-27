@@ -79,4 +79,12 @@ class Homework {
         redirect('Homework');
     }
 
+    public function editHomework($homeworkID) {
+
+        $homeworkModel = $this->loadModel('HomeworkModel');
+        $homework = $homeworkModel->getHomeworkByID($homeworkID);
+        // var_dump($homework);
+        $this->view('crud/edit_homework', ['homework' => $homework]);
+    }
+
 }

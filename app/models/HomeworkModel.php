@@ -38,4 +38,12 @@
             $params = ['homeworkID' => $homeworkID];
             return $this->query($query, $params);
         }
+
+        public function getHomeworkByID($homeworkID) {
+
+            $query = "SELECT * FROM {$this->table} WHERE homeworkID = :homeworkID";
+
+            $params = ['homeworkID' => $homeworkID];
+            return $this->query($query, $params);
+        }
     }
