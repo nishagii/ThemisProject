@@ -606,4 +606,81 @@ class CaseModel
 
         return $selectedJuniorId;
     }
+
+    /**
+     * Get count of cases by status
+     * @param string $status Case status to count
+     * @return int Count of cases with the specified status
+     */
+    public function getCaseCountByStatus($status)
+    {
+        $query = "SELECT COUNT(*) as count FROM {$this->table} 
+              WHERE case_status = :status AND deleted = 0";
+        $params = ['status' => $status];
+
+        $result = $this->query($query, $params);
+
+        // Check if result exists and return the count
+        if (!empty($result)) {
+            return $result[0]->count;
+        }
+
+        return 0; // Return 0 if no results found
+    }
+
+    /**
+     * Get count of closed cases for a specific month
+     * @param string $yearMonth Year and month in format 'YYYY-MM'
+     * @return int Count of cases closed in the specified month
+     */
+    public function getClosedCasesCountByMonth($yearMonth)
+    {
+        $query = "SELECT COUNT(*) as count FROM {$this->table} 
+              WHERE case_status = 'Closed' 
+              AND DATE_FORMAT(updated_at, '%Y-%m') = :year_month
+              AND deleted = 0";
+        $params = ['year_month' => $yearMonth];
+
+        $result = $this->query($query, $params);
+
+        // Check if result exists and return the count
+        if (!empty($result)) {
+            return $result[0]->count;
+        }
+
+        return 0; // Return 0 if no results found
+    }
+
+    /**
+     * Get recent cases
+     * @param int $limit Number of cases to retrieve
+     * @return array Array of recent case objects
+     */
+    public function getRecentCases($limit = 5)
+    {
+        // Convert $limit to integer to ensure it's safe
+        $limit = (int)$limit;
+
+        $query = "SELECT c.*, 
+              a.first_name as attorney_first_name, a.last_name as attorney_last_name,
+              j.first_name as junior_first_name, j.last_name as junior_last_name
+              FROM {$this->table} c
+              LEFT JOIN users a ON c.attorney_id = a.id
+              LEFT JOIN users j ON c.junior_id = j.id
+              WHERE c.deleted = 0
+              ORDER BY c.created_at DESC
+              LIMIT $limit";  // Use the integer directly in the query
+
+        // No parameters needed for LIMIT anymore
+        $cases = $this->query($query);
+
+        // Decrypt sensitive data in each case
+        if (is_array($cases)) {
+            foreach ($cases as &$case) {
+                $case = $this->decryptSensitiveData($case);
+            }
+        }
+
+        return $cases;
+    }
 }
