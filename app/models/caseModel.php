@@ -553,4 +553,57 @@ class CaseModel
 
         return $this->query($query, $params);
     }
+
+    /**
+     * Get case count for each junior counsel
+     * @return array Array of junior IDs and their case counts
+     */
+    public function getJuniorCaseCounts()
+    {
+        $query = "SELECT junior_id, COUNT(*) as case_count 
+              FROM {$this->table} 
+              WHERE deleted = 0 AND junior_id IS NOT NULL 
+              GROUP BY junior_id";
+
+        $results = $this->query($query);
+
+        // Convert to associative array with junior_id as key
+        $caseCounts = [];
+        if (is_array($results)) {
+            foreach ($results as $row) {
+                $caseCounts[$row->junior_id] = $row->case_count;
+            }
+        }
+
+        return $caseCounts;
+    }
+
+    /**
+     * Get junior with lowest case load
+     * @param array $juniors Array of junior user objects
+     * @return int|null ID of junior with lowest case load or null if no juniors
+     */
+    public function getJuniorWithLowestCaseLoad($juniors)
+    {
+        if (empty($juniors)) {
+            return null;
+        }
+
+        $caseCounts = $this->getJuniorCaseCounts();
+
+        // Find junior with lowest case count
+        $lowestCount = PHP_INT_MAX;
+        $selectedJuniorId = null;
+
+        foreach ($juniors as $junior) {
+            $count = $caseCounts[$junior->id] ?? 0; // 0 if no cases assigned
+
+            if ($count < $lowestCount) {
+                $lowestCount = $count;
+                $selectedJuniorId = $junior->id;
+            }
+        }
+
+        return $selectedJuniorId;
+    }
 }
