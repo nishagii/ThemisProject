@@ -1,7 +1,5 @@
 <?php
 
-use Google\Service\AndroidPublisher\Timestamp;
-
 class Homework {
     use Controller;
 
@@ -41,6 +39,16 @@ class Homework {
             $errors['priority'] = 'priority is required';
         }
 
+        if(!empty($data['deadlineDate']) && !empty($data['deadlineTime'])) {
+            $deadline = strtotime($data['deadlineDate'] . ' ' . $data['deadlineTime']);
+            $current = time();
+            
+            if($deadline <= $current) {
+                $errors['deadline'] = 'Deadline cannot be in the past or current time';
+            }
+        }
+
+        
 
         if(!empty($errors)) {
             

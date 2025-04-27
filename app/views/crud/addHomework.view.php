@@ -45,19 +45,68 @@
                 <p class="error"><?= htmlspecialchars($errors['priority']) ?> </p>
             <?php endif; ?> <br>
             <input type="submit" value="Add">
-            <?php if(isset($errors['deadline'])): ?>
-                <p class="error"><?= htmlspecialchars($errors['deadline']) ?> </p>
-            <?php endif; ?>
+            
         </form>
     </div>
 
     <script>
-       document.addEventListener("DOMContentLoaded", () => {
-            dateInput = document.getElementById('deadlineDate');
-            today = new Date();
-            todayDate = today.toISOString().split('T')[0];
+        document.addEventListener("DOMContentLoaded", () => {
+            const dateInput = document.getElementById('deadlineDate');
+            const timeInput = document.getElementById('deadlineTime');
+            const form = document.querySelector('form');
+            
+            // Create error element for datetime validation
+            const errorElement = document.createElement("p");
+            errorElement.className = "error";
+            errorElement.id = "datetime-error";
+            errorElement.style.display = "none";
+            
+            // Insert error element after time input
+            timeInput.parentNode.insertBefore(errorElement, timeInput.nextSibling);
+            
+            // Set minimum date to today
+            const today = new Date();
+            const todayDate = today.toISOString().split('T')[0];
             dateInput.setAttribute('min', todayDate);
-       })
+            
+            // Add form submission validation
+            form.addEventListener('submit', (e) => {
+                // Hide error message initially
+                errorElement.style.display = "none";
+                
+                if (dateInput.value) {
+                    const selectedDate = new Date(dateInput.value);
+                    const currentDate = new Date();
+                    
+                    // If selected date is today, check time
+                    if (selectedDate.toDateString() === currentDate.toDateString()) {
+                        const timeValue = timeInput.value;
+                        if (timeValue) {
+                            const [hours, minutes] = timeValue.split(':');
+                            
+                            // Set time on selected date for comparison
+                            selectedDate.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+                            
+                            // If selected datetime is in the past, prevent form submission
+                            if (selectedDate <= currentDate) {
+                                e.preventDefault();
+                                errorElement.textContent = "Deadline cannot be in the past. Please select a future time.";
+                                errorElement.style.display = "block";
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Clear validation message when input changes
+            timeInput.addEventListener('input', () => {
+                errorElement.style.display = "none";
+            });
+            
+            dateInput.addEventListener('input', () => {
+                errorElement.style.display = "none";
+            });
+        });
     </script>
 </body>
 </html>
