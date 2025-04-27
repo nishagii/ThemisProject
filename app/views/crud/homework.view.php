@@ -22,6 +22,11 @@
                             <div class="label">Due Time: <?= htmlspecialchars($hw->deadlineTime) ?></div>
                             <div class="label">Priority: <?= htmlspecialchars($hw->priority) ?></div>
                             <div class="label">Created At: <?= htmlspecialchars($hw->createdDate) ?></div>
+                            <a href="<?= ROOT?>/Homework/deleteHw/<?= htmlspecialchars($hw->homeworkID)?>">
+                                <button>
+                                    Delete
+                                </button>
+                            </a>
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>

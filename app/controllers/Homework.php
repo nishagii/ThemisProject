@@ -72,4 +72,11 @@ class Homework {
         redirect('Homework');
     }
 
+    public function deleteHw($homeworkID) {
+        
+        $homeworkModel = $this->loadModel('HomeworkModel');
+        $homeworkModel->deleteHomework($homeworkID);
+        redirect('Homework');
+    }
+
 }

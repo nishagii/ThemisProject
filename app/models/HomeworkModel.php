@@ -30,4 +30,12 @@
             $query = "SELECT * FROM {$this->table} ORDER BY homeworkID DESC";
             return $this->query($query);
         }
+
+        public function deleteHomework($homeworkID) {
+
+            $query = "DELETE FROM {$this->table} WHERE homeworkID = :homeworkID";
+
+            $params = ['homeworkID' => $homeworkID];
+            return $this->query($query, $params);
+        }
     }
