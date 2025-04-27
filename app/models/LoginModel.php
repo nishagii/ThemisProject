@@ -40,4 +40,9 @@ class LoginModel
     
         return $this->query($query, $params);
     }
+
+    public function getAllLoginDetails() {
+        $query = "SELECT * FROM {$this->table} ORDER BY login_time DESC";
+        return $this->query($query);
+    }
 }
