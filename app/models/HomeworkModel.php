@@ -46,4 +46,24 @@
             $params = ['homeworkID' => $homeworkID];
             return $this->query($query, $params);
         }
+
+        public function updateHomeworkByID($data) {
+
+            $query = "UPDATE {$this->table}
+                        SET `subject` = :subject,
+                            `desc` = :desc,
+                            deadlineDate = :deadlineDate,
+                            deadlineTime = :deadlineTime,
+                            priority = :priority
+                            WHERE homeworkID = :homeworkID";
+
+            $params = ['homeworkID' => $data['homeworkID'],
+                        'subject' => $data['subject'],
+                        'desc' => $data['desc'],
+                        'deadlineDate' => $data['deadlineDate'] ,
+                        'deadlineTime' => $data['deadlineTime'],
+                        'priority' => $data['priority']
+                    ];
+            return $this->query($query, $params);
+        }
     }

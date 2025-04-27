@@ -73,6 +73,7 @@ class TaskLawyer
         'priority' => $_POST['priority'] ?? '',
     ];
 
+    
     // Load the Task model
     $taskModel = $this->loadModel('TaskModel');
 
