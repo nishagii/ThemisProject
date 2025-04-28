@@ -62,7 +62,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Uploaded By</th>
+                            <!-- <th>Uploaded By</th> -->
                             <th>Uploaded Date</th>
                             <th>Actions</th>
                         </tr>
@@ -73,7 +73,7 @@
                                 <tr>
                                     <td><?php echo $template->name; ?></td>
                                     <td><?php echo $template->description; ?></td>
-                                    <td><?php echo $template->uploaded_by; ?></td>
+                                    <!-- <td><?php echo $template->uploaded_by; ?></td> -->
                                     <td><?php echo $template->uploaded_date; ?></td>
                                     <td>
                                         <div class="action-menu">
