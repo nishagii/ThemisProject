@@ -20,7 +20,7 @@
             Task Management
         </h1>
 
-        <!-- Add Task Button -->
+       
         <div class="add">
             <a href="<?= ROOT ?>/addTask">
                 <button class="add-button">
@@ -67,7 +67,7 @@
         
 
         <div class="task-table-container">
-                <!-- Search Bar -->
+               
             <div class="search-container">
                 <input type="text" id="task-search" placeholder="Search tasks by name, assignee, priority...">
                 <button onclick="searchTasks()"><i class="fas fa-search"></i> Search</button>
@@ -146,7 +146,7 @@
         document.getElementById("total-counter").addEventListener("click", () => {
             const rows = document.querySelectorAll(".task-table tbody tr");
             rows.forEach(row => {
-                row.style.display = ""; // Show all rows
+                row.style.display = ""; 
             });
             document.getElementById("no-results").style.display = "none";
         });
@@ -160,17 +160,17 @@
                 const status = statusCell.dataset.originalStatus.toLowerCase();
 
                 if (status === "pending") {
-                    row.style.display = ""; // show
+                    row.style.display = ""; 
                     visibleCount++;
                 } else {
-                    row.style.display = "none"; // hide
+                    row.style.display = "none"; 
                 }
             });
 
-            // Show no results message if needed
+           
             document.getElementById("no-results").style.display = visibleCount === 0 ? "block" : "none";
             
-            // Optionally scroll to the table
+            
             document.getElementById("task-table").scrollIntoView({ behavior: "smooth" });
         });
 
@@ -210,7 +210,7 @@
             document.getElementById("task-table").scrollIntoView({ behavior: "smooth" });
         });
 
-        // Search functionality
+       
         function searchTasks() {
             const searchTerm = document.getElementById("task-search").value.toLowerCase();
             const rows = document.querySelectorAll(".task-table tbody tr");
@@ -237,18 +237,18 @@
                 }
             });
 
-            // Show no results message if needed
+            
             document.getElementById("no-results").style.display = visibleCount === 0 ? "block" : "none";
         }
 
-        // Add event listener for Enter key on search input
+        
         document.getElementById("task-search").addEventListener("keyup", function(event) {
             if (event.key === "Enter") {
                 searchTasks();
             }
         });
 
-        // Clear search when input is cleared
+       
         document.getElementById("task-search").addEventListener("input", function() {
             if (this.value === "") {
                 const rows = document.querySelectorAll(".task-table tbody tr");
@@ -260,7 +260,7 @@
         });
 
         function viewTaskDetails(taskId) {
-            // Redirect to the task details page
+            
             window.location.href = "<?= ROOT ?>/tasklawyer/details/" + taskId;
         }
 
@@ -278,7 +278,7 @@
                 color: '#1d1b31',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Redirect to the delete action
+                   
                     window.location.href = `<?= ROOT ?>/tasklawyer/deleteTask/${taskID}`;
                 }
             });
@@ -300,7 +300,7 @@
                 cell.textContent = 'Overdue';
                 cell.style.color = 'red';
 
-                // Send API call to update status
+               
                 fetch(`<?= ROOT ?>/tasklawyer/overdueTask/${taskID}`, {
                     method: 'POST',
                 })
@@ -329,7 +329,7 @@
                 const getText = (el, index) => el.cells[index].textContent.trim().toLowerCase();
                 const getDate = (el, index) => new Date(el.cells[index].textContent.trim());
                 const getPriorityValue = (priority) => {
-                    // Adjust depending on your priority naming
+                  
                     if (priority === "high") return 3;
                     if (priority === "medium") return 2;
                     if (priority === "low") return 1;
