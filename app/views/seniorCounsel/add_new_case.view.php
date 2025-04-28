@@ -11,7 +11,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        /* Style for readonly fields */
+
         input[readonly] {
             background-color: #f8f9fa;
             cursor: not-allowed;
@@ -49,18 +49,18 @@
             </div>
 
             <form method="POST" action="<?= ROOT ?>/cases/addCase">
-                <!-- Hidden field to store client_id -->
+           
                 <input type="hidden" id="client_id" name="client_id" value="">
                 <input type="hidden" id="client_registered" name="client_registered" value="0">
 
                 <div class="form-layout">
-                    <!-- Left Column -->
+         
                     <div class="form-column">
-                        <!-- Client Section -->
+
                         <div class="form-container">
                             <h2>Client Information</h2>
 
-                            <!-- Client Selection -->
+                        
                             <div class="form-group">
                                 <label for="existing_client">Select Client</label>
                                 <select id="existing_client" name="existing_client" class="form-select" onchange="toggleClientFields()">
@@ -112,9 +112,9 @@
                         </div>
                     </div>
 
-                    <!-- Right Column -->
+
                     <div class="form-column">
-                        <!-- Instructing Attorney Section -->
+                     
                         <div class="form-container">
                             <h2>Instructing Attorney</h2>
                             <div class="form-group">
@@ -132,7 +132,7 @@
                             </div>
                         </div>
 
-                        <!-- Junior Counsel Section -->
+                    
                         <div class="form-container">
                             <h2>Junior Counsel</h2>
                             <div class="form-group">
@@ -150,7 +150,7 @@
                             </div>
                         </div>
 
-                        <!-- Case Details Section -->
+                       
                         <div class="form-container">
                             <h2>Case Details</h2>
                             <div class="form-group">
@@ -179,7 +179,7 @@
     </main>
 
     <script>
-        // Function to toggle client fields based on selection
+
         function toggleClientFields() {
             const selection = document.getElementById('existing_client').value;
             const clientFields = document.getElementById('client_details_fields');
@@ -187,31 +187,31 @@
             const clientRegisteredField = document.getElementById('client_registered');
 
             if (selection === 'new') {
-                // Show all client fields for new client
+          
                 clientFields.style.display = 'block';
 
-                // Clear the fields
+     
                 document.getElementById('client_name').value = '';
                 document.getElementById('client_number').value = '';
                 document.getElementById('client_email').value = '';
                 document.getElementById('client_address').value = '';
 
-                // Enable all fields
+          
                 document.getElementById('client_name').readOnly = false;
                 document.getElementById('client_number').readOnly = false;
                 document.getElementById('client_email').readOnly = false;
                 document.getElementById('client_address').readOnly = false;
 
-                // Set hidden fields
+             
                 clientIdField.value = '';
                 clientRegisteredField.value = '0';
 
-                // Add visual indicator
+      
                 document.querySelectorAll('#client_details_fields input').forEach(input => {
                     input.style.backgroundColor = '';
                 });
             } else {
-                // For existing client, fetch their details
+        
                 fetch(`<?= ROOT ?>/users/getUserDetails/${selection}`)
                     .then(response => {
                         if (!response.ok) {
@@ -221,25 +221,25 @@
                     })
                     .then(data => {
                         if (data.success) {
-                            // Populate fields with user data
+                          
                             document.getElementById('client_name').value = data.user.first_name + ' ' + data.user.last_name;
                             document.getElementById('client_number').value = data.user.phone || '';
                             document.getElementById('client_email').value = data.user.email || '';
                             document.getElementById('client_address').value = data.user.address || '';
 
-                            // Make name, number, and email readonly
+
                             document.getElementById('client_name').readOnly = true;
                             document.getElementById('client_number').readOnly = true;
                             document.getElementById('client_email').readOnly = true;
 
-                            // Keep address editable
+          
                             document.getElementById('client_address').readOnly = false;
 
-                            // Set hidden fields
+                   
                             clientIdField.value = selection;
                             clientRegisteredField.value = '1';
 
-                            // Add visual indicator for readonly fields
+                         
                             document.querySelectorAll('#client_details_fields input[readonly]').forEach(input => {
                                 input.style.backgroundColor = '#f8f9fa';
                             });
@@ -253,45 +253,45 @@
                         alert('Error loading client details. Please try again.');
                     });
 
-                // Show the fields
+            
                 clientFields.style.display = 'block';
             }
         }
 
-        // Initialize the form
+
         document.addEventListener('DOMContentLoaded', function() {
             toggleClientFields();
 
-            // Add form validation
+
             document.querySelector('form').addEventListener('submit', function(event) {
                 let isValid = true;
 
-                // Clear previous error messages
+                
                 document.querySelectorAll('.error-message').forEach(el => el.remove());
 
-                // Validate required fields
+             
                 const requiredFields = ['case_number', 'court'];
 
-                // If new client, validate client fields
+             
                 if (document.getElementById('existing_client').value === 'new') {
                     requiredFields.push('client_name', 'client_email', 'client_number');
                 }
 
-                // Always validate address
+              
                 requiredFields.push('client_address');
 
-                // Check each required field
+
                 requiredFields.forEach(fieldId => {
                     const field = document.getElementById(fieldId);
                     if (field && field.value.trim() === '') {
                         isValid = false;
 
-                        // Create error message
+           
                         const errorMsg = document.createElement('div');
                         errorMsg.className = 'error-message';
                         errorMsg.textContent = 'This field is required';
 
-                        // Add error message after the field
+                       
                         field.parentNode.appendChild(errorMsg);
                     }
                 });
