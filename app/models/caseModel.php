@@ -90,6 +90,7 @@ class CaseModel
             'client_number',
             'client_email',
             'client_address',
+            'client_occupation',
             'notes',
             'priority'
         ];
@@ -117,6 +118,7 @@ class CaseModel
             'client_number',
             'client_email',
             'client_address',
+            'client_occupation',
             'notes',
             'priority'
 
@@ -153,10 +155,10 @@ class CaseModel
 
         // Prepare the query to insert data into the "cases" table
         $query = "INSERT INTO {$this->table} 
-                  (client_id, client_registered, client_name, client_number, client_email, client_address, 
+                  (client_id, client_registered, client_name, client_number, client_email, client_address,client_occupation,
                    case_number, court, notes, attorney_id, junior_id, case_status,priority)
                   VALUES 
-                  (:client_id, :client_registered, :client_name, :client_number, :client_email, :client_address, 
+                  (:client_id, :client_registered, :client_name, :client_number, :client_email, :client_address,:client_occupation,
                    :case_number, :court, :notes, :attorney_id, :junior_id, :case_status, :priority)";
 
         // Bind parameters to prevent SQL injection
@@ -167,6 +169,7 @@ class CaseModel
             'client_number' => $encryptedData['client_number'],
             'client_email' => $encryptedData['client_email'],
             'client_address' => $encryptedData['client_address'],
+            'client_occupation' => $encryptedData['client_occupation'],
             'case_number' => $encryptedData['case_number'],
             'court' => $encryptedData['court'],
             'notes' => $encryptedData['notes'],
@@ -301,6 +304,7 @@ class CaseModel
                   client_number = :client_number,
                   client_email = :client_email,
                   client_address = :client_address,
+                  client_occupation = :client_occupation, 
                   case_number = :case_number,
                   court = :court,
                   notes = :notes,
@@ -319,6 +323,7 @@ class CaseModel
             'client_number' => $encryptedData['client_number'],
             'client_email' => $encryptedData['client_email'],
             'client_address' => $encryptedData['client_address'],
+            'client_occupation' => $encryptedData['client_occupation'],
             'case_number' => $encryptedData['case_number'],
             'court' => $encryptedData['court'],
             'notes' => $encryptedData['notes'],

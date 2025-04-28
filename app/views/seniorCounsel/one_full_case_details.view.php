@@ -83,6 +83,12 @@
                 </div>
                 <div class="info-row">
                     <div class="info-item">
+                        <strong>Job:</strong>
+                        <p><?= htmlspecialchars($case->client_occupation) ?></p>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-item">
                         <strong>Notes:</strong>
                         <p><?= htmlspecialchars($case->notes) ?></p>
                     </div>

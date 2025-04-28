@@ -96,6 +96,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     return true;
   }
+  function validateIdNumber(id, message) {
+    const field = document.getElementById(id);
+    if (!field || field.disabled) {
+      return true; // Skip validation for non-existent or disabled fields
+    }
+
+    const idNumberRegex = /^\d{13}$/; // Exactly 10 numeric digits
+    if (!idNumberRegex.test(field.value.trim())) {
+      showError(id, message);
+      return false;
+    }
+    return true;
+  }
 
   function showError(id, message) {
     const field = document.getElementById(id);

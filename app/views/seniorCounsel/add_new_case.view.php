@@ -11,7 +11,6 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-      
         input[readonly] {
             background-color: #f8f9fa;
             cursor: not-allowed;
@@ -49,7 +48,7 @@
             </div>
 
             <form method="POST" action="<?= ROOT ?>/cases/addCase">
-             
+
                 <input type="hidden" id="client_id" name="client_id" value="">
                 <input type="hidden" id="client_registered" name="client_registered" value="0">
 
@@ -107,6 +106,14 @@
                                         type="text"
                                         name="client_address"
                                         placeholder="Enter Address" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="client_occupation">Occupation</label>
+                                    <input
+                                        id="client_occupation"
+                                        type="text"
+                                        name="client_occupation"
+                                        placeholder="Enter Occupation" />
                                 </div>
                             </div>
                         </div>
@@ -204,12 +211,14 @@
                 document.getElementById('client_number').value = '';
                 document.getElementById('client_email').value = '';
                 document.getElementById('client_address').value = '';
+                document.getElementById('client_occupation').value = '';
 
                 // Enable all fields
                 document.getElementById('client_name').readOnly = false;
                 document.getElementById('client_number').readOnly = false;
                 document.getElementById('client_email').readOnly = false;
                 document.getElementById('client_address').readOnly = false;
+                document.getElementById('client_occupation').readOnly = false;
 
                 // Set hidden fields
                 clientIdField.value = '';
@@ -235,14 +244,17 @@
                             document.getElementById('client_number').value = data.user.phone || '';
                             document.getElementById('client_email').value = data.user.email || '';
                             document.getElementById('client_address').value = data.user.address || '';
+                            document.getElementById('client_occupation').value = data.user.occupation || '';
 
                             // Make name, number, and email readonly
                             document.getElementById('client_name').readOnly = true;
                             document.getElementById('client_number').readOnly = true;
                             document.getElementById('client_email').readOnly = true;
 
+
                             // Keep address editable
                             document.getElementById('client_address').readOnly = false;
+                            document.getElementById('client_occupation').readOnly = false;
 
                             // Set hidden fields
                             clientIdField.value = selection;
