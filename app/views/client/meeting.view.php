@@ -67,6 +67,9 @@
                     <label for="meeting-purpose">Purpose:</label>
                     <textarea id="meeting-purpose" name="meeting_purpose" required></textarea>
 
+                    <label for="meeting_location">Location:</label>
+                    <input type="text" id="meeting_location" name="meeting_location" required>
+
                     <label for="meeting-comments">Comments:</label>
                     <textarea id="meeting-comments" name="meeting_comments" required></textarea>
 
@@ -87,6 +90,7 @@
                             <th>Purpose</th>
                             <th>Comments</th>
                             <th>Status</th>
+                            <th>Location</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -115,6 +119,7 @@
                                     <td><?= htmlspecialchars($meeting->meeting_purpose) ?></td>
                                     <td><?= htmlspecialchars($meeting->meeting_comments) ?></td>
                                     <td class="<?= $statusClass ?>"><?= htmlspecialchars($meeting->meeting_status) ?></td>
+                                    <td><?= htmlspecialchars($meeting->meeting_location) ?></td>
                                     <td>
                                         <?php if ($meeting->meeting_status == 'Pending') : ?>
                                             <button class="delete-btn" data-id="<?= $meeting->id ?>" onclick="confirmDelete(<?= $meeting->id ?>)">
@@ -126,6 +131,7 @@
                                             </button>
                                         <?php endif; ?>
                                     </td>
+
                                 </tr>
                             <?php endforeach; ?>
                         <?php else : ?>

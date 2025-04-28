@@ -10,9 +10,9 @@ class MeetingModel
        
 
         $query = "INSERT INTO {$this->table}
-        (client_id,meeting_date, meeting_time, meeting_purpose, meeting_comments,meeting_status)
+        (client_id,meeting_date, meeting_time, meeting_purpose, meeting_comments,meeting_status,meeting_location)
         VALUES
-        (:client_id,:meeting_date, :meeting_time, :meeting_purpose, :meeting_comments, :meeting_status)";
+        (:client_id,:meeting_date, :meeting_time, :meeting_purpose, :meeting_comments, :meeting_status,:meeting_location)";
 
 
         // Bind parameters to prevent SQL injection
@@ -24,6 +24,7 @@ class MeetingModel
             'meeting_purpose' => $data['meeting_purpose'],
             'meeting_comments' => $data['meeting_comments'],
             'meeting_status' => 'Pending',
+            'meeting_location' => $data['meeting_location'],
         ];
 
         return $this->query($query,$params);

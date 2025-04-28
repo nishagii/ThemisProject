@@ -11,7 +11,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        /* Style for readonly fields */
+      
         input[readonly] {
             background-color: #f8f9fa;
             cursor: not-allowed;
@@ -49,12 +49,12 @@
             </div>
 
             <form method="POST" action="<?= ROOT ?>/cases/addCase">
-                <!-- Hidden field to store client_id -->
+             
                 <input type="hidden" id="client_id" name="client_id" value="">
                 <input type="hidden" id="client_registered" name="client_registered" value="0">
 
                 <div class="form-layout">
-                    <!-- Left Column -->
+
                     <div class="form-column">
                         <!-- Client Section -->
                         <div class="form-container">

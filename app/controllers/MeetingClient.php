@@ -26,6 +26,7 @@ class MeetingClient
                 'meeting_purpose' => $_POST['meeting_purpose']?? '',
                 'meeting_comments' => $_POST['meeting_comments']?? '',
                 'meeting_status' => 'Pending',
+                'meeting_location' => $_POST['meeting_location'] ?? ''
             ];
 
             $meetingModel = $this->loadModel('MeetingModel');
