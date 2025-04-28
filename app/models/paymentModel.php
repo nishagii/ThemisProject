@@ -3,14 +3,9 @@
 class PaymentModel
 {
     use Model;
-    protected $table = 'payments'; // Name of the database table
+    protected $table = 'payments'; 
 
-    /**
-     * Save a new payment record to the database.
-     *
-     * @param array $data Associative array containing payment details.
-     * @return bool True if the operation was successful, false otherwise.
-     */
+ 
     public function savePayment($data)
     {
         $query = "INSERT INTO {$this->table} 
@@ -29,13 +24,7 @@ class PaymentModel
     }
 
 
-    // ALTER TABLE payments CHANGE id_number remarks VARCHAR(255);
-    // ALTER TABLE payments ADD COLUMN remarks VARCHAR(255) AFTER id_number;
-    /**
-     * Retrieve all payments from the database.
-     *
-     * @return array List of all payments.
-     */
+
     public function getAllPayments()
     {
         $query = "SELECT * FROM {$this->table}
@@ -43,12 +32,7 @@ class PaymentModel
         return $this->query($query);
     }
 
-    /**
-     * Retrieve a specific payment by ID.
-     *
-     * @param int $id The ID of the payment.
-     * @return array|null The payment record or null if not found.
-     */
+
     public function getPaymentById($id)
     {
         $query = "SELECT * FROM {$this->table} WHERE id = :id";
@@ -59,11 +43,7 @@ class PaymentModel
     }
 
 
-    /**
-     * Retrieve all payments with associated case details.
-     *
-     * @return array List of all payments with case details.
-     */
+  
     public function getAllPaymentsWithCaseDetails()
     {
         $query = "SELECT p.*, c.case_number, c.client_name , c.court, c.client_number
@@ -73,13 +53,13 @@ class PaymentModel
 
         $payments = $this->query($query);
 
-        //decrypt sensitive data
+   
         if (!empty($payments)) {
             //load the caseModel to use its decryptSensitiveData method
             $caseModel = new CaseModel();
 
             foreach ($payments as &$payment){
-                // Decrypt the sensitive data
+             
                 $payment = $caseModel -> decryptSensitiveData($payment);
             }
 
@@ -87,14 +67,10 @@ class PaymentModel
         }
     }
 
-    /**
-     * Retrieve total amount received from payments this month.
-     * @return int Total amount received in the current month.
-     * 
-     */
+
     public function getTotalAmountReceivedInMonth()
     {
-        // Get the first and last day of the current month
+       
         $firstDayOfMonth = date('Y-m-01');
         $lastDayOfMonth = date('Y-m-t');
 

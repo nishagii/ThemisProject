@@ -14,7 +14,7 @@ require_once '../vendor/autoload.php';
 require_once dirname(__DIR__) . '/core/config.php';
 
 
-   
+
 
 class PaymentController
 {
@@ -22,8 +22,7 @@ class PaymentController
 
     public function __construct()
     {
-       $this->requireLogin();
-     
+        $this->requireLogin();
     }
 
     public function index()
@@ -31,49 +30,47 @@ class PaymentController
 
         $this->requireRole(['client']);
 
-        // Redirect if not logged in
         if (empty($_SESSION['user_id'])) {
             redirect('login');
             return;
         }
 
-        // Get username and email from session
+
         $username = $_SESSION['username'] ?? 'User';
         $email = $_SESSION['email'] ?? NULL;
 
-        // Prepare data array
+
         $data = [
             'username' => $username,
             'user_email' => $email,
             'cases' => []
         ];
 
-        // If email is available, fetch the user's cases
+
         if ($email) {
             $caseModel = $this->loadModel('CaseModel');
             $data['cases'] = $caseModel->getCasesByClientEmail($email);
         }
 
-        // Load the payments view with data
         $this->view('client/payments', $data);
     }
 
-    // Create a new payment session using Stripe
+
     public function createCheckoutSession()
     {
         \Stripe\Stripe::setApiKey(STRIPE_SECRET);
 
         header('Content-Type: application/json');
 
-        // Decode JSON input
+
         $data = json_decode(file_get_contents("php://input"), true);
 
-        // Validate input
-        $case_number = $data['case_number'] ?? null;
-        $remarks = $data['remarks'] ?? null; // Changed from id_number to remarks
-        $amount = isset($data['amount']) ? $data['amount'] * 100 : null; // Convert to cents
 
-        if (!$case_number || !$amount) { // Removed remarks from required check
+        $case_number = $data['case_number'] ?? null;
+        $remarks = $data['remarks'] ?? null;
+        $amount = isset($data['amount']) ? $data['amount'] * 100 : null;
+
+        if (!$case_number || !$amount) {
             http_response_code(400);
             echo json_encode(['error' => 'Missing required fields']);
             exit;
@@ -97,7 +94,7 @@ class PaymentController
                 'cancel_url' => ROOT . '/PaymentController/paymentCancel',
                 'metadata' => [
                     'case_number' => $case_number,
-                    'remarks' => $remarks, // Changed from id_number to remarks
+                    'remarks' => $remarks,
                 ]
             ]);
 
@@ -108,7 +105,7 @@ class PaymentController
         }
     }
 
-    // Handle payment success
+
     public function paymentSuccess()
     {
         $session_id = $_GET['session_id'] ?? '';
@@ -136,14 +133,14 @@ class PaymentController
         $this->view('/client/payment_success');
     }
 
-    // Handle payment cancellation
+
     public function paymentCancel()
     {
         $_SESSION['error'] = 'Payment was canceled.';
         redirect('PaymentController');
     }
 
-    // Retrieve all payments
+
     public function retrieveAllPayments()
     {
         $paymentModel = $this->loadModel('PaymentModel');
@@ -152,7 +149,7 @@ class PaymentController
         $this->view('/payments/all_payments', ['payments' => $payments]);
     }
 
-    // Retrieve a single payment by ID
+
     public function retrievePayment($paymentId)
     {
         $paymentModel = $this->loadModel('PaymentModel');
@@ -160,5 +157,4 @@ class PaymentController
 
         $this->view('/payments/payment_details', ['payment' => $payment]);
     }
-
 }
