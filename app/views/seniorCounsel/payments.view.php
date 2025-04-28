@@ -62,7 +62,7 @@
                     <div>Amount</div>
                     <div>Invoice</div>
                     <div>Send to Client</div>
-                    <div>Payment Status</div>
+                   
                 </div>
 
                 <?php if (!empty($invoices)): ?>
@@ -84,7 +84,7 @@
                                 <?php endif; ?>
                             </div>
 
-                            <div class="status"><?= $invoice->sent ? 'Sent' : 'Pending' ?></div>
+                            
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
