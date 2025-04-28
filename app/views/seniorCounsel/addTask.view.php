@@ -96,82 +96,82 @@
     
 
                 <script>
-   // Function to validate the selected date and time
+   
     function validateDateAndTime() {
     const today = new Date();
     const dateInput = document.getElementById("deadlineDate");
     const timeInput = document.getElementById("deadlineTime");
 
-    // Get today's date in YYYY-MM-DD format
-    const todayDate = today.toISOString().split('T')[0]; // Get only the date part (YYYY-MM-DD)
+   
+    const todayDate = today.toISOString().split('T')[0]; 
 
-    // Set the minimum date for the date input to today
+    
     dateInput.setAttribute('min', todayDate);
 
-    // Event listener for date input
+   
     dateInput.addEventListener('change', function () {
-        const selectedDate = new Date(`${dateInput.value}T${timeInput.value}`); // Use default time if not selected
+        const selectedDate = new Date(`${dateInput.value}T${timeInput.value}`); 
         if (selectedDate < today) {
             alert('Deadline date and time cannot be in the past.');
-            dateInput.value = ''; // Clear the invalid date
+            dateInput.value = ''; 
         }
     });
 
-    // Event listener for time input
+  
     timeInput.addEventListener('change', function () {
         if (!dateInput.value) {
             alert('Please select a date first.');
-            timeInput.value = ''; // Clear the invalid time
+            timeInput.value = '';
             return;
         }
 
         const selectedDate = new Date(`${dateInput.value}T${timeInput.value}`);
         if (selectedDate < today) {
             alert('Deadline date and time cannot be in the past.');
-            timeInput.value = ''; // Clear the invalid time
+            timeInput.value = ''; 
         }
     });
 }
 
-// Run the validation function once the DOM is loaded
+
 document.addEventListener('DOMContentLoaded', validateDateAndTime);
 
 
-// Function to validate the form before submission
+
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
     const errorMessages = {};
 
     form.addEventListener("submit", function (event) {
-        // Clear previous error messages
+       
         clearErrors();
 
-        // Perform validation
+      
         let isValid = true;
 
-        // Validate Task Name
+       
         isValid &= validateRequired("name", "Task name is required.");
 
-        // Validate Description
+      
         isValid &= validateRequired("description", "Description is required.");
 
-        // Validate Assignee
+      
         isValid &= validateRequired("assigneeID", "Assignee is required.");
 
-        // Validate Deadline Date
+      
         isValid &= validateRequired("deadlineDate", "Deadline date is required.");
 
-        // Validate Deadline Time
+       
         isValid &= validateRequired("deadlineTime", "Deadline time is required.");
         isValid &= validateTimeNotInPast("deadlineTime", "Deadline time cannot be in the past.");
 
-        // Prevent form submission if validation fails
+      
         if (!isValid) {
             event.preventDefault();
         }
     });
 
-    // Validate required fields
+   
     function validateRequired(id, message) {
         const field = document.getElementById(id);
         if (field.value.trim() === "") {
@@ -181,10 +181,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 
-    // Validate that the selected date is not in the past
+  
     function validateDateNotInPast(id, message) {
         const field = document.getElementById(id);
-        const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+        const today = new Date().toISOString().split('T')[0];
         if (field.value < today) {
             showError(id, message);
             return false;
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 
-    // Validate that the selected time is not in the past
+   
     function validateTimeNotInPast(id, message) {
         const dateField = document.getElementById("deadlineDate");
         const timeField = document.getElementById(id);
@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 
-    // Display error messages
+    
     function showError(id, message) {
         const field = document.getElementById(id);
         const errorElement = document.createElement("div");
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
         field.parentElement.appendChild(errorElement);
     }
 
-    // Clear previous error messages
+   
     function clearErrors() {
         document.querySelectorAll(".error-message").forEach((element) => element.remove());
     }
