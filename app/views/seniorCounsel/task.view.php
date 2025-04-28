@@ -167,10 +167,10 @@
                 }
             });
 
-           
+            
             document.getElementById("no-results").style.display = visibleCount === 0 ? "block" : "none";
             
-            
+           
             document.getElementById("task-table").scrollIntoView({ behavior: "smooth" });
         });
 
@@ -210,7 +210,7 @@
             document.getElementById("task-table").scrollIntoView({ behavior: "smooth" });
         });
 
-       
+        
         function searchTasks() {
             const searchTerm = document.getElementById("task-search").value.toLowerCase();
             const rows = document.querySelectorAll(".task-table tbody tr");
@@ -237,7 +237,7 @@
                 }
             });
 
-            
+           
             document.getElementById("no-results").style.display = visibleCount === 0 ? "block" : "none";
         }
 
@@ -260,7 +260,7 @@
         });
 
         function viewTaskDetails(taskId) {
-            
+           
             window.location.href = "<?= ROOT ?>/tasklawyer/details/" + taskId;
         }
 
@@ -329,7 +329,7 @@
                 const getText = (el, index) => el.cells[index].textContent.trim().toLowerCase();
                 const getDate = (el, index) => new Date(el.cells[index].textContent.trim());
                 const getPriorityValue = (priority) => {
-                  
+                   
                     if (priority === "high") return 3;
                     if (priority === "medium") return 2;
                     if (priority === "low") return 1;
