@@ -13,6 +13,11 @@
             $this->view('crud/paper',['paper' => $paper]);
         }
 
+        public function addPaper() {
+
+            $this->view('crud/addPaper');
+        }
+
         public function savePaper() {
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -77,5 +82,9 @@
                 return;
 
             }
+        }
+
+        public function deletePaper($paperID) {
+            
         }
     }
