@@ -14,7 +14,7 @@
 <body>
     <div>
         <ul class="small-navbar">
-            <li><a href="calendarjunior"><?= ROOT ?>/Calendar"</a></li>
+            <li><a href="<?= ROOT ?>/calendarjunior">Calendar</a></li>
             <li><a href="task">Task Board</a></li>
             <li><a href="templateJunior">Document templates</a></li>
             <li><a href="knowledge">Knowledge Panel</a></li>
