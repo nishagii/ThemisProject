@@ -43,10 +43,10 @@
                         <textarea id="description" name="description" rows="3"></textarea>
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="pdf">Upload Task PDF (optional):</label>
                         <input type="file" id="pdf" name="pdf" accept="application/pdf" class="custom-file-input">
-                    </div>
+                    </div> -->
                     
                     <div class="form-group">
                         <label for="assigneeID">Assign To:</label>
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
         isValid &= validateRequired("name", "Task name is required.");
 
       
-        isValid &= validateRequired("description", "Description is required.");
+        // isValid &= validateRequired("description", "Description is required.");
 
       
         isValid &= validateRequired("assigneeID", "Assignee is required.");
