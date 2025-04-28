@@ -36,22 +36,24 @@
                         <th>Case ID</th>
                         <th>Client</th>
                         <th>Status</th>
-                        <th>Next Hearing</th>
+                        <th>Court</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>001</td>
-                        <td>John Doe</td>
-                        <td>In Progress</td>
-                        <td>2024-12-05</td>
-                    </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>Jane Smith</td>
-                        <td>Delayed</td>
-                        <td>2024-12-10</td>
-                    </tr>
+                    <?php if (isset($recentCases) && is_array($recentCases) && count($recentCases) > 0): ?>
+                        <?php foreach ($recentCases as $case): ?>
+                            <tr>
+                                <td><?= $case->case_number ?></td>
+                                <td><?= $case->client_name ?></td>
+                                <td><?= $case->case_status ?></td>
+                                <td><?= $case->court ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="4">No recent cases found</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
             <a href="<?= ROOT ?>/cases/retrieveAllCases" class="btn">View All Cases</a>
@@ -102,6 +104,15 @@
                     <h3>No Delayed Cases</h3>
                 <?php endif; ?>
             </div>
+
+            <!-- Pie Chart -->
+            <div class=" card cards ">
+                <h3>Case Stats</h3>
+                <div class="pie-chart-container">
+                    <canvas id="casesPieChart"></canvas>
+                </div>
+
+            </div>
         </div>
 
 
@@ -109,23 +120,28 @@
         <div class="chart-container">
             <div class="heading">
                 <h3>Case Analytics</h3>
+                <p> Analytics about the cases handled by
+                    <span style="color: #fa9800; font-weight: bold;"> Attorneys </span> and <span style="color: #fa9800; font-weight: bold;"> Juniors. </span>.
+                </p>
             </div>
 
 
             <div class="chart-row">
-                <!-- Pie Chart -->
+
+
+                <!-- Bar Chart -->
                 <div class="chart-item">
-                    <h4>Case Stats</h4>
-                    <div class="pie-chart-container">
-                        <canvas id="casesPieChart"></canvas>
+                    <h4>Cases Handled by Attorneys</h4>
+                    <div class="bar-chart-container">
+                        <canvas id="barChart"></canvas>
                     </div>
                 </div>
 
                 <!-- Bar Chart -->
                 <div class="chart-item">
-                    <h4>Cases Handled by Lawyer</h4>
+                    <h4>Cases Handled by Juniors</h4>
                     <div class="bar-chart-container">
-                        <canvas id="barChart"></canvas>
+                        <canvas id="juniorBarChart"></canvas>
                     </div>
                 </div>
 
@@ -140,39 +156,90 @@
         </div>
     </div>
 
+    // Enhanced chart configurations
     <script>
-        // Data for the pie chart
-        const data = {
-            labels: ['Open Cases', 'Delayed Cases', 'Closed Cases', 'Upcoming Hearings'],
+        // Color palette that matches your design theme
+        const themisColors = {
+            primary: ['rgba(250, 152, 0, 0.8)', 'rgba(250, 152, 0, 0.6)', 'rgba(250, 152, 0, 0.4)'],
+            secondary: ['rgba(29, 27, 49, 0.8)', 'rgba(29, 27, 49, 0.6)', 'rgba(29, 27, 49, 0.4)'],
+            accent: [
+                'rgba(77, 46, 0, 0.8)',
+                'rgba(153, 92, 0, 0.8)',
+                'rgba(230, 138, 0, 0.8)',
+                'rgba(255, 173, 51, 0.8)',
+                'rgba(255, 204, 128, 0.8)'
+            ],
+            borders: [
+                'rgb(77, 46, 0)',
+                'rgb(153, 92, 0)',
+                'rgb(230, 138, 0)',
+                'rgb(255, 173, 51)',
+                'rgb(255, 204, 128)'
+            ]
+        };
+
+        // Global Chart.js configuration
+        Chart.defaults.font.family = "'Montserrat', sans-serif";
+        Chart.defaults.font.size = 14;
+        Chart.defaults.color = '#1d1b31';
+
+        // Enhance tooltip style
+        Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(29, 27, 49, 0.8)';
+        Chart.defaults.plugins.tooltip.titleFont = {
+            weight: 'bold',
+            size: 14
+        };
+        Chart.defaults.plugins.tooltip.bodyFont = {
+            size: 13
+        };
+        Chart.defaults.plugins.tooltip.padding = 10;
+        Chart.defaults.plugins.tooltip.cornerRadius = 6;
+        Chart.defaults.plugins.tooltip.borderColor = 'rgba(250, 152, 0, 0.5)';
+        Chart.defaults.plugins.tooltip.borderWidth = 1;
+
+        // Data for the pie chart with enhanced styling
+        const pieData = {
+            labels: <?= json_encode($pieChartData['labels']) ?>,
             datasets: [{
                 label: 'Case Distribution',
-                data: [15, 5, 20, 10], // Replace with dynamic data from backend
-                backgroundColor: [
-                    'rgb(77, 46, 0,0.8)', // Dark Orange (Delayed Cases)
-                    'rgb(153, 92, 0,0.8)', // Green (Closed Cases)
-                    'rgb(230, 138, 0,0.8)', // Navy (Active Cases)
-                    'rgb(255, 173, 51,0.8)' // Red (Pending Cases)
-                ],
-                borderColor: [
-                    'rgb(77, 46, 0)', // Dark Orange (Delayed Cases)
-                    'rgb(153, 92, 0)', // Green (Closed Cases)
-                    'rgb(230, 138, 0)', // Navy (Active Cases)
-                    'rgb(255, 173, 51)' // Red (Pending Cases)
-                ],
-                borderWidth: 1
+                data: <?= json_encode($pieChartData['data']) ?>,
+                backgroundColor: themisColors.accent,
+                borderColor: themisColors.borders,
+                borderWidth: 2,
+                hoverOffset: 10
             }]
         };
 
         // Configuration for the pie chart
-        const config = {
-            type: 'pie', // Pie chart type
-            data: data,
+        const pieConfig = {
+            type: 'pie',
+            data: pieData,
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'right'
+                        position: 'right',
+                        labels: {
+                            padding: 15,
+                            usePointStyle: true,
+                            boxWidth: 10,
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    },
+                    title: {
+                        display: false,
+                        text: 'Case Distribution',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
                     }
+                },
+                animation: {
+                    animateScale: true,
+                    animateRotate: true
                 }
             }
         };
@@ -180,40 +247,175 @@
         // Render the pie chart
         const casesPieChart = new Chart(
             document.getElementById('casesPieChart'),
-            config
+            pieConfig
         );
 
-
-        // Bar chart data and configuration
+        // Bar chart for attorneys
         new Chart(document.getElementById("barChart"), {
             type: "bar",
             data: {
-                labels: ['Attorney 1', 'Attorney 2', 'Attorney 3'],
+                labels: <?= json_encode($attorneyChartData['labels']) ?>,
                 datasets: [{
                     label: 'Cases Handled',
-                    data: [10, 25, 5],
-                    backgroundColor: ['#ff6b6b', '#4e73df', '#1cc88a'],
+                    data: <?= json_encode($attorneyChartData['data']) ?>,
+                    backgroundColor: themisColors.accent,
+                    borderColor: themisColors.borders,
+                    borderWidth: 2,
+                    borderRadius: 6,
+                    hoverBackgroundColor: themisColors.primary
                 }]
             },
             options: {
-                responsive: true
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0,
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)',
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                }
             }
         });
 
-        // Line chart data and configuration
-        new Chart(document.getElementById("lineChart"), {
-            type: "line",
+        // Bar chart for juniors
+        new Chart(document.getElementById("juniorBarChart"), {
+            type: "bar",
             data: {
-                labels: ['January', 'February', 'March', 'April'],
+                labels: <?= json_encode($juniorChartData['labels']) ?>,
                 datasets: [{
-                    label: 'Cases Closed',
-                    data: [5, 10, 15, 20],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    fill: false
+                    label: 'Cases Handled',
+                    data: <?= json_encode($juniorChartData['data']) ?>,
+                    backgroundColor: themisColors.primary,
+                    borderColor: 'rgba(250, 152, 0, 1)',
+                    borderWidth: 2,
+                    borderRadius: 6,
+                    hoverBackgroundColor: themisColors.accent[2]
                 }]
             },
             options: {
-                responsive: true
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0,
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)',
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                animation: {
+                    duration: 2000,
+                    easing: 'easeOutQuart'
+                }
+            }
+        });
+
+        // Line chart for cases closed over time
+        new Chart(document.getElementById("lineChart"), {
+            type: "line",
+            data: {
+                labels: <?= json_encode($lineChartData['labels']) ?>,
+                datasets: [{
+                    label: 'Cases Closed',
+                    data: <?= json_encode($lineChartData['data']) ?>,
+                    borderColor: 'rgba(250, 152, 0, 1)',
+                    backgroundColor: 'rgba(250, 152, 0, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3,
+                    pointBackgroundColor: 'rgba(29, 27, 49, 0.8)',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0,
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                weight: 'bold'
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 2000
+                }
             }
         });
     </script>

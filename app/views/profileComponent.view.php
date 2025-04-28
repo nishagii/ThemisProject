@@ -183,24 +183,25 @@ echo "<script>console.log(" . json_encode($_SESSION) . ");</script>";
             </button>
         </div>
 
+        <!-- In your profileComponent.php view file -->
+<!-- At the location where you want to display the login history -->
+
         <div class="activity-section">
             <h3>Login Activity</h3>
             <div class="login-container">
                 <table class="login-table">
                     <thead>
                         <tr>
-                            <th>Last Login Date</th>
-                            <th>Last Login Time</th>
+                        <th>Login Time</th>
                             <th>IP Address</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (isset($data['loginHistory']) && !empty($data['loginHistory'])): ?>
-                            <?php foreach ($data['loginHistory'] as $login): ?>
+                        <?php if (isset($data['login_history']) && !empty($data['login_history'])): ?>
+                            <?php foreach ($data['login_history'] as $login): ?>
                                 <tr>
-                                    <td><?= date('d/m/Y', strtotime($login->login_time)) ?></td>
-                                    <td><?= date('h:i A', strtotime($login->login_time)) ?></td>
+                                <td><?= htmlspecialchars($login->login_time) ?></td>
                                     <td><?= htmlspecialchars($login->ip_address) ?></td>
                                     <td><?= htmlspecialchars($login->status) ?></td>
                                 </tr>

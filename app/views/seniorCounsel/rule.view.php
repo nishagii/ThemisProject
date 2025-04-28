@@ -14,35 +14,39 @@
 </head>
 
 <body>
-<?php include('component/bigNav.view.php'); ?>
-<?php include('component/smallNav1.view.php'); ?>
-<?php include('component/sidebar.view.php'); ?>
-<div class="home-section">
-    <div class="rules-header">
-        <h1>Supreme Court Rules</h1>
-    </div>
-    <div class="sc-rules">
-    <?php if (!empty($rules)): ?>
-        <?php foreach ($rules as $rule): ?>
-            <ul>
+    <?php include('component/bigNav.view.php'); ?>
+    <?php include('component/smallNav1.view.php'); ?>
+    <?php include('component/sidebar.view.php'); ?>
+    <div class="home-section">
+        <div class="rules-header">
+            <h1>Supreme Court Rules</h1>
+        </div>
+        <p> Sri Lankan Supreme Court Rules are the highest court of law in Sri Lanka. Here listed are the
+            <span style="color: #fa9800; font-weight: bold;">Court Rules</span> by the Supreme Court.
+        </p>
+
+        <div class="sc-rules">
+            <?php if (!empty($rules)): ?>
+                <?php foreach ($rules as $rule): ?>
+                    <ul>
+                        <li>
+                            <span><?php echo $rule->rule_number; ?></span>
+                            <span><?php echo $rule->published_date; ?></span>
+                            <span>
+                                <span><a href="<?php echo $rule->sinhala_link; ?>" target="_blank">Sinhala</a></span>
+                                <span><a href="<?php echo $rule->tamil_link; ?>" target="_blank">Tamil</a></span>
+                                <span><a href="<?php echo $rule->english_link; ?>" target="_blank">English</a></span>
+                            </span>
+                        </li>
+                    </ul>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <li>
-                <span><?php echo $rule->rule_number; ?></span>
-                <span><?php echo $rule->published_date; ?></span>
-                <span>
-                    <span><a href="<?php echo $rule->sinhala_link; ?>" target="_blank">Sinhala</a></span>
-                    <span><a href="<?php echo $rule->tamil_link; ?>" target="_blank">Tamil</a></span>
-                    <span><a href="<?php echo $rule->english_link; ?>" target="_blank">English</a></span>
-                </span>
+                    No rules found in the database.
                 </li>
-            </ul>
-        <?php endforeach; ?>
-        <?php else: ?>
-            <li>
-                No rules found in the database.
-            </li>
-        <?php endif; ?>
+            <?php endif; ?>
+        </div>
     </div>
-</div>
     <script>
         function confirmDelete(ruleId) {
             Swal.fire({
@@ -65,4 +69,5 @@
         }
     </script>
 </body>
+
 </html>

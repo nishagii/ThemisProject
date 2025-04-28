@@ -136,12 +136,12 @@
                         <?php if (!empty($meetings) && is_array($meetings)): ?>
                             <?php foreach ($meetings as $meeting): ?>
                                 <div class="meeting-card">
-                                    <h3>Meeting with: <?= htmlspecialchars($meeting->lawyer_name) ?></h3>
+                                   
                                     <p>Date: <i class="fas fa-calendar"></i> <?= htmlspecialchars($meeting->meeting_date) ?></p>
                                     <p>Time: <i class="fas fa-clock"></i> <?= htmlspecialchars($meeting->meeting_time) ?></p>
                                     <p>Status: 
-                                        <span class="status <?= strtolower(str_replace(' ', '-', $meeting->status)) ?>">
-                                            <?= htmlspecialchars($meeting->status) ?>
+                                        <span class="status <?= strtolower(str_replace(' ', '-', $meeting->meetin_status)) ?>">
+                                            <?= htmlspecialchars($meeting->meeting_status) ?>
                                         </span>
                                     </p>
                                 </div>

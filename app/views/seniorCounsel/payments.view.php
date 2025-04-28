@@ -30,7 +30,9 @@
 
         <div class="invoice-card">
 
-
+            <p> Here are the invoices sent for the
+                <span style="color: #fa9800; font-weight: bold;">Clients. </span> Click on the invoice to view the details.
+            </p>
             <div class="invoice-container">
 
                 <!-- Sort Button Section -->
@@ -76,7 +78,7 @@
                             </div>
                             <div>
                                 <?php if ($invoice->sent): ?>
-                                    <span class="invoice-sent-label">Invoice Sent</span>
+                                    <span class="invoice-sent-label">Sent</span>
                                 <?php else: ?>
                                     <a href="<?= ROOT ?>/invoice/markInvoiceAsSent/<?= $invoice->invoiceID ?>" class="send-button">Send</a>
                                 <?php endif; ?>
@@ -96,37 +98,36 @@
     </div>
     <script>
         function sortInvoices() {
-    const option = document.getElementById("sort-invoices").value;
-    const rows = Array.from(document.querySelectorAll(".invoice-row"));
-    const container = document.querySelector(".invoice-container");
+            const option = document.getElementById("sort-invoices").value;
+            const rows = Array.from(document.querySelectorAll(".invoice-row"));
+            const container = document.querySelector(".invoice-container");
 
-    rows.sort((a, b) => {
-        const dateA = new Date(a.querySelector(".due-date").textContent.trim());
-        const dateB = new Date(b.querySelector(".due-date").textContent.trim());
-        const clientA = a.querySelector(".client").textContent.trim().toLowerCase();
-        const clientB = b.querySelector(".client").textContent.trim().toLowerCase();
-        const amountA = parseFloat(a.querySelector(".amount").textContent.replace(/[^\d.]/g, ""));
-        const amountB = parseFloat(b.querySelector(".amount").textContent.replace(/[^\d.]/g, ""));
+            rows.sort((a, b) => {
+                const dateA = new Date(a.querySelector(".due-date").textContent.trim());
+                const dateB = new Date(b.querySelector(".due-date").textContent.trim());
+                const clientA = a.querySelector(".client").textContent.trim().toLowerCase();
+                const clientB = b.querySelector(".client").textContent.trim().toLowerCase();
+                const amountA = parseFloat(a.querySelector(".amount").textContent.replace(/[^\d.]/g, ""));
+                const amountB = parseFloat(b.querySelector(".amount").textContent.replace(/[^\d.]/g, ""));
 
-        switch (option) {
-            case "date-asc":
-                return dateA - dateB;
-            case "date-desc":
-                return dateB - dateA;
-            case "client-asc":
-                return clientA.localeCompare(clientB);
-            case "client-desc":
-                return clientB.localeCompare(clientA);
-            case "amount-asc":
-                return amountA - amountB;
-            case "amount-desc":
-                return amountB - amountA;
+                switch (option) {
+                    case "date-asc":
+                        return dateA - dateB;
+                    case "date-desc":
+                        return dateB - dateA;
+                    case "client-asc":
+                        return clientA.localeCompare(clientB);
+                    case "client-desc":
+                        return clientB.localeCompare(clientA);
+                    case "amount-asc":
+                        return amountA - amountB;
+                    case "amount-desc":
+                        return amountB - amountA;
+                }
+            });
+
+            rows.forEach(row => container.appendChild(row));
         }
-    });
-
-    rows.forEach(row => container.appendChild(row));
-}
-
     </script>
 
 </body>

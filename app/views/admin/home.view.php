@@ -114,7 +114,7 @@
             <div class="quick-action">
                 <div class="action-icon"></div>
                 <div class="label">Reports</div>
-                <button class="add-user-btn" onclick="window.location.href='<?= ROOT ?>/admin'">
+                <button class="add-user-btn" onclick="window.location.href='<?= ROOT ?>/report'">
                     <i class="fas fa-file-alt"></i>
                     View
                 </button>

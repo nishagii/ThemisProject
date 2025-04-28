@@ -35,7 +35,7 @@ class Cases
 
     // Add a new case
     // In app/controllers/Cases.php
-   
+
     public function addCase()
     {
         // Collect POST data
@@ -75,28 +75,37 @@ class Cases
             $data['client_id'] = null;
         }
 
-        // Handle attorney and junior selection
+        // Handle attorney selection
         $data['attorney_id'] = !empty($_POST['attorney_id']) ? (int)$_POST['attorney_id'] : null;
-        $data['junior_id'] = !empty($_POST['junior_id']) ? (int)$_POST['junior_id'] : null;
+
+        // Handle junior selection with auto-assignment logic
+        if (!empty($_POST['junior_id'])) {
+            $data['junior_id'] = (int)$_POST['junior_id'];
+        } else {
+            // Auto-assign junior with lowest case load
+            $userModel = $this->loadModel('UserModel');
+            $caseModel = $this->loadModel('CaseModel');
+            $juniors = $userModel->getUsersByRole('junior');
+            $data['junior_id'] = $caseModel->getJuniorWithLowestCaseLoad($juniors);
+
+            // Log the auto-assignment
+            if ($data['junior_id']) {
+                $junior = $userModel->getUserByID($data['junior_id']);
+                $juniorName = $junior ? $junior->first_name . ' ' . $junior->last_name : 'Unknown';
+                $data['notes'] = ($data['notes'] ? $data['notes'] . "\n\n" : '') .
+                    "Auto-assigned to junior counsel {$juniorName} based on case load.";
+            }
+        }
 
         // Save data to the database
         $caseModel = $this->loadModel('CaseModel');
         $caseModel->save($data);
 
-        $notificationModel = $this->loadModel('NotificationModel');
-        $notification = [
-            'user_id' => $clientId,
-            'message' => "You have been added to a new case. View the case page for more details.",
-            'timestamp' => date('Y-m-d H:i:s'),
-            'status' => 'unread'
-        ];
-
-        $notificationModel->createNotification($notification);
-
         // Redirect to the home page or success page
         $_SESSION['success'] = 'Case added successfully!';
         redirect('cases/retrieveAllCases');
     }
+
 
     // Rest of the code remains the same...
     public function retrieveAllCases()
