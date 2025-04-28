@@ -120,6 +120,9 @@
         <div class="chart-container">
             <div class="heading">
                 <h3>Case Analytics</h3>
+                <p> Analytics about the cases handled by
+                    <span style="color: #fa9800; font-weight: bold;"> Attorneys </span> and <span style="color: #fa9800; font-weight: bold;"> Juniors. </span>.
+                </p>
             </div>
 
 
