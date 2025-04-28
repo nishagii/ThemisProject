@@ -79,7 +79,7 @@ class HomeLawyer
 
         // Get recent cases (limit to 5)
         $recentCases = method_exists($caseModel, 'getRecentCases') ?
-            $caseModel->getRecentCases(5) : [];
+            $caseModel->getRecentCases(3) : [];
 
         // Load the view with data
         $this->view('/seniorCounsel/home', [
