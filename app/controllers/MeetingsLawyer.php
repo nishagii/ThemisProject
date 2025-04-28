@@ -1,7 +1,7 @@
 <?php
 
 
-//lawyer meetings class
+
 class MeetingsLawyer
 {
     use Controller;
@@ -13,7 +13,7 @@ class MeetingsLawyer
         $data['username'] = empty($_SESSION['USER']) ? 'User' : $_SESSION['USER']->email;
         $data['meetingDetails'] = $meetingModel->getAllMeetings();
          
-        //get meeting details
+       
         
         $meetingDetails = $meetingModel->getAllMeetings(); 
 
