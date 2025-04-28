@@ -44,7 +44,9 @@ class HomeLawyer
         if (is_array($attorneys)) {
             foreach ($attorneys as $attorney) {
                 $attorneyNames[] = $attorney->first_name . ' ' . $attorney->last_name;
-                $attorneyCaseCounts[] = count($caseModel->getCasesByAttorneyId($attorney->id));
+                $cases = $caseModel->getCasesByAttorneyId($attorney->id);
+                // Fix: Check if cases is an array before counting
+                $attorneyCaseCounts[] = is_array($cases) ? count($cases) : 0;
             }
         }
 
@@ -56,7 +58,9 @@ class HomeLawyer
         if (is_array($juniors)) {
             foreach ($juniors as $junior) {
                 $juniorNames[] = $junior->first_name . ' ' . $junior->last_name;
-                $juniorCaseCounts[] = count($caseModel->getCasesByJuniorId($junior->id));
+                $cases = $caseModel->getCasesByJuniorId($junior->id);
+                // Fix: Check if cases is an array before counting
+                $juniorCaseCounts[] = is_array($cases) ? count($cases) : 0;
             }
         }
 
