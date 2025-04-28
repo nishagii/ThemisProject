@@ -18,4 +18,11 @@
             return $this->query($query, $params);
         }
 
+        public function getAll() {
+
+            $query = "SELECT * FROM {$this->table} ORDER BY paperID DESC";
+
+            return $this->query($query);
+        }
+
      }

@@ -6,7 +6,11 @@
 
         public function index() {
 
-            $this->view('crud/addPaper');
+            $paperModel = $this->loadModel('PaperModel');
+            $paper = $paperModel->getAll();
+            // print_r($paper);
+
+            $this->view('crud/paper',['paper' => $paper]);
         }
 
         public function savePaper() {
