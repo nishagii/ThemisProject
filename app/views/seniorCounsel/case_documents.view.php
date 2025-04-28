@@ -48,7 +48,7 @@
                     <div> </div>
                 </div>
                 
-                <!-- Loop through the documents and display each one -->
+               
                 <?php if (!empty($documents)): ?>
                     <?php foreach ($documents as $document): ?>
                         <div class="transaction-row">
@@ -58,7 +58,7 @@
                             <div><a href="<?= ROOT ?>/assets/documents/<?= $document->file_path ?>" download class="download-button">Download</a></div>
                             <div class="action-buttons">
                                 <?php if ($document->uploaded_by == $_SESSION['user_id']): ?>
-                                    <!-- Show Edit and Delete buttons only if the current user is the uploader -->
+                                   
                                     <button class="edit-button" onclick="handleEdit(<?php echo $document->document_id; ?>)">
                                         <i class='bx bx-edit-alt'></i>
                                     </button>
@@ -78,7 +78,7 @@
         </div>
     </div>
     
-    <!-- JavaScript Section -->
+
     <script>
         function confirmDelete(documentId) {
             Swal.fire({
@@ -94,27 +94,26 @@
                 color: '#1d1b31',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Redirect to the delete action
+                   
                     window.location.href = "<?= ROOT ?>/document/deleteDocument/" + documentId;
                 }
             });
         }
         
         function handleEdit(documentId) {
-            // Redirect to the edit page
+           
             window.location.href = "<?= ROOT ?>/document/editDocument/" + documentId;
         }
         
         function handleUpload(case_id) {
-            // Redirect to the upload page
+          
             window.location.href = "<?= ROOT ?>/document/add_Document/" + case_id;
         }
         function sortDocuments() {
         const sortOption = document.getElementById("sort-options").value;
         const rows = Array.from(document.querySelectorAll(".transaction-row"));
         const container = document.querySelector(".document-container");
-        
-        // Get the header and upload button elements
+      
         const header = document.querySelector(".transaction-header");
         const uploadSection = document.querySelector(".upload-section");
         
@@ -122,15 +121,15 @@
             const nameA = a.querySelector(".transaction-description").textContent.trim().toLowerCase();
             const nameB = b.querySelector(".transaction-description").textContent.trim().toLowerCase();
             
-            // Improved date parsing
+           
             const dateStrA = a.querySelector(".transaction-date").textContent.trim();
             const dateStrB = b.querySelector(".transaction-date").textContent.trim();
             
-            // Parse dates properly - this handles various date formats better
+            
             const dateA = new Date(dateStrA);
             const dateB = new Date(dateStrB);
             
-            // Check if dates are valid
+        
             const isValidDateA = !isNaN(dateA.getTime());
             const isValidDateB = !isNaN(dateB.getTime());
             
@@ -148,11 +147,11 @@
             }
         });
         
-        // Remove all rows from container
+       
         const rowsParent = rows[0].parentNode;
         rows.forEach(row => rowsParent.removeChild(row));
         
-        // Append the header and upload section first (if they were removed)
+       
         if (!container.contains(header)) {
             container.appendChild(header);
         }
@@ -160,7 +159,7 @@
             container.appendChild(uploadSection);
         }
         
-        // Then append all sorted rows
+     
         rows.forEach(row => rowsParent.appendChild(row));
     }
 
