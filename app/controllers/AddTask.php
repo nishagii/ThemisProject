@@ -19,10 +19,10 @@ class AddTask
         $this->view('/seniorCounsel/addTask', ['users' => $users]);
     }
 
-    // Add a new task with optional PDF file upload
+    
     public function add()
     {
-        // Collect POST data for the task
+        
         $data = [
             'name' => $_POST['name'] ?? '',
             'description' => $_POST['description'] ?? '',
@@ -32,7 +32,7 @@ class AddTask
             'priority' => $_POST['priority'] ?? '',
         ];
 
-        // Validate the data (you can add more validation here as needed)
+        
         $errors = [];
         if (empty($data['name'])) {
             $errors['name'] = 'Task name is required';
@@ -53,14 +53,14 @@ class AddTask
             $errors['priority'] = 'Priority is required';
         }
 
-        // If there are errors, render the form again with error messages
+       
         if (!empty($errors)) {
-            // Pass errors to the view and render the form again
+           
             $this->view('/addTask/add', ['errors' => $errors, 'data' => $data]);
             return;
         }
 
-        // Handle PDF file upload (optional)
+       
         if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === UPLOAD_ERR_OK) {
             $fileName = uniqid() . '_' . basename($_FILES['pdf']['name']);
             $targetDir = "../public/assets/tasks/";
@@ -79,19 +79,19 @@ class AddTask
                 if (!move_uploaded_file($_FILES['pdf']['tmp_name'], $targetFile)) {
                     $errors['pdf'] = 'Error moving uploaded file.';
                 } else {
-                    $data['pdf'] = $fileName; // Store the PDF file name to save later in DB
+                    $data['pdf'] = $fileName; 
                 }
             }
         }
 
         
-        // If there are any errors, re-render the form with the errors
+       
         if (!empty($errors)) {
             $this->view('/addTask/add', ['errors' => $errors, 'data' => $data]);
             return;
         }
 
-        // Save the task data
+      
         $taskModel = $this->loadModel('TaskModel');
         $taskModel->save($data);
 
@@ -109,7 +109,7 @@ class AddTask
         ];
         $notificationModel->createNotification($notification);
 
-        // Redirect to the task list or success page
+       
         redirect('tasklawyer');
     }
 }
