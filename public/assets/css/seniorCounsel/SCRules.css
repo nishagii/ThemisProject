@@ -90,6 +90,9 @@ body {
     background-color: #f44336;
     color: white;
 }
+p {
+    margin-left: 20px;
+}
 
 .btn 
 {
