@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
         isValid &= validateRequired("name", "Task name is required.");
 
       
-        // isValid &= validateRequired("description", "Description is required.");
+        isValid &= validateRequired("description", "Description is required.");
 
       
         isValid &= validateRequired("assigneeID", "Assignee is required.");
