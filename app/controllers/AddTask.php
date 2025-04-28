@@ -84,6 +84,7 @@ class AddTask
             }
         }
 
+        
         // If there are any errors, re-render the form with the errors
         if (!empty($errors)) {
             $this->view('/addTask/add', ['errors' => $errors, 'data' => $data]);

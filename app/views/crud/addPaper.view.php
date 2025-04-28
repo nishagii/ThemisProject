@@ -7,9 +7,11 @@
 </head>
 <body>
     <div class="form-container">
-    <form method="POST" action="<?= ROOT ?>/savePaper" enctype="multipart/form-data">
+    <form method="POST" action="<?= ROOT ?>/Paper/savePaper" enctype="multipart/form-data">
         <input type="text" name="subject"> <br> <br>
-
+        <?php if(isset($errors['subject'])): ?>
+            <p><?= htmlspecialchars($errors['subject'])?></p>
+        <?php endif; ?>
         <input type="file" name="paper">  <br> <br>
 
         <input type="submit" value="add">
