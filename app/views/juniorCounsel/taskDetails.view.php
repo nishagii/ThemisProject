@@ -185,7 +185,7 @@
     </div>
 
     <script>
-        // Show/hide completion comments form
+       
         const completeButton = document.getElementById('completeButton');
         const completionComments = document.getElementById('completionComments');
         const cancelButton = document.getElementById('cancelButton');

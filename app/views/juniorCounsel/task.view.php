@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">  <!-- this is imported to use icons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <style>
-        /* Add style for clickable rows */
+       
         table tbody tr {
             cursor: pointer;
             transition: background-color 0.2s;
@@ -20,7 +20,7 @@
             background-color: #f5f5f5;
         }
         
-        /* Ensure "Done" button doesn't trigger the row click */
+       
         .done, .done-overdue {
             position: relative;
             z-index: 2;
@@ -114,7 +114,7 @@
                         <tbody>
                             <?php foreach ($completedTasks as $task): ?>
                                 <?php
-                                    // Calculate time taken
+                                    
                                     $assigned = new DateTime($task->assignedDate);
                                     $completed = new DateTime($task->completedDate ?? $task->deadlineDate);
                                     $interval = $assigned->diff($completed);
@@ -140,7 +140,7 @@
     <script src="<?= ROOT ?>/assets/js/juniorCounsel/task.js"></script>
     <script>
         function viewTaskDetails(taskId) {
-            // Redirect to the task details page
+           
             window.location.href = "<?= ROOT ?>/task/details/" + taskId;
         }
     </script>
