@@ -21,13 +21,16 @@
         </div>
 
         <div class="template-container">
+            <p> Add a new template to the list by clicking the button below.
+                <span style="color: #fa9800; font-weight: bold;">Any user </span> can use templates listed here.
+            </p>
             <div class="search-container">
                 <input type="text"
-                class="search-bar"  
-                placeholder="Search here for templates" 
-                oninput="searchTemplates(this.value)"
-                onfocus="this.placeholder = ''" 
-                onblur="this.placeholder = 'Search here for templates'" />
+                    class="search-bar"
+                    placeholder="Search here for templates"
+                    oninput="searchTemplates(this.value)"
+                    onfocus="this.placeholder = ''"
+                    onblur="this.placeholder = 'Search here for templates'" />
                 <div class="sort-wrapper">
                     <i class="bx bx-sort sort-icon" title="Sort" onclick="toggleSortMenu()"></i>
                     <div class="sort-dropdown" id="sortMenu">
@@ -36,7 +39,7 @@
                         <button class="dropdown-item" onclick="sortBy('uploaded_date')">Sort by Date</button>
                     </div>
                 </div>
-    
+
             </div>
 
             <div class="add">
@@ -65,33 +68,33 @@
                         </tr>
                     </thead>
                     <tbody id="templatesTable">
-                    <?php if (!empty($templates)): ?>
-                    <?php foreach ($templates as $template): ?>
-                        <tr>
-                            <td><?php echo $template->name; ?></td>
-                            <td><?php echo $template->description; ?></td>
-                            <td><?php echo $template->uploaded_by; ?></td>
-                            <td><?php echo $template->uploaded_date; ?></td>
-                            <td>
-                                <div class="action-menu">
-                                    <button class="dots-btn">⋮</button>
-                                    <div class="dropdown">
-                                        <!-- Download -->
-                                        <a href="<?php echo $template->document_link; ?>" target="_blank" class="dropdown-item">Download</a>
-                                        <!-- Edit -->
-                                        <a href="<?= ROOT ?>/template/edit/<?= $template->id ?>" class="dropdown-item">Edit</a>
-                                        <!-- Delete -->
-                                        <a href="javascript:void(0);" onclick="confirmDelete(<?= $template->id; ?>)" class="dropdown-item">Delete</a>  
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <tr>
-                        <td colspan="6">No templates found in the database.</td>
-                    </tr>
-                <?php endif; ?>
+                        <?php if (!empty($templates)): ?>
+                            <?php foreach ($templates as $template): ?>
+                                <tr>
+                                    <td><?php echo $template->name; ?></td>
+                                    <td><?php echo $template->description; ?></td>
+                                    <td><?php echo $template->uploaded_by; ?></td>
+                                    <td><?php echo $template->uploaded_date; ?></td>
+                                    <td>
+                                        <div class="action-menu">
+                                            <button class="dots-btn">⋮</button>
+                                            <div class="dropdown">
+                                                <!-- Download -->
+                                                <a href="<?php echo $template->document_link; ?>" target="_blank" class="dropdown-item">Download</a>
+                                                <!-- Edit -->
+                                                <a href="<?= ROOT ?>/template/edit/<?= $template->id ?>" class="dropdown-item">Edit</a>
+                                                <!-- Delete -->
+                                                <a href="javascript:void(0);" onclick="confirmDelete(<?= $template->id; ?>)" class="dropdown-item">Delete</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="6">No templates found in the database.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
@@ -109,7 +112,7 @@
         // Sort function - Sends an AJAX request
         function sortBy(criteria) {
             fetch(`<?= ROOT ?>/Template/sort/${criteria}`)
-                .then(response => response.text())  // Get HTML response
+                .then(response => response.text()) // Get HTML response
                 .then(data => {
                     document.getElementById("templatesTable").innerHTML = data; // Update table
                     attachDropdownListeners(); // Re-attach event listeners
@@ -136,7 +139,7 @@
         }
 
         // Close dropdown menus when clicking outside
-        document.addEventListener("click", function () {
+        document.addEventListener("click", function() {
             closeOtherMenus();
         });
 
@@ -175,7 +178,7 @@
                 const button = menu.querySelector(".dots-btn");
                 const dropdown = menu.querySelector(".dropdown");
 
-                button.addEventListener("click", function (e) {
+                button.addEventListener("click", function(e) {
                     e.stopPropagation(); // Prevent click propagation
                     // Toggle visibility of dropdown
                     dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
@@ -183,7 +186,7 @@
             });
 
             // Close dropdown when clicking outside
-            document.addEventListener("click", function () {
+            document.addEventListener("click", function() {
                 document.querySelectorAll(".dropdown").forEach(dropdown => {
                     dropdown.style.display = "none";
                 });
@@ -191,26 +194,27 @@
         }
 
         // Initial attachment of event listeners
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             attachDropdownListeners();
         });
-        
+
         function searchTemplates(query) {
             fetch("<?= ROOT ?>/Template/search", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: `query=${encodeURIComponent(query)}`
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("templatesTable").innerHTML = data;
-                attachDropdownListeners(); // re-attach action menu
-            })
-            .catch(error => console.error("Search error:", error));
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: `query=${encodeURIComponent(query)}`
+                })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("templatesTable").innerHTML = data;
+                    attachDropdownListeners(); // re-attach action menu
+                })
+                .catch(error => console.error("Search error:", error));
 
         }
     </script>
 </body>
+
 </html>
