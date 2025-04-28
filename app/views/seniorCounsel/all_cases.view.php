@@ -21,7 +21,7 @@
         }
 
         .status-ongoing {
-            background-color: rgba(59, 209, 124, 0.55);
+            background-color: rgba(27, 221, 111, 0.55);
             color: white;
         }
 
@@ -190,6 +190,20 @@
             color: #2e7d32;
             border: 1px solid #c8e6c9;
         }
+
+        .update-status-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background-color: #ccc;
+            border: rgb(143, 173, 255) 2px solid;
+            color: rgb(143, 173, 255);
+        }
+
+        .update-status-btn.disabled:hover {
+            background-color: #ccc;
+            transform: none;
+            box-shadow: none;
+        }
     </style>
 </head>
 
@@ -296,7 +310,11 @@
                                     <option value="ongoing" <?= ($case->case_status == 'ongoing' || empty($case->case_status)) ? 'selected' : '' ?>>Ongoing</option>
                                     <option value="closed" <?= ($case->case_status == 'closed') ? 'selected' : '' ?>>Closed</option>
                                 </select>
-                                <button class="update-status-btn" onclick="updateCaseStatus(<?= $case->id ?>)">Update Status</button>
+                                <?php if ($case->case_status != 'closed'): ?>
+                                    <button class="update-status-btn" onclick="updateCaseStatus(<?= $case->id ?>)">Update Status</button>
+                                <?php else: ?>
+                                    <button class="update-status-btn disabled" disabled title="Closed cases cannot be updated">Update Status</button>
+                                <?php endif; ?>
                             </div>
 
                             <p><strong>Notes:</strong> <?= htmlspecialchars($case->notes) ?></p>
@@ -364,7 +382,11 @@
                                     <option value="ongoing" <?= ($case->case_status == 'ongoing' || empty($case->case_status)) ? 'selected' : '' ?>>Ongoing</option>
                                     <option value="closed" <?= ($case->case_status == 'closed') ? 'selected' : '' ?>>Closed</option>
                                 </select>
-                                <button class="update-status-btn" onclick="updateCaseStatus(<?= $case->id ?>)">Update Status</button>
+                                <?php if ($case->case_status != 'closed'): ?>
+                                    <button class="update-status-btn" onclick="updateCaseStatus(<?= $case->id ?>)">Update Status</button>
+                                <?php else: ?>
+                                    <button class="update-status-btn disabled" disabled title="Closed cases cannot be updated">Update Status</button>
+                                <?php endif; ?>
                             </div>
 
                             <div class="notes-container">
@@ -420,11 +442,15 @@
 
                             <!-- Status Update Form -->
                             <div class="status-container">
-                                <select class="status-select" id="status-closed-<?= $case->id ?>">
-                                    <option value="ongoing">Ongoing</option>
-                                    <option value="closed" selected>Closed</option>
+                                <select class="status-select" id="status-<?= $case->id ?>">
+                                    <option value="ongoing" <?= ($case->case_status == 'ongoing' || empty($case->case_status)) ? 'selected' : '' ?>>Ongoing</option>
+                                    <option value="closed" <?= ($case->case_status == 'closed') ? 'selected' : '' ?>>Closed</option>
                                 </select>
-                                <button class="update-status-btn" onclick="updateCaseStatus(<?= $case->id ?>, 'closed')">Update Status</button>
+                                <?php if ($case->case_status != 'closed'): ?>
+                                    <button class="update-status-btn" onclick="updateCaseStatus(<?= $case->id ?>)">Update Status</button>
+                                <?php else: ?>
+                                    <button class="update-status-btn disabled" disabled title="Closed cases cannot be updated">Update Status</button>
+                                <?php endif; ?>
                             </div>
 
                             <p><strong>Notes:</strong> <?= htmlspecialchars($case->notes) ?></p>

@@ -10,13 +10,14 @@ class LoginModel
     {
        
         $query = "INSERT INTO {$this->table} 
-                  (user_id, login_time, ip_address, status)
+                  (user_id, attempted_username, login_time, ip_address, status)
                   VALUES 
-                  (:user_id, NOW(), :ip_address, :status)";
+                  (:user_id, :attempted_username, NOW(), :ip_address, :status)";
 
         
         $params = [
             'user_id'    => $data['user_id'],
+            'attempted_username'    => $data['attempted_username'],
             'ip_address' => $data['ip_address'],
             'status'     => $data['status'],
         ];
@@ -38,5 +39,14 @@ class LoginModel
 
     
         return $this->query($query, $params);
+    }
+
+    public function getAllLoginDetails() {
+        $query = "SELECT l.*, u.username, u.role 
+                  FROM {$this->table} l
+                  LEFT JOIN users u ON l.user_id = u.id
+                  ORDER BY l.login_time DESC";
+        
+        return $this->query($query);
     }
 }
