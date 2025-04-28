@@ -25,4 +25,21 @@
             return $this->query($query);
         }
 
+        public function getPaperByID($paperID) {
+
+            $query = "SELECT * FROM {$this->table} WHERE paperID = :paperID";
+            $params = ['paperID' => $paperID];
+
+            return $this->query($query, $params);
+            
+        }
+
+        public function deletePap($paperID) {
+
+            $query = "DELETE FROM {$this->table} WHERE paperID = :paperID";
+            $params = ['paperID' => $paperID];
+
+            return $this->query($query, $params);
+        }
+
      }

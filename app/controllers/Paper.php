@@ -85,6 +85,23 @@
         }
 
         public function deletePaper($paperID) {
-            
+
+            $paperModel = $this->loadModel('PaperModel');
+            $paper = $paperModel->getPaperByID($paperID);
+            // print_r($paper);
+
+            $result = $paperModel->deletePap($paperID);
+            // print_r($result);
+
+            if($result) {
+                $filePath = "../public/assets/paper/" . $paper[0]->paper;
+                // print_r($filePath);
+
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                    echo "done";
+                }
+            }
+            redirect('Paper');
         }
     }

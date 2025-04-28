@@ -181,6 +181,7 @@ class Document
             exit;
         }
         
+        
         // Delete the document record from database
         $result = $documentModel->delete($documentID);
         
