@@ -73,15 +73,7 @@
                 <button onclick="searchTasks()"><i class="fas fa-search"></i> Search</button>
             </div>
             
-            <div class="sort-section">
-                <label for="sort-tasks">Sort by:</label>
-                <select id="sort-tasks" onchange="sortTasks()">
-                    <option value="deadline-desc">Deadline (Newest)</option>
-                    <option value="deadline-asc">Deadline (Oldest)</option>
-                    <option value="priority-asc">Priority (Low to High)</option>
-                    <option value="priority-desc">Priority (High to Low)</option>
-                </select>
-            </div>
+            
             <table class="task-table" id="task-table">
                 <thead>
                     <tr>
