@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="form-container">
-    <form method="POST" action="<?= ROOT ?>/savePaper">
+    <form method="POST" action="<?= ROOT ?>/savePaper" enctype="multipart/form-data">
         <input type="text" name="subject"> <br> <br>
 
         <input type="file" name="paper">  <br> <br>
