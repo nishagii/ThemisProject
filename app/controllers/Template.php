@@ -126,8 +126,10 @@ public function create() {
             'document_link' => $documentLink
         ];
 
-        // Insert into database
         $this->templateModel->insert($data);
+
+        header("Location: " . ROOT . "/Template/index");
+        exit;
     }
 
     $this->view('seniorCounsel/add_template');

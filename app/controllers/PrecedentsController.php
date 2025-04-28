@@ -245,6 +245,9 @@ public function create() {
 
         // Insert into database
         $this->precedentModel->insert($data);
+
+        header("Location: " . ROOT . "/precedentsController/index");
+        exit;
     }
 
     $this->view('precedentsAdmin/create_precedent');

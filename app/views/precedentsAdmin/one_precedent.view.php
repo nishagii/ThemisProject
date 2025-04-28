@@ -129,8 +129,8 @@
             </div>
         </div>
         <div class="card-footer">
-            <a href="<?= ROOT ?>/PrecedentsController/edit/<?= $case->id ?>" class="btn btn-edit">Edit Case</a>
-            <a href="javascript:void(0);" onclick="confirmDelete(<?= $case->id; ?>)" class="btn btn-delete">Delete Case</a>
+            <a href="<?= ROOT ?>/PrecedentsController/edit/<?= $case->id ?>" class="btn btn-edit">Edit Precedent</a>
+            <a href="javascript:void(0);" onclick="confirmDelete(<?= $case->id; ?>)" class="btn btn-delete">Delete Precedent</a>
         </div>
     </div>
 </body>
