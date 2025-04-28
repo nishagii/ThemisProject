@@ -64,6 +64,8 @@
                 }
 
                 $paperModel = $this->loadModel('PaperModel');
+                $paperModel->save($data);
+                redirect('Paper');
 
             } else {
                 $errors['paper'] = 'file upload is required';
