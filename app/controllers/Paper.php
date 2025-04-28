@@ -104,4 +104,13 @@
             }
             redirect('Paper');
         }
+
+        public function editPaper($paperID) {
+
+            $paperModel = $this->loadModel('PaperModel');
+            $paper = $paperModel->getPaperByID($paperID);
+            
+
+            $this->view('crud/edit_paper', ['paper' => $paper]);
+        }
     }

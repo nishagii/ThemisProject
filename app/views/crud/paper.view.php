@@ -25,11 +25,11 @@
                                     Delete
                                 </button>
                             </a>
-                            <!-- <a href="<?= ROOT?>/Homework/editHomework/<?= htmlspecialchars($hw->homeworkID)?>">
+                            <a href="<?= ROOT?>/Paper/editPaper/<?= htmlspecialchars($p->paperID)?>">
                                 <button>
                                     Edit
                                 </button>
-                            </a> -->
+                            </a>
                         </div>
                     <?php endforeach; ?>
                 <?php else : ?>

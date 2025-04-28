@@ -34,6 +34,7 @@
                         <textarea id="docDescription" name="doc_description" rows="4" required><?= htmlspecialchars($document[0]->doc_description) ?></textarea>
                     </div>
                     
+                    
                     <div class="form-group">
                         <label>Existing File:</label>
                         <p><?= htmlspecialchars($document[0]->file_path) ?></p>
