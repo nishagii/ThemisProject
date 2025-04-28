@@ -18,7 +18,7 @@
                         
                 ];
 
-                // print_r($data);
+                //print_r($data);
             }
 
             $errors = [];
@@ -29,6 +29,47 @@
             if(!empty($errors)) {
                 $this->view('crud/addPaper',['data' => $data, 'errors' => $errors]);
                 return;
+            }
+
+            if (isset($_FILES['paper']) && $_FILES['paper']['error'] === UPLOAD_ERR_OK) {
+
+                $paperName = uniqid(). '_' . basename($_FILES['paper']['name']);
+                // var_dump($paperName);
+
+                $targetDir = "../public/assets/paper/";
+                // var_dump($targetDir);
+
+                if (!file_exists($targetDir)) {
+                    mkdir($targetDir, 0777, true);
+                    // echo "made";
+                }
+
+                $targetFile = $targetDir.$paperName;
+                // print_r($targetFile);
+
+                $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+                // print_r($fileType);
+
+                $allowedTypes = ['pdf'];
+                if(!in_array($fileType, $allowedTypes)) {
+                    $errors['paper'] = 'Only pdf is allowed';
+                    // echo "only pdf";
+                } else {
+                    if(!move_uploaded_file($_FILES['paper']['tmp_name'], $targetFile)) {
+                        $errors['paper'] = 'error moving file to location';
+                    } else {
+                        $data['paper'] = $paperName;
+                        // echo 'moved';
+                    }
+                }
+
+                $paperModel = $this->loadModel('PaperModel');
+
+            } else {
+                $errors['paper'] = 'file upload is required';
+                $this->view('crud/addPaper',['data' => $data, 'errors' => $errors]);
+                return;
+
             }
         }
     }

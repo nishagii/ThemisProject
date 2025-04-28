@@ -12,7 +12,10 @@
         <?php if(isset($errors['subject'])): ?>
             <p><?= htmlspecialchars($errors['subject'])?></p>
         <?php endif; ?>
-        <input type="file" name="paper">  <br> <br>
+        <input type="file" name="paper" accept="application/pdf">  <br> <br>
+        <?php if(isset($errors['paper'])): ?>
+            <p><?= htmlspecialchars($errors['paper'])?></p>
+        <?php endif; ?>
 
         <input type="submit" value="add">
     </form>
