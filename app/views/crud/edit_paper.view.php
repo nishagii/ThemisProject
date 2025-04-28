@@ -24,6 +24,30 @@
 
         <input type="submit" value="update">
     </form>
+
+    <div class="flex">
+                <div class="search-container">
+                    <input type="text" id="document-search" placeholder="Search documents..." onkeyup="searchDocuments()">
+                    
+                </div>
+                <div class="sort-section">
+                    <label for="sort-options">Sort by:</label>
+                    <select id="sort-options" onchange="sortDocuments()">
+                        <option value="date-desc">Date (Newest)</option>
+                        <option value="date-asc">Date (Oldest)</option>
+                        <option value="name-asc">Name (A-Z)</option>
+                        <option value="name-desc">Name (Z-A)</option>
+                    </select>
+                </div>
+
+                <div class="filter-container">
+                    <label for="filter-options">Filter:</label>
+                    <select id="filter-options" onchange="filterDocuments()">
+                        <option value="all">All Documents</option>
+                        <option value="my-uploads">Uploaded by me</option>
+                    </select>
+                </div>
+            </div>
     </div>
 </body>
 </html>

@@ -28,29 +28,7 @@
         <!-- Sort Button Section -->
         
         <div class="case-details-card">
-            <div class="flex">
-                <div class="search-container">
-                    <input type="text" id="document-search" placeholder="Search documents..." onkeyup="searchDocuments()">
-                    
-                </div>
-                <div class="sort-section">
-                    <label for="sort-options">Sort by:</label>
-                    <select id="sort-options" onchange="sortDocuments()">
-                        <option value="date-desc">Date (Newest)</option>
-                        <option value="date-asc">Date (Oldest)</option>
-                        <option value="name-asc">Name (A-Z)</option>
-                        <option value="name-desc">Name (Z-A)</option>
-                    </select>
-                </div>
-
-                <div class="filter-container">
-                    <label for="filter-options">Filter:</label>
-                    <select id="filter-options" onchange="filterDocuments()">
-                        <option value="all">All Documents</option>
-                        <option value="my-uploads">Uploaded by me</option>
-                    </select>
-                </div>
-            </div>
+            
             
 
             <div class="document-container">
@@ -65,7 +43,7 @@
                 <div class="transaction-header">
                     <div>Description</div>
                     <div>Date</div>
-                    <div>Uploaded By</div>
+                   
                     <div>Receipt</div>
                     <div> </div>
                 </div>
@@ -76,7 +54,7 @@
                         <div class="transaction-row">
                             <div class="transaction-description"><?php echo htmlspecialchars($document->doc_name); ?></div>
                             <div class="transaction-date"><?php echo htmlspecialchars($document->uploaded_at); ?></div>
-                            <div class="transaction-uploader"><?php echo htmlspecialchars($document->first_name); ?></div>
+                            
                             <div><a href="<?= ROOT ?>/assets/documents/<?= $document->file_path ?>" download class="download-button">Download</a></div>
                             <div class="action-buttons">
                                 <?php if ($document->uploaded_by == $_SESSION['user_id']): ?>
