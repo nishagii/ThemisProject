@@ -131,9 +131,7 @@
     </div>
 
     <script>
-        document.getElementById("total-counter").addEventListener("click", () => {
-            document.getElementById("task-table").scrollIntoView({ behavior: "smooth" });
-        });
+        
 
         document.getElementById("total-counter").addEventListener("click", () => {
             const rows = document.querySelectorAll(".task-table tbody tr");
