@@ -57,6 +57,11 @@
   <button type="submit">Submit</button>
 </form>
 
+ <!-- <div class="form-group">
+                        <label for="pdf">Upload Task PDF (optional):</label>
+                        <input type="file" id="pdf" name="pdf" accept="application/pdf" class="custom-file-input">
+                    </div> -->
+
             <label for="priority">Priority:</label>
             <select id="priority" name="priority">
                 <option value="high">High</option>

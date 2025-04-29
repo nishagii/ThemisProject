@@ -43,10 +43,7 @@
                         <textarea id="description" name="description" rows="3"></textarea>
                     </div>
 
-                    <!-- <div class="form-group">
-                        <label for="pdf">Upload Task PDF (optional):</label>
-                        <input type="file" id="pdf" name="pdf" accept="application/pdf" class="custom-file-input">
-                    </div> -->
+                   
                     
                     <div class="form-group">
                         <label for="assigneeID">Assign To:</label>
