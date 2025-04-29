@@ -598,3 +598,31 @@
 </body>
 
 </html>
+
+<!-- 
+<tbody>
+    <?php foreach ($completedTasks as $task): ?>
+        <?php
+            $assigned = new DateTime($task->assignedDate);
+            $completed = new DateTime($task->completedDate ?? $task->deadlineDate);
+            $interval = $assigned->diff($completed);
+            $days = $interval->days;
+
+            // No need to explode if already an array
+            $tagsArray = $task->tags; 
+        ?>
+        <tr onclick="viewTaskDetails(<?= $task->taskID ?>)">
+            <td><?= htmlspecialchars($task->name) ?></td>
+            <td><?= htmlspecialchars($task->assignedDate) ?></td>
+            <td><?= $days . ' day(s)' ?></td>
+            <td class="<?= $task->status === 'completed' ? 'completed' : 'incomplete' ?>">
+                <?= ucfirst($task->status) ?>
+            </td>
+            <td>
+                <?php foreach ($tagsArray as $tag): ?>
+                    <span class="tag"><?= htmlspecialchars(trim($tag)) ?></span>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</tbody> -->

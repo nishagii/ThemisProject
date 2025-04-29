@@ -34,6 +34,28 @@
             <?php endif; ?>
             
 
+            <form>
+  <label><input type="checkbox" name="vehicle" value="car"> Car</label><br>
+  <label><input type="checkbox" name="vehicle" value="bike"> Bike</label><br>
+  <label><input type="checkbox" name="vehicle" value="boat"> Boat</label><br>
+</form>
+
+<form>
+  <label><input type="radio" name="gender" value="male"> Male</label><br>
+  <label><input type="radio" name="gender" value="female"> Female</label><br>
+  <label><input type="radio" name="gender" value="other"> Other</label><br>
+</form>
+
+<form method="post" enctype="multipart/form-data" action="/addTask/add">
+  <!-- Other inputs -->
+
+  <label>Priority:</label><br>
+  <input type="radio" name="priority" value="low"> Low<br>
+  <input type="radio" name="priority" value="medium"> Medium<br>
+  <input type="radio" name="priority" value="high"> High<br>
+
+  <button type="submit">Submit</button>
+</form>
 
             <label for="priority">Priority:</label>
             <select id="priority" name="priority">
