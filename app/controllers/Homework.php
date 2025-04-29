@@ -18,6 +18,37 @@ class Homework {
         // $data['tags'] = $tagsString;
         // $tagsArray = explode(',', $row['tags']);
          // 'tags' => $_POST['tags'] ?? [],  
+
+                
+        if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === UPLOAD_ERR_OK) {
+            $fileName = uniqid() . '_' . basename($_FILES['pdf']['name']);
+            $targetDir = "../public/assets/tasks/";
+
+            if (!file_exists($targetDir)) {
+                mkdir($targetDir, 0777, true);
+            }
+
+            $targetFile = $targetDir . $fileName;
+            $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+            $allowedTypes = ['pdf'];
+            if (!in_array($fileType, $allowedTypes)) {
+                $errors['pdf'] = 'Only PDF files are allowed.';
+            } else {
+                if (!move_uploaded_file($_FILES['pdf']['tmp_name'], $targetFile)) {
+                    $errors['pdf'] = 'Error moving uploaded file.';
+                } else {
+                    $data['pdf'] = $fileName; 
+                }
+            }
+        }
+
+        
+       
+        if (!empty($errors)) {
+            $this->view('/addTask/add', ['errors' => $errors, 'data' => $data]);
+            return;
+        }
         
 
         $this->view('crud/addHomework');
