@@ -13,7 +13,11 @@ class Homework {
     }
 
     public function homeworkForm() {
-
+ // $tags = $_POST['tags'] ?? []; // this is an array
+        // $tagsString = implode(',', $tags); // convert to string like "urgent,important"
+        // $data['tags'] = $tagsString;
+        // $tagsArray = explode(',', $row['tags']);
+         // 'tags' => $_POST['tags'] ?? [],  
         
 
         $this->view('crud/addHomework');

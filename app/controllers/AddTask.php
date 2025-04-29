@@ -40,13 +40,10 @@ class AddTask
             'assigneeID' => $_POST['assigneeID'] ?? '',
             'deadlineDate' => $_POST['deadlineDate'] ?? '',
             'deadlineTime' => $_POST['deadlineTime'] ?? '',
-            'priority' => $_POST['priority'] ?? '', // from radio buttons
-            // 'tags' => $_POST['tags'] ?? [],          // from checkboxes
+            'priority' => $_POST['priority'] ?? '', 
+                 
         ];
-        // $tags = $_POST['tags'] ?? []; // this is an array
-        // $tagsString = implode(',', $tags); // convert to string like "urgent,important"
-        // $data['tags'] = $tagsString;
-        // $tagsArray = explode(',', $row['tags']);
+       
                 
 
         
