@@ -3,7 +3,7 @@
 class TaskModel
 {
     use Model; 
-    protected $table = 'task'; // Name of the database table for tasks
+    protected $table = 'task'; 
 
     /**
      * Save a new task to the database.
@@ -13,42 +13,41 @@ class TaskModel
      */
     public function save($data)
     {
-        // Prepare the query to insert data into the "tasks" table
+     
         $query = "INSERT INTO {$this->table} 
                 (name, description, task_doc, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority)
                 VALUES 
                 (:name, :description, :task_doc, :assigneeID, NOW(), :deadlineDate, :deadlineTime, 'pending', :priority)";
 
-        // Add the optional task document (if present)
+       
         $params = [
             'name' => $data['name'],
             'description' => $data['description'],
-            'task_doc' => isset($data['pdf']) ? $data['pdf'] : null, // Add task_doc if a file was uploaded
+            'task_doc' => isset($data['pdf']) ? $data['pdf'] : null, 
             'assigneeID' => $data['assigneeID'],
             'deadlineDate' => $data['deadlineDate'],
             'deadlineTime' => $data['deadlineTime'],
             'priority' => $data['priority'],
         ];
 
-        // Execute the query using the parent Model class's query method
+      
         return $this->query($query, $params);
     }
 
     public function getAllTasks()
     {
-        // Prepare the SQL query to fetch all tasks with the username of the assignee
+        
         $query = "SELECT t.taskID, t.name, t.description, t.assigneeID, u.username AS assigneeName, 
                         t.assignedDate, t.deadlineDate, t.deadlineTime, t.status, t.priority 
                 FROM {$this->table} t
                 INNER JOIN users u ON t.assigneeID = u.id
                 ORDER BY t.taskID DESC";
 
-        // Execute the query and return the results
+   
         return $this->query($query);
     }
 
 
-    // Get a specific case by ID
     public function getTaskById($taskID)
     {
         $query = "SELECT t.*, users.username as assigneeName FROM {$this->table} t inner join users on t.assigneeID = users.id WHERE taskID = :taskID";
@@ -56,12 +55,12 @@ class TaskModel
 
         $result = $this->query($query, $params);
 
-        // Check if result is empty
+     
         if (empty($result)) {
-            return null; // Return null if no case is found
+            return null; 
         }
 
-        return $result[0]; // Return the first (and expected only) result
+        return $result[0]; 
     }
 
     public function updateTask($data)
@@ -83,13 +82,13 @@ class TaskModel
             'deadlineDate' => $data['deadlineDate'],
             'deadlineTime' => $data['deadlineTime'],
             'priority' => $data['priority'],
-            'taskID' => $data['taskID'], // Ensure taskID is passed
+            'taskID' => $data['taskID'], 
         ];
     
         return $this->query($query, $params);
     }
     
-    //delete case
+ 
     public function deleteTask($taskID)
     {
         $query = "DELETE FROM $this->table WHERE taskID = :taskID";
