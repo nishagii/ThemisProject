@@ -82,7 +82,7 @@
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const stripe = Stripe("<?= STRIPE_PUBLIC ?>"); // Load Stripe public key
+            const stripe = Stripe("<?= STRIPE_PUBLIC ?>");
             const payButton = document.getElementById("PayButton");
             const paymentForm = document.getElementById("paymentForm");
 
@@ -90,10 +90,10 @@
                 event.preventDefault();
 
                 const caseNumber = document.getElementById("CaseNumber").value.trim();
-                const remarks = document.getElementById("remarks").value.trim(); // Changed from IDNumber to remarks
+                const remarks = document.getElementById("remarks").value.trim(); 
                 const amount = document.getElementById("PaymentAmount").value.trim();
 
-                if (!caseNumber || !amount) { // Removed remarks from required fields check
+                if (!caseNumber || !amount) { 
                     alert("Please fill all required fields.");
                     return;
                 }
@@ -105,7 +105,7 @@
                         },
                         body: JSON.stringify({
                             case_number: caseNumber,
-                            remarks: remarks, // Changed from id_number to remarks
+                            remarks: remarks,
                             amount: amount
                         })
                     })

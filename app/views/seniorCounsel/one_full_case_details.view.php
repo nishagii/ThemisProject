@@ -109,7 +109,7 @@
                 color: '#1d1b31',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Redirect to the delete action
+               
                     window.location.href = `<?= ROOT ?>/cases/deleteCase/${caseId}`;
                 }
             });

@@ -8,19 +8,19 @@ class Login {
         
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $userModel = $this->loadModel('UserModel');
-            $loginModel = $this->loadModel('LoginModel');  // Load the LoginModel to log the login attempt
+            $loginModel = $this->loadModel('LoginModel');  
             
-            // Capture IP address
-            $ipAddress = $_SERVER['REMOTE_ADDR'];  // Get the user's IP address
+           
+            $ipAddress = $_SERVER['REMOTE_ADDR'];  
             
-            // Check if the user exists first, regardless of password
+           
             $userExists = $userModel->findUserByUsernameOrEmail($_POST['username'] ?? $_POST['email'] ?? '');
             
-            // Attempt to login (checks both existence and correct password)
+           
             $user = $userModel->login($_POST);
             
             if ($user) {
-                // Create session
+              
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['username'] = $user->username;
                 $_SESSION['role'] = $user->role;
@@ -29,14 +29,14 @@ class Login {
                 $_SESSION['email'] = $user->email;
                 $_SESSION['phone'] = $user->phone;
                 
-                // Log successful login attempt
+                
                 $loginData = [
                     'user_id'    => $user->id,
                     'ip_address' => $ipAddress,
-                    'status'     => 'Success',  // Since the login was successful
+                    'status'     => 'Success',  
                     'attempted_username' => $_POST['username'] ?? $_POST['email'] ?? '',
                 ];
-                $loginModel->save($loginData);  // Save the login details into the database
+                $loginModel->save($loginData);  
                 
                 // Redirect based on role
                 if ($user->role === 'admin') {
@@ -52,32 +52,32 @@ class Login {
                 } elseif ($user->role === 'precedent') {
                     redirect('precedentscontroller/index?login=success');
                 } else {
-                    // Default role or error
+                   
                     redirect('generalDashboard');
                 }
                 
                 exit();
             } else {
-                // Handle failed login attempts
+               
                 if ($userExists) {
-                    // User exists but password is wrong
+                   
                     $loginData = [
-                        'user_id'    => $userExists->id, // We can use the actual user ID
+                        'user_id'    => $userExists->id, 
                         'ip_address' => $ipAddress,
                         'status'     => 'Failure',
                         'attempted_username' => $_POST['username'] ?? $_POST['email'] ?? '',
                     ];
                 } else {
-                    // User doesn't exist at all
+                   
                     $loginData = [
-                        'user_id'    => null, // No valid user ID for this case
+                        'user_id'    => null, 
                         'ip_address' => $ipAddress,
                         'status'     => 'Failure',
                         'attempted_username' => $_POST['username'] ?? $_POST['email'] ?? '',
                     ];
                 }
                 
-                $loginModel->save($loginData);  // Save the failed login attempt
+                $loginModel->save($loginData);  
                 $data['errors'] = ['Invalid username/email or password'];
             }
         }

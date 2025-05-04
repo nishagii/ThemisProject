@@ -7,13 +7,13 @@
     <title>Paid Receipts</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/paidReciepts.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- DataTables CSS -->
+    
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-    <!-- jQuery -->
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- DataTables JS -->
+  
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    <!-- DataTables Responsive Extension -->
+ 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
     <style>
@@ -97,7 +97,6 @@
             background-color: #fa9800;
         }
 
-        /* Status badge styling enhancement */
         .status-badge {
             padding: 5px 10px;
             border-radius: 20px;
@@ -112,7 +111,7 @@
             color: #155724;
         }
 
-        /* Responsive adjustments */
+       
         @media (max-width: 768px) {
             .search-container {
                 flex-direction: column;
@@ -129,7 +128,6 @@
             }
         }
 
-        /* Search highlighting styles */
         .highlight {
             background-color: #fff3cd;
             color: #856404;
@@ -160,7 +158,7 @@
             </a>
         </div>
 
-        <!-- Search and filter container -->
+
         <div class="search-container">
             <div class="search-box">
                 <i class="fas fa-search"></i>
@@ -230,16 +228,16 @@
 
     <script>
         $(document).ready(function() {
-            // Initialize DataTable
+            
             var table = $('#paymentsTable').DataTable({
                 responsive: true,
                 "order": [
                     [7, "desc"]
-                ], // Sort by date (column 7) in descending order by default
+                ], 
                 "columnDefs": [{
                         "responsivePriority": 1,
                         "targets": [0, 5, 6]
-                    }, // Prioritize these columns
+                    }, 
                     {
                         "responsivePriority": 2,
                         "targets": [1, 7]
@@ -249,71 +247,71 @@
                         "targets": [2, 3, 4]
                     }
                 ],
-                // Hide the default search box
+              
                 "dom": 'lrtip'
             });
 
-            // Custom search functionality with highlighting
+          
             $('#searchInput').on('keyup', function() {
                 var searchTerm = this.value;
 
-                // Apply the search
+        
                 table.search(searchTerm).draw();
 
-                // Remove any existing highlights
+  
                 $('#paymentsTable tbody td').each(function() {
                     var text = $(this).text();
                     $(this).html(text);
                 });
 
-                // If search term is not empty, highlight matches
+                
                 if (searchTerm.trim() !== '') {
                     highlightSearchTerm(searchTerm);
                 }
             });
 
-            // Function to highlight search term in table cells
+         
             function highlightSearchTerm(term) {
-                // Create a case-insensitive regular expression for the search term
+               
                 var regex = new RegExp('(' + term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + ')', 'gi');
 
-                // Apply highlighting to each cell
+              
                 $('#paymentsTable tbody td').each(function() {
                     var cell = $(this);
 
-                    // Skip cells with status badges or other complex content
+                   
                     if (cell.find('.status-badge').length > 0) {
                         return;
                     }
 
                     var content = cell.text();
 
-                    // Only highlight if the cell contains the search term
+                
                     if (content.toLowerCase().indexOf(term.toLowerCase()) >= 0) {
                         cell.html(content.replace(regex, '<span class="highlight">$1</span>'));
                     }
                 });
             }
 
-            // Date sorting
+           
             $('#dateSort').on('change', function() {
                 var sortOrder = $(this).val() === 'oldest' ? 'asc' : 'desc';
                 table.order([7, sortOrder]).draw();
 
-                // Re-apply highlighting after sorting
+           
                 var searchTerm = $('#searchInput').val();
                 if (searchTerm.trim() !== '') {
                     highlightSearchTerm(searchTerm);
                 }
             });
 
-            // Amount range filtering
+         
             $.fn.dataTable.ext.search.push(
                 function(settings, data, dataIndex) {
                     var min = parseFloat($('#minAmount').val()) || 0;
                     var max = parseFloat($('#maxAmount').val()) || Infinity;
 
-                    // Get the amount from the row (column 5)
+               
                     var amount = parseFloat(data[5].replace(/[^0-9.-]+/g, '')) || 0;
 
                     if ((min <= amount && amount <= max)) {
@@ -323,28 +321,28 @@
                 }
             );
 
-            // Apply amount filters when inputs change
+
             $('#minAmount, #maxAmount').on('input', function() {
                 table.draw();
 
-                // Re-apply highlighting after filtering
+              
                 var searchTerm = $('#searchInput').val();
                 if (searchTerm.trim() !== '') {
                     highlightSearchTerm(searchTerm);
                 }
             });
 
-            // Reset filters button
+           
             $('#resetFilters').on('click', function() {
                 $('#searchInput').val('');
                 $('#dateSort').val('latest');
                 $('#minAmount').val('');
                 $('#maxAmount').val('');
 
-                // Reset search and sorting
+              
                 table.search('').order([7, 'desc']).draw();
 
-                // Remove any existing highlights
+                
                 $('#paymentsTable tbody td').each(function() {
                     var text = $(this).text();
                     $(this).html(text);

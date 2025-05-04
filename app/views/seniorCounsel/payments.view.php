@@ -35,7 +35,7 @@
             </p>
             <div class="invoice-container">
 
-                <!-- Sort Button Section -->
+                
                 <div class="sort-section">
                     <label for="sort-invoices">Sort by:</label>
                     <select id="sort-invoices" onchange="sortInvoices()">

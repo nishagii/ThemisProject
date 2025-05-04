@@ -15,7 +15,7 @@
         border: 1px solid #ddd;
     }
 
-    /* Search and sort controls */
+   
     .controls-container {
         display: flex;
         justify-content: space-between;
@@ -66,7 +66,7 @@
         color: #1d1b31;
     }
 
-    /* No results message */
+  
     .no-results {
         text-align: center;
         padding: 20px;
@@ -92,7 +92,7 @@
                 <p>Here you can view the client meeting requests and their status. Select buttons to filter the details </p>
             </div>
 
-            <!-- Search and Sort Controls -->
+           
             <div class="controls-container">
                 <div class="search-container">
                     <i class='bx bx-search'></i>
@@ -161,7 +161,7 @@
                     </tbody>
                 </table>
 
-                <!-- No results message (hidden by default) -->
+               
                 <div id="noResultsMessage" class="no-results" style="display: none;">
                     No meetings match your search criteria
                 </div>
@@ -194,10 +194,10 @@
                         this.className = 'status-select ' + newStatus.toLowerCase();
                         this.setAttribute('data-current', newStatus);
 
-                        // Update the row's data-status attribute for filtering
+                      
                         this.closest('tr').setAttribute('data-status', newStatus);
 
-                        // Re-apply current filter
+                      
                         const activeFilter = document.querySelector('.filter-btn.active');
                         if (activeFilter) {
                             filterByStatus(activeFilter.dataset.status);
@@ -209,9 +209,9 @@
 
     document.querySelectorAll('.filter-btn').forEach(button => {
         button.addEventListener('click', function() {
-            // Remove active class from all buttons
+           
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
+           
             this.classList.add('active');
 
             const status = this.dataset.status;
@@ -219,26 +219,26 @@
         });
     });
 
-    // Search functionality
+   
     const searchInput = document.getElementById('searchInput');
     searchInput.addEventListener('input', function() {
         applyFiltersAndSort();
     });
 
-    // Sort functionality
+ 
     const sortSelect = document.getElementById('sortSelect');
     sortSelect.addEventListener('change', function() {
         applyFiltersAndSort();
     });
 
-    // Function to filter by status
+  
     function filterByStatus(status) {
-        // Store the current status filter
+       
         window.currentStatusFilter = status;
         applyFiltersAndSort();
     }
 
-    // Function to apply all filters and sorting
+   
     function applyFiltersAndSort() {
         const searchTerm = searchInput.value.toLowerCase();
         const sortOption = sortSelect.value;
@@ -247,7 +247,7 @@
         const rows = Array.from(document.querySelectorAll('#meetingsTableBody tr:not(#noMeetingsRow)'));
         let visibleCount = 0;
 
-        // First, sort the rows
+      
         rows.sort((a, b) => {
             switch (sortOption) {
                 case 'newest':
@@ -263,13 +263,13 @@
             }
         });
 
-        // Then filter and reorder
+       
         rows.forEach(row => {
-            // Get all text content from the row for searching
+           
             const rowText = row.textContent.toLowerCase();
             const rowStatus = row.dataset.status;
 
-            // Check if row matches both search and status filters
+          
             const matchesSearch = searchTerm === '' || rowText.includes(searchTerm);
             const matchesStatus = statusFilter === 'all' || rowStatus === statusFilter;
 
@@ -281,11 +281,11 @@
             }
         });
 
-        // Reorder the table
+       
         const tbody = document.getElementById('meetingsTableBody');
         rows.forEach(row => tbody.appendChild(row));
 
-        // Show/hide no results message
+      
         const noResultsMessage = document.getElementById('noResultsMessage');
         if (visibleCount === 0 && rows.length > 0) {
             noResultsMessage.style.display = 'block';
@@ -294,7 +294,7 @@
         }
     }
 
-    // Initialize with default sort (newest first)
+ 
     document.addEventListener('DOMContentLoaded', function() {
         applyFiltersAndSort();
     });

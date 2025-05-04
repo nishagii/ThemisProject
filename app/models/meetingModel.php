@@ -15,7 +15,7 @@ class MeetingModel
         (:client_id,:meeting_date, :meeting_time, :meeting_purpose, :meeting_comments, :meeting_status)";
 
 
-        // Bind parameters to prevent SQL injection
+     
 
         $params = [
             'client_id' => $data['client_id'],
@@ -44,7 +44,7 @@ class MeetingModel
             --   OR (m.meeting_date = CURDATE() AND m.meeting_time >= CURTIME()) 
               ORDER BY m.meeting_date ASC, m.meeting_time ASC";
         return $this->query($query);
-    } // uncomment this condition after showing off your damn skills xD
+    } 
 
 
     public function updateMeetingStatus($meetingId,$status)
