@@ -32,7 +32,9 @@
     text-transform: uppercase;
   }
 
-
+.individual .high {
+  background-color: rgb(251, 222, 168);
+}
 
   /* Individual Counter Styles */
   .counter {

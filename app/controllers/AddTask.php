@@ -23,20 +23,11 @@ class AddTask
     public function add()
     {
         
-        $data = [
-            'name' => $_POST['name'] ?? '',
-            'description' => $_POST['description'] ?? '',
-            'assigneeID' => $_POST['assigneeID'] ?? '',
-            'deadlineDate' => $_POST['deadlineDate'] ?? '',
-            'deadlineTime' => $_POST['deadlineTime'] ?? '',
-            'priority' => $_POST['priority'] ?? '',
-            'tags' => $_POST['tags'] ?? [],
-
-        ];
 
         $data = [
             'name' => $_POST['name'] ?? '',
             'description' => $_POST['description'] ?? '',
+            'category' => $_POST['category'] ?? '',
             'assigneeID' => $_POST['assigneeID'] ?? '',
             'deadlineDate' => $_POST['deadlineDate'] ?? '',
             'deadlineTime' => $_POST['deadlineTime'] ?? '',
@@ -53,6 +44,9 @@ class AddTask
         }
         if (empty($data['description'])) {
             $errors['description'] = 'Description is required';
+        }
+        if (empty($data['category'])) {
+            $errors['category'] = 'Category is required';
         }
         if (empty($data['assigneeID'])) {
             $errors['assigneeID'] = 'Assignee is required';

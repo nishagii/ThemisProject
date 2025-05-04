@@ -87,8 +87,8 @@
                         </div>
 
                         <div class="info-item">
-                            <span class="info-label">Assigned By</span>
-                            <span class="info-value"><?= htmlspecialchars($task->assignerName ?? 'System') ?></span>
+                            <span class="info-label">Category</span>
+                            <span class="info-value"><?= htmlspecialchars($task->category) ?></span>
                         </div>
                         <?php if ($task->status === 'completed' && !empty($task->completedDate)): ?>
                         <div class="info-item">

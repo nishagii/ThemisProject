@@ -10,10 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-
-    <?php include('component/bigNav.view.php'); ?>
+<?php include('component/bigNav.view.php'); ?>
     <?php include('component/smallNav1.view.php'); ?>
     <?php include('component/sidebar.view.php'); ?>
+    
     
     <div class="parent-container home-section">
         <h1 class="task-heading">
@@ -38,6 +38,13 @@
             </div>
 
             <div class="individual">
+            <div class="counter high" id="high-counter">
+                    <div class="counter-icon">
+                        <i class="fas fa-arrow-up"></i>
+                    </div>
+                    <h3>Uncompleted tasks with high priority</h3>
+                    <span><?= $highAndActive[0]->highAndActive ?? 0 ?></span>
+                </div>
                 <div class="counter active" id="active-counter">
                     <div class="counter-icon">
                         <i class="fas fa-spinner"></i>
@@ -78,6 +85,7 @@
                 <thead>
                     <tr>
                         <th>Task Name</th>
+                        <th>Category</th>
                         <th>Assigned To</th>
                         <th>Deadline Date</th>
                         <th>Priority</th>
@@ -89,6 +97,8 @@
                     <?php foreach ($task as $t): ?>
                     <tr onclick="viewTaskDetails(<?= $t->taskID ?>)">
                         <td><?= htmlspecialchars($t->name) ?></td>
+                        <td><?= htmlspecialchars($t->category) ?></td>
+                        
                         <td><?= htmlspecialchars($t->assigneeName) ?></td>
                         <div class="deadline"><td><?= htmlspecialchars($t->deadlineDate) ?></td></div>
                         <td><?= htmlspecialchars($t->priority) ?></td>
@@ -142,6 +152,29 @@
         });
 
         document.getElementById("active-counter").addEventListener("click", () => {
+            const rows = document.querySelectorAll(".task-table tbody tr");
+            let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const statusCell = row.querySelector(".status");
+                const status = statusCell.dataset.originalStatus.toLowerCase();
+
+                if (status === "pending") {
+                    row.style.display = ""; 
+                    visibleCount++;
+                } else {
+                    row.style.display = "none"; 
+                }
+            });
+
+            
+            document.getElementById("no-results").style.display = visibleCount === 0 ? "block" : "none";
+            
+           
+            document.getElementById("task-table").scrollIntoView({ behavior: "smooth" });
+        });
+
+        document.getElementById("high-counter").addEventListener("click", () => {
             const rows = document.querySelectorAll(".task-table tbody tr");
             let visibleCount = 0;
             

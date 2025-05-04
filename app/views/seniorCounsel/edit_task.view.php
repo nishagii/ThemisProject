@@ -42,6 +42,11 @@
                             <label for="description">Description:</label>
                             <textarea id="description" name="description" rows="3" required><?= htmlspecialchars($task->description) ?></textarea>
                         </div>
+
+                        <div class="form-group">
+                        <label for="category">Category:</label>
+                        <input type="text" id="category" name="category" value="<?= htmlspecialchars($task->category) ?>">
+                    </div>
                         
                         <div class="form-group">
                             <label for="assigneeID">Assign To:</label>

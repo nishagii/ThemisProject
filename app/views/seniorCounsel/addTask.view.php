@@ -6,7 +6,7 @@
     <title>THEMIS</title>
     <link rel="stylesheet" href="<?= ROOT ?>/assets/css/seniorCounsel/task.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- this is imported to use icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> 
 </head>
 <body>
 
@@ -43,7 +43,11 @@
                         <textarea id="description" name="description" rows="3"></textarea>
                     </div>
 
-                   
+                   <!-- code changes for code check final -->
+                    <div class="form-group">
+                        <label for="category">Category:</label>
+                        <input type="text" id="category" name="category">
+                    </div>
                     
                     <div class="form-group">
                         <label for="assigneeID">Assign To:</label>
@@ -151,6 +155,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       
         isValid &= validateRequired("description", "Description is required.");
+
+        // code check changes
+
+        isValid &= validateRequired("category", "Category is required.");
 
       
         isValid &= validateRequired("assigneeID", "Assignee is required.");

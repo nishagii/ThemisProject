@@ -15,14 +15,15 @@ class TaskModel
     {
      
         $query = "INSERT INTO {$this->table} 
-                (name, description, task_doc, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority)
+                (name, description, category, task_doc, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority)
                 VALUES 
-                (:name, :description, :task_doc, :assigneeID, NOW(), :deadlineDate, :deadlineTime, 'pending', :priority)";
+                (:name, :description, :category, :task_doc, :assigneeID, NOW(), :deadlineDate, :deadlineTime, 'pending', :priority)";
 
        
         $params = [
             'name' => $data['name'],
             'description' => $data['description'],
+            'category' => $data['category'],
             'task_doc' => isset($data['pdf']) ? $data['pdf'] : null, 
             'assigneeID' => $data['assigneeID'],
             'deadlineDate' => $data['deadlineDate'],
@@ -37,7 +38,7 @@ class TaskModel
     public function getAllTasks()
     {
         
-        $query = "SELECT t.taskID, t.name, t.description, t.assigneeID, u.username AS assigneeName, 
+        $query = "SELECT t.taskID, t.name, t.description,t.category, t.assigneeID, u.username AS assigneeName, 
                         t.assignedDate, t.deadlineDate, t.deadlineTime, t.status, t.priority 
                 FROM {$this->table} t
                 INNER JOIN users u ON t.assigneeID = u.id
@@ -69,6 +70,7 @@ class TaskModel
                   SET 
                       name = :name,
                       description = :description,
+                      category = :category,
                       assigneeID = :assigneeID,
                       deadlineDate = :deadlineDate,
                       deadlineTime = :deadlineTime,
@@ -78,6 +80,7 @@ class TaskModel
         $params = [
             'name' => $data['name'],
             'description' => $data['description'],
+            'category' => $data['category'],
             'assigneeID' => $data['assigneeID'],
             'deadlineDate' => $data['deadlineDate'],
             'deadlineTime' => $data['deadlineTime'],
@@ -98,7 +101,7 @@ class TaskModel
 
     public function getTaskByUserId($userId)
     {
-        $query = "SELECT taskID, name, description, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority 
+        $query = "SELECT taskID, name, description,category, assigneeID, assignedDate, deadlineDate, deadlineTime, status, priority 
                 FROM {$this->table} 
                 WHERE assigneeID = :userId ORDER BY taskID DESC";
 
@@ -122,12 +125,20 @@ class TaskModel
     
         return $this->query($query, $params);
     }
+
+    
     
 
     public function getTaskCountByStatus($status) 
     {
         $query = "SELECT COUNT(taskID) AS count FROM {$this->table} WHERE status = :status";
         return $this->query($query, ['status' => $status]);
+    }
+
+    public function getTaskCountHighAndActive() 
+    {
+        $query = "SELECT COUNT(taskID) AS highAndActive FROM task WHERE priority = 'high' AND status = 'pending'";
+        return $this->query($query);
     }
     
 

@@ -49,6 +49,7 @@
                         <thead>
                             <tr>
                                 <th>Task</th>
+                                <th>Category</th>
                                 <th>Assigned Date</th>
                                 <th>Deadline Date</th>
                                 <th>Duration</th>
@@ -72,6 +73,7 @@
                             ?>
                                 <tr onclick="viewTaskDetails(<?= $task->taskID ?>)">
                                     <td><?= htmlspecialchars($task->name) ?></td>
+                                    <td><?= htmlspecialchars($task->category) ?></td>
                                     <td><?= htmlspecialchars($task->assignedDate) ?></td>
                                     <td class="<?= $isOverdue ? 'overdue' : 'deadline-date' ?>">
                                         <?= htmlspecialchars($task->deadlineDate) ?>

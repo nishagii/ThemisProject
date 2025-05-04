@@ -16,21 +16,27 @@ class TaskLawyer
         $TaskModel = $this->loadModel('TaskModel'); 
 
         $task = $TaskModel->getAllTasks();
+        // print_r($task);
         $pendingCount = $TaskModel->getTaskCountByStatus('pending');
         $completedCount = $TaskModel->getTaskCountByStatus('completed');
         $overdueCount = $TaskModel->getTaskCountByStatus('overdue');
+        $highAndActive = $TaskModel->getTaskCountHighAndActive();
+        // print_r($highAndActive);
 
         
         $totalCount = ($pendingCount[0]->count ?? 0) + 
                     ($completedCount[0]->count ?? 0) + 
                     ($overdueCount[0]->count ?? 0);
 
+        // print_r($totalCount);
+
         $this->view('/seniorCounsel/task', [
             'task' => $task,
             'totalCount' => $totalCount,
             'pendingCount' => $pendingCount,
             'completedCount' => $completedCount,
-            'overdueCount' => $overdueCount
+            'overdueCount' => $overdueCount,
+            'highAndActive' => $highAndActive
         ]);
     }
 
@@ -66,7 +72,9 @@ class TaskLawyer
     $data = [
         'taskID' => $_POST['taskID'] ?? '', // Include taskID
         'name' => $_POST['name'] ?? '',
+
         'description' => $_POST['description'] ?? '',
+        'category' => $_POST['category'] ?? '',
         'assigneeID' => $_POST['assigneeID'] ?? '',
         'deadlineDate' => $_POST['deadlineDate'] ?? '',
         'deadlineTime' => $_POST['deadlineTime'] ?? '',
